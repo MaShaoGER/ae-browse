@@ -1,0 +1,149 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-15T11:31:52.667Z",
+  "scope": "Pure ES3 graph/parameter plan; no AE mutation.",
+  "passed": 35,
+  "failed": 0,
+  "results": [
+    {
+      "name": "默认图形参数从包文件而来",
+      "passed": true
+    },
+    {
+      "name": "外观参数覆盖可编译",
+      "passed": true
+    },
+    {
+      "name": "横向与竖向合成使用各自的中心位置",
+      "passed": true
+    },
+    {
+      "name": "入场时间为相对插入时间",
+      "passed": true
+    },
+    {
+      "name": "动画选择：none",
+      "passed": true
+    },
+    {
+      "name": "动画选择：pop",
+      "passed": true
+    },
+    {
+      "name": "动画选择：slide",
+      "passed": true
+    },
+    {
+      "name": "动画选择：fade",
+      "passed": true
+    },
+    {
+      "name": "非法参数被预检拒绝：{\"width\":0}",
+      "passed": true
+    },
+    {
+      "name": "非法参数被预检拒绝：{\"width\":5000}",
+      "passed": true
+    },
+    {
+      "name": "非法参数被预检拒绝：{\"height\":\"200\"}",
+      "passed": true
+    },
+    {
+      "name": "非法参数被预检拒绝：{\"radius\":-1}",
+      "passed": true
+    },
+    {
+      "name": "非法参数被预检拒绝：{\"color\":[1,0,0]}",
+      "passed": true
+    },
+    {
+      "name": "非法参数被预检拒绝：{\"duration\":0}",
+      "passed": true
+    },
+    {
+      "name": "非法参数被预检拒绝：{\"motion\":\"absent\"}",
+      "passed": true
+    },
+    {
+      "name": "未知参数被拒绝",
+      "passed": true
+    },
+    {
+      "name": "时长超过合成被拒绝",
+      "passed": true
+    },
+    {
+      "name": "负插入时间被拒绝",
+      "passed": true
+    },
+    {
+      "name": "没有可用合成时拒绝生成",
+      "passed": true
+    },
+    {
+      "name": "未知 payload 版本被拒绝",
+      "passed": true
+    },
+    {
+      "name": "重复节点 ID 被拒绝",
+      "passed": true
+    },
+    {
+      "name": "父节点引用不存在被拒绝",
+      "passed": true
+    },
+    {
+      "name": "额外或未知节点需要其他适配器",
+      "passed": true
+    },
+    {
+      "name": "缺失参数绑定被拒绝",
+      "passed": true
+    },
+    {
+      "name": "错误尺寸绑定被拒绝",
+      "passed": true
+    },
+    {
+      "name": "状态引用不存在的参数被拒绝",
+      "passed": true
+    },
+    {
+      "name": "动画目标不存在被拒绝",
+      "passed": true
+    },
+    {
+      "name": "动画数值维度不匹配被拒绝",
+      "passed": true
+    },
+    {
+      "name": "保留字段不会进入参数合并",
+      "passed": true
+    },
+    {
+      "name": "必需效果缺失阻止生成",
+      "passed": true
+    },
+    {
+      "name": "可选效果缺失允许降级",
+      "passed": true
+    },
+    {
+      "name": "效果目标不存在被拒绝",
+      "passed": true
+    },
+    {
+      "name": "附属文件不会被这个适配器静默丢弃",
+      "passed": true
+    },
+    {
+      "name": "字体依赖需要额外适配器",
+      "passed": true
+    },
+    {
+      "name": "同一输入多次编译不会修改源数据",
+      "passed": true
+    }
+  ]
+}

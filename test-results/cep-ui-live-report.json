@@ -1,0 +1,433 @@
+{
+  "finished": true,
+  "startedAt": "2026-10-14T12:56:20.101Z",
+  "readback": {
+    "ok": true,
+    "compId": 1,
+    "layerId": 13,
+    "instanceId": "create-1791982169152-duqffa6j",
+    "layerCount": 1,
+    "packId": "local.motion.basics",
+    "assetId": "rounded-card",
+    "parameters": {
+      "width": 320,
+      "height": 180,
+      "radius": 24,
+      "color": [
+        0.20000000298023,
+        0.5,
+        1,
+        1
+      ],
+      "duration": 0.6,
+      "motion": "pop"
+    },
+    "observed": {
+      "size": [
+        320,
+        180
+      ],
+      "radius": 24,
+      "color": [
+        0.20000000298023,
+        0.5,
+        1,
+        1
+      ],
+      "position": [
+        320,
+        180,
+        0
+      ],
+      "geometryPropertyState": [
+        {
+          "keys": 0,
+          "expression": false
+        },
+        {
+          "keys": 0,
+          "expression": false
+        },
+        {
+          "keys": 0,
+          "expression": false
+        }
+      ],
+      "animation": [
+        {
+          "channel": "ADBE Scale",
+          "keys": [
+            {
+              "time": 0,
+              "value": [
+                0,
+                0,
+                100
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            },
+            {
+              "time": 0.3,
+              "value": [
+                108,
+                108,
+                100
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            },
+            {
+              "time": 0.6,
+              "value": [
+                100,
+                100,
+                100
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "channel": "ADBE Position",
+          "keys": []
+        },
+        {
+          "channel": "ADBE Opacity",
+          "keys": []
+        }
+      ],
+      "effects": [
+        {
+          "descriptor": {
+            "id": "soften",
+            "matchName": "ADBE Gaussian Blur 2",
+            "required": false,
+            "target": "output",
+            "settings": [],
+            "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+          },
+          "enabled": true,
+          "propertyState": []
+        }
+      ],
+      "effectsTotal": 1
+    },
+    "modified": false,
+    "projectFile": null
+  },
+  "frames": {
+    "ok": true,
+    "compId": "1",
+    "compName": "__AE_BROWSE_CEP_UI_cep-host-1791981162921-de010fe9",
+    "captureId": "c26bd2cd462a0e03b9f9656f6b079b90",
+    "frames": [
+      {
+        "time": 0.5,
+        "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\1_0_500000_0_c26bd2cd.png",
+        "width": 640,
+        "height": 360,
+        "sizeBytes": 973,
+        "sha256": "ab07634d890e2af8fd274d30b605b9e7d672c276dc9f2f99a8706adbf78a5941",
+        "source": "comp",
+        "method": "saveFrameToPng",
+        "compId": "1",
+        "sourceBitDepth": 8,
+        "bitDepth": 8,
+        "compWidth": 640,
+        "compHeight": 360,
+        "resolutionFactor": [
+          1,
+          1
+        ]
+      },
+      {
+        "time": 0.8,
+        "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\1_0_800000_1_c26bd2cd.png",
+        "width": 640,
+        "height": 360,
+        "sizeBytes": 6566,
+        "sha256": "7538718caa73c786622a087aa1749c844cc4f0331ee4d8e882121112c05ac6ec",
+        "source": "comp",
+        "method": "saveFrameToPng",
+        "compId": "1",
+        "sourceBitDepth": 8,
+        "bitDepth": 8,
+        "compWidth": 640,
+        "compHeight": 360,
+        "resolutionFactor": [
+          1,
+          1
+        ]
+      },
+      {
+        "time": 1.1,
+        "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\1_1_100000_2_c26bd2cd.png",
+        "width": 640,
+        "height": 360,
+        "sizeBytes": 5601,
+        "sha256": "209e52051503203530e1f5aa640ddcbcb896109ab9158e3cfb31a35a94d3ed75",
+        "source": "comp",
+        "method": "saveFrameToPng",
+        "compId": "1",
+        "sourceBitDepth": 8,
+        "bitDepth": 8,
+        "compWidth": 640,
+        "compHeight": 360,
+        "resolutionFactor": [
+          1,
+          1
+        ]
+      }
+    ],
+    "grid": {
+      "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\c26bd2cd462a0e03b9f9656f6b079b90-grid.png",
+      "width": 1280,
+      "height": 722,
+      "sha256": "d712d2d525df570aad317b5681d12afc17e663f266031d1e24937b1173da57c8",
+      "columns": 2,
+      "rows": 2,
+      "cellWidth": 638,
+      "cellHeight": 359,
+      "scaled": true,
+      "cells": [
+        {
+          "index": 0,
+          "time": 0.5,
+          "x": 0,
+          "y": 0,
+          "w": 638,
+          "h": 359
+        },
+        {
+          "index": 1,
+          "time": 0.8,
+          "x": 642,
+          "y": 0,
+          "w": 638,
+          "h": 359
+        },
+        {
+          "index": 2,
+          "time": 1.1,
+          "x": 0,
+          "y": 363,
+          "w": 638,
+          "h": 359
+        }
+      ]
+    },
+    "imageBudget": {
+      "totalBase64Chars": 33912,
+      "totalLimitBase64Chars": 12582912,
+      "perImageLimitBase64Chars": 4718592
+    },
+    "warnings": [
+      "The grid image was scaled to fit within grid_max_side."
+    ],
+    "execution_source": {
+      "mode": "live",
+      "project_path": null
+    }
+  },
+  "comparison": {
+    "ok": true,
+    "compId": "1",
+    "compName": "__AE_BROWSE_CEP_UI_cep-host-1791981162921-de010fe9",
+    "captureId": "b9fb079a8fc5c2fd5d51ee0a0dcfda2e",
+    "frames": [
+      {
+        "time": 0.5,
+        "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\1_0_500000_0_b9fb079a.png",
+        "width": 640,
+        "height": 360,
+        "sizeBytes": 973,
+        "sha256": "ab07634d890e2af8fd274d30b605b9e7d672c276dc9f2f99a8706adbf78a5941",
+        "source": "comp",
+        "method": "saveFrameToPng",
+        "compId": "1",
+        "sourceBitDepth": 8,
+        "bitDepth": 8,
+        "compWidth": 640,
+        "compHeight": 360,
+        "resolutionFactor": [
+          1,
+          1
+        ]
+      },
+      {
+        "time": 1.1,
+        "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\1_1_100000_1_b9fb079a.png",
+        "width": 640,
+        "height": 360,
+        "sizeBytes": 5601,
+        "sha256": "209e52051503203530e1f5aa640ddcbcb896109ab9158e3cfb31a35a94d3ed75",
+        "source": "comp",
+        "method": "saveFrameToPng",
+        "compId": "1",
+        "sourceBitDepth": 8,
+        "bitDepth": 8,
+        "compWidth": 640,
+        "compHeight": 360,
+        "resolutionFactor": [
+          1,
+          1
+        ]
+      }
+    ],
+    "compare": {
+      "a": {
+        "time": 0.5,
+        "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\1_0_500000_0_b9fb079a.png",
+        "width": 640,
+        "height": 360,
+        "sha256": "ab07634d890e2af8fd274d30b605b9e7d672c276dc9f2f99a8706adbf78a5941"
+      },
+      "b": {
+        "time": 1.1,
+        "path": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\1_1_100000_1_b9fb079a.png",
+        "width": 640,
+        "height": 360,
+        "sha256": "209e52051503203530e1f5aa640ddcbcb896109ab9158e3cfb31a35a94d3ed75"
+      },
+      "metrics": {
+        "changedRatio": 0.25,
+        "changedPixels": 57600,
+        "totalPixels": 230400,
+        "meanAbsDiff": 63.0655,
+        "maxAbsDiff": 255,
+        "bbox": {
+          "x": 160,
+          "y": 90,
+          "w": 320,
+          "h": 180
+        },
+        "threshold": 0
+      },
+      "diffPath": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\b9fb079a8fc5c2fd5d51ee0a0dcfda2e-diff.png",
+      "sideBySidePath": "D:\\project\\ae-browse\\test-results\\cep-host-1791981162921-de010fe9\\ui-frames\\b9fb079a8fc5c2fd5d51ee0a0dcfda2e-sbs.png",
+      "scaled": false
+    },
+    "imageBudget": {
+      "totalBase64Chars": 20768,
+      "totalLimitBase64Chars": 12582912,
+      "perImageLimitBase64Chars": 4718592
+    },
+    "execution_source": {
+      "mode": "live",
+      "project_path": null
+    }
+  },
+  "cleanup": {
+    "removed": true,
+    "absentByItemScan": true,
+    "itemCount": 0,
+    "remaining": [],
+    "saved": false
+  },
+  "finalScan": {
+    "projectLocator": {
+      "locatorKind": "jsx",
+      "projectId": null
+    },
+    "total": 0,
+    "offset": 0,
+    "limit": 50,
+    "returned": 0,
+    "hasMore": false,
+    "nextOffset": null,
+    "items": [],
+    "execution_source": {
+      "mode": "live",
+      "project_path": null
+    }
+  },
+  "endedAt": "2026-10-14T12:56:21.093Z",
+  "ok": true,
+  "publicationNote": "Session routing identifiers omitted for repository publication; recorded test outcomes are unchanged."
+}

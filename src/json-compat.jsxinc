@@ -1,0 +1,168 @@
+/* Bounded ES3 JSON data codec. Parsing never evaluates source text. */
+var AEBrowseJSON = (function () {
+    var MAX_CHARS = 4 * 1024 * 1024, MAX_DEPTH = 64, MAX_VALUES = 100000;
+    function fail(code, message) { var error = new Error(message); error.code = code; throw error; }
+    function own(value, key) { return Object.prototype.hasOwnProperty.call(value, key); }
+    function array(value) { return Object.prototype.toString.call(value) === '[object Array]'; }
+    function reserved(key) { return key === '__proto__' || key === 'constructor' || key === 'prototype'; }
+    function parse(source) {
+        if (typeof source !== 'string') { fail('E_JSON_INVALID', 'JSON 输入必须是字符串。'); }
+        if (source.length > MAX_CHARS) { fail('E_JSON_LIMIT', 'JSON 输入超过读取预算。'); }
+        var at = 0, count = 0;
+        function invalid() { fail('E_JSON_INVALID', 'JSON 格式无效，位置：' + at); }
+        function white() { while (at < source.length && /[ \t\r\n]/.test(source.charAt(at))) { at++; } }
+        function string() {
+            var result = '', character, escaped, hex;
+            if (source.charAt(at++) !== '"') { invalid(); }
+            while (at < source.length) {
+                character = source.charAt(at++);
+                if (character === '"') { return result; }
+                if (character === '\\') {
+                    if (at >= source.length) { invalid(); }
+                    escaped = source.charAt(at++);
+                    if (escaped === '"' || escaped === '\\' || escaped === '/') { result += escaped; }
+                    else if (escaped === 'b') { result += '\b'; }
+                    else if (escaped === 'f') { result += '\f'; }
+                    else if (escaped === 'n') { result += '\n'; }
+                    else if (escaped === 'r') { result += '\r'; }
+                    else if (escaped === 't') { result += '\t'; }
+                    else if (escaped === 'u') {
+                        hex = source.substr(at, 4);
+                        if (!/^[0-9a-fA-F]{4}$/.test(hex)) { invalid(); }
+                        result += String.fromCharCode(parseInt(hex, 16)); at += 4;
+                    } else { invalid(); }
+                } else {
+                    if (character.charCodeAt(0) < 32) { invalid(); }
+                    result += character;
+                }
+            }
+            invalid();
+        }
+        function value(depth) {
+            if (depth > MAX_DEPTH) { fail('E_DEPTH_LIMIT', 'JSON 数据嵌套过深。'); }
+            if (++count > MAX_VALUES) { fail('E_JSON_LIMIT', 'JSON 数据项目超过预算。'); }
+            white();
+            var character = source.charAt(at), result, key, token, numberStart;
+            if (character === '"') { return string(); }
+            if (character === '{') {
+                at++; result = {}; white();
+                if (source.charAt(at) === '}') { at++; return result; }
+                while (at < source.length) {
+                    white(); key = string();
+                    if (reserved(key)) { fail('E_RESERVED_KEY', 'JSON 数据包含保留字段。'); }
+                    if (own(result, key)) { fail('E_JSON_DUPLICATE_KEY', 'JSON 对象包含重复字段。'); }
+                    white(); if (source.charAt(at++) !== ':') { invalid(); }
+                    result[key] = value(depth + 1); white();
+                    character = source.charAt(at++);
+                    if (character === '}') { return result; }
+                    if (character !== ',') { invalid(); }
+                }
+                invalid();
+            }
+            if (character === '[') {
+                at++; result = []; white();
+                if (source.charAt(at) === ']') { at++; return result; }
+                while (at < source.length) {
+                    result.push(value(depth + 1)); white(); character = source.charAt(at++);
+                    if (character === ']') { return result; }
+                    if (character !== ',') { invalid(); }
+                }
+                invalid();
+            }
+            token = source.substr(at, 4);
+            if (token === 'true') { at += 4; return true; }
+            if (token === 'null') { at += 4; return null; }
+            if (source.substr(at, 5) === 'false') { at += 5; return false; }
+            if (character === '-' || /[0-9]/.test(character) && character !== '') {
+                numberStart = at;
+                if (character === '-') { at++; }
+                if (source.charAt(at) === '0') { at++; }
+                else {
+                    if (!/[1-9]/.test(source.charAt(at)) || at >= source.length) { invalid(); }
+                    while (at < source.length && /[0-9]/.test(source.charAt(at))) { at++; }
+                }
+                if (source.charAt(at) === '.') {
+                    at++; if (at >= source.length || !/[0-9]/.test(source.charAt(at))) { invalid(); }
+                    while (at < source.length && /[0-9]/.test(source.charAt(at))) { at++; }
+                }
+                character = source.charAt(at);
+                if (character === 'e' || character === 'E') {
+                    at++; character = source.charAt(at); if (character === '+' || character === '-') { at++; }
+                    if (at >= source.length || !/[0-9]/.test(source.charAt(at))) { invalid(); }
+                    while (at < source.length && /[0-9]/.test(source.charAt(at))) { at++; }
+                }
+                result = Number(source.substring(numberStart, at));
+                if (!isFinite(result)) { fail('E_NUMBER_NONFINITE', 'JSON 数值必须是有限数值。'); }
+                return result;
+            }
+            invalid();
+        }
+        var result = value(0); white(); if (at !== source.length) { invalid(); } return result;
+    }
+    function quote(source) {
+        var result = '"', character, code, hex;
+        for (var i = 0; i < source.length; i++) {
+            character = source.charAt(i); code = source.charCodeAt(i);
+            if (character === '"' || character === '\\') { result += '\\' + character; }
+            else if (code < 32 || code === 0x2028 || code === 0x2029 || code >= 0xD800 && code <= 0xDFFF) {
+                hex = code.toString(16); result += '\\u' + ('0000' + hex).substr(hex.length);
+            } else { result += character; }
+        }
+        return result + '"';
+    }
+    function stringify(input, replacer, space) {
+        var stack = [], count = 0, gap = '', indent = '', propertyList = null;
+        if (replacer !== undefined && replacer !== null && typeof replacer !== 'function' && !array(replacer)) { fail('E_JSON_REPLACER', 'JSON replacer 无效。'); }
+        if (array(replacer)) {
+            propertyList = [];
+            for (var p = 0; p < replacer.length; p++) {
+                if (typeof replacer[p] === 'string' || typeof replacer[p] === 'number') {
+                    var selected = String(replacer[p]), duplicate = false;
+                    if (reserved(selected)) { fail('E_RESERVED_KEY', 'JSON 数据包含保留字段。'); }
+                    for (var q = 0; q < propertyList.length; q++) { if (propertyList[q] === selected) { duplicate = true; } }
+                    if (!duplicate) { propertyList.push(selected); }
+                }
+            }
+        }
+        if (typeof space === 'number' && isFinite(space)) { for (var s = 0; s < Math.min(10, Math.max(0, Math.floor(space))); s++) { gap += ' '; } }
+        else if (typeof space === 'string') { gap = space.substr(0, 10); }
+        function encode(holder, key, depth) {
+            if (depth > MAX_DEPTH) { fail('E_DEPTH_LIMIT', 'JSON 数据嵌套过深。'); }
+            if (++count > MAX_VALUES) { fail('E_JSON_LIMIT', 'JSON 数据项目超过预算。'); }
+            var value = holder[key], i, names = [], parts = [], encoded, priorIndent, result;
+            if (value && typeof value === 'object' && typeof value.toJSON === 'function') { value = value.toJSON(key); }
+            if (typeof replacer === 'function') { value = replacer.call(holder, key, value); }
+            if (value === null) { return 'null'; }
+            if (typeof value === 'string') { if (value.length > MAX_CHARS) { fail('E_JSON_LIMIT', 'JSON 文本超过预算。'); } return quote(value); }
+            if (typeof value === 'number') { return isFinite(value) ? String(value) : 'null'; }
+            if (typeof value === 'boolean') { return String(value); }
+            if (typeof value !== 'object') { return undefined; }
+            for (i = 0; i < stack.length; i++) { if (stack[i] === value) { fail('E_JSON_CYCLE', 'JSON 数据包含循环引用。'); } }
+            for (var name in value) { if (own(value, name) && reserved(name)) { fail('E_RESERVED_KEY', 'JSON 数据包含保留字段。'); } }
+            stack.push(value); priorIndent = indent; indent += gap;
+            if (array(value)) {
+                if (value.length > MAX_VALUES) { fail('E_JSON_LIMIT', 'JSON 数组超过预算。'); }
+                for (i = 0; i < value.length; i++) { encoded = encode(value, String(i), depth + 1); parts.push(encoded === undefined ? 'null' : encoded); }
+                result = parts.length === 0 ? '[]' : gap ? '[\n' + indent + parts.join(',\n' + indent) + '\n' + priorIndent + ']' : '[' + parts.join(',') + ']';
+            } else {
+                if (propertyList !== null) { names = propertyList; }
+                else { for (name in value) { if (own(value, name)) { names.push(name); } } }
+                for (i = 0; i < names.length; i++) {
+                    if (!own(value, names[i])) { continue; }
+                    encoded = encode(value, names[i], depth + 1);
+                    if (encoded !== undefined) { parts.push(quote(names[i]) + (gap ? ': ' : ':') + encoded); }
+                }
+                result = parts.length === 0 ? '{}' : gap ? '{\n' + indent + parts.join(',\n' + indent) + '\n' + priorIndent + '}' : '{' + parts.join(',') + '}';
+            }
+            stack.pop(); indent = priorIndent;
+            if (result.length > MAX_CHARS) { fail('E_JSON_LIMIT', 'JSON 输出超过预算。'); }
+            return result;
+        }
+        var result = encode({ '': input }, '', 0);
+        if (result !== undefined && result.length > MAX_CHARS) { fail('E_JSON_LIMIT', 'JSON 输出超过预算。'); }
+        return result;
+    }
+    return { parse: parse, stringify: stringify, maxChars: MAX_CHARS };
+})();
+/* Existing adapters use JSON; install only where the host has no native codec. */
+if (typeof JSON === 'undefined') { var JSON = AEBrowseJSON; }

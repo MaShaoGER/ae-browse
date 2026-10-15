@@ -1,0 +1,206 @@
+{
+  "ok": true,
+  "compId": 1,
+  "layerId": 13,
+  "instanceId": "create-1791982169152-duqffa6j",
+  "layerCount": 1,
+  "packId": "local.motion.basics",
+  "assetId": "rounded-card",
+  "parameters": {
+    "width": 320,
+    "height": 180,
+    "radius": 24,
+    "color": [
+      0.20000000298023,
+      0.5,
+      1,
+      1
+    ],
+    "duration": 0.6,
+    "motion": "pop"
+  },
+  "observed": {
+    "size": [
+      320,
+      180
+    ],
+    "radius": 24,
+    "color": [
+      0.20000000298023,
+      0.5,
+      1,
+      1
+    ],
+    "position": [
+      320,
+      180,
+      0
+    ],
+    "geometryPropertyState": [
+      {
+        "keys": 0,
+        "expression": false
+      },
+      {
+        "keys": 0,
+        "expression": false
+      },
+      {
+        "keys": 0,
+        "expression": false
+      }
+    ],
+    "animation": [
+      {
+        "channel": "ADBE Scale",
+        "keys": [
+          {
+            "time": 0,
+            "value": [
+              0,
+              0,
+              100
+            ],
+            "inType": "6612",
+            "outType": "6612",
+            "inEase": [
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              }
+            ],
+            "outEase": [
+              {
+                "speed": 360,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 360,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              }
+            ]
+          },
+          {
+            "time": 0.3,
+            "value": [
+              108,
+              108,
+              100
+            ],
+            "inType": "6612",
+            "outType": "6612",
+            "inEase": [
+              {
+                "speed": 360,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 360,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              }
+            ],
+            "outEase": [
+              {
+                "speed": -26.6666666666667,
+                "influence": 16.666666667
+              },
+              {
+                "speed": -26.6666666666667,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              }
+            ]
+          },
+          {
+            "time": 0.6,
+            "value": [
+              100,
+              100,
+              100
+            ],
+            "inType": "6612",
+            "outType": "6612",
+            "inEase": [
+              {
+                "speed": -26.6666666666667,
+                "influence": 16.666666667
+              },
+              {
+                "speed": -26.6666666666667,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              }
+            ],
+            "outEase": [
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              },
+              {
+                "speed": 0,
+                "influence": 16.666666667
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "channel": "ADBE Position",
+        "keys": []
+      },
+      {
+        "channel": "ADBE Opacity",
+        "keys": []
+      }
+    ],
+    "effects": [
+      {
+        "descriptor": {
+          "id": "soften",
+          "matchName": "ADBE Gaussian Blur 2",
+          "required": false,
+          "target": "output",
+          "settings": [],
+          "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+        },
+        "enabled": true,
+        "propertyState": []
+      }
+    ],
+    "effectsTotal": 1
+  },
+  "modified": false,
+  "projectFile": null,
+  "execution_source": {
+    "mode": "live",
+    "project_path": null
+  },
+  "readAt": "2026-10-14T12:56:20.100Z",
+  "publicationNote": "Session routing identifiers omitted for repository publication; recorded test outcomes are unchanged."
+}

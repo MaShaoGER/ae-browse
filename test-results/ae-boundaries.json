@@ -1,0 +1,150 @@
+{
+  "finished": true,
+  "aeVersion": "26.0x67",
+  "startedAtMs": 1791974971300,
+  "before": {
+    "projectItemCount": 103,
+    "activeCompId": 1102
+  },
+  "results": [
+    {
+      "name": "创建原生形状并读取尺寸与圆角",
+      "passed": true
+    },
+    {
+      "name": "添加属性后重新取得引用仍可设置填充",
+      "passed": true
+    },
+    {
+      "name": "写入可编辑动画关键帧并读取实际值",
+      "passed": true
+    },
+    {
+      "name": "已有关键帧的属性不能直接用静态 setValue 覆盖",
+      "passed": true
+    },
+    {
+      "name": "本机允许给图层添加高斯模糊",
+      "passed": true
+    },
+    {
+      "name": "按内部属性路径设置效果数值并读取确认",
+      "passed": true
+    },
+    {
+      "name": "同时添加多个效果后重新取得引用",
+      "passed": true
+    },
+    {
+      "name": "为效果颜色参数写入基础颜色值",
+      "passed": true
+    },
+    {
+      "name": "缺失效果能够在添加前检测",
+      "passed": true
+    },
+    {
+      "name": "添加不存在的效果会报错并可被捕获",
+      "passed": true
+    },
+    {
+      "name": "不存在的效果属性路径不会写入其他参数",
+      "passed": true
+    },
+    {
+      "name": "执行过程中保持用户原合成不变",
+      "passed": true
+    }
+  ],
+  "effectProperties": [
+    {
+      "effect": "ADBE Gaussian Blur 2",
+      "index": 1,
+      "matchName": "ADBE Gaussian Blur 2-0001",
+      "displayName": "模糊度",
+      "valueType": "6417"
+    },
+    {
+      "effect": "ADBE Gaussian Blur 2",
+      "index": 2,
+      "matchName": "ADBE Gaussian Blur 2-0002",
+      "displayName": "模糊方向",
+      "valueType": "6417"
+    },
+    {
+      "effect": "ADBE Gaussian Blur 2",
+      "index": 3,
+      "matchName": "ADBE Gaussian Blur 2-0003",
+      "displayName": "重复边缘像素",
+      "valueType": "6417"
+    },
+    {
+      "effect": "ADBE Gaussian Blur 2",
+      "index": 4,
+      "matchName": "ADBE Effect Built In Params",
+      "displayName": "合成选项",
+      "valueType": "undefined"
+    }
+  ],
+  "compId": 1478,
+  "compName": "__AE_Browse_Boundary_1791974971300",
+  "layerId": 1490,
+  "blurIndex": 1,
+  "tintIndex": 2,
+  "previewTime": 0.6,
+  "passed": 12,
+  "failed": 0,
+  "finishedAtMs": 1791974971412,
+  "visualVerification": {
+    "effectCompare": {
+      "a": {
+        "captureId": "5ac5c24332ebb3589ead11bc91ce7fc3",
+        "index": 0,
+        "time": 0.6,
+        "path": "D:\\project\\ae-browse\\test-results\\frames\\1478_0_600000_0_5ac5c243.png",
+        "width": 640,
+        "height": 360,
+        "sha256": "19cc5d096b1e7d2406ff81b38d6a78958043cc7aa30ffb44794ba9b7a16a62c2"
+      },
+      "b": {
+        "time": 0.6,
+        "path": "D:\\project\\ae-browse\\test-results\\frames\\1478_0_600000_0_34013e9c.png",
+        "width": 640,
+        "height": 360,
+        "sha256": "1acd04e594c73201991e338a71db7d6bba8b0abe8e44ea7eeb3deb04518ef794"
+      },
+      "metrics": {
+        "changedRatio": 0.1145,
+        "changedPixels": 26388,
+        "totalPixels": 230400,
+        "meanAbsDiff": 25.8706,
+        "maxAbsDiff": 241,
+        "bbox": {
+          "x": 210,
+          "y": 120,
+          "w": 220,
+          "h": 120
+        },
+        "threshold": 0
+      },
+      "diffPath": "D:\\project\\ae-browse\\test-results\\frames\\34013e9cea314cc11883a43c37da3e7f-diff.png",
+      "sideBySidePath": "D:\\project\\ae-browse\\test-results\\frames\\34013e9cea314cc11883a43c37da3e7f-sbs.png",
+      "scaled": false
+    },
+    "changedPixels": 26388,
+    "changedBounds": {
+      "x": 210,
+      "y": 120,
+      "w": 220,
+      "h": 120
+    }
+  },
+  "cleanup": {
+    "verified": true,
+    "scratchExists": false,
+    "projectItemCountAfter": 103,
+    "projectItemCountBefore": 103,
+    "savedProject": false,
+    "note": "临时合成已删除。创建和删除曾进入 AE 撤销历史；不承诺撤销栈或工程 dirty 标志完全还原。"
+  }
+}

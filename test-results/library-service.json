@@ -1,0 +1,57 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-15T11:31:53.457Z",
+  "scope": "Node-only read-only package snapshots, registry recovery, and host/plan preflight; no AE mutation.",
+  "passed": 12,
+  "failed": 0,
+  "results": [
+    {
+      "name": "中文路径登记、跨实例恢复与移除保持来源字节不变",
+      "passed": true
+    },
+    {
+      "name": "完全相同的库复用，并明确记录迁移后的来源目录",
+      "passed": true
+    },
+    {
+      "name": "同版本内容冲突与不同版本更新均要求明确选择",
+      "passed": true
+    },
+    {
+      "name": "来源内容变化阻止准备请求，并保留旧登记到明确重新添加",
+      "passed": true
+    },
+    {
+      "name": "缺失或失效的来源在重启后保留 unavailable 诊断",
+      "passed": true
+    },
+    {
+      "name": "单个损坏素材不会阻止同包中的完好素材",
+      "passed": true
+    },
+    {
+      "name": "不支持的素材类型只阻止自身，并可按类型过滤",
+      "passed": true
+    },
+    {
+      "name": "相对路径穿越与目录链接越界只阻止对应素材",
+      "passed": true
+    },
+    {
+      "name": "发送前重做 AE 版本、能力、合成与参数预检",
+      "passed": true
+    },
+    {
+      "name": "必需效果缺失阻止准备，可选效果缺失允许基础图形",
+      "passed": true
+    },
+    {
+      "name": "主登记损坏可从最近成功副本恢复，两者损坏时保留原文件",
+      "passed": true
+    },
+    {
+      "name": "同一实例的并发登记串行保存，且移除不存在的库是幂等操作",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+# Reproducible build output and installed dependencies
+/dist/
+/node_modules/
+
+# Local settings and credentials
+.env
+.env.*
+!.env.example
+/.vscode/
+/.idea/
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Generated test fixtures and machine-specific host/configuration snapshots
+/test-results/fixtures-*/
+/test-results/roundtrip-1791977119410/
+/test-results/**/*-config.json
+/test-results/ae-host*.json
+/test-results/cep-live-host-info.json
+/test-results/cep-isolated-bootstrap.json
+/test-results/**/library-data/
+/test-results/local-only/

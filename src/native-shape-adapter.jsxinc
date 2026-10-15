@@ -1,0 +1,193 @@
+/* Narrow AE adapter used by the explicit round-trip tests, not a completed browser panel. */
+var AEBrowseNative = (function () {
+    var PREFIX = 'AEBrowse:';
+    function fail(code, message) { AEBrowsePlan.fail(code, message); }
+    function readJSON(file) {
+        if (!file.exists) { fail('E_FILE_MISSING', '文件缺失：' + file.fsName); }
+        if (file.length > 4 * 1024 * 1024) { fail('E_SOURCE_LIMIT', 'JSON 文件超过读取预算。'); }
+        file.encoding = 'UTF-8';
+        if (!file.open('r')) { fail('E_FILE_READ', '无法读取文件：' + file.fsName); }
+        var content;
+        try { content = file.read(); } finally { file.close(); }
+        var data;
+        try { data = JSON.parse(content.replace(/^\uFEFF/, '')); } catch (_) { fail('E_JSON_INVALID', 'JSON 文件损坏。'); }
+        AEBrowsePlan.scan(data, 0);
+        return data;
+    }
+    function pathInPack(directory, relative) {
+        if (typeof relative !== 'string' || !relative || /[\u0000-\u001f<>:"|?*]/.test(relative)) { fail('E_PATH_INVALID', '需要包内相对路径。'); }
+        relative = relative.replace(/\\/g, '/');
+        var parts = relative.split('/');
+        for (var i = 0; i < parts.length; i++) { if (!parts[i] || parts[i] === '.' || parts[i] === '..' || /[. ]$/.test(parts[i]) || /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(parts[i])) { fail('E_PATH_INVALID', '需要规范的包内相对路径。'); } }
+        return new File(directory.fsName + '/' + relative);
+    }
+    function load(directory, assetId) {
+        var root = new Folder(directory), manifest = readJSON(new File(root.fsName + '/pack.json'));
+        if (!manifest || manifest.schemaVersion !== 1 || !manifest.pack || !(manifest.assets instanceof Array)) { fail('E_SCHEMA_VERSION', '图形包格式不支持。'); }
+        var asset = null;
+        for (var i = 0; i < manifest.assets.length; i++) { if (manifest.assets[i].id === assetId) { if (asset !== null) { fail('E_ASSET_DUPLICATE', '素材 ID 重复。'); } asset = manifest.assets[i]; } }
+        if (asset === null) { fail('E_ASSET_MISSING', '图形包中没有这个素材。'); }
+        if (asset.kind !== 'ae.nativeShape' || !/\.json$/i.test(asset.source)) { fail('E_KIND_UNSUPPORTED', '当前适配器只读取 JSON 原生形状。'); }
+        return { manifest: manifest, asset: asset, payload: readJSON(pathInPack(root, asset.source)) };
+    }
+    function installedEffects() { var result = [], list = app.effects; for (var i = 0; i < list.length; i++) { result.push(list[i].matchName); } return result; }
+    function meta(layer, required) {
+        if (!layer || typeof layer.comment !== 'string' || layer.comment.indexOf(PREFIX) !== 0) { if (required) { fail('E_INSTANCE_UNKNOWN', '图层不是本工具生成的实例。'); } return null; }
+        try { var value = JSON.parse(layer.comment.substring(PREFIX.length)); AEBrowsePlan.scan(value, 0); return value; }
+        catch (_) { if (required) { fail('E_INSTANCE_METADATA', '实例信息已损坏。'); } return null; }
+    }
+    function findProperty(group, selectors) {
+        var current = group;
+        for (var i = 0; i < selectors.length; i++) {
+            var found = null, occurrence = 0;
+            for (var j = 1; j <= current.numProperties; j++) { var candidate = current.property(j); if (candidate.matchName === selectors[i].matchName) { occurrence++; if (occurrence === selectors[i].occurrence) { found = candidate; break; } } }
+            if (found === null) { fail('E_EFFECT_PROPERTY_PATH', '效果参数路径不存在：' + selectors[i].matchName); }
+            current = found;
+        }
+        return current;
+    }
+    function geometry(layer, metadata) {
+        var contents = layer.property('ADBE Root Vectors Group').property(metadata.groupIndex).property('ADBE Vectors Group');
+        return { rectangle: contents.property(metadata.rectangleIndex), fill: contents.property(metadata.fillIndex) };
+    }
+    function easeValues(values) { var result = []; for (var i = 0; i < values.length; i++) { result.push({ speed: values[i].speed, influence: values[i].influence }); } return result; }
+    function snapshot(layer, metadata) {
+        var shape = geometry(layer, metadata), transform = layer.property('ADBE Transform Group');
+        var result = { size: shape.rectangle.property('ADBE Vector Rect Size').value, radius: shape.rectangle.property('ADBE Vector Rect Roundness').value, color: shape.fill.property('ADBE Vector Fill Color').value, position: transform.property('ADBE Position').valueAtTime(metadata.insertTime, true), geometryPropertyState: [], animation: [], effects: [], effectsTotal: layer.property('ADBE Effect Parade').numProperties };
+        var geometryProperties = [shape.rectangle.property('ADBE Vector Rect Size'), shape.rectangle.property('ADBE Vector Rect Roundness'), shape.fill.property('ADBE Vector Fill Color')];
+        for (var g = 0; g < geometryProperties.length; g++) { result.geometryPropertyState.push({ keys: geometryProperties[g].numKeys, expression: geometryProperties[g].expressionEnabled }); }
+        var channels = ['ADBE Scale', 'ADBE Position', 'ADBE Opacity'];
+        for (var i = 0; i < channels.length; i++) {
+            var property = transform.property(channels[i]), keys = [];
+            if (property.expressionEnabled) { fail('E_INSTANCE_EXPRESSION', '实例含手工表达式，当前测试适配器不覆盖它。'); }
+            for (var j = 1; j <= property.numKeys; j++) { keys.push({ time: property.keyTime(j) - metadata.insertTime, value: property.keyValue(j), inType: String(property.keyInInterpolationType(j)), outType: String(property.keyOutInterpolationType(j)), inEase: easeValues(property.keyInTemporalEase(j)), outEase: easeValues(property.keyOutTemporalEase(j)) }); }
+            result.animation.push({ channel: channels[i], keys: keys });
+        }
+        var effects = layer.property('ADBE Effect Parade');
+        for (i = 0; i < metadata.effects.length; i++) {
+            var record = metadata.effects[i], effect = effects.property(record.index);
+            if (!effect || effect.matchName !== record.descriptor.matchName) { fail('E_INSTANCE_CHANGED', '效果结构已经手工更改。'); }
+            var descriptor = AEBrowsePlan.clone(record.descriptor);
+            var propertyState = [];
+            for (j = 0; j < descriptor.settings.length; j++) { var settingProperty = findProperty(effect, descriptor.settings[j].path); descriptor.settings[j].value = settingProperty.valueAtTime(metadata.insertTime, true); propertyState.push({ keys: settingProperty.numKeys, expression: settingProperty.expressionEnabled }); }
+            result.effects.push({ descriptor: descriptor, enabled: effect.enabled, propertyState: propertyState });
+        }
+        return result;
+    }
+    function capture(layer) {
+        var metadata = meta(layer, true), observed;
+        try { observed = snapshot(layer, metadata); } catch (error) { if (error.code) { throw error; } fail('E_INSTANCE_CHANGED', '实例图形结构已经更改。'); }
+        var values = AEBrowsePlan.clone(metadata.parameters);
+        if (metadata.bindings.size instanceof Array) { values[metadata.bindings.size[0]] = observed.size[0]; values[metadata.bindings.size[1]] = observed.size[1]; }
+        else { values[metadata.bindings.size] = observed.size; }
+        values[metadata.bindings.radius] = observed.radius; values[metadata.bindings.color] = observed.color;
+        return { packId: metadata.packId, assetId: metadata.assetId, parameters: values, observed: observed, modified: !AEBrowsePlan.same(observed, metadata.baseline) };
+    }
+    function create(comp, loaded, overrides, options) {
+        options = options || {};
+        if (!(comp instanceof CompItem)) { fail('E_NO_ACTIVE_COMP', '需要目标合成。'); }
+        var plan = AEBrowsePlan.plan(loaded.asset, loaded.payload, overrides || {}, { width: comp.width, height: comp.height, duration: comp.duration, insertTime: options.insertTime === undefined ? comp.time : options.insertTime, installedEffects: installedEffects() });
+        var instanceId = options.instanceId || ('instance-' + new Date().getTime() + '-' + Math.floor(Math.random() * 100000));
+        var sourceSignature = JSON.stringify({ payload: loaded.payload, effects: loaded.asset.effects || [] });
+        for (var existingIndex = 1; existingIndex <= comp.numLayers; existingIndex++) {
+            var existing = comp.layer(existingIndex), existingMeta = meta(existing, false);
+            if (existingMeta && existingMeta.packId === loaded.manifest.pack.id && existingMeta.instanceId === instanceId) {
+                if (existingMeta.assetId === loaded.asset.id && existingMeta.packVersion === loaded.manifest.pack.version && existingMeta.sourceSignature === sourceSignature && Math.abs(existingMeta.insertTime - plan.insertTime) < .000001 && AEBrowsePlan.same(existingMeta.parameters, plan.parameters) && !capture(existing).modified) { return { layer: existing, reused: true, diagnostics: plan.diagnostics }; }
+                fail('E_INSTANCE_CONFLICT', '同一次导入的实例已有不同参数或手工修改。');
+            }
+        }
+        var layer = null;
+        try {
+            layer = comp.layers.addShape(); layer.name = plan.name;
+            var group = layer.property('ADBE Root Vectors Group').addProperty('ADBE Vector Group');
+            var groupIndex = group.propertyIndex;
+            var contents = group.property('ADBE Vectors Group');
+            var rectangleIndex = contents.addProperty('ADBE Vector Shape - Rect').propertyIndex;
+            var fillIndex = contents.addProperty('ADBE Vector Graphic - Fill').propertyIndex;
+            var metadata = { schemaVersion: 1, instanceId: instanceId, packId: loaded.manifest.pack.id, packVersion: loaded.manifest.pack.version, sourceSignature: sourceSignature, assetId: loaded.asset.id, parameters: plan.parameters, bindings: plan.bindings, insertTime: plan.insertTime, groupIndex: groupIndex, rectangleIndex: rectangleIndex, fillIndex: fillIndex, effects: [] };
+            var shape = geometry(layer, metadata);
+            shape.rectangle.property('ADBE Vector Rect Size').setValue(plan.size);
+            shape.rectangle.property('ADBE Vector Rect Roundness').setValue(plan.radius);
+            shape.fill.property('ADBE Vector Fill Color').setValue(plan.color);
+            var transform = layer.property('ADBE Transform Group');
+            transform.property('ADBE Position').setValue(plan.position);
+            layer.inPoint = plan.insertTime;
+            if (plan.animation) {
+                var propertyMatchName = 'ADBE Opacity';
+                if (plan.animation.channel === 'scale') { propertyMatchName = 'ADBE Scale'; }
+                else if (plan.animation.channel === 'position') { propertyMatchName = 'ADBE Position'; }
+                var property = transform.property(propertyMatchName);
+                if (!property || property.matchName !== propertyMatchName) { fail('E_ANIMATION_PROPERTY', '动画属性定位与预期不一致。'); }
+                for (var i = 0; i < plan.animation.values.length; i++) {
+                    var value = AEBrowsePlan.clone(plan.animation.values[i]);
+                    if (plan.animation.channel === 'scale' && property.value.length === 3 && value.length === 2) { value.push(100); }
+                    property.setValueAtTime(plan.insertTime + plan.duration * i / (plan.animation.values.length - 1), value);
+                }
+            }
+            for (i = 0; i < plan.effects.length; i++) {
+                var descriptor = plan.effects[i], effectIndex = null;
+                try {
+                    var effects = layer.property('ADBE Effect Parade');
+                    if (!effects.canAddProperty(descriptor.matchName)) { fail('E_EFFECT_MISSING', '目标图层不能添加这个效果。'); }
+                    effectIndex = effects.addProperty(descriptor.matchName).propertyIndex;
+                    for (var j = 0; j < descriptor.settings.length; j++) {
+                        var setting = descriptor.settings[j], effect = layer.property('ADBE Effect Parade').property(effectIndex);
+                        var target = findProperty(effect, setting.path);
+                        target.setValue(setting.value);
+                        if (!AEBrowsePlan.same(target.value, setting.value)) { fail('E_EFFECT_VALUE_ROUNDTRIP', '效果参数被宿主改变，不能确认还原。'); }
+                    }
+                    metadata.effects.push({ index: effectIndex, descriptor: descriptor });
+                } catch (effectError) {
+                    if (descriptor.required) { throw effectError; }
+                    if (effectIndex !== null) { layer.property('ADBE Effect Parade').property(effectIndex).remove(); }
+                    plan.diagnostics.push({ code: 'W_EFFECT_SKIPPED', effectId: descriptor.id, message: String(effectError) });
+                }
+            }
+            metadata.baseline = snapshot(layer, metadata);
+            layer.comment = PREFIX + JSON.stringify(metadata);
+            return { layer: layer, reused: false, diagnostics: plan.diagnostics };
+        } catch (error) { if (layer !== null) { layer.remove(); } throw error; }
+    }
+    function updateAppearance(layer, loaded, overrides) {
+        var metadata = meta(layer, true);
+        if (layer.locked) { fail('E_SELECTION_LOCKED', '图层已锁定。'); }
+        if (metadata.packId !== loaded.manifest.pack.id || metadata.assetId !== loaded.asset.id) { fail('E_INSTANCE_IDENTITY', '素材身份不匹配。'); }
+        var current = capture(layer);
+        if (current.modified) { fail('E_INSTANCE_MODIFIED', '实例已手工修改，当前更新已停止。'); }
+        var values = AEBrowsePlan.clone(metadata.parameters);
+        for (var key in overrides) { if (Object.prototype.hasOwnProperty.call(overrides, key)) { values[key] = overrides[key]; } }
+        var comp = layer.containingComp;
+        var plan = AEBrowsePlan.plan(loaded.asset, loaded.payload, values, { width: comp.width, height: comp.height, duration: comp.duration, insertTime: metadata.insertTime, installedEffects: installedEffects() });
+        if (plan.motion !== metadata.parameters.motion || plan.parameters.duration !== metadata.parameters.duration) { fail('E_ANIMATION_UPDATE_UNSUPPORTED', '这个测试入口只更新外观，不重写动画。'); }
+        var shape = geometry(layer, metadata), properties = [shape.rectangle.property('ADBE Vector Rect Size'), shape.rectangle.property('ADBE Vector Rect Roundness'), shape.fill.property('ADBE Vector Fill Color')];
+        for (var i = 0; i < properties.length; i++) { if (properties[i].numKeys > 0 || properties[i].expressionEnabled) { fail('E_INSTANCE_MODIFIED', '外观参数已有动画或表达式。'); } }
+        var old = [properties[0].value, properties[1].value, properties[2].value];
+        try { properties[0].setValue(plan.size); properties[1].setValue(plan.radius); properties[2].setValue(plan.color); }
+        catch (error) { for (i = 0; i < properties.length; i++) { properties[i].setValue(old[i]); } throw error; }
+        metadata.parameters = plan.parameters; metadata.baseline = snapshot(layer, metadata);
+        layer.comment = PREFIX + JSON.stringify(metadata);
+        return capture(layer);
+    }
+    function makeFolder(directory) { if (!directory.exists) { if (!directory.parent.exists) { makeFolder(directory.parent); } if (!directory.create()) { fail('E_EXPORT_WRITE', '无法创建导出目录。'); } } }
+    function writeJSON(file, value) {
+        if (file.exists) { fail('E_EXPORT_EXISTS', '导出文件已存在，停止覆盖。'); }
+        makeFolder(file.parent); file.encoding = 'UTF-8';
+        if (!file.open('w')) { fail('E_EXPORT_WRITE', '无法写入导出文件。'); }
+        try { if (!file.write(JSON.stringify(value, null, 2))) { fail('E_EXPORT_WRITE', '写入导出文件失败。'); } } finally { file.close(); }
+    }
+    function exportPack(directory, loaded, layer) {
+        var captured = capture(layer);
+        if (captured.modified) { fail('E_INSTANCE_MODIFIED', '存在尚未支持导出的手工修改，请先明确保存策略。'); }
+        var manifest = AEBrowsePlan.clone(loaded.manifest), asset = AEBrowsePlan.clone(loaded.asset);
+        for (var i = 0; i < asset.parameters.length; i++) { asset.parameters[i].default = captured.parameters[asset.parameters[i].id]; }
+        asset.effects = [];
+        for (i = 0; i < captured.observed.effects.length; i++) { asset.effects.push(captured.observed.effects[i].descriptor); }
+        delete asset.preview; delete asset.resources;
+        manifest.assets = [asset];
+        var root = new Folder(directory), manifestFile = new File(root.fsName + '/pack.json'), sourceFile = pathInPack(root, asset.source);
+        if (manifestFile.exists || sourceFile.exists) { fail('E_EXPORT_EXISTS', '导出目标已有内容，停止覆盖。'); }
+        writeJSON(sourceFile, loaded.payload); writeJSON(manifestFile, manifest);
+        return { directory: root.fsName, packId: manifest.pack.id, assetId: asset.id };
+    }
+    return { load: load, create: create, capture: capture, updateAppearance: updateAppearance, exportPack: exportPack };
+})();

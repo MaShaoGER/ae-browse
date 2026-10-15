@@ -1,0 +1,567 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-15T11:31:52.385Z",
+  "scope": "Node package contract, real file relocation, and simulated host preflight; no AE layer generation or rendering.",
+  "passed": 103,
+  "failed": 0,
+  "total": 103,
+  "metadata1000Ms": 151.07,
+  "fixtures": "test-results/fixtures-1792063912130-59852",
+  "results": [
+    {
+      "group": "package",
+      "name": "完整示例包可登记并满足模拟宿主预检",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "UTF-8 BOM 清单可读取",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "损坏 JSON被拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "尾随逗号被拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "执行语句被拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "无效清单根：null",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "无效清单根：",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "无效清单根：42",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "无效清单根：undefined",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "空素材包被拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "未来协议版本被明确拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "格式错误的素材数组被拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "空素材条目被单独隔离",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "图形包 ID 必须是字符串",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "包名缺失被拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "正式及预发布包版本可读取",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "非语义版本号被拒绝",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "包内重复素材 ID 阻止登记",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "一个损坏素材不影响另一个素材",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "未知素材类型可展示元数据但单项停用",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "未来素材类型可通过注册能力扩展",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "未知扩展字段保留且不会改变清单",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "清单大小读取预算生效",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "素材数量预算可配置",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "深度预算拒绝过深输入",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "文本预算生效",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "未知操作名称被拒绝",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"../outside.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"C:/outside.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"/outside.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"\\\\\\\\server\\\\share\\\\a.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets/a.json:stream\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets/CON.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets/NUL\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets/a?.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets/a\\u0000.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets/../rounded-card.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets//rounded-card.json\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "非法资源路径：\"assets/a.json.\"",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "相对 Windows 分隔符可归一化",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "缺失预览图使用占位图且不阻止基础导入",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "预览图也不能越过图形包目录",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "必需源文件缺失会停用单项素材",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "必需附属资源缺失会停用素材",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "未提供包目录时不会宣称素材可导入",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "目录读取失败返回使用提示",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "整个包复制到含中文及空格的目录后仍可读取",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "包移动后的内容指纹保持一致",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "指向包外的目录链接被拒绝",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "错误源文件类型被拒绝",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "脚本源文件被拒绝且不会执行",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "图形源 JSON 损坏被隔离",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "图形描述根必须是对象",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "源 JSON 的读取预算在解析前检查",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "源文件中的无穷数被隔离",
+      "passed": true
+    },
+    {
+      "group": "portability",
+      "name": "清单中的保留字段被拒绝",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "数值默认值超出上限",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "数值默认值是字符串",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "范围最小值大于最大值",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "无穷数",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "未知参数类型",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "颜色必须含四个归一化分量",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "枚举默认值必须存在于选项",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "枚举选项不得重复",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "参数 ID 不得重复",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "中文参数提示可保留",
+      "passed": true
+    },
+    {
+      "group": "parameters",
+      "name": "提示文本中的代码保持为数据",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "效果通过 matchName 匹配而不依赖中文名称",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "可选效果缺失允许降级并报告被跳过的效果",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "必需效果缺失阻止单项素材导入",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "效果名称不能模糊匹配",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "同名效果的多个实例可用不同稳定 ID 声明",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "效果实例 ID 重复被拒绝",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "效果参数可以声明基础数值和属性路径",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "效果属性路径缺失被拒绝",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "自定义复杂效果参数需要专用适配器",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "效果参数的实例序号必须为正整数",
+      "passed": true
+    },
+    {
+      "group": "effects",
+      "name": "未取得效果清单时不会宣称可执行",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "AE 26.0x67 构建字符串可作最低版本比较",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "过低 AE 版本阻止单项导入",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "最低 AE 版本格式错误有提示",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "完全离线时允许登记与浏览但执行需检查",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "缺失执行能力只停用相关素材",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "未验证执行适配器不会冒充已支持",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "字体依赖保留专用检查入口",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "无合成时可浏览但不能创建图形",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "未选中图层时提示选择效果目标",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "锁定的选中图层不能添加效果",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "未锁定目标满足添加效果的上下文预检",
+      "passed": true
+    },
+    {
+      "group": "host",
+      "name": "报错包含稳定代码、阶段、范围、中文提示与处理动作",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "新图形包登记为新增",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "重复复制相同包复用而不重复安装",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "同版本不同内容要求选择而不静默覆盖",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "新版本包保留用户自建预设",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "资源内容变化会改变指纹",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "缺失可选预览仍可计算稳定指纹",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "缺失必需资源不能被指纹函数忽略",
+      "passed": true
+    },
+    {
+      "group": "registration",
+      "name": "缺失入口清单不能计算指纹",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "不存在的根目录返回诊断而不直接抛异常",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "无效语义版本拒绝：1.2.3-alpha..1",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "无效语义版本拒绝：1.2.3-01",
+      "passed": true
+    },
+    {
+      "group": "package",
+      "name": "无效语义版本拒绝：1.2.3+build..1",
+      "passed": true
+    },
+    {
+      "group": "budget",
+      "name": "1000 项清单能够完成文件与结构预检",
+      "passed": true
+    }
+  ],
+  "hostSnapshot": {
+    "mode": "read-only",
+    "finished": true,
+    "aeVersion": "26.0x67",
+    "startedAtMs": 1791977119646,
+    "snapshotAgeMs": 86792740,
+    "effectCount": 1583,
+    "gaussianBlurAvailable": true,
+    "activeComp": false,
+    "selectionCount": 0
+  },
+  "realHostInventoryPreflight": {
+    "schemaVersion": 1,
+    "canRegister": true,
+    "allContractValid": true,
+    "assetCount": 1,
+    "assets": [
+      {
+        "id": "rounded-card",
+        "valid": true,
+        "canImport": false,
+        "status": "needs-host-check",
+        "skippedEffects": []
+      }
+    ],
+    "diagnostics": [
+      {
+        "code": "W_CAPABILITY_CHECK_PENDING",
+        "severity": "warning",
+        "phase": "compatibility",
+        "scope": "asset",
+        "assetId": "rounded-card",
+        "pointer": "/assets/0/requirements/capabilities",
+        "message": "执行适配器尚未验证这些能力。",
+        "actions": [
+          "完成宿主能力检查"
+        ]
+      }
+    ]
+  }
+}

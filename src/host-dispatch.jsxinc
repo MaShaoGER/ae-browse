@@ -1,0 +1,198 @@
+/* Fixed JSON-only CEP entry. Files and scripts from graphic packs are never loaded here. */
+var AEBrowseHost = (function () {
+    var PROTOCOL_VERSION = 1, BRIDGE_VERSION = '0.1.0', busy = false;
+    var CAPABILITIES = ['shape.create', 'animation.keyframes', 'effect.add'];
+    function fail(code, message) { var error = new Error(message); error.code = code; throw error; }
+    function own(value, key) { return Object.prototype.hasOwnProperty.call(value, key); }
+    function array(value) { return value instanceof Array; }
+    function object(value) { return value !== null && typeof value === 'object' && !array(value); }
+    function id(value) { return typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(value); }
+    function integer(value) { return typeof value === 'number' && isFinite(value) && Math.floor(value) === value && value > 0; }
+    function text(value) { return typeof value === 'string' && /\S/.test(value) && value.length <= 16384; }
+    function sameData(a, b) {
+        if (a === b) { return true; }
+        if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object' || array(a) !== array(b)) { return false; }
+        var countA = 0, countB = 0;
+        for (var key in a) { if (own(a, key)) { countA++; if (!own(b, key) || !sameData(a[key], b[key])) { return false; } } }
+        for (key in b) { if (own(b, key)) { countB++; } }
+        return countA === countB;
+    }
+    function length(value, max, code, label) { if (!array(value) || value.length > max) { fail(code, label + '格式无效或超过预算。'); } }
+    function now() { return new Date().getTime(); }
+    function activeComp() { var item = app.project ? app.project.activeItem : null; return item && item instanceof CompItem ? item : null; }
+    function context() {
+        var comp = activeComp();
+        return { activeComp: comp !== null, comp: comp === null ? null : { id: comp.id, name: String(comp.name), width: comp.width, height: comp.height, duration: comp.duration, time: comp.time, frameRate: comp.frameRate }, selectionCount: comp === null ? 0 : comp.selectedLayers.length };
+    }
+    function effects() {
+        var result = [], list = app.effects;
+        if (!list || typeof list.length !== 'number' || list.length > 10000) { fail('E_HOST_EFFECTS', '无法读取有效的宿主效果清单。'); }
+        for (var i = 0; i < list.length; i++) {
+            if (list[i] && typeof list[i].matchName === 'string' && list[i].matchName) { result.push({ matchName: list[i].matchName, displayName: String(list[i].displayName || list[i].matchName) }); }
+        }
+        return result;
+    }
+    function hostInfo() { return { aeVersion: String(app.version), effects: effects(), capabilities: CAPABILITIES.slice(0), supportedKinds: ['ae.nativeShape'], bridgeVersion: BRIDGE_VERSION }; }
+    function targetComp(target) {
+        if (!object(target) || !integer(target.compId)) { fail('E_TARGET_FORMAT', '目标需要有效的合成 ID。'); }
+        var comp = activeComp();
+        if (comp === null) { fail('E_NO_ACTIVE_COMP', '请先打开目标合成。'); }
+        if (comp.id !== target.compId) { fail('E_CONTEXT_CHANGED', '当前合成已经改变，请刷新后重新添加。'); }
+        return comp;
+    }
+    function versionAtLeast(actual, minimum) {
+        var a = String(actual).match(/^(\d+)(?:\.(\d+))?(?:\.(\d+))?/), b = String(minimum).match(/^(\d+)(?:\.(\d+))?(?:\.(\d+))?/);
+        if (!a || !b) { return false; }
+        for (var i = 1; i <= 3; i++) { var av = Number(a[i] || 0), bv = Number(b[i] || 0); if (av !== bv) { return av > bv; } }
+        return true;
+    }
+    function requirements(asset) {
+        if (asset.requirements === undefined) { return; }
+        var declared = asset.requirements;
+        if (!object(declared)) { fail('E_REQUIREMENTS_FORMAT', '素材依赖声明需要对象。'); }
+        if (declared.aeMin !== undefined) {
+            if (typeof declared.aeMin !== 'string' || !/^\d+\.\d+(?:\.\d+)?$/.test(declared.aeMin)) { fail('E_AE_VERSION_FORMAT', '最低 AE 版本格式无效。'); }
+            if (!versionAtLeast(app.version, declared.aeMin)) { fail('E_AE_VERSION_LOW', '当前 AE 版本低于素材要求。'); }
+        }
+        if (declared.capabilities !== undefined) {
+            length(declared.capabilities, 32, 'E_CAPABILITIES_FORMAT', '能力依赖');
+            for (var i = 0; i < declared.capabilities.length; i++) {
+                var found = false;
+                if (!text(declared.capabilities[i])) { fail('E_CAPABILITIES_FORMAT', '能力依赖需要非空字符串。'); }
+                for (var j = 0; j < CAPABILITIES.length; j++) { if (declared.capabilities[i] === CAPABILITIES[j]) { found = true; break; } }
+                if (!found) { fail('E_CAPABILITY_MISSING', '当前执行入口不支持能力：' + declared.capabilities[i]); }
+            }
+        }
+    }
+    function loadedData(loaded) {
+        if (!object(loaded) || !object(loaded.manifest) || !object(loaded.asset) || !object(loaded.payload)) { fail('E_LOADED_FORMAT', '执行数据缺少清单、素材或图形描述。'); }
+        var manifest = loaded.manifest, asset = loaded.asset;
+        if (manifest.schemaVersion !== 1) { fail('E_SCHEMA_VERSION', '不支持这个图形包格式版本。'); }
+        if (!object(manifest.pack) || !id(manifest.pack.id) || typeof manifest.pack.version !== 'string' || !/^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/.test(manifest.pack.version) || !text(manifest.pack.name)) { fail('E_PACK_IDENTITY', '图形包身份、版本或名称无效。'); }
+        length(manifest.assets, 5000, 'E_ASSET_LIMIT', '清单素材');
+        if (!id(asset.id) || !text(asset.name)) { fail('E_ASSET_IDENTITY', '素材 ID 或名称无效。'); }
+        var member = null, assetIds = {};
+        for (var i = 0; i < manifest.assets.length; i++) {
+            var candidate = manifest.assets[i];
+            if (!object(candidate) || !id(candidate.id)) { fail('E_ASSET_IDENTITY', '清单包含无效素材身份。'); }
+            if (own(assetIds, '$' + candidate.id)) { fail('E_ASSET_DUPLICATE', '清单素材 ID 重复。'); }
+            assetIds['$' + candidate.id] = true;
+            if (candidate.id === asset.id) { member = candidate; }
+        }
+        if (member === null) { fail('E_ASSET_MISSING', '执行素材不属于当前图形包。'); }
+        if (!sameData(member, asset)) { fail('E_ASSET_IDENTITY', '执行素材与清单中的声明不一致。'); }
+        if (asset.kind !== 'ae.nativeShape') { fail('E_KIND_UNSUPPORTED', '当前入口只支持原生形状素材。'); }
+        if (typeof asset.source !== 'string' || !/\.json$/i.test(asset.source) || /[\u0000-\u001f<>:"|?*]/.test(asset.source)) { fail('E_SOURCE_FORMAT', '原生形状需要包内 JSON 描述。'); }
+        var sourceParts = asset.source.replace(/\\/g, '/').split('/');
+        for (i = 0; i < sourceParts.length; i++) { if (!sourceParts[i] || sourceParts[i] === '.' || sourceParts[i] === '..' || /[. ]$/.test(sourceParts[i]) || /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(sourceParts[i])) { fail('E_SOURCE_FORMAT', '图形来源路径不规范。'); } }
+        length(asset.parameters || [], 128, 'E_OPERATION_LIMIT', '参数声明');
+        length(asset.effects || [], 64, 'E_OPERATION_LIMIT', '效果声明');
+        for (i = 0; i < (asset.effects || []).length; i++) {
+            var effect = asset.effects[i];
+            if (!object(effect)) { fail('E_EFFECT_DESCRIPTOR', '效果声明格式无效。'); }
+            length(effect.settings, 256, 'E_OPERATION_LIMIT', '效果设置');
+            for (var j = 0; j < effect.settings.length; j++) { if (!object(effect.settings[j])) { fail('E_EFFECT_VALUE', '效果设置格式无效。'); } length(effect.settings[j].path, 16, 'E_OPERATION_LIMIT', '效果路径'); }
+        }
+        var payload = loaded.payload;
+        length(payload.nodes, 3, 'E_OPERATION_LIMIT', '图形节点');
+        length(payload.states || [], 128, 'E_OPERATION_LIMIT', '图形状态');
+        length(payload.animations || [], 64, 'E_OPERATION_LIMIT', '图形动画');
+        for (i = 0; i < (payload.animations || []).length; i++) { if (!object(payload.animations[i])) { fail('E_ANIMATION_FORMAT', '动画声明格式无效。'); } length(payload.animations[i].values, 2048, 'E_OPERATION_LIMIT', '动画关键帧'); }
+        requirements(asset);
+        return loaded;
+    }
+    function metadata(layer) {
+        if (!layer || typeof layer.comment !== 'string' || layer.comment.indexOf('AEBrowse:') !== 0) { return null; }
+        try { return AEBrowseJSON.parse(layer.comment.substring(9)); } catch (_) { return null; }
+    }
+    function guardOperation(comp, operationId, loaded) {
+        if (comp.numLayers > 20000) { fail('E_OPERATION_LIMIT', '目标合成图层超过当前扫描预算。'); }
+        var found = null;
+        for (var i = 1; i <= comp.numLayers; i++) {
+            var layer = comp.layer(i), meta = metadata(layer);
+            if (meta && meta.instanceId === operationId) {
+                if (found !== null || meta.packId !== loaded.manifest.pack.id || meta.assetId !== loaded.asset.id) { fail('E_INSTANCE_CONFLICT', '同一个操作 ID 已被其他实例使用。'); }
+                found = layer;
+            }
+        }
+        return found;
+    }
+    function instanceData(comp, layer, instanceId, reused) {
+        if (!layer || !integer(layer.id) || layer.containingComp !== comp) { fail('E_INSTANCE_READBACK', '无法确认创建图层身份。'); }
+        var meta = metadata(layer);
+        if (!meta || meta.schemaVersion !== 1 || meta.instanceId !== instanceId) { fail('E_INSTANCE_IDENTITY', '实例身份与请求不一致。'); }
+        var captured = AEBrowseNative.capture(layer);
+        return { compId: comp.id, layerId: layer.id, instanceId: instanceId, reused: !!reused, packId: captured.packId, assetId: captured.assetId, parameters: captured.parameters, observed: captured.observed, modified: captured.modified };
+    }
+    function instantiate(request) {
+        var comp = targetComp(request.target);
+        if (!id(request.operationId)) { fail('E_OPERATION_ID', '创建请求需要稳定的操作 ID。'); }
+        var payload = request.payload;
+        if (!object(payload) || !object(payload.parameters) || typeof payload.insertTime !== 'number' || !isFinite(payload.insertTime)) { fail('E_PAYLOAD_FORMAT', '创建请求需要素材、参数对象与有限插入时间。'); }
+        var loaded = loadedData(payload.loaded), installed = effects(), names = [];
+        for (var i = 0; i < installed.length; i++) { names.push(installed[i].matchName); }
+        /* Validate the full plan before the undo group or any AE writes. */
+        AEBrowsePlan.plan(loaded.asset, loaded.payload, payload.parameters, { width: comp.width, height: comp.height, duration: comp.duration, insertTime: payload.insertTime, installedEffects: names });
+        guardOperation(comp, request.operationId, loaded);
+        if (targetComp(request.target) !== comp) { fail('E_CONTEXT_CHANGED', '执行前目标合成已经改变。'); }
+        var opened = false, result = null, diagnostics = [], data, priorIds = {};
+        for (i = 1; i <= comp.numLayers; i++) { priorIds['$' + comp.layer(i).id] = true; }
+        try {
+            app.beginUndoGroup('AE Browse · 添加图形'); opened = true;
+            result = AEBrowseNative.create(comp, loaded, payload.parameters, { insertTime: payload.insertTime, instanceId: request.operationId });
+            if (result.reused && !own(priorIds, '$' + result.layer.id)) { fail('E_INSTANCE_READBACK', '实例复用状态与创建结果不一致。'); }
+            data = instanceData(comp, result.layer, request.operationId, result.reused);
+            if (data.modified) { fail('E_INSTANCE_READBACK', '实例回读与创建基线不一致。'); }
+            if (data.packId !== loaded.manifest.pack.id || data.assetId !== loaded.asset.id) { fail('E_INSTANCE_IDENTITY', '实例回读的素材身份不一致。'); }
+            /* Serialization is part of readback: fail inside the group so cleanup still runs. */
+            AEBrowseJSON.stringify(data);
+            diagnostics = result.diagnostics || [];
+        } catch (error) {
+            /* This adapter creates only one layer synchronously. Also catch its failed removal before it can return a result. */
+            var createdLayers = [], createdIds = {};
+            for (i = 1; i <= comp.numLayers; i++) {
+                var candidate = comp.layer(i);
+                if (!own(priorIds, '$' + candidate.id)) { createdLayers.push(candidate); createdIds['$' + candidate.id] = true; }
+            }
+            for (i = 0; i < createdLayers.length; i++) { try { createdLayers[i].remove(); } catch (cleanupError) { error.cleanupError = String(cleanupError); } }
+            for (i = 1; i <= comp.numLayers; i++) { if (own(createdIds, '$' + comp.layer(i).id)) { error.cleanupFailed = true; break; } }
+            throw error;
+        } finally { if (opened) { app.endUndoGroup(); } }
+        return { data: data, diagnostics: diagnostics };
+    }
+    function readInstance(request) {
+        var comp = targetComp(request.target), target = request.target, found = null;
+        if (!integer(target.layerId) || !id(target.instanceId)) { fail('E_TARGET_FORMAT', '读取实例需要图层 ID 与实例 ID。'); }
+        if (comp.numLayers > 20000) { fail('E_OPERATION_LIMIT', '目标合成图层超过当前扫描预算。'); }
+        for (var i = 1; i <= comp.numLayers; i++) { var layer = comp.layer(i); if (layer.id === target.layerId) { found = layer; break; } }
+        if (found === null) { fail('E_INSTANCE_MISSING', '目标图层已不存在。'); }
+        return { data: instanceData(comp, found, target.instanceId, true), diagnostics: [] };
+    }
+    function dispatch(requestJSON) {
+        var start = now(), requestId = null, response = { protocolVersion: PROTOCOL_VERSION, requestId: null, ok: false, data: null, diagnostics: [], timing: { hostMs: 0 } }, acquired = false;
+        try {
+            if (typeof requestJSON !== 'string' || requestJSON.length > AEBrowseJSON.maxChars) { fail('E_REQUEST_LIMIT', '宿主请求格式无效或超过预算。'); }
+            var request = AEBrowseJSON.parse(requestJSON);
+            if (object(request) && id(request.requestId)) { requestId = request.requestId; response.requestId = requestId; }
+            if (!object(request) || request.protocolVersion !== PROTOCOL_VERSION) { fail('E_PROTOCOL_VERSION', '宿主通信协议版本不支持。'); }
+            if (requestId === null) { fail('E_REQUEST_ID', '请求需要有效的通信 ID。'); }
+            if (typeof request.operation !== 'string' || !request.operation || request.operation.length > 128 || !object(request.payload) || !own(request, 'target') || request.target !== null && !object(request.target)) { fail('E_REQUEST_FORMAT', '请求操作、目标或数据格式无效。'); }
+            if (busy) { fail('E_HOST_BUSY', '宿主正在处理另一个请求。'); }
+            busy = true; acquired = true;
+            var result;
+            if (request.operation === 'getHostInfo') { result = { data: hostInfo(), diagnostics: [] }; }
+            else if (request.operation === 'getContext') { result = { data: context(), diagnostics: [] }; }
+            else if (request.operation === 'instantiateAsset') { result = instantiate(request); }
+            else if (request.operation === 'readInstance') { result = readInstance(request); }
+            else { fail('E_OPERATION_UNSUPPORTED', '当前入口尚未支持操作：' + request.operation); }
+            response.data = result.data; response.diagnostics = result.diagnostics; response.ok = true;
+        } catch (error) {
+            response.data = null; response.ok = false;
+            response.diagnostics.push({ code: error.code || 'E_HOST_OPERATION', severity: 'error', phase: 'host', message: String(error.message || error) });
+            if (error.cleanupFailed || error.cleanupError) { response.diagnostics.push({ code: 'E_CLEANUP_FAILED', severity: 'error', phase: 'cleanup', message: '本次创建的图层未能确认清理，请检查目标合成。' }); }
+        } finally { if (acquired) { busy = false; } response.timing.hostMs = Math.max(0, now() - start); }
+        try { return AEBrowseJSON.stringify(response); }
+        catch (serializationError) { return AEBrowseJSON.stringify({ protocolVersion: PROTOCOL_VERSION, requestId: requestId, ok: false, data: null, diagnostics: [{ code: serializationError.code || 'E_RESPONSE_SERIALIZE', severity: 'error', phase: 'host', message: '宿主结果无法序列化。' }], timing: { hostMs: Math.max(0, now() - start) } }); }
+    }
+    return { dispatch: dispatch, protocolVersion: PROTOCOL_VERSION, bridgeVersion: BRIDGE_VERSION };
+})();

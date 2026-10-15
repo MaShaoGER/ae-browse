@@ -1,0 +1,18 @@
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+const { inspectDirectory, fingerprint } = require('../src/pack-validator.cjs');
+const root = path.resolve(__dirname, '..');
+const config = JSON.parse(fs.readFileSync(path.join(root, 'test-results/roundtrip-config.json'), 'utf8'));
+if (!path.resolve(config.copied).startsWith(path.resolve(root, 'test-results') + path.sep)) throw new Error('Copy destination outside test-results');
+if (fs.existsSync(config.copied)) throw new Error('Refusing to overwrite round-trip copy');
+fs.cpSync(config.exported, config.copied, { recursive: true });
+const host = JSON.parse(fs.readFileSync(path.join(root, 'test-results/ae-host.json'), 'utf8').replace(/^\uFEFF/, ''));
+const verifiedHost = { ...host, activeComp: true, capabilities: ['shape.create', 'animation.keyframes', 'effect.add'] };
+const contract = inspectDirectory(config.copied, { host: verifiedHost });
+if (!contract.allContractValid || !contract.assets[0].canImport) throw new Error('Copied exported package fails contract preflight: ' + JSON.stringify(contract.diagnostics));
+const originalFingerprint = fingerprint(config.exported), copiedFingerprint = fingerprint(config.copied);
+if (originalFingerprint !== copiedFingerprint) throw new Error('Copied package content differs');
+const result = { finished: true, timestamp: new Date().toISOString(), copiedFrom: config.exported, copiedTo: config.copied, contentUnchanged: true, originalFingerprint, copiedFingerprint, contract, scope: 'Real exported files copied to a different Unicode directory; narrow adapter capabilities verified by this run.' };
+fs.writeFileSync(path.join(config.root, 'copied-pack-check.json'), JSON.stringify(result, null, 2));
+console.log(JSON.stringify({ canRegister: contract.canRegister, allContractValid: contract.allContractValid, contentUnchanged: true, status: contract.assets[0].status }));

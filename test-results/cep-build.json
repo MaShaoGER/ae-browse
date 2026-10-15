@@ -1,0 +1,37 @@
+{
+  "category": "Node package checks; no live CEP or AE",
+  "finished": true,
+  "finishedAt": "2026-10-15T11:31:53.713Z",
+  "passed": 7,
+  "failed": 0,
+  "results": [
+    {
+      "name": "CEP 清单只声明本轮 AE 26 与 CEP 12 目标",
+      "passed": true
+    },
+    {
+      "name": "构建使用官方 CSInterface 的固定内容",
+      "passed": true
+    },
+    {
+      "name": "所有本地 UI 脚本与样式均在构建内，不使用远程运行依赖",
+      "passed": true
+    },
+    {
+      "name": "Node 库服务可以从发布结构加载",
+      "passed": true
+    },
+    {
+      "name": "JSX 已合并 JSON、计划与正式分发入口，加载不读包或写 AE 工程",
+      "passed": true
+    },
+    {
+      "name": "浏览器演示包含可复制示例的真实清单",
+      "passed": true
+    },
+    {
+      "name": "构建清单中的文件指纹都与当前产物一致，测试样例没有打包",
+      "passed": true
+    }
+  ]
+}

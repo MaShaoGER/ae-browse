@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "pack": {
+    "id": "local.motion.basics",
+    "version": "0.1.0",
+    "name": "可复制图形库示例",
+    "author": "AE Browse",
+    "description": "数据格式样例：圆角卡片、状态、动画和可选效果。",
+    "license": "示例内容允许复制及修改"
+  },
+  "assets": [
+    {
+      "id": "rounded-card",
+      "name": "圆角卡片",
+      "kind": "ae.nativeShape",
+      "source": "assets/rounded-card.json",
+      "tags": [
+        "卡片",
+        "背景"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes",
+          "effect.add"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "width",
+          "label": "宽度",
+          "type": "number",
+          "default": 430,
+          "min": 1,
+          "max": 4096,
+          "unit": "px",
+          "help": "以图形中心为基准调整宽度。"
+        },
+        {
+          "id": "height",
+          "label": "高度",
+          "type": "number",
+          "default": 240,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "radius",
+          "label": "圆角",
+          "type": "number",
+          "default": 30,
+          "min": 0,
+          "max": 90,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.20000000298023,
+            0.85000002384186,
+            0.44999998807907,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.8,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "id": "soften",
+          "matchName": "ADBE Gaussian Blur 2",
+          "required": true,
+          "target": "output",
+          "settings": [
+            {
+              "path": [
+                {
+                  "matchName": "ADBE Gaussian Blur 2-0001",
+                  "occurrence": 1
+                }
+              ],
+              "valueType": "number",
+              "value": 8
+            }
+          ],
+          "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+        },
+        {
+          "id": "tint",
+          "matchName": "ADBE Fill",
+          "required": true,
+          "target": "output",
+          "settings": [
+            {
+              "path": [
+                {
+                  "matchName": "ADBE Fill-0002",
+                  "occurrence": 1
+                }
+              ],
+              "valueType": "color",
+              "value": [
+                1,
+                0.60000002384186,
+                0.10000000149012,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "help": {
+        "summary": "调整外观与动画后添加到当前合成。",
+        "steps": [
+          "打开目标合成",
+          "调整外观和动画",
+          "添加新图形"
+        ],
+        "troubleshooting": [
+          {
+            "code": "E_NO_ACTIVE_COMP",
+            "tip": "请先打开一个合成；图形库仍可浏览。"
+          },
+          {
+            "code": "W_EFFECT_MISSING",
+            "tip": "可选择跳过模糊，保留基本图形。"
+          }
+        ]
+      },
+      "extensions": {
+        "local.motion.basics": {
+          "category": "基础图形"
+        }
+      }
+    }
+  ]
+}

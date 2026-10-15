@@ -1,0 +1,14 @@
+{
+  "name": "ae-browse",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Portable AE graphic libraries with a CEP browser and guarded native shape bridge.",
+  "scripts": {
+    "test": "node tests/boundaries.cjs",
+    "test:plan": "node tests/native-plan.cjs",
+    "test:cep": "node tests/library-service.cjs && node tests/host-bridge.cjs && node tests/host-dispatch.cjs && node tests/cep-build.cjs",
+    "build": "node scripts/build-cep.cjs",
+    "preview": "node scripts/preview-panel.cjs",
+    "validate": "node scripts/validate-pack.cjs examples/portable-demo"
+  }
+}

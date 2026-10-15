@@ -1,0 +1,128 @@
+/* ES3-compatible planning shared by Node boundary tests and the AE test adapter. */
+var AEBrowsePlan = (function () {
+    function fail(code, message) { var error = new Error(message); error.code = code; throw error; }
+    function own(value, key) { return Object.prototype.hasOwnProperty.call(value, key); }
+    function object(value) { return value !== null && typeof value === 'object' && !(value instanceof Array); }
+    function clone(value) { return JSON.parse(JSON.stringify(value)); }
+    function finite(value) { return typeof value === 'number' && isFinite(value); }
+    function validId(value) { return typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(value); }
+    function vector(value, count, color) {
+        if (!(value instanceof Array) || value.length !== count) { return false; }
+        for (var i = 0; i < count; i++) { if (!finite(value[i]) || (color && (value[i] < 0 || value[i] > 1))) { return false; } }
+        return true;
+    }
+    function fits(descriptor, value) {
+        if (descriptor.type === 'number') { return finite(value) && (descriptor.min === undefined || value >= descriptor.min) && (descriptor.max === undefined || value <= descriptor.max); }
+        if (descriptor.type === 'color') { return vector(value, 4, true); }
+        if (descriptor.type === 'point2') { return vector(value, 2, false); }
+        if (descriptor.type === 'boolean') { return typeof value === 'boolean'; }
+        if (descriptor.type === 'text') { return typeof value === 'string'; }
+        if (descriptor.type === 'enum' && descriptor.options instanceof Array) { for (var i = 0; i < descriptor.options.length; i++) { if (descriptor.options[i] === value) { return true; } } }
+        return false;
+    }
+    function scan(value, depth) {
+        if (depth > 64) { fail('E_DEPTH_LIMIT', '数据嵌套过深。'); }
+        if (typeof value === 'number' && !finite(value)) { fail('E_NUMBER_NONFINITE', '数值必须是有限数值。'); }
+        if (value && typeof value === 'object') { for (var key in value) { if (own(value, key)) { if (key === '__proto__' || key === 'constructor' || key === 'prototype') { fail('E_RESERVED_KEY', '包含保留字段。'); } scan(value[key], depth + 1); } } }
+    }
+    function parameters(asset, overrides) {
+        if (!object(overrides)) { fail('E_PARAMETERS_FORMAT', '参数覆盖必须是对象。'); }
+        var result = {}, descriptors = {}, list = asset.parameters || [], i, key;
+        if (!(list instanceof Array)) { fail('E_PARAMETERS_FORMAT', '参数声明必须是数组。'); }
+        for (i = 0; i < list.length; i++) {
+            var descriptor = list[i];
+            if (!object(descriptor) || !validId(descriptor.id) || own(descriptors, '$' + descriptor.id)) { fail('E_PARAMETER_ID', '参数 ID 无效或重复。'); }
+            descriptors['$' + descriptor.id] = descriptor;
+            var value = own(overrides, descriptor.id) ? overrides[descriptor.id] : descriptor.default;
+            if (!fits(descriptor, value)) { fail('E_PARAMETER_VALUE', '参数值不符合类型或范围：' + descriptor.id); }
+            result[descriptor.id] = clone(value);
+        }
+        for (key in overrides) { if (own(overrides, key) && !own(descriptors, '$' + key)) { fail('E_PARAMETER_UNKNOWN', '不认识的参数：' + key); } }
+        return { values: result, descriptors: descriptors };
+    }
+    function binding(spec, values) {
+        if (!object(spec) || !own(spec, 'bind')) { fail('E_BINDING_FORMAT', '图形属性需要参数绑定。'); }
+        if (spec.bind instanceof Array) { var result = []; for (var i = 0; i < spec.bind.length; i++) { result.push(binding({ bind: spec.bind[i] }, values)); } return result; }
+        if (typeof spec.bind !== 'string' || !own(values, spec.bind)) { fail('E_BINDING_MISSING', '图形引用了不存在的参数。'); }
+        return clone(values[spec.bind]);
+    }
+    function plan(asset, payload, overrides, context) {
+        scan(asset, 0); scan(payload, 0); scan(overrides, 0);
+        if (!object(asset) || asset.kind !== 'ae.nativeShape') { fail('E_KIND_UNSUPPORTED', '当前测试适配器只生成原生形状。'); }
+        if (asset.resources && (!(asset.resources instanceof Array) || asset.resources.length > 0) || asset.requirements && asset.requirements.fonts !== undefined) { fail('E_RESOURCE_ADAPTER_REQUIRED', '附属资源或字体需要额外适配器，当前入口不忽略它们。'); }
+        if (!object(payload) || payload.formatVersion !== 1 || !(payload.nodes instanceof Array)) { fail('E_PAYLOAD_VERSION', '图形描述格式不支持。'); }
+        if (!object(context) || !finite(context.width) || !finite(context.height) || !finite(context.duration) || context.width <= 0 || context.height <= 0 || context.duration <= 0) { fail('E_NO_ACTIVE_COMP', '需要有效的目标合成。'); }
+        var parsed = parameters(asset, overrides || {}), values = parsed.values;
+        var nodes = {}, layerNode = null, rectangleNode = null, fillNode = null, i, key;
+        for (i = 0; i < payload.nodes.length; i++) {
+            var node = payload.nodes[i];
+            if (!object(node) || !validId(node.id) || own(nodes, '$' + node.id)) { fail('E_NODE_ID', '图形节点 ID 无效或重复。'); }
+            nodes['$' + node.id] = node;
+            if (node.type === 'shapeLayer' && layerNode === null) { layerNode = node; }
+            else if (node.type === 'rectangle' && rectangleNode === null) { rectangleNode = node; }
+            else if (node.type === 'fill' && fillNode === null) { fillNode = node; }
+            else { fail('E_NODE_KIND_UNSUPPORTED', '当前测试适配器支持一个形状层、一个矩形和一个填充。'); }
+        }
+        if (!layerNode || !rectangleNode || !fillNode || rectangleNode.parent !== layerNode.id || fillNode.parent !== rectangleNode.id) { fail('E_NODE_GRAPH', '图形节点层级不支持。'); }
+        if (layerNode.anchor !== 'center' || layerNode.position !== 'compCenter') { fail('E_POSITION_MODE', '当前测试适配器使用中心锚点与合成中心定位。'); }
+        var size = binding(rectangleNode.size, values), radius = binding(rectangleNode.roundness, values), color = binding(fillNode.color, values);
+        if (!vector(size, 2, false) || size[0] <= 0 || size[1] <= 0 || !finite(radius) || radius < 0 || !vector(color, 4, true)) { fail('E_GEOMETRY_VALUE', '图形尺寸、圆角或颜色无效。'); }
+        var states = payload.states || [], stateIds = {};
+        if (!(states instanceof Array)) { fail('E_STATE_FORMAT', '状态必须是数组。'); }
+        for (i = 0; i < states.length; i++) {
+            var state = states[i];
+            if (!object(state) || !validId(state.id) || own(stateIds, '$' + state.id) || !object(state.parameters)) { fail('E_STATE_FORMAT', '状态 ID 或参数声明无效。'); }
+            stateIds['$' + state.id] = true;
+            for (key in state.parameters) { if (own(state.parameters, key) && (!own(parsed.descriptors, '$' + key) || !fits(parsed.descriptors['$' + key], state.parameters[key]))) { fail('E_STATE_PARAMETER', '状态包含不存在或无效的参数：' + key); } }
+        }
+        var motion = values.motion === undefined ? 'none' : values.motion;
+        var insertTime = context.insertTime === undefined ? 0 : context.insertTime;
+        var duration = motion === 'none' ? 0 : values.duration;
+        if (!finite(insertTime) || insertTime < 0 || insertTime >= context.duration) { fail('E_INSERT_TIME', '插入时间必须位于目标合成内。'); }
+        if (!finite(duration) || duration < 0 || motion !== 'none' && duration <= 0 || insertTime + duration > context.duration + 0.000001) { fail('E_DURATION_OUTSIDE_COMP', '动画时长超过目标合成可用区间。'); }
+        var animation = null, recipes = payload.animations || [], recipeIds = {};
+        if (!(recipes instanceof Array)) { fail('E_ANIMATION_FORMAT', '动画必须是数组。'); }
+        for (i = 0; i < recipes.length; i++) {
+            var recipe = recipes[i];
+            if (!object(recipe) || !validId(recipe.id) || own(recipeIds, '$' + recipe.id) || recipe.target !== layerNode.id || recipe.channel !== 'scale' || recipe.timeOrigin !== 'insertTime' || !(recipe.values instanceof Array) || recipe.values.length < 2) { fail('E_ANIMATION_FORMAT', '动画声明或目标无效。'); }
+            recipeIds['$' + recipe.id] = true;
+            for (var j = 0; j < recipe.values.length; j++) { if (!vector(recipe.values[j], 2, false)) { fail('E_ANIMATION_VALUE', '动画关键帧数值无效。'); } }
+            var recipeDuration = binding(recipe.duration, values);
+            if (!finite(recipeDuration) || recipeDuration <= 0) { fail('E_ANIMATION_VALUE', '动画时长绑定无效。'); }
+            if (recipe.id === motion) { animation = { channel: 'scale', values: clone(recipe.values) }; }
+        }
+        if (motion === 'slide') { animation = { channel: 'position', values: [[context.width / 2, context.height / 2 + 64], [context.width / 2, context.height / 2]] }; }
+        if (motion === 'fade') { animation = { channel: 'opacity', values: [0, 100] }; }
+        if (motion === 'none') { animation = null; }
+        if (motion !== 'none' && animation === null) { fail('E_ANIMATION_UNSUPPORTED', '当前图形没有这个动画的实现。'); }
+        var effects = asset.effects || [], effectIds = {}, selectedEffects = [], diagnostics = [];
+        if (!(effects instanceof Array) || !(context.installedEffects instanceof Array)) { fail('E_EFFECTS_FORMAT', '缺少效果声明或宿主效果清单。'); }
+        for (i = 0; i < effects.length; i++) {
+            var effect = effects[i];
+            if (!object(effect) || !validId(effect.id) || own(effectIds, '$' + effect.id) || typeof effect.matchName !== 'string' || !effect.matchName || effect.target !== layerNode.id || typeof effect.required !== 'boolean' || !(effect.settings instanceof Array)) { fail('E_EFFECT_DESCRIPTOR', '效果声明、实例 ID 或目标无效。'); }
+            effectIds['$' + effect.id] = true;
+            for (j = 0; j < effect.settings.length; j++) {
+                var setting = effect.settings[j];
+                if (!object(setting) || !(setting.path instanceof Array) || setting.path.length < 1 || setting.valueType === 'enum' || !fits({ type: setting.valueType }, setting.value)) { fail('E_EFFECT_VALUE', '效果参数类型不支持。'); }
+                for (var k = 0; k < setting.path.length; k++) { var selector = setting.path[k]; if (!object(selector) || typeof selector.matchName !== 'string' || !selector.matchName || !finite(selector.occurrence) || Math.floor(selector.occurrence) !== selector.occurrence || selector.occurrence < 1) { fail('E_EFFECT_PROPERTY_PATH', '效果属性路径无效。'); } }
+            }
+            var available = false;
+            for (j = 0; j < context.installedEffects.length; j++) { if (context.installedEffects[j] === effect.matchName) { available = true; break; } }
+            if (!available) {
+                if (effect.required) { fail('E_EFFECT_MISSING', '缺少必需效果：' + effect.matchName); }
+                diagnostics.push({ code: 'W_EFFECT_MISSING', message: '跳过不可用的可选效果：' + effect.matchName, effectId: effect.id });
+            } else { selectedEffects.push(clone(effect)); }
+        }
+        return { assetId: asset.id, name: asset.name, parameters: values, bindings: { size: clone(rectangleNode.size.bind), radius: rectangleNode.roundness.bind, color: fillNode.color.bind }, size: size, radius: radius, color: color, position: [context.width / 2, context.height / 2], insertTime: insertTime, duration: duration, motion: motion, animation: animation, effects: selectedEffects, diagnostics: diagnostics };
+    }
+    function same(a, b) {
+        if (typeof a === 'number' && typeof b === 'number') { return Math.abs(a - b) < 0.00001; }
+        if (a === b) { return true; }
+        if (!a || !b || typeof a !== typeof b || typeof a !== 'object') { return false; }
+        var countA = 0, countB = 0;
+        for (var key in a) { if (own(a, key)) { countA++; if (!own(b, key) || !same(a[key], b[key])) { return false; } } }
+        for (key in b) { if (own(b, key)) { countB++; } }
+        return countA === countB;
+    }
+    return { plan: plan, parameters: parameters, same: same, clone: clone, fail: fail, scan: scan };
+})();

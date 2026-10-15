@@ -1,0 +1,77 @@
+{
+  "formatVersion": 1,
+  "description": "原生形状适配器的输入草案；当前校验器不负责生成 AE 图层。",
+  "nodes": [
+    {
+      "id": "output",
+      "type": "shapeLayer",
+      "anchor": "center",
+      "position": "compCenter"
+    },
+    {
+      "id": "card",
+      "parent": "output",
+      "type": "rectangle",
+      "size": {
+        "bind": [
+          "width",
+          "height"
+        ]
+      },
+      "roundness": {
+        "bind": "radius"
+      }
+    },
+    {
+      "id": "fill",
+      "parent": "card",
+      "type": "fill",
+      "color": {
+        "bind": "color"
+      }
+    }
+  ],
+  "states": [
+    {
+      "id": "normal",
+      "parameters": {
+        "width": 320,
+        "height": 180,
+        "radius": 24
+      }
+    },
+    {
+      "id": "emphasis",
+      "parameters": {
+        "width": 360,
+        "height": 210,
+        "radius": 30
+      }
+    }
+  ],
+  "animations": [
+    {
+      "id": "pop",
+      "target": "output",
+      "channel": "scale",
+      "timeOrigin": "insertTime",
+      "duration": {
+        "bind": "duration"
+      },
+      "values": [
+        [
+          0,
+          0
+        ],
+        [
+          108,
+          108
+        ],
+        [
+          100,
+          100
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+const { inspectDirectory } = require('../src/pack-validator.cjs');
+const directory = path.resolve(process.argv[2] || 'examples/portable-demo');
+let host;
+if (process.argv[3]) host = JSON.parse(fs.readFileSync(process.argv[3], 'utf8').replace(/^\uFEFF/, ''));
+const result = inspectDirectory(directory, { host });
+console.log(JSON.stringify(result, null, 2));
+process.exitCode = result.canRegister && result.allContractValid ? 0 : 1;

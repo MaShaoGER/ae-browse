@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest Version="7.0" ExtensionBundleId="local.aebrowse" ExtensionBundleVersion="0.2.0" ExtensionBundleName="AE Browse">
+  <ExtensionList>
+    <Extension Id="local.aebrowse.panel" Version="0.2.0" />
+  </ExtensionList>
+  <ExecutionEnvironment>
+    <HostList><Host Name="AEFT" Version="[26.0,27.0)" /></HostList>
+    <LocaleList><Locale Code="All" /></LocaleList>
+    <RequiredRuntimeList><RequiredRuntime Name="CSXS" Version="12.0" /></RequiredRuntimeList>
+  </ExecutionEnvironment>
+  <DispatchInfoList>
+    <Extension Id="local.aebrowse.panel">
+      <DispatchInfo>
+        <Resources>
+          <MainPath>./cep/index.html</MainPath>
+          <ScriptPath>./jsx/host.jsx</ScriptPath>
+          <CEFCommandLine>
+            <Parameter>--enable-nodejs</Parameter>
+            <Parameter>--mixed-context</Parameter>
+          </CEFCommandLine>
+        </Resources>
+        <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+        <UI>
+          <Type>Panel</Type>
+          <Menu>AE Browse</Menu>
+          <Geometry>
+            <Size><Width>780</Width><Height>640</Height></Size>
+            <MinSize><Width>300</Width><Height>420</Height></MinSize>
+          </Geometry>
+        </UI>
+      </DispatchInfo>
+    </Extension>
+  </DispatchInfoList>
+</ExtensionManifest>

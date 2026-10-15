@@ -1,0 +1,7337 @@
+{
+  "schemaVersion": 1,
+  "finished": true,
+  "runId": "cep-host-1791981162921-de010fe9",
+  "aeVersion": "26.0x67",
+  "startedAt": "2026-10-14T12:33:32Z",
+  "startedAtMs": 1791981212216,
+  "tests": [
+    {
+      "name": "只读宿主信息与当前上下文",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes",
+          "effect.add"
+        ],
+        "effectsCount": 1583
+      }
+    },
+    {
+      "name": "没有活动合成时创建请求提前停止",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "code": "E_NO_ACTIVE_COMP",
+          "severity": "error",
+          "phase": "host",
+          "message": "请先打开目标合成。"
+        }
+      ]
+    },
+    {
+      "name": "中文合成名称与特殊字符通过正式 JSON 编解码",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "returnedName": "__AE_BROWSE_CEP_TEST_cep-host-1791981162921-de010fe9 中文验证",
+        "probe": "中文往返：引号\"、反斜杠\\、换行\u000a、制表\u0009、分隔符\u2028\u2029"
+      }
+    },
+    {
+      "name": "目标合成 ID 不匹配时停止且不添加图层",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "code": "E_CONTEXT_CHANGED",
+          "severity": "error",
+          "phase": "host",
+          "message": "当前合成已经改变，请刷新后重新添加。"
+        }
+      ]
+    },
+    {
+      "name": "无效参数在创建图层前停止",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "code": "E_PARAMETER_VALUE",
+          "severity": "error",
+          "phase": "host",
+          "message": "参数值不符合类型或范围：width"
+        }
+      ]
+    },
+    {
+      "name": "缺失必需效果在创建前停止",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "code": "E_EFFECT_MISSING",
+          "severity": "error",
+          "phase": "host",
+          "message": "缺少必需效果：AE_BROWSE_NOT_INSTALLED_EFFECT_cep-host-1791981162921-de010fe9"
+        }
+      ]
+    },
+    {
+      "name": "原生形状实际尺寸、圆角、颜色和 pop 关键帧回读",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "compId": 123,
+        "layerId": 135,
+        "instanceId": "cep-host-1791981162921-de010fe9-main",
+        "reused": false,
+        "packId": "local.motion.basics",
+        "assetId": "rounded-card",
+        "parameters": {
+          "width": 440,
+          "height": 220,
+          "radius": 35,
+          "color": [
+            0.80000001192093,
+            0.25,
+            0.10000000149012,
+            1
+          ],
+          "duration": 0.6,
+          "motion": "pop"
+        },
+        "observed": {
+          "size": [
+            440,
+            220
+          ],
+          "radius": 35,
+          "color": [
+            0.80000001192093,
+            0.25,
+            0.10000000149012,
+            1
+          ],
+          "position": [
+            320,
+            180,
+            0
+          ],
+          "geometryPropertyState": [
+            {
+              "keys": 0,
+              "expression": false
+            },
+            {
+              "keys": 0,
+              "expression": false
+            },
+            {
+              "keys": 0,
+              "expression": false
+            }
+          ],
+          "animation": [
+            {
+              "channel": "ADBE Scale",
+              "keys": [
+                {
+                  "time": 0,
+                  "value": [
+                    0,
+                    0,
+                    100
+                  ],
+                  "inType": "6612",
+                  "outType": "6612",
+                  "inEase": [
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ],
+                  "outEase": [
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ]
+                },
+                {
+                  "time": 0.3,
+                  "value": [
+                    108,
+                    108,
+                    100
+                  ],
+                  "inType": "6612",
+                  "outType": "6612",
+                  "inEase": [
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ],
+                  "outEase": [
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ]
+                },
+                {
+                  "time": 0.6,
+                  "value": [
+                    100,
+                    100,
+                    100
+                  ],
+                  "inType": "6612",
+                  "outType": "6612",
+                  "inEase": [
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ],
+                  "outEase": [
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "channel": "ADBE Position",
+              "keys": [
+                
+              ]
+            },
+            {
+              "channel": "ADBE Opacity",
+              "keys": [
+                
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "descriptor": {
+                "id": "soften",
+                "matchName": "ADBE Gaussian Blur 2",
+                "required": false,
+                "target": "output",
+                "settings": [
+                  
+                ],
+                "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+              },
+              "enabled": true,
+              "propertyState": [
+                
+              ]
+            }
+          ],
+          "effectsTotal": 1
+        },
+        "modified": false
+      }
+    },
+    {
+      "name": "readInstance 按真实图层 ID 回读且不修改图层",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "compId": 123,
+        "layerId": 135,
+        "instanceId": "cep-host-1791981162921-de010fe9-main",
+        "reused": true,
+        "packId": "local.motion.basics",
+        "assetId": "rounded-card",
+        "parameters": {
+          "width": 440,
+          "height": 220,
+          "radius": 35,
+          "color": [
+            0.80000001192093,
+            0.25,
+            0.10000000149012,
+            1
+          ],
+          "duration": 0.6,
+          "motion": "pop"
+        },
+        "observed": {
+          "size": [
+            440,
+            220
+          ],
+          "radius": 35,
+          "color": [
+            0.80000001192093,
+            0.25,
+            0.10000000149012,
+            1
+          ],
+          "position": [
+            320,
+            180,
+            0
+          ],
+          "geometryPropertyState": [
+            {
+              "keys": 0,
+              "expression": false
+            },
+            {
+              "keys": 0,
+              "expression": false
+            },
+            {
+              "keys": 0,
+              "expression": false
+            }
+          ],
+          "animation": [
+            {
+              "channel": "ADBE Scale",
+              "keys": [
+                {
+                  "time": 0,
+                  "value": [
+                    0,
+                    0,
+                    100
+                  ],
+                  "inType": "6612",
+                  "outType": "6612",
+                  "inEase": [
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ],
+                  "outEase": [
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ]
+                },
+                {
+                  "time": 0.3,
+                  "value": [
+                    108,
+                    108,
+                    100
+                  ],
+                  "inType": "6612",
+                  "outType": "6612",
+                  "inEase": [
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 360,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ],
+                  "outEase": [
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ]
+                },
+                {
+                  "time": 0.6,
+                  "value": [
+                    100,
+                    100,
+                    100
+                  ],
+                  "inType": "6612",
+                  "outType": "6612",
+                  "inEase": [
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": -26.6666666666667,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ],
+                  "outEase": [
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    },
+                    {
+                      "speed": 0,
+                      "influence": 16.666666667
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "channel": "ADBE Position",
+              "keys": [
+                
+              ]
+            },
+            {
+              "channel": "ADBE Opacity",
+              "keys": [
+                
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "descriptor": {
+                "id": "soften",
+                "matchName": "ADBE Gaussian Blur 2",
+                "required": false,
+                "target": "output",
+                "settings": [
+                  
+                ],
+                "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+              },
+              "enabled": true,
+              "propertyState": [
+                
+              ]
+            }
+          ],
+          "effectsTotal": 1
+        },
+        "modified": false
+      }
+    },
+    {
+      "name": "同一操作 ID 的相同请求复用同一图层",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "layerId": 135,
+        "reused": true,
+        "layerCount": 1
+      }
+    },
+    {
+      "name": "同一操作 ID 的不同参数冲突且不覆盖已有实例",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "code": "E_INSTANCE_CONFLICT",
+          "severity": "error",
+          "phase": "host",
+          "message": "同一次导入的实例已有不同参数或手工修改。"
+        }
+      ]
+    },
+    {
+      "name": "slide 动画通道与关键帧实际回读",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "channel": "ADBE Scale",
+          "keys": [
+            
+          ]
+        },
+        {
+          "channel": "ADBE Position",
+          "keys": [
+            {
+              "time": 0,
+              "value": [
+                320,
+                244,
+                0
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 106.666666666667,
+                  "influence": 16.666666667
+                }
+              ]
+            },
+            {
+              "time": 0.6,
+              "value": [
+                320,
+                180,
+                0
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 106.666666666667,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "channel": "ADBE Opacity",
+          "keys": [
+            
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fade 动画通道与关键帧实际回读",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "channel": "ADBE Scale",
+          "keys": [
+            
+          ]
+        },
+        {
+          "channel": "ADBE Position",
+          "keys": [
+            
+          ]
+        },
+        {
+          "channel": "ADBE Opacity",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0,
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 166.666666666667,
+                  "influence": 16.666666667
+                }
+              ]
+            },
+            {
+              "time": 0.6,
+              "value": 100,
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 166.666666666667,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "none 动画通道与关键帧实际回读",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": [
+        {
+          "channel": "ADBE Scale",
+          "keys": [
+            
+          ]
+        },
+        {
+          "channel": "ADBE Position",
+          "keys": [
+            
+          ]
+        },
+        {
+          "channel": "ADBE Opacity",
+          "keys": [
+            
+          ]
+        }
+      ]
+    },
+    {
+      "name": "必需效果属性写入失败后清理本次新建图层",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "effect": "ADBE Fill",
+        "diagnostics": [
+          {
+            "code": "E_EFFECT_PROPERTY_PATH",
+            "severity": "error",
+            "phase": "host",
+            "message": "效果参数路径不存在：AE_BROWSE_MISSING_PROPERTY_cep-host-1791981162921-de010fe9"
+          }
+        ],
+        "retainedLayerIds": [
+          138,
+          137,
+          136,
+          135
+        ]
+      }
+    },
+    {
+      "name": "失败清理后正式入口仍能再次创建与回读",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "layerId": 140,
+        "layerCount": 5
+      }
+    },
+    {
+      "name": "清理后项目 item 扫描确认临时合成消失且原合成图层不变",
+      "passed": true,
+      "scope": "live AE property test",
+      "details": {
+        "attempted": true,
+        "removed": true,
+        "absentByItemScan": true,
+        "baselineUnchanged": true,
+        "postWriteFailureLayerIdsUnchanged": true
+      }
+    }
+  ],
+  "scope": "Actual AE properties through built AEBrowseHost.dispatch; no rendered pixel checks.",
+  "cleanup": {
+    "attempted": true,
+    "removed": true,
+    "absentByItemScan": true,
+    "baselineUnchanged": true,
+    "postWriteFailureLayerIdsUnchanged": true
+  },
+  "undoGroups": {
+    "directlyObserved": false,
+    "note": "AE exposes no undo-group-depth query. Real failure recovery is checked without executing Undo or replacing app methods.",
+    "failurePathReached": true,
+    "subsequentDispatchSucceeded": true
+  },
+  "persistence": {
+    "written": true
+  },
+  "builtHost": {
+    "path": "D:/project/ae-browse/dist/AE Browse/jsx/host.jsx",
+    "sha256": "426e4cd7e7b06b73d9f9029370e49ea28640cbe25ce813b0c963acbf5790c73a"
+  },
+  "preparationHostSource": "D:/project/ae-browse/test-results/cep-live-host-info.json",
+  "reportFile": "D:/project/ae-browse/test-results/cep-host-1791981162921-de010fe9/cep-host-report.json",
+  "before": {
+    "itemCount": 0,
+    "items": [
+      
+    ],
+    "projectFile": null,
+    "activeCompId": null
+  },
+  "hostInfo": {
+    "aeVersion": "26.0x67",
+    "effects": [
+      {
+        "matchName": "SphereLabAEGlass",
+        "displayName": "AE Glass"
+      },
+      {
+        "matchName": "PEAF",
+        "displayName": "AutoFill 2"
+      },
+      {
+        "matchName": "DRAGOY Bevelizer",
+        "displayName": "Bevelizer"
+      },
+      {
+        "matchName": "RP Boundary Fill 3",
+        "displayName": "Boundary Fill 3"
+      },
+      {
+        "matchName": "Grape_Colume",
+        "displayName": "Colume"
+      },
+      {
+        "matchName": "MB ConnectLayersProStyles",
+        "displayName": "Connect Layers Pro - Styles"
+      },
+      {
+        "matchName": "Loophouse Cosmic",
+        "displayName": "Cosmic"
+      },
+      {
+        "matchName": "PEDG2",
+        "displayName": "Deep Glow 2"
+      },
+      {
+        "matchName": "TiMDropletee",
+        "displayName": "Dropletee"
+      },
+      {
+        "matchName": "irrealix Dust Transition",
+        "displayName": "Dust Transition"
+      },
+      {
+        "matchName": "FeedbackStudio",
+        "displayName": "Feedback Studio"
+      },
+      {
+        "matchName": "YCraft Fluid",
+        "displayName": "Fluid"
+      },
+      {
+        "matchName": "Grape_FluidMap",
+        "displayName": "FluidMap"
+      },
+      {
+        "matchName": "CROSSPHERE_FractalNoise3Dv2",
+        "displayName": "Fractal Noise 3D"
+      },
+      {
+        "matchName": "One Chance Furikake",
+        "displayName": "Furikake"
+      },
+      {
+        "matchName": "AESweetsGlitch7in1",
+        "displayName": "Glitch 7in1"
+      },
+      {
+        "matchName": "TiMGPUDog",
+        "displayName": "GPUDog"
+      },
+      {
+        "matchName": "NMFX GridWarp",
+        "displayName": "GridWarp"
+      },
+      {
+        "matchName": "m's Halftone",
+        "displayName": "m's Halftone"
+      },
+      {
+        "matchName": "HardCorrupt_v1",
+        "displayName": "HardCorrupt"
+      },
+      {
+        "matchName": "Grape_InkBloom",
+        "displayName": "InkBloom"
+      },
+      {
+        "matchName": "KO_BandFillBasic",
+        "displayName": "KO BandFillBasic"
+      },
+      {
+        "matchName": "KO_Foil",
+        "displayName": "KO Foil"
+      },
+      {
+        "matchName": "BGRA L3tt3rM4pp3r2",
+        "displayName": "L3tt3rM4pp3r2"
+      },
+      {
+        "matchName": "meLinearWipePlus",
+        "displayName": "Linear Wipe+"
+      },
+      {
+        "matchName": "ADBE MaskPNGSc",
+        "displayName": "MaskPNGS"
+      },
+      {
+        "matchName": "Haligonianmemleak",
+        "displayName": "memleak"
+      },
+      {
+        "matchName": "irrealix Mosaic",
+        "displayName": "Mosaic"
+      },
+      {
+        "matchName": "Grape_NatuRamp",
+        "displayName": "NatuRamp"
+      },
+      {
+        "matchName": "irrealix Nebulosity",
+        "displayName": "Nebulosity"
+      },
+      {
+        "matchName": "Grape_PathBlurFX",
+        "displayName": "PathBlurFX"
+      },
+      {
+        "matchName": "TJS PixelExtender",
+        "displayName": "Pixel Extender"
+      },
+      {
+        "matchName": "Grape_Pixion",
+        "displayName": "Pixion"
+      },
+      {
+        "matchName": "irrealix Potok",
+        "displayName": "Potok"
+      },
+      {
+        "matchName": "irrealix proGradient",
+        "displayName": "proGradient"
+      },
+      {
+        "matchName": "irrealix Reka Grid",
+        "displayName": "Reka Grid"
+      },
+      {
+        "matchName": "PERP",
+        "displayName": "Repeater"
+      },
+      {
+        "matchName": "RXXR",
+        "displayName": "RXXR"
+      },
+      {
+        "matchName": "PESS3",
+        "displayName": "Shadow Studio 3"
+      },
+      {
+        "matchName": "irrealix Stretch",
+        "displayName": "Stretch"
+      },
+      {
+        "matchName": "PETB2",
+        "displayName": "TextBox 2"
+      },
+      {
+        "matchName": "PEMUTHICCPRO",
+        "displayName": "Thicc Pro"
+      },
+      {
+        "matchName": "TORN_PAPER",
+        "displayName": "Torn Paper"
+      },
+      {
+        "matchName": "DRAGOY Tracery",
+        "displayName": "Tracery"
+      },
+      {
+        "matchName": "Grape_VoxPattern",
+        "displayName": "Vox Pattern"
+      },
+      {
+        "matchName": "Wave The Path v1.0",
+        "displayName": "Wave The Path"
+      },
+      {
+        "matchName": "YY_Ramp+/2/AndrewYY's _3ECF151",
+        "displayName": "YY_Ramp+"
+      },
+      {
+        "matchName": "CINEMA 4D Effect",
+        "displayName": "Cineware"
+      },
+      {
+        "matchName": "Cryptomatte",
+        "displayName": "Cryptomatte"
+      },
+      {
+        "matchName": "EXtractoR",
+        "displayName": "EXtractoR"
+      },
+      {
+        "matchName": "IDentifier",
+        "displayName": "IDentifier"
+      },
+      {
+        "matchName": "CC Ball Action",
+        "displayName": "CC Ball Action"
+      },
+      {
+        "matchName": "CC Bender",
+        "displayName": "CC Bender"
+      },
+      {
+        "matchName": "CC Bend It",
+        "displayName": "CC Bend It"
+      },
+      {
+        "matchName": "CC Blobbylize",
+        "displayName": "CC Blobbylize"
+      },
+      {
+        "matchName": "CS BlockLoad",
+        "displayName": "CC Block Load"
+      },
+      {
+        "matchName": "CC Bubbles",
+        "displayName": "CC Bubbles"
+      },
+      {
+        "matchName": "CC Burn Film",
+        "displayName": "CC Burn Film"
+      },
+      {
+        "matchName": "CS Color Neutralizer",
+        "displayName": "CC Color Neutralizer"
+      },
+      {
+        "matchName": "CC Color Offset",
+        "displayName": "CC Color Offset"
+      },
+      {
+        "matchName": "CS Composite",
+        "displayName": "CC Composite"
+      },
+      {
+        "matchName": "CC Composite",
+        "displayName": "CC Composite (obsolete)"
+      },
+      {
+        "matchName": "CS CrossBlur",
+        "displayName": "CC Cross Blur"
+      },
+      {
+        "matchName": "CC Cylinder",
+        "displayName": "CC Cylinder"
+      },
+      {
+        "matchName": "CC Drizzle",
+        "displayName": "CC Drizzle"
+      },
+      {
+        "matchName": "CC Environment",
+        "displayName": "CC Environment"
+      },
+      {
+        "matchName": "CC Flo Motion",
+        "displayName": "CC Flo Motion"
+      },
+      {
+        "matchName": "CC Force Motion Blur",
+        "displayName": "CC Force Motion Blur"
+      },
+      {
+        "matchName": "CC Glass",
+        "displayName": "CC Glass"
+      },
+      {
+        "matchName": "CC Glass Wipe",
+        "displayName": "CC Glass Wipe"
+      },
+      {
+        "matchName": "CC Glue Gun",
+        "displayName": "CC Glue Gun"
+      },
+      {
+        "matchName": "CC Griddler",
+        "displayName": "CC Griddler"
+      },
+      {
+        "matchName": "CC Grid Wipe",
+        "displayName": "CC Grid Wipe"
+      },
+      {
+        "matchName": "CC Hair",
+        "displayName": "CC Hair"
+      },
+      {
+        "matchName": "CS HexTile",
+        "displayName": "CC HexTile"
+      },
+      {
+        "matchName": "CC Image Wipe",
+        "displayName": "CC Image Wipe"
+      },
+      {
+        "matchName": "CC Jaws",
+        "displayName": "CC Jaws"
+      },
+      {
+        "matchName": "CC Kaleida",
+        "displayName": "CC Kaleida"
+      },
+      {
+        "matchName": "CS Kernel",
+        "displayName": "CC Kernel"
+      },
+      {
+        "matchName": "CC Lens",
+        "displayName": "CC Lens"
+      },
+      {
+        "matchName": "CC Light Burst 2.5",
+        "displayName": "CC Light Burst 2.5"
+      },
+      {
+        "matchName": "CC Light Rays",
+        "displayName": "CC Light Rays"
+      },
+      {
+        "matchName": "CC Light Sweep",
+        "displayName": "CC Light Sweep"
+      },
+      {
+        "matchName": "CC Light Wipe",
+        "displayName": "CC Light Wipe"
+      },
+      {
+        "matchName": "CS LineSweep",
+        "displayName": "CC Line Sweep"
+      },
+      {
+        "matchName": "CC Mr. Mercury",
+        "displayName": "CC Mr. Mercury"
+      },
+      {
+        "matchName": "CC Mr. Smoothie",
+        "displayName": "CC Mr. Smoothie"
+      },
+      {
+        "matchName": "CC Overbrights",
+        "displayName": "CC Overbrights"
+      },
+      {
+        "matchName": "CC Page Turn",
+        "displayName": "CC Page Turn"
+      },
+      {
+        "matchName": "CC PS Classic",
+        "displayName": "CC PS Classic (obsolete)"
+      },
+      {
+        "matchName": "CC Particle Systems II",
+        "displayName": "CC Particle Systems II"
+      },
+      {
+        "matchName": "CC PS LE Classic",
+        "displayName": "CC PS LE Classic (obsolete)"
+      },
+      {
+        "matchName": "CC Pixel Polly",
+        "displayName": "CC Pixel Polly"
+      },
+      {
+        "matchName": "CC Plastic",
+        "displayName": "CC Plastic"
+      },
+      {
+        "matchName": "CC Power Pin",
+        "displayName": "CC Power Pin"
+      },
+      {
+        "matchName": "CC Particle World",
+        "displayName": "CC Particle World"
+      },
+      {
+        "matchName": "CC Radial Blur",
+        "displayName": "CC Radial Blur"
+      },
+      {
+        "matchName": "CC Radial Fast Blur",
+        "displayName": "CC Radial Fast Blur"
+      },
+      {
+        "matchName": "CC Radial ScaleWipe",
+        "displayName": "CC Radial ScaleWipe"
+      },
+      {
+        "matchName": "CC Rain",
+        "displayName": "CC Rain (obsolete)"
+      },
+      {
+        "matchName": "CSRainfall",
+        "displayName": "CC Rainfall"
+      },
+      {
+        "matchName": "CC RepeTile",
+        "displayName": "CC RepeTile"
+      },
+      {
+        "matchName": "CC Ripple Pulse",
+        "displayName": "CC Ripple Pulse"
+      },
+      {
+        "matchName": "CC Scale Wipe",
+        "displayName": "CC Scale Wipe"
+      },
+      {
+        "matchName": "CC Scatterize",
+        "displayName": "CC Scatterize"
+      },
+      {
+        "matchName": "CC Simple Wire Removal",
+        "displayName": "CC Simple Wire Removal"
+      },
+      {
+        "matchName": "CC Slant",
+        "displayName": "CC Slant"
+      },
+      {
+        "matchName": "CC Smear",
+        "displayName": "CC Smear"
+      },
+      {
+        "matchName": "CC Snow",
+        "displayName": "CC Snow (obsolete)"
+      },
+      {
+        "matchName": "CSSnowfall",
+        "displayName": "CC Snowfall"
+      },
+      {
+        "matchName": "CC Sphere",
+        "displayName": "CC Sphere"
+      },
+      {
+        "matchName": "CC Split",
+        "displayName": "CC Split"
+      },
+      {
+        "matchName": "CC Split 2",
+        "displayName": "CC Split 2"
+      },
+      {
+        "matchName": "CC Spotlight",
+        "displayName": "CC Spotlight"
+      },
+      {
+        "matchName": "CC Star Burst",
+        "displayName": "CC Star Burst"
+      },
+      {
+        "matchName": "CS Threads",
+        "displayName": "CC Threads"
+      },
+      {
+        "matchName": "CC Threshold",
+        "displayName": "CC Threshold"
+      },
+      {
+        "matchName": "CC Threshold RGB",
+        "displayName": "CC Threshold RGB"
+      },
+      {
+        "matchName": "CC Tiler",
+        "displayName": "CC Tiler"
+      },
+      {
+        "matchName": "CC Time Blend",
+        "displayName": "CC Time Blend"
+      },
+      {
+        "matchName": "CC Time Blend FX",
+        "displayName": "CC Time Blend FX"
+      },
+      {
+        "matchName": "CC Toner",
+        "displayName": "CC Toner"
+      },
+      {
+        "matchName": "CC Twister",
+        "displayName": "CC Twister"
+      },
+      {
+        "matchName": "CC Vector Blur",
+        "displayName": "CC Vector Blur"
+      },
+      {
+        "matchName": "CS Vignette",
+        "displayName": "CC Vignette"
+      },
+      {
+        "matchName": "CC WarpoMatic",
+        "displayName": "CC WarpoMatic"
+      },
+      {
+        "matchName": "CC Wide Time",
+        "displayName": "CC Wide Time"
+      },
+      {
+        "matchName": "Keylight 906",
+        "displayName": "Keylight (1.2)"
+      },
+      {
+        "matchName": "ISL MochaShapeImporter",
+        "displayName": "mocha shape"
+      },
+      {
+        "matchName": "mochaAECC",
+        "displayName": "Mocha AE"
+      },
+      {
+        "matchName": "F's AlphaFix",
+        "displayName": "F's AlphaFix"
+      },
+      {
+        "matchName": "F's alphaThreshold",
+        "displayName": "F's alphaThreshold"
+      },
+      {
+        "matchName": "F's AnimatedNoise",
+        "displayName": "F's AnimatedNoise"
+      },
+      {
+        "matchName": "F's CCplus",
+        "displayName": "F's CCplus"
+      },
+      {
+        "matchName": "F's CellGrad",
+        "displayName": "F's CellGrad"
+      },
+      {
+        "matchName": "F's CellLineEraser",
+        "displayName": "F's CellLineEraser"
+      },
+      {
+        "matchName": "F's ChannelNoise",
+        "displayName": "F's ChannelNoise"
+      },
+      {
+        "matchName": "F's ChannelShift",
+        "displayName": "F's ChannelShift"
+      },
+      {
+        "matchName": "F's ChromaticAberration",
+        "displayName": "F's ChromaticAberration"
+      },
+      {
+        "matchName": "F's ColorChangeFromPoint",
+        "displayName": "F's ColorChangeFromPoint"
+      },
+      {
+        "matchName": "F's ColorChangeSimple",
+        "displayName": "F's ColorChangeSimple"
+      },
+      {
+        "matchName": "F's ColorChange",
+        "displayName": "F's ColorChange"
+      },
+      {
+        "matchName": "F's ColorKey",
+        "displayName": "F's ColorKey"
+      },
+      {
+        "matchName": "F's ColorMatKey",
+        "displayName": "F's ColorMatKey"
+      },
+      {
+        "matchName": "F's colorThreshold",
+        "displayName": "F's colorThreshold"
+      },
+      {
+        "matchName": "F's CreateAlpha",
+        "displayName": "F's CreateAlpha"
+      },
+      {
+        "matchName": "F's EdgeBlur",
+        "displayName": "F's EdgeBlur"
+      },
+      {
+        "matchName": "F's EdgeLine-Hi",
+        "displayName": "F's EdgeLine-Hi"
+      },
+      {
+        "matchName": "F's EdgeLine",
+        "displayName": "F's EdgeLine"
+      },
+      {
+        "matchName": "F's ExpsColors",
+        "displayName": "F's ExpsColors"
+      },
+      {
+        "matchName": "F's ExpsPos",
+        "displayName": "F's ExpsPos"
+      },
+      {
+        "matchName": "F's Extract-Hi",
+        "displayName": "F's Extract-Hi"
+      },
+      {
+        "matchName": "F's FillColor",
+        "displayName": "F's FillColor"
+      },
+      {
+        "matchName": "F's Filter",
+        "displayName": "F's Filter"
+      },
+      {
+        "matchName": "F's Flare",
+        "displayName": "F's Flare"
+      },
+      {
+        "matchName": "F's Frame",
+        "displayName": "F's Frame"
+      },
+      {
+        "matchName": "FsSSFrame",
+        "displayName": "FsSSFrame"
+      },
+      {
+        "matchName": "F's grayToColorize",
+        "displayName": "F's grayToColorize"
+      },
+      {
+        "matchName": "F's grayToCountourLine",
+        "displayName": "F's grayToCountourLine"
+      },
+      {
+        "matchName": "F's graytoneToColorize",
+        "displayName": "F's graytoneToColorize"
+      },
+      {
+        "matchName": "F's grayToWaveLine",
+        "displayName": "F's grayToWaveLine"
+      },
+      {
+        "matchName": "F's GuideFrame",
+        "displayName": "F's GuideFrame"
+      },
+      {
+        "matchName": "F's HLS_Reverse",
+        "displayName": "F's HLS_Reverse"
+      },
+      {
+        "matchName": "F's IroToreAdjacent",
+        "displayName": "F's IroToreAdjacent"
+      },
+      {
+        "matchName": "F's IroTore",
+        "displayName": "F's IroTore"
+      },
+      {
+        "matchName": "F's LineDetection",
+        "displayName": "F's LineDetection"
+      },
+      {
+        "matchName": "F's LineTrace",
+        "displayName": "F's LineTrace"
+      },
+      {
+        "matchName": "F's MainLineRepaint",
+        "displayName": "F's MainLineRepaint"
+      },
+      {
+        "matchName": "F's MaskFromRGB",
+        "displayName": "F's MaskFromRGB"
+      },
+      {
+        "matchName": "F's MaskFromRGB_Multi",
+        "displayName": "F's MaskFromRGB_Multi"
+      },
+      {
+        "matchName": "F's Max",
+        "displayName": "F's Max"
+      },
+      {
+        "matchName": "F's Max_Kasumi",
+        "displayName": "F's Max_Kasumi"
+      },
+      {
+        "matchName": "F's Mosaic",
+        "displayName": "F's Mosaic"
+      },
+      {
+        "matchName": "F's NamiGarasu",
+        "displayName": "F's NamiGarasu"
+      },
+      {
+        "matchName": "F's NoiseHiLo_Alpha",
+        "displayName": "F's NoiseHiLo_Alpha"
+      },
+      {
+        "matchName": "F's NoiseHiLo_RGB",
+        "displayName": "F's NoiseHiLo_RGB"
+      },
+      {
+        "matchName": "F's OpticalDiffusion",
+        "displayName": "F's OpticalDiffusion"
+      },
+      {
+        "matchName": "F's OutLine",
+        "displayName": "F's OutLine"
+      },
+      {
+        "matchName": "F's PaintMalutPaint",
+        "displayName": "F's PaintMalutPaint"
+      },
+      {
+        "matchName": "F's Paint",
+        "displayName": "F's Paint"
+      },
+      {
+        "matchName": "F's PaperPlaneGetWeightInfo",
+        "displayName": "F's PaperPlaneGetWeightInfo"
+      },
+      {
+        "matchName": "F's PaperPlaneGetWeight",
+        "displayName": "F's PaperPlaneGetWeight"
+      },
+      {
+        "matchName": "F's PixelExtend",
+        "displayName": "F's PixelExtend"
+      },
+      {
+        "matchName": "F's PixelReplace",
+        "displayName": "F's PixelReplace"
+      },
+      {
+        "matchName": "F's PixelSelector",
+        "displayName": "F's PixelSelector"
+      },
+      {
+        "matchName": "F's Posterization8bit",
+        "displayName": "F's Posterization8bit"
+      },
+      {
+        "matchName": "F's Premultiply",
+        "displayName": "F's Premultiply"
+      },
+      {
+        "matchName": "F's RandomLineNoise",
+        "displayName": "F's RandomLineNoise"
+      },
+      {
+        "matchName": "F's RandomMosaic2nd",
+        "displayName": "F's RandomMosaic2nd"
+      },
+      {
+        "matchName": "F's RandomMosaic",
+        "displayName": "F's RandomMosaic"
+      },
+      {
+        "matchName": "F's RandomShift",
+        "displayName": "F's RandomShift"
+      },
+      {
+        "matchName": "F's RGBAControl",
+        "displayName": "F's RGBAControl"
+      },
+      {
+        "matchName": "F's RgbToAlpha",
+        "displayName": "F's RgbToAlpha"
+      },
+      {
+        "matchName": "F's Scanline",
+        "displayName": "F's Scanline"
+      },
+      {
+        "matchName": "F's ScreenShakeDir",
+        "displayName": "F's ScreenShakeDir"
+      },
+      {
+        "matchName": "F's ScreenShakeMM",
+        "displayName": "F's ScreenShakeMM"
+      },
+      {
+        "matchName": "F's SelectColor",
+        "displayName": "F's SelectColor"
+      },
+      {
+        "matchName": "F's SelectedBlur",
+        "displayName": "F's SelectedBlur"
+      },
+      {
+        "matchName": "F's Shine",
+        "displayName": "F's Shine"
+      },
+      {
+        "matchName": "F's ShitsuKanBlur",
+        "displayName": "F's ShitsuKanBlur"
+      },
+      {
+        "matchName": "F's smokeThreshold",
+        "displayName": "F's smokeThreshold"
+      },
+      {
+        "matchName": "F's SparkGrand",
+        "displayName": "F's SparkGrand"
+      },
+      {
+        "matchName": "F's SparkMult",
+        "displayName": "F's SparkMult"
+      },
+      {
+        "matchName": "F's SparkRing",
+        "displayName": "F's SparkRing"
+      },
+      {
+        "matchName": "F's SparkStorm",
+        "displayName": "F's SparkStorm"
+      },
+      {
+        "matchName": "F's Spark",
+        "displayName": "F's Spark"
+      },
+      {
+        "matchName": "F's sputteringAlpha",
+        "displayName": "F's sputteringAlpha"
+      },
+      {
+        "matchName": "F's sputteringCircle",
+        "displayName": "F's sputteringCircle"
+      },
+      {
+        "matchName": "F's sputteringRect",
+        "displayName": "F's sputteringRect"
+      },
+      {
+        "matchName": "F's sputteringSplash",
+        "displayName": "F's sputteringSplash"
+      },
+      {
+        "matchName": "F's Star",
+        "displayName": "F's Star"
+      },
+      {
+        "matchName": "F's Star_Colorful",
+        "displayName": "F's Star_Colorful"
+      },
+      {
+        "matchName": "F's Thin",
+        "displayName": "F's Thin"
+      },
+      {
+        "matchName": "F's ToGray",
+        "displayName": "F's ToGray"
+      },
+      {
+        "matchName": "F's Toner",
+        "displayName": "F's Toner"
+      },
+      {
+        "matchName": "F's Tone",
+        "displayName": "F's Tone"
+      },
+      {
+        "matchName": "F's TouchDrawCenter",
+        "displayName": "F's TouchDrawCenter"
+      },
+      {
+        "matchName": "F's TouchDrawStraght",
+        "displayName": "F's TouchDrawStraght"
+      },
+      {
+        "matchName": "F's TouchDraw",
+        "displayName": "F's TouchDraw"
+      },
+      {
+        "matchName": "F's UsedColorList",
+        "displayName": "F's UsedColorList"
+      },
+      {
+        "matchName": "F's VideoGrid",
+        "displayName": "F's VideoGrid"
+      },
+      {
+        "matchName": "F's VideoLine2nd",
+        "displayName": "F's VideoLine2nd"
+      },
+      {
+        "matchName": "F's VideoLine",
+        "displayName": "F's VideoLine"
+      },
+      {
+        "matchName": "F's whiteInOut",
+        "displayName": "F's whiteInOut"
+      },
+      {
+        "matchName": "F's YuvControl",
+        "displayName": "F's YuvControl"
+      },
+      {
+        "matchName": "PSOFT ANTI-ALIASING",
+        "displayName": "anti-aliasing"
+      },
+      {
+        "matchName": "PSOFT BLURCEL",
+        "displayName": "P_BlurCel"
+      },
+      {
+        "matchName": "PSOFT BLURRGB",
+        "displayName": "P_BlurRGB"
+      },
+      {
+        "matchName": "PSOFT BOUNDARYLINE",
+        "displayName": "P_BoundaryLine"
+      },
+      {
+        "matchName": "PSOFT COLORSELECTION",
+        "displayName": "P_ColorSelection"
+      },
+      {
+        "matchName": "PSOFT DEBAND",
+        "displayName": "P_Deband"
+      },
+      {
+        "matchName": "PSOFT DELTAFX",
+        "displayName": "P_DeltaFX"
+      },
+      {
+        "matchName": "PSOFT EXTEND",
+        "displayName": "P_Extend"
+      },
+      {
+        "matchName": "PSOFT FILL",
+        "displayName": "P_Fill"
+      },
+      {
+        "matchName": "PSOFT GRADIENT",
+        "displayName": "P_Gradient"
+      },
+      {
+        "matchName": "PSOFT REPLACECOLOR",
+        "displayName": "P_ReplaceColor"
+      },
+      {
+        "matchName": "PSOFT TEXTURE",
+        "displayName": "P_Texture"
+      },
+      {
+        "matchName": "PSOFT BLURCELLAYER",
+        "displayName": "P_BlurCelLayer"
+      },
+      {
+        "matchName": "PSOFT BLURCELMULTI",
+        "displayName": "P_BlurCelMulti"
+      },
+      {
+        "matchName": "PSOFT BLURCEL RADIAL",
+        "displayName": "P_BlurCelRadial"
+      },
+      {
+        "matchName": "PSOFT BLURPATH",
+        "displayName": "P_BlurPath"
+      },
+      {
+        "matchName": "PSOFT CHROMATICABERRATIONS",
+        "displayName": "P_ChromaticAberrations"
+      },
+      {
+        "matchName": "PSOFT GLOW",
+        "displayName": "P_Glow"
+      },
+      {
+        "matchName": "PSOFT GradientMap",
+        "displayName": "P_GradientMap"
+      },
+      {
+        "matchName": "PSOFT InnerShadow",
+        "displayName": "P_InnerShadow"
+      },
+      {
+        "matchName": "PSOFT FOCUS LINES",
+        "displayName": "P_FocusLines"
+      },
+      {
+        "matchName": "PSOFT HALFTONE",
+        "displayName": "P_Halftone"
+      },
+      {
+        "matchName": "PSOFT PATHSTROKE",
+        "displayName": "P_PathStroke"
+      },
+      {
+        "matchName": "PSOFT SPEED LINES",
+        "displayName": "P_SpeedLines"
+      },
+      {
+        "matchName": "PSOFT PENCIL4 LINE",
+        "displayName": "P_Pencil+ 4 Line"
+      },
+      {
+        "matchName": "tc Echospace",
+        "displayName": "Echospace"
+      },
+      {
+        "matchName": "tc Form",
+        "displayName": "Form"
+      },
+      {
+        "matchName": "Geo",
+        "displayName": "Geo"
+      },
+      {
+        "matchName": "tc Trapcode Horizon",
+        "displayName": "Horizon"
+      },
+      {
+        "matchName": "tc Lux",
+        "displayName": "Lux"
+      },
+      {
+        "matchName": "rg Mir",
+        "displayName": "Mir 3"
+      },
+      {
+        "matchName": "tc Particular",
+        "displayName": "Trapcode Particular"
+      },
+      {
+        "matchName": "tc Sound Keys",
+        "displayName": "Sound Keys"
+      },
+      {
+        "matchName": "tc Tao",
+        "displayName": "Tao"
+      },
+      {
+        "matchName": "VIDEOCOPILOT 3DArray",
+        "displayName": "Element"
+      },
+      {
+        "matchName": "VIDEOCOPILOT OpticalFlares",
+        "displayName": "Optical Flares"
+      },
+      {
+        "matchName": "VIDEOCOPILOT Sphere",
+        "displayName": "VC Orb"
+      },
+      {
+        "matchName": "VIDEOCOPILOT VCReflect",
+        "displayName": "VC Reflect"
+      },
+      {
+        "matchName": "PLND ColorVSN",
+        "displayName": "ColorVSN"
+      },
+      {
+        "matchName": "SatoriGeometricFilters",
+        "displayName": "Geometric Filter"
+      },
+      {
+        "matchName": "GGGLASSWORK",
+        "displayName": "Glasswork"
+      },
+      {
+        "matchName": "PXSRT_HydroChrome",
+        "displayName": "HydroChrome"
+      },
+      {
+        "matchName": "PSSMADPAINTER",
+        "displayName": "MAD PAINTER"
+      },
+      {
+        "matchName": "GGGLMOSH",
+        "displayName": "Motion Mosh"
+      },
+      {
+        "matchName": "PSSPGAL",
+        "displayName": "Pixel Galactic"
+      },
+      {
+        "matchName": "GG PixelSorter3",
+        "displayName": "Pixel Sorter 3 "
+      },
+      {
+        "matchName": "AGPRetroDither",
+        "displayName": "RetroDither"
+      },
+      {
+        "matchName": "Red Giant GrowBounds",
+        "displayName": "Grow Bounds"
+      },
+      {
+        "matchName": "ADBE TimeMachine",
+        "displayName": "TimeMachine"
+      },
+      {
+        "matchName": "BDVF",
+        "displayName": "VariFont"
+      },
+      {
+        "matchName": "PSSVXSRT",
+        "displayName": "Voxel Sorter"
+      },
+      {
+        "matchName": "BCC_AMBIENTLIGHT",
+        "displayName": " BCC+Ambient Light"
+      },
+      {
+        "matchName": "BCC_ATMOSPHERICGLOWDISSOLVE",
+        "displayName": " BCC+Atmospheric Glow Dissolve"
+      },
+      {
+        "matchName": "BCC_ATMOSPHERICGLOW",
+        "displayName": " BCC+Atmospheric Glow"
+      },
+      {
+        "matchName": "BCC_AUDIOVISUALIZER",
+        "displayName": " BCC+Audio Visualizer"
+      },
+      {
+        "matchName": "BCC33D Image Shatter",
+        "displayName": "BCC 3D Image Shatter"
+      },
+      {
+        "matchName": "BCC6ThreeWayCC",
+        "displayName": "BCC 3 Way Color Grade"
+      },
+      {
+        "matchName": "BCC3Composite",
+        "displayName": "BCC Composite"
+      },
+      {
+        "matchName": "BCC3Alpha Pixel Noise",
+        "displayName": "BCC Alpha Pixel Noise OBS"
+      },
+      {
+        "matchName": "BCC3Alpha Process",
+        "displayName": "BCC Alpha Process"
+      },
+      {
+        "matchName": "BCC3Alpha Spotlight",
+        "displayName": "BCC Alpha Spotlight OBS"
+      },
+      {
+        "matchName": "BCC3Artists Poster",
+        "displayName": "BCC Artist's Poster"
+      },
+      {
+        "matchName": "BCC Beat Reactor",
+        "displayName": "BCC Beat Reactor"
+      },
+      {
+        "matchName": "BCC Beauty Studio",
+        "displayName": "BCC Beauty Studio OBSOLETE"
+      },
+      {
+        "matchName": "BCC Blobs Wipe",
+        "displayName": "BCC Blobs Wipe"
+      },
+      {
+        "matchName": "BCC Blobs WipePrTr",
+        "displayName": "BCC Blobs Wipe"
+      },
+      {
+        "matchName": "BCC3Blur",
+        "displayName": "BCC Blur"
+      },
+      {
+        "matchName": "BCC VR Blur",
+        "displayName": "BCC VR Blur"
+      },
+      {
+        "matchName": "BCC Blur Dissolve",
+        "displayName": "BCC Blur Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC Blur DissolvePrTr",
+        "displayName": "BCC Blur Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Boost Blend",
+        "displayName": "BCC Boost Blend OBS"
+      },
+      {
+        "matchName": "BCC3Brightness-Contrast",
+        "displayName": "BCC Brightness-Contrast"
+      },
+      {
+        "matchName": "BCC Broadcast Safe",
+        "displayName": "BCC Broadcast Safe"
+      },
+      {
+        "matchName": "BCC3Bulge",
+        "displayName": "BCC Bulge"
+      },
+      {
+        "matchName": "BCC3Brick",
+        "displayName": "BCC Brick OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Bump Map",
+        "displayName": "BCC Bump Map"
+      },
+      {
+        "matchName": "BCC3Rock",
+        "displayName": "BCC Rock OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Burnt Film",
+        "displayName": "BCC Burnt Film"
+      },
+      {
+        "matchName": "BCC Burnt FilmPrTr",
+        "displayName": "BCC Burnt Film"
+      },
+      {
+        "matchName": "BCC Card Array",
+        "displayName": "BCC Wild Cards"
+      },
+      {
+        "matchName": "BCC3Cartooner",
+        "displayName": "BCC Cartooner"
+      },
+      {
+        "matchName": "BCC3Rays Cartoon",
+        "displayName": "BCC Rays Cartoon OBSOLETE"
+      },
+      {
+        "matchName": "BCC6Cartoon2Look",
+        "displayName": "BCC Cartoon Look"
+      },
+      {
+        "matchName": "BCC3Caustics",
+        "displayName": "BCC Caustics"
+      },
+      {
+        "matchName": "BCCChecker Wipe",
+        "displayName": "BCC Checker Wipe"
+      },
+      {
+        "matchName": "BCCChecker WipePrTr",
+        "displayName": "BCC Checker Wipe"
+      },
+      {
+        "matchName": "BCC3Chroma Key",
+        "displayName": "BCC Chroma Key"
+      },
+      {
+        "matchName": "BCC Chroma Key Studio",
+        "displayName": "BCC Chroma Key Studio"
+      },
+      {
+        "matchName": "BCC3Cloth",
+        "displayName": "BCC Cloth OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Clouds",
+        "displayName": "BCC Clouds OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Color Balance",
+        "displayName": "BCC Color Balance"
+      },
+      {
+        "matchName": "BCC4Color Choker",
+        "displayName": "BCC Color Choker"
+      },
+      {
+        "matchName": "BCC3Color Correction",
+        "displayName": "BCC Color Correction"
+      },
+      {
+        "matchName": "BCC3Colorize",
+        "displayName": "BCC Colorize"
+      },
+      {
+        "matchName": "BCC3Colorize Glow",
+        "displayName": "BCC Colorize Glow"
+      },
+      {
+        "matchName": "BCC Colorize Glow Dissolve",
+        "displayName": "BCC Colorize Glow Dissolve"
+      },
+      {
+        "matchName": "BCC Colorize Glow DissolvePrTr",
+        "displayName": "BCC Colorize Glow Dissolve"
+      },
+      {
+        "matchName": "BCC3Color Match",
+        "displayName": "BCC Color Match"
+      },
+      {
+        "matchName": "BCC3Color Palette",
+        "displayName": "BCC Color Palette OBS"
+      },
+      {
+        "matchName": "BCC3Comet",
+        "displayName": "BCC Comet OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Composite Choker",
+        "displayName": "BCC Composite Choker"
+      },
+      {
+        "matchName": "BCC Composite Dissolve",
+        "displayName": "BCC Composite Dissolve"
+      },
+      {
+        "matchName": "BCC Composite DissolvePrTr",
+        "displayName": "BCC Composite Dissolve"
+      },
+      {
+        "matchName": "BCC3CornerPin",
+        "displayName": "BCC Corner Pin OBS"
+      },
+      {
+        "matchName": "BCC Corner Pin Studio",
+        "displayName": "BCC Corner Pin Studio"
+      },
+      {
+        "matchName": "BCC3Correct Selected Color",
+        "displayName": "BCC Correct Selected Color"
+      },
+      {
+        "matchName": "BCC Crash Zoom Dissolve",
+        "displayName": "BCC Crash Zoom Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC Crash Zoom DissolvePrTr",
+        "displayName": "BCC Crash Zoom Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Criss-Cross Wipe",
+        "displayName": "BCC Criss-Cross Wipe"
+      },
+      {
+        "matchName": "BCC Criss-Cross WipePrTr",
+        "displayName": "BCC Criss-Cross Wipe"
+      },
+      {
+        "matchName": "BCC Cross Glitch",
+        "displayName": "BCC Cross Glitch OBSOLETE"
+      },
+      {
+        "matchName": "BCC Cross GlitchPrTr",
+        "displayName": "BCC Cross Glitch OBSOLETE"
+      },
+      {
+        "matchName": "BCC Cross Melt",
+        "displayName": "BCC Cross Melt"
+      },
+      {
+        "matchName": "BCC Cross MeltPrTr",
+        "displayName": "BCC Cross Melt"
+      },
+      {
+        "matchName": "BCC Cross Zoom",
+        "displayName": "BCC Cross Zoom OBSOLETE"
+      },
+      {
+        "matchName": "BCC Cross ZoomPrTr",
+        "displayName": "BCC Cross Zoom OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Cube",
+        "displayName": "BCC Cube"
+      },
+      {
+        "matchName": "BCC Curl",
+        "displayName": "BCC Curl"
+      },
+      {
+        "matchName": "BCC Curl Dissolve",
+        "displayName": "BCC Curl Dissolve"
+      },
+      {
+        "matchName": "BCC Curl DissolvePrTr",
+        "displayName": "BCC Curl Dissolve"
+      },
+      {
+        "matchName": "BCC3Cylinder",
+        "displayName": "BCC Cylinder"
+      },
+      {
+        "matchName": "BCC Damaged TV Dissolve",
+        "displayName": "BCC Damaged TV Dissolve"
+      },
+      {
+        "matchName": "BCC Damaged TV DissolvePrTr",
+        "displayName": "BCC Damaged TV Dissolve"
+      },
+      {
+        "matchName": "BCC4Damaged TV",
+        "displayName": "BCC Damaged TV"
+      },
+      {
+        "matchName": "BCC3DeGrain",
+        "displayName": "BCC DeGrain OBS"
+      },
+      {
+        "matchName": "BCC3Deinterlace",
+        "displayName": "BCC Deinterlace"
+      },
+      {
+        "matchName": "BCC3DeNoise",
+        "displayName": "BCC DeNoise OBS"
+      },
+      {
+        "matchName": "BCC3Directional Blur",
+        "displayName": "BCC Directional Blur OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Displacement Map",
+        "displayName": "BCC Displacement Map"
+      },
+      {
+        "matchName": "BCC Dropout Fixer",
+        "displayName": "BCC Dropout Fixer"
+      },
+      {
+        "matchName": "BCC3Drop Shadow",
+        "displayName": "BCC Drop Shadow"
+      },
+      {
+        "matchName": "BCC3Dust and Scratches",
+        "displayName": "BCC Dust and Scratches"
+      },
+      {
+        "matchName": "BCC3DVE",
+        "displayName": "BCC DVE OBSOLETE"
+      },
+      {
+        "matchName": "BCC3DVE Basic",
+        "displayName": "BCC DVE Basic OBSOLETE"
+      },
+      {
+        "matchName": "BCC6DV Fixer",
+        "displayName": "BCC DV Fixer OBSOLETE"
+      },
+      {
+        "matchName": "BCC Edge Cleaner",
+        "displayName": "BCC Edge Cleaner OBSOLETE"
+      },
+      {
+        "matchName": "BCC Edge Grunge",
+        "displayName": "BCC Edge Grunge"
+      },
+      {
+        "matchName": "BCC3Edge Lighting",
+        "displayName": "BCC Edge Lighting"
+      },
+      {
+        "matchName": "BCC3Emboss",
+        "displayName": "BCC Emboss"
+      },
+      {
+        "matchName": "ScriptEP",
+        "displayName": "BCC Extruded EPS"
+      },
+      {
+        "matchName": "ScriptSP",
+        "displayName": "BCC Extruded Spline"
+      },
+      {
+        "matchName": "ScriptET",
+        "displayName": "BCC Extruded Text"
+      },
+      {
+        "matchName": "BCC3Pyramid Blur",
+        "displayName": "BCC Pyramid Blur OBSOLETE"
+      },
+      {
+        "matchName": "BCC Fast Film Glow",
+        "displayName": "BCC Fast Film Glow OBSOLETE"
+      },
+      {
+        "matchName": "BCC Fast Film Glow Dissolve",
+        "displayName": "BCC Fast Film Glow Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC Fast Film Glow DissolvePrTr",
+        "displayName": "BCC Fast Film Glow Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC Fast Film Process",
+        "displayName": "BCC Fast Film Process OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Fast Flipper",
+        "displayName": "BCC Fast Flipper"
+      },
+      {
+        "matchName": "BCC Fast Lens Blur",
+        "displayName": "BCC Fast Lens Blur OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Film Damage",
+        "displayName": "BCC Film Damage OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Ultra Glow",
+        "displayName": "BCC Film Glow OBS"
+      },
+      {
+        "matchName": "BCC Film Glow Dissolve",
+        "displayName": "BCC Film Glow Dissolve OBS"
+      },
+      {
+        "matchName": "BCC Film Glow DissolvePrTr",
+        "displayName": "BCC Film Glow Dissolve OBS"
+      },
+      {
+        "matchName": "BCC3Film Grain",
+        "displayName": "BCC Film Grain OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Film Process",
+        "displayName": "BCC Film Process OBS"
+      },
+      {
+        "matchName": "BCC3Fire",
+        "displayName": "BCC Fire OBS"
+      },
+      {
+        "matchName": "BCC3Flicker Fixer",
+        "displayName": "BCC Flicker Fixer"
+      },
+      {
+        "matchName": "BCCFlutter",
+        "displayName": "BCC Flutter Cut OBSOLETE"
+      },
+      {
+        "matchName": "BCCFlutterPrTr",
+        "displayName": "BCC Flutter Cut OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Fractal Noise",
+        "displayName": "BCC Fractal Noise OBSOLETE"
+      },
+      {
+        "matchName": "BCCFXBrowser",
+        "displayName": "BCC FX Browser"
+      },
+      {
+        "matchName": "BCC3Gaussian Blur",
+        "displayName": "BCC Gaussian Blur OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Glare",
+        "displayName": "BCC Glare OBSOLETE"
+      },
+      {
+        "matchName": "BCC 3D Extruded Image Shatter",
+        "displayName": "BCC 3D Extruded Image Shatter"
+      },
+      {
+        "matchName": "BCC3Glint",
+        "displayName": "BCC Glint OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Glitter",
+        "displayName": "BCC Glitter OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Glow",
+        "displayName": "BCC Glow OBS"
+      },
+      {
+        "matchName": "BCC3Glow Alpha Edges",
+        "displayName": "BCC Glow Alpha Edges"
+      },
+      {
+        "matchName": "BCC3Glow Matte",
+        "displayName": "BCC Glow Matte OBS"
+      },
+      {
+        "matchName": "BCC3Granite",
+        "displayName": "BCC Granite OBSOLETE"
+      },
+      {
+        "matchName": "BCC Grid Wipe",
+        "displayName": "BCC Grid Wipe"
+      },
+      {
+        "matchName": "BCC Grid WipePrTr",
+        "displayName": "BCC Grid Wipe"
+      },
+      {
+        "matchName": "BCC Grunge",
+        "displayName": "BCC Grunge"
+      },
+      {
+        "matchName": "BCC Halftone",
+        "displayName": "BCC Halftone"
+      },
+      {
+        "matchName": "BCC3Hue-Sat-Lightness",
+        "displayName": "BCC Hue-Sat-Lightness"
+      },
+      {
+        "matchName": "BCC3Invert Solarize",
+        "displayName": "BCC Invert Solarize"
+      },
+      {
+        "matchName": "BCC3Jitter",
+        "displayName": "BCC Jitter"
+      },
+      {
+        "matchName": "BCC3Jitter Basic",
+        "displayName": "BCC Jitter Basic"
+      },
+      {
+        "matchName": "BCC Kaleida Dissolve",
+        "displayName": "BCC Kaleida Dissolve"
+      },
+      {
+        "matchName": "BCC Kaleida DissolvePrTr",
+        "displayName": "BCC Kaleida Dissolve"
+      },
+      {
+        "matchName": "BCC Laser Beam",
+        "displayName": "BCC Laser Beam"
+      },
+      {
+        "matchName": "ScriptLD",
+        "displayName": "BCC Layer Deformer"
+      },
+      {
+        "matchName": "BCC4LED",
+        "displayName": "BCC LED OBSOLETE"
+      },
+      {
+        "matchName": "BCC6LensBlur",
+        "displayName": "BCC Lens Blur OBS"
+      },
+      {
+        "matchName": "BCC Lens Blur Dissolve",
+        "displayName": "BCC Lens Blur Dissolve"
+      },
+      {
+        "matchName": "BCC Lens Blur DissolvePrTr",
+        "displayName": "BCC Lens Blur Dissolve"
+      },
+      {
+        "matchName": "BCC Lens Correction",
+        "displayName": "BCC Lens Correction"
+      },
+      {
+        "matchName": "BCC Lens Distortion Wipe",
+        "displayName": "BCC Lens Distortion Wipe"
+      },
+      {
+        "matchName": "BCC Lens Distortion WipePrTr",
+        "displayName": "BCC Lens Distortion Wipe"
+      },
+      {
+        "matchName": "BCC3Lens Flare Adv",
+        "displayName": "BCC Lens Flare Adv OBS"
+      },
+      {
+        "matchName": "BCC3Lens Flare 3D",
+        "displayName": "BCC Lens Flare 3D"
+      },
+      {
+        "matchName": "BCC Lens Flare Dissolve",
+        "displayName": "BCC Lens Flare Dissolve"
+      },
+      {
+        "matchName": "BCC Lens Flare DissolvePrTr",
+        "displayName": "BCC Lens Flare Dissolve"
+      },
+      {
+        "matchName": "BCC Lens Flare Round",
+        "displayName": "BCC Lens Flare Round"
+      },
+      {
+        "matchName": "BCC Lens Flare RoundPrTr",
+        "displayName": "BCC Lens Flare Round"
+      },
+      {
+        "matchName": "BCC Lens Flare Spiked",
+        "displayName": "BCC Lens Flare Spiked"
+      },
+      {
+        "matchName": "BCC Lens Flare SpikedPrTr",
+        "displayName": "BCC Lens Flare Spiked"
+      },
+      {
+        "matchName": "BCC Lens Flash",
+        "displayName": "BCC Lens Flash"
+      },
+      {
+        "matchName": "BCC Lens FlashPrTr",
+        "displayName": "BCC Lens Flash"
+      },
+      {
+        "matchName": "BCC6LensShape",
+        "displayName": "BCC Lens Shape"
+      },
+      {
+        "matchName": "BCC6LensTransition",
+        "displayName": "BCC Lens Transition OBS"
+      },
+      {
+        "matchName": "BCC LensTransitionPrTr",
+        "displayName": "BCC Lens Transition OBS"
+      },
+      {
+        "matchName": "BCC3Levels Gamma",
+        "displayName": "BCC Levels Gamma"
+      },
+      {
+        "matchName": "BCC Light Leaks",
+        "displayName": "BCC Light Leaks OBSOLETE"
+      },
+      {
+        "matchName": "BCCLightLeakDslv",
+        "displayName": "BCC Light Leaks Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCCLightLeakDslvPrTr",
+        "displayName": "BCC Light Leaks Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Light Matte",
+        "displayName": "BCC Light Matte OBS"
+      },
+      {
+        "matchName": "BCC3Lightning",
+        "displayName": "BCC Lightning"
+      },
+      {
+        "matchName": "BCC3Light Sweep",
+        "displayName": "BCC Light Sweep"
+      },
+      {
+        "matchName": "BCC Light Wipe",
+        "displayName": "BCC Light Wipe"
+      },
+      {
+        "matchName": "BCC Light WipePrTr",
+        "displayName": "BCC Light Wipe"
+      },
+      {
+        "matchName": "BCC3Light Wrap",
+        "displayName": "BCC Light Wrap OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Light Zoom",
+        "displayName": "BCC Light Zoom OBS"
+      },
+      {
+        "matchName": "BCC3Linear Color Key",
+        "displayName": "BCC Linear Color Key OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Linear Luma Key",
+        "displayName": "BCC Linear Luma Key OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Linear Wipe",
+        "displayName": "BCC Linear Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC Linear WipePrTr",
+        "displayName": "BCC Linear Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Looper",
+        "displayName": "BCC Looper"
+      },
+      {
+        "matchName": "BCC Magic Sharp",
+        "displayName": "BCC Magic Sharp OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Make Alpha Key",
+        "displayName": "BCC Make Alpha Key"
+      },
+      {
+        "matchName": "BCC3Match Grain",
+        "displayName": "BCC Match Grain"
+      },
+      {
+        "matchName": "BCC3MatchMove",
+        "displayName": "BCC Match Move"
+      },
+      {
+        "matchName": "BCC3Matte Choker",
+        "displayName": "BCC Matte Choker"
+      },
+      {
+        "matchName": "BCC3Matte Cleanup",
+        "displayName": "BCC Matte Cleanup"
+      },
+      {
+        "matchName": "BCC3Median",
+        "displayName": "BCC Median"
+      },
+      {
+        "matchName": "BCC3Misalignment",
+        "displayName": "BCC Misalignment"
+      },
+      {
+        "matchName": "BCC3Mixed Colors",
+        "displayName": "BCC Mixed Colors"
+      },
+      {
+        "matchName": "BCC4Morph",
+        "displayName": "BCC Morph"
+      },
+      {
+        "matchName": "Boris3Pixelate",
+        "displayName": "BCC Mosaic OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Motion Blur",
+        "displayName": "BCC Motion Blur OBSOLETE"
+      },
+      {
+        "matchName": "BCC3MotionKey",
+        "displayName": "BCC Motion Key OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Multi Shadow",
+        "displayName": "BCC Multi Shadow"
+      },
+      {
+        "matchName": "BCC3Multi Stretch Wipe",
+        "displayName": "BCC Multi Stretch Wipe"
+      },
+      {
+        "matchName": "BCC Multi Stretch WipePrTr",
+        "displayName": "BCC Multi Stretch Wipe"
+      },
+      {
+        "matchName": "BCC3Multi Stripe Wipe",
+        "displayName": "BCC Multi Stripe Wipe"
+      },
+      {
+        "matchName": "BCC Multi Stripe WipePrTr",
+        "displayName": "BCC Multi Stripe Wipe"
+      },
+      {
+        "matchName": "BCC3MultiTone Mix",
+        "displayName": "BCC MultiTone Mix"
+      },
+      {
+        "matchName": "BCC3Noise Map",
+        "displayName": "BCC Noise Map OBS"
+      },
+      {
+        "matchName": "BCC4Noise Map 2",
+        "displayName": "BCC Noise Map 2"
+      },
+      {
+        "matchName": "BCC6Noise Reduction",
+        "displayName": "BCC Noise Reduction OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Optical Flow",
+        "displayName": "BCC Optical Flow OBSOLETE"
+      },
+      {
+        "matchName": "BCC Organic Strands",
+        "displayName": "BCC Organic Strands"
+      },
+      {
+        "matchName": "BCC3Page Turn",
+        "displayName": "BCC Page Turn"
+      },
+      {
+        "matchName": "BCC Pan and Zoom",
+        "displayName": "BCC Pan and Zoom"
+      },
+      {
+        "matchName": "BCC Particle Array 3D",
+        "displayName": "BCC Particle Array 3D"
+      },
+      {
+        "matchName": "BCC Particle Emitter 3D",
+        "displayName": "BCC Particle Emitter 3D"
+      },
+      {
+        "matchName": "BCC Particle Illusion",
+        "displayName": "BCC Particle Illusion"
+      },
+      {
+        "matchName": "BCC PI Dissolve",
+        "displayName": "BCC Particle Illusion Dissolve"
+      },
+      {
+        "matchName": "BCC PI DissolvePrTr",
+        "displayName": "BCC Particle Illusion Dissolve"
+      },
+      {
+        "matchName": "BCC3Particle System",
+        "displayName": "BCC Particle System OBSOLETE"
+      },
+      {
+        "matchName": "BCC Pin Art 3D",
+        "displayName": "BCC Pin Art 3D"
+      },
+      {
+        "matchName": "BCC3Pixel Chooser",
+        "displayName": "BCC Pixel Chooser OBSOLETE"
+      },
+      {
+        "matchName": "BCC6Pixel Fixer",
+        "displayName": "BCC Pixel Fixer"
+      },
+      {
+        "matchName": "BCC3Polar Displacement",
+        "displayName": "BCC Polar Displacement"
+      },
+      {
+        "matchName": "BCC3Posterize",
+        "displayName": "BCC Posterize"
+      },
+      {
+        "matchName": "BCC3Posterize Time",
+        "displayName": "BCC Posterize Time"
+      },
+      {
+        "matchName": "BCC3Premult",
+        "displayName": "BCC Premult"
+      },
+      {
+        "matchName": "BCC Primatte Studio",
+        "displayName": "BCC Primatte Studio OBSOLETE"
+      },
+      {
+        "matchName": "BCC4Prism",
+        "displayName": "BCC Prism OBSOLETE"
+      },
+      {
+        "matchName": "BCC Prism Dissolve",
+        "displayName": "BCC Prism Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC Prism DissolvePrTr",
+        "displayName": "BCC Prism Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Rays Puffy",
+        "displayName": "BCC Rays Puffy"
+      },
+      {
+        "matchName": "BCC3Radial Blur",
+        "displayName": "BCC Radial Blur OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Rays Radiant Spotlight",
+        "displayName": "BCC Rays Radiant Spotlight OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Radial Wipe",
+        "displayName": "BCC Radial Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC Radial WipePrTr",
+        "displayName": "BCC Radial Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Rays Radiant Edges",
+        "displayName": "BCC Rays Radiant Edges"
+      },
+      {
+        "matchName": "BCC3Rain",
+        "displayName": "BCC Rain"
+      },
+      {
+        "matchName": "BCC3Rays",
+        "displayName": "BCC Rays OBSOLETE"
+      },
+      {
+        "matchName": "BCC Rays Dissolve",
+        "displayName": "BCC Rays Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC Rays DissolvePrTr",
+        "displayName": "BCC Rays Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Rectangular Wipe",
+        "displayName": "BCC Rectangular Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC Rectangular WipePrTr",
+        "displayName": "BCC Rectangular Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC Reflection",
+        "displayName": "BCC Reflection"
+      },
+      {
+        "matchName": "BCC Reframer",
+        "displayName": "BCC Reframer"
+      },
+      {
+        "matchName": "BCC Remover",
+        "displayName": "BCC Remover"
+      },
+      {
+        "matchName": "BCC VR Reorient",
+        "displayName": "BCC VR Reorient"
+      },
+      {
+        "matchName": "BCC3Reptilian",
+        "displayName": "BCC Reptilian OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Reverse Spotlight",
+        "displayName": "BCC Reverse Spotlight"
+      },
+      {
+        "matchName": "BCC3RGB Blend",
+        "displayName": "BCC RGB Blend"
+      },
+      {
+        "matchName": "BCC RGB Blur Dissolve",
+        "displayName": "BCC RGB Blur Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC RGB Blur DissolvePrTr",
+        "displayName": "BCC RGB Blur Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC RGB Dspl Dissolve",
+        "displayName": "BCC RGB Displacement Dissolve"
+      },
+      {
+        "matchName": "BCC RGB Dspl DissolvePrTr",
+        "displayName": "BCC RGB Displacement Dissolve"
+      },
+      {
+        "matchName": "BCC3RGB Edges",
+        "displayName": "BCC RGB Edges"
+      },
+      {
+        "matchName": "BCC3RGB Pixel Noise",
+        "displayName": "BCC RGB Pixel Noise"
+      },
+      {
+        "matchName": "BCC Ribbon Wipe",
+        "displayName": "BCC Ribbon Wipe"
+      },
+      {
+        "matchName": "BCC Ribbon WipePrTr",
+        "displayName": "BCC Ribbon Wipe"
+      },
+      {
+        "matchName": "BCC3Rays Ring",
+        "displayName": "BCC Rays Ring OBSOLETE"
+      },
+      {
+        "matchName": "BCC Rings Wipe",
+        "displayName": "BCC Rings Wipe"
+      },
+      {
+        "matchName": "BCC Rings WipePrTr",
+        "displayName": "BCC Rings Wipe"
+      },
+      {
+        "matchName": "BCC3Ripple",
+        "displayName": "BCC Ripple"
+      },
+      {
+        "matchName": "BCC Ripple Dissolve",
+        "displayName": "BCC Ripple Dissolve"
+      },
+      {
+        "matchName": "BCC Ripple DissolvePrTr",
+        "displayName": "BCC Ripple Dissolve"
+      },
+      {
+        "matchName": "BCC3Rays Ripply",
+        "displayName": "BCC Rays Ripply OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Rough Glow",
+        "displayName": "BCC Rough Glow OBS"
+      },
+      {
+        "matchName": "BCC3Safe Colors",
+        "displayName": "BCC Safe Colors OBS"
+      },
+      {
+        "matchName": "BCC4Scanline",
+        "displayName": "BCC Scanline OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Scatterize",
+        "displayName": "BCC Scatterize"
+      },
+      {
+        "matchName": "BCC3Sequencer",
+        "displayName": "BCC Sequencer OBS"
+      },
+      {
+        "matchName": "BCC Cast Shadow",
+        "displayName": "BCC Cast Shadow"
+      },
+      {
+        "matchName": "BCC3Lens Flare",
+        "displayName": "BCC Lens Flare OBS"
+      },
+      {
+        "matchName": "BCC6Pencil Sketch",
+        "displayName": "BCC Pencil Sketch"
+      },
+      {
+        "matchName": "BCC6Smooth Tone",
+        "displayName": "BCC Smooth Tone OBS"
+      },
+      {
+        "matchName": "BCC3Snow",
+        "displayName": "BCC Snow"
+      },
+      {
+        "matchName": "BCC3Sparks",
+        "displayName": "BCC Sparks OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Sphere",
+        "displayName": "BCC Sphere"
+      },
+      {
+        "matchName": "BCC3Sphere Transition",
+        "displayName": "BCC Sphere Transition"
+      },
+      {
+        "matchName": "BCC Spill Remover",
+        "displayName": "BCC Spill Remover OBSOLETE"
+      },
+      {
+        "matchName": "BCC Spin Blur Dissolve",
+        "displayName": "BCC Spin Blur Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC Spin Blur DissolvePrTr",
+        "displayName": "BCC Spin Blur Dissolve OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Spiral Blur",
+        "displayName": "BCC Spiral Blur OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Spotlight",
+        "displayName": "BCC Spotlight"
+      },
+      {
+        "matchName": "BCC3Spray Paint Noise",
+        "displayName": "BCC Spray Paint Noise"
+      },
+      {
+        "matchName": "BCC3Stabilizer",
+        "displayName": "BCC Optical Stabilizer"
+      },
+      {
+        "matchName": "BCC3Stage Light",
+        "displayName": "BCC Stage Light"
+      },
+      {
+        "matchName": "BCC3Star Matte",
+        "displayName": "BCC Star Matte OBS"
+      },
+      {
+        "matchName": "BCC3Stars",
+        "displayName": "BCC Stars OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Steel Plate",
+        "displayName": "BCC Steel Plate OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Rays Streaky",
+        "displayName": "BCC Rays Streaky OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Super Blend",
+        "displayName": "BCC Super Blend OBS"
+      },
+      {
+        "matchName": "BCC6Swish Pan",
+        "displayName": "BCC Swish Pan OBSOLETE"
+      },
+      {
+        "matchName": "BCC Swish PanPrTr",
+        "displayName": "BCC Swish Pan OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Temporal Blur",
+        "displayName": "BCC Temporal Blur"
+      },
+      {
+        "matchName": "BCC3Rays Textured",
+        "displayName": "BCC Rays Textured OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Textured Wipe",
+        "displayName": "BCC Textured Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC Textured WipePrTr",
+        "displayName": "BCC Textured Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC6Charcoal Sketch",
+        "displayName": "BCC Charcoal Sketch"
+      },
+      {
+        "matchName": "BCC4Tile Mosaic",
+        "displayName": "BCC Tile Mosaic"
+      },
+      {
+        "matchName": "BCC Tile Wipe",
+        "displayName": "BCC Tile Wipe"
+      },
+      {
+        "matchName": "BCC Tile WipePrTr",
+        "displayName": "BCC Tile Wipe"
+      },
+      {
+        "matchName": "BCC3Time Displacement",
+        "displayName": "BCC Time Displacement"
+      },
+      {
+        "matchName": "BCCTS",
+        "displayName": "BCC Title Studio"
+      },
+      {
+        "matchName": "BCC3Trails",
+        "displayName": "BCC Trails"
+      },
+      {
+        "matchName": "BCC3Trails Basic",
+        "displayName": "BCC Trails Basic"
+      },
+      {
+        "matchName": "BCC3Tritone",
+        "displayName": "BCC Tritone"
+      },
+      {
+        "matchName": "BCC Tritone Dissolve",
+        "displayName": "BCC Tritone Dissolve"
+      },
+      {
+        "matchName": "BCC Tritone DissolvePrTr",
+        "displayName": "BCC Tritone Dissolve"
+      },
+      {
+        "matchName": "BCC4Turbulence",
+        "displayName": "BCC Turbulence"
+      },
+      {
+        "matchName": "BCC3Twirl",
+        "displayName": "BCC Twirl"
+      },
+      {
+        "matchName": "BCC Twister",
+        "displayName": "BCC Twister"
+      },
+      {
+        "matchName": "BCC TwisterPrTr",
+        "displayName": "BCC Twister"
+      },
+      {
+        "matchName": "BCC32D Particles",
+        "displayName": "BCC 2D Particles"
+      },
+      {
+        "matchName": "BCC Two Strip Color",
+        "displayName": "BCC Two Strip Color OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Two Way Key",
+        "displayName": "BCC Two Way Key OBSOLETE"
+      },
+      {
+        "matchName": "ScriptTO",
+        "displayName": "BCC Type On Text"
+      },
+      {
+        "matchName": "BCC3Unsharp Mask",
+        "displayName": "BCC Unsharp Mask"
+      },
+      {
+        "matchName": "BCC UpRez",
+        "displayName": "BCC UpRez OBSOLETE"
+      },
+      {
+        "matchName": "BCC Vector Blur Dissolve",
+        "displayName": "BCC Vector Blur Dissolve"
+      },
+      {
+        "matchName": "BCC Vector Blur DissolvePrTr",
+        "displayName": "BCC Vector Blur Dissolve"
+      },
+      {
+        "matchName": "BCC3Vector Displacement",
+        "displayName": "BCC Vector Displacement"
+      },
+      {
+        "matchName": "BCC3Veined Marble",
+        "displayName": "BCC Veined Marble OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Velocity Remap",
+        "displayName": "BCC Velocity Remap OBSOLETE"
+      },
+      {
+        "matchName": "BCC Video Glitch",
+        "displayName": "BCC Video Glitch OBSOLETE"
+      },
+      {
+        "matchName": "BCC4Video Morph",
+        "displayName": "BCC Video Morph"
+      },
+      {
+        "matchName": "BCC6Videoscope",
+        "displayName": "BCC Videoscope"
+      },
+      {
+        "matchName": "BCCVignette",
+        "displayName": "BCC Vignette OBSOLETE"
+      },
+      {
+        "matchName": "BCCVignette Wipe",
+        "displayName": "BCC Vignette Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCCVignette WipePrTr",
+        "displayName": "BCC Vignette Wipe OBSOLETE"
+      },
+      {
+        "matchName": "BCC VR Insert",
+        "displayName": "BCC VR Insert"
+      },
+      {
+        "matchName": "BCC VR Flicker Fixer",
+        "displayName": "BCC VR Flicker Fixer"
+      },
+      {
+        "matchName": "BCC VR Sharpen",
+        "displayName": "BCC VR Sharpen"
+      },
+      {
+        "matchName": "BCC4Warp",
+        "displayName": "BCC Warp"
+      },
+      {
+        "matchName": "BCC6Water Color",
+        "displayName": "BCC Water Color"
+      },
+      {
+        "matchName": "BCC Water Waves Dissolve",
+        "displayName": "BCC Water Waves Dissolve"
+      },
+      {
+        "matchName": "BCC Water Waves DissolvePrTr",
+        "displayName": "BCC Water Waves Dissolve"
+      },
+      {
+        "matchName": "BCC3Wave",
+        "displayName": "BCC Wave"
+      },
+      {
+        "matchName": "BCC3Weave",
+        "displayName": "BCC Weave OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Rays Wedge",
+        "displayName": "BCC Rays Wedge OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Wire Remover",
+        "displayName": "BCC Wire Remover"
+      },
+      {
+        "matchName": "Boris3WitnessProtection",
+        "displayName": "BCC WitnessProtection OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Wood Grain",
+        "displayName": "BCC Wood Grain OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Wooden Planks",
+        "displayName": "BCC Wooden Planks OBSOLETE"
+      },
+      {
+        "matchName": "BCC3Z-Blur",
+        "displayName": "BCC Z-Blur"
+      },
+      {
+        "matchName": "BCC3Z Space I",
+        "displayName": "BCC Z Space I OBS"
+      },
+      {
+        "matchName": "BCC3Z Space II",
+        "displayName": "BCC Z Space II OBS"
+      },
+      {
+        "matchName": "BCC3Z Space III",
+        "displayName": "BCC Z Space III OBS"
+      },
+      {
+        "matchName": "BCC_BEAUTYSTUDIO",
+        "displayName": " BCC+Beauty Studio"
+      },
+      {
+        "matchName": "BCC_BLACKANDWHITE",
+        "displayName": " BCC+Black and White"
+      },
+      {
+        "matchName": "BCC_BLEACHBYPASS",
+        "displayName": " BCC+Bleach Bypass"
+      },
+      {
+        "matchName": "BCC_BLURDISSOLVE",
+        "displayName": " BCC+Blur Dissolve"
+      },
+      {
+        "matchName": "BCC_BLUR",
+        "displayName": " BCC+Blur"
+      },
+      {
+        "matchName": "BCC_BORDERS",
+        "displayName": " BCC+Borders"
+      },
+      {
+        "matchName": "BCC_CAMERASHAKEDISSOLVE",
+        "displayName": " BCC+Camera Shake Dissolve"
+      },
+      {
+        "matchName": "BCC_CAMERASHAKE",
+        "displayName": " BCC+Camera Shake"
+      },
+      {
+        "matchName": "BCC_CENTERSPOT",
+        "displayName": " BCC+Center Spot"
+      },
+      {
+        "matchName": "BCC_CHANNELBLURDISSOLVE",
+        "displayName": " BCC+Channel Blur Dissolve"
+      },
+      {
+        "matchName": "BCC_CHANNELYUVBLUR",
+        "displayName": " BCC+Channel Blur YUV"
+      },
+      {
+        "matchName": "BCC_CHANNELBLUR",
+        "displayName": " BCC+Channel Blur"
+      },
+      {
+        "matchName": "BCC_CHROMABANDS",
+        "displayName": " BCC+Chroma Bands"
+      },
+      {
+        "matchName": "BCC_CHROMATICABERRATION",
+        "displayName": " BCC+Chromatic Aberration"
+      },
+      {
+        "matchName": "BCC_COLORGRADIENT",
+        "displayName": " BCC+Color Gradient"
+      },
+      {
+        "matchName": "BCC_COLORINFRARED",
+        "displayName": " BCC+Color Infrared"
+      },
+      {
+        "matchName": "BCC_COLORLINK",
+        "displayName": " BCC+Color Link"
+      },
+      {
+        "matchName": "BCC_COLORPASTE",
+        "displayName": " BCC+Color Paste"
+      },
+      {
+        "matchName": "BCC_COLORSHADOW",
+        "displayName": " BCC+Color Shadow"
+      },
+      {
+        "matchName": "BCC_COLORSPOT",
+        "displayName": " BCC+Color Spot"
+      },
+      {
+        "matchName": "BCC_COLORIZEGRADIENT",
+        "displayName": " BCC+Colorize Gradient"
+      },
+      {
+        "matchName": "BCC_COMPOSITE",
+        "displayName": " BCC+Composite"
+      },
+      {
+        "matchName": "BCC_CRASHZOOMDISSOLVE",
+        "displayName": " BCC+Crash Zoom Dissolve"
+      },
+      {
+        "matchName": "BCC_CROSSPROCESSING",
+        "displayName": " BCC+Cross Processing"
+      },
+      {
+        "matchName": "BCC_CROSSZOOMDISSOLVE",
+        "displayName": " BCC+Cross Zoom Dissolve"
+      },
+      {
+        "matchName": "BCC_DAYFORNIGHT",
+        "displayName": " BCC+Day for Night"
+      },
+      {
+        "matchName": "BCC_DEBAND",
+        "displayName": " BCC+DeBand"
+      },
+      {
+        "matchName": "BCC_DEBLOCK",
+        "displayName": " BCC+DeBlock"
+      },
+      {
+        "matchName": "BCC_DEFOG",
+        "displayName": " BCC+DeFog"
+      },
+      {
+        "matchName": "BCC_DEFRINGE",
+        "displayName": " BCC+DeFringe"
+      },
+      {
+        "matchName": "BCC_MLDENOISE",
+        "displayName": " BCC+DeNoise ML"
+      },
+      {
+        "matchName": "BCC_MLDEPTHESTIMATION",
+        "displayName": " BCC+Depth Map ML"
+      },
+      {
+        "matchName": "BCC_DEPTHOFFIELD",
+        "displayName": " BCC+Depth of Field"
+      },
+      {
+        "matchName": "BCC_MLDEPTHWIPE",
+        "displayName": " BCC+Depth Wipe ML"
+      },
+      {
+        "matchName": "BCC_DETAIL",
+        "displayName": " BCC+Detail"
+      },
+      {
+        "matchName": "BCC_DEVELOP",
+        "displayName": " BCC+Develop"
+      },
+      {
+        "matchName": "BCC_DIFFUSION",
+        "displayName": " BCC+Diffusion"
+      },
+      {
+        "matchName": "BCC_DIRECTIONALBLURDISSOLVE",
+        "displayName": " BCC+Directional Blur Dissolve"
+      },
+      {
+        "matchName": "BCC_DIRECTIONALBLUR",
+        "displayName": " BCC+Directional Blur"
+      },
+      {
+        "matchName": "BCC_DISSOLVE",
+        "displayName": " BCC+Dissolve"
+      },
+      {
+        "matchName": "BCC_DOUBLEFOG",
+        "displayName": " BCC+Double Fog"
+      },
+      {
+        "matchName": "BCC_DUALGRADIENT",
+        "displayName": " BCC+Dual Gradient"
+      },
+      {
+        "matchName": "BCC_EDGECLEANER",
+        "displayName": " BCC+Edge Cleaner"
+      },
+      {
+        "matchName": "BCC_EDGECOMPOSITE",
+        "displayName": " BCC+Edge Composite"
+      },
+      {
+        "matchName": "BCC_ENHANCING",
+        "displayName": " BCC+Enhancing"
+      },
+      {
+        "matchName": "BCC_EYELIGHT",
+        "displayName": " BCC+Eye Light"
+      },
+      {
+        "matchName": "BCC_FSTOP",
+        "displayName": " BCC+F-Stop"
+      },
+      {
+        "matchName": "BCC_MLFACESEGMENTATION",
+        "displayName": " BCC+Face ML"
+      },
+      {
+        "matchName": "BCC_FILMGLOWDISSOLVE",
+        "displayName": " BCC+Film Glow Dissolve"
+      },
+      {
+        "matchName": "BCC_FILMGLOW",
+        "displayName": " BCC+Film Glow"
+      },
+      {
+        "matchName": "BCC_FILMGRUNGE",
+        "displayName": " BCC+Film Grunge"
+      },
+      {
+        "matchName": "BCC_FILMROLL",
+        "displayName": " BCC+Film Roll"
+      },
+      {
+        "matchName": "BCC_FILMSTOCKS",
+        "displayName": " BCC+Film Stocks"
+      },
+      {
+        "matchName": "BCC_FLASHING",
+        "displayName": " BCC+Flashing"
+      },
+      {
+        "matchName": "BCC_FLUORESCENT",
+        "displayName": " BCC+Fluorescent"
+      },
+      {
+        "matchName": "BCC_FLUTTERCUT",
+        "displayName": " BCC+Flutter Cut"
+      },
+      {
+        "matchName": "BCC_FOG",
+        "displayName": " BCC+Fog"
+      },
+      {
+        "matchName": "BCC_MLFRAMEFIXER",
+        "displayName": " BCC+Frame Fixer ML"
+      },
+      {
+        "matchName": "BCC_FROST",
+        "displayName": " BCC+Frost"
+      },
+      {
+        "matchName": "BCC_GELS",
+        "displayName": " BCC+Gels"
+      },
+      {
+        "matchName": "BCC_GLOWDARKS",
+        "displayName": " BCC+Glow Darks"
+      },
+      {
+        "matchName": "BCC_GLOWEDGES",
+        "displayName": " BCC+Glow Edges"
+      },
+      {
+        "matchName": "BCC_GLOW",
+        "displayName": " BCC+Glow"
+      },
+      {
+        "matchName": "BCC_GRADE",
+        "displayName": " BCC+Grade"
+      },
+      {
+        "matchName": "BCC_GRAIN",
+        "displayName": " BCC+Grain"
+      },
+      {
+        "matchName": "BCC_HALO",
+        "displayName": " BCC+Halo"
+      },
+      {
+        "matchName": "BCC_HARRISSHUTTER",
+        "displayName": " BCC+Harris Shutter"
+      },
+      {
+        "matchName": "BCC_HAZE",
+        "displayName": " BCC+Haze"
+      },
+      {
+        "matchName": "BCC_HIGHCONTRAST",
+        "displayName": " BCC+High Contrast"
+      },
+      {
+        "matchName": "BCC_HOLDOUTCOMPOSITE",
+        "displayName": " BCC+Holdout Composite"
+      },
+      {
+        "matchName": "BCC_ICEHALOS",
+        "displayName": " BCC+Ice Halos"
+      },
+      {
+        "matchName": "BCC_INFRARED",
+        "displayName": " BCC+Infrared"
+      },
+      {
+        "matchName": "BCC_MLJUMPCUT",
+        "displayName": " BCC+Jump Cut Fixer ML"
+      },
+      {
+        "matchName": "BCC_KELVIN",
+        "displayName": " BCC+Kelvin"
+      },
+      {
+        "matchName": "BCC_KEYLIGHT",
+        "displayName": " BCC+Key Light"
+      },
+      {
+        "matchName": "BCC_LENSBLUR",
+        "displayName": " BCC+Lens Blur"
+      },
+      {
+        "matchName": "BCC_LENSDISTORTION",
+        "displayName": " BCC+Lens Distortion"
+      },
+      {
+        "matchName": "BCC_LENSFLARE",
+        "displayName": " BCC+Lens Flare"
+      },
+      {
+        "matchName": "BCC_LICENSEPLATEML",
+        "displayName": " BCC+License Plate ML"
+      },
+      {
+        "matchName": "BCC_LIGHTFLICKER",
+        "displayName": " BCC+Light Flicker"
+      },
+      {
+        "matchName": "BCC_LIGHTLEAKSDISSOLVE",
+        "displayName": " BCC+Light Leaks Dissolve"
+      },
+      {
+        "matchName": "BCC_LIGHTLEAKS",
+        "displayName": " BCC+Light Leaks"
+      },
+      {
+        "matchName": "BCC_LIGHTWRAP",
+        "displayName": " BCC+Light Wrap"
+      },
+      {
+        "matchName": "BCC_LIGHT",
+        "displayName": " BCC+Light"
+      },
+      {
+        "matchName": "BCC_LINEARCOLORKEY",
+        "displayName": " BCC+Linear Color Key"
+      },
+      {
+        "matchName": "BCC_LINEARLUMAKEY",
+        "displayName": " BCC+Linear Luma Key"
+      },
+      {
+        "matchName": "BCC_LINEARWIPE",
+        "displayName": " BCC+Linear Wipe"
+      },
+      {
+        "matchName": "BCC_LOOKS",
+        "displayName": " BCC+Looks"
+      },
+      {
+        "matchName": "BCC_LOWCONTRAST",
+        "displayName": " BCC+Low Contrast"
+      },
+      {
+        "matchName": "BCC_MAGICSHARP",
+        "displayName": " BCC+Magic Sharp"
+      },
+      {
+        "matchName": "BCC_MATHCOMPOSITE",
+        "displayName": " BCC+Math Composite"
+      },
+      {
+        "matchName": "BCC_MLMATTEREFINE",
+        "displayName": " BCC+Matte Refine ML"
+      },
+      {
+        "matchName": "BCC_MIST",
+        "displayName": " BCC+Mist"
+      },
+      {
+        "matchName": "BCC_MOSAICDISSOLVE",
+        "displayName": " BCC+Mosaic Dissolve"
+      },
+      {
+        "matchName": "BCC_MOSAIC",
+        "displayName": " BCC+Mosaic"
+      },
+      {
+        "matchName": "BCC_MOTIONBLURML",
+        "displayName": " BCC+Motion Blur ML"
+      },
+      {
+        "matchName": "BCC_MULTISTARDISSOLVE",
+        "displayName": " BCC+Multi-Star Dissolve"
+      },
+      {
+        "matchName": "BCC_MULTISTAR",
+        "displayName": " BCC+Multi-Star"
+      },
+      {
+        "matchName": "BCC_NDGRADIENT",
+        "displayName": " BCC+ND Gradient"
+      },
+      {
+        "matchName": "BCC_NET",
+        "displayName": " BCC+Net"
+      },
+      {
+        "matchName": "BCC_NIGHTVISION",
+        "displayName": " BCC+Night Vision"
+      },
+      {
+        "matchName": "BCC_NONADDITIVEMIX",
+        "displayName": " BCC+Non-Additive Mix"
+      },
+      {
+        "matchName": "BCC_OPTICALDISSOLVE",
+        "displayName": " BCC+Optical Dissolve"
+      },
+      {
+        "matchName": "BCC_ORBSDISSOLVE",
+        "displayName": " BCC+Orbs Dissolve"
+      },
+      {
+        "matchName": "BCC_ORBS",
+        "displayName": " BCC+Orbs"
+      },
+      {
+        "matchName": "BCC_OVEREXPOSE",
+        "displayName": " BCC+Overexpose"
+      },
+      {
+        "matchName": "BCC_PHOTOGRAPHIC",
+        "displayName": " BCC+Photographic"
+      },
+      {
+        "matchName": "BCC_PIXELCHOOSER",
+        "displayName": " BCC+Pixel Chooser"
+      },
+      {
+        "matchName": "BCC_POLARWARP",
+        "displayName": " BCC+Polar Warp"
+      },
+      {
+        "matchName": "BCC_POLARIZER",
+        "displayName": " BCC+Polarizer"
+      },
+      {
+        "matchName": "BCC_PRIMATTESTUDIO",
+        "displayName": " BCC+Primatte Studio"
+      },
+      {
+        "matchName": "BCC_PRISMDISSOLVE",
+        "displayName": " BCC+Prism Dissolve"
+      },
+      {
+        "matchName": "BCC_PRISMBLUR",
+        "displayName": " BCC+Prism"
+      },
+      {
+        "matchName": "BCC_RACKFOCUSDISSOLVE",
+        "displayName": " BCC+Rack Focus Dissolve"
+      },
+      {
+        "matchName": "BCC_RACKFOCUS",
+        "displayName": " BCC+Rack Focus"
+      },
+      {
+        "matchName": "BCC_RADIALBLUR",
+        "displayName": " BCC+Radial Blur"
+      },
+      {
+        "matchName": "BCC_RADIALEXPOSURE",
+        "displayName": " BCC+Radial Exposure"
+      },
+      {
+        "matchName": "BCC_RADIALTINT",
+        "displayName": " BCC+Radial Tint"
+      },
+      {
+        "matchName": "BCC_RADIALWIPE",
+        "displayName": " BCC+Radial Wipe"
+      },
+      {
+        "matchName": "BCC_RAYSDISSOLVE",
+        "displayName": " BCC+Rays Dissolve"
+      },
+      {
+        "matchName": "BCC_RAYS",
+        "displayName": " BCC+Rays"
+      },
+      {
+        "matchName": "BCC_RECTANGULARWIPE",
+        "displayName": " BCC+Rectangular Wipe"
+      },
+      {
+        "matchName": "BCC_REFLECTOR",
+        "displayName": " BCC+Reflector"
+      },
+      {
+        "matchName": "BCC_RELIGHT",
+        "displayName": " BCC+ReLight"
+      },
+      {
+        "matchName": "BCC_MLRETIMER",
+        "displayName": " BCC+Retimer ML"
+      },
+      {
+        "matchName": "BCC_SCANLINE",
+        "displayName": " BCC+Scanline"
+      },
+      {
+        "matchName": "BCC_SELECTIVESATURATION",
+        "displayName": " BCC+Selective Saturation"
+      },
+      {
+        "matchName": "BCC_SEPIA",
+        "displayName": " BCC+Sepia"
+      },
+      {
+        "matchName": "BCC_SHADOWSHIGHLIGHTS",
+        "displayName": " BCC+Shadows/Highlights"
+      },
+      {
+        "matchName": "BCC_SILK",
+        "displayName": " BCC+Silk"
+      },
+      {
+        "matchName": "BCC_SKINTONE",
+        "displayName": " BCC+Skin Tone"
+      },
+      {
+        "matchName": "BCC_SMEARBLUR",
+        "displayName": " BCC+Smear Blur"
+      },
+      {
+        "matchName": "BCC_SMOKEANDFOGDISSOLVE",
+        "displayName": " BCC+Smoke and Fog Dissolve"
+      },
+      {
+        "matchName": "BCC_SMOKEANDFOG",
+        "displayName": " BCC+Smoke and Fog"
+      },
+      {
+        "matchName": "BCC_SMOKEWIPE",
+        "displayName": " BCC+Smoke Wipe"
+      },
+      {
+        "matchName": "BCC_SPILLREMOVER",
+        "displayName": " BCC+Spill Remover"
+      },
+      {
+        "matchName": "BCC_SPINBLURDISSOLVE",
+        "displayName": " BCC+Spin Blur Dissolve"
+      },
+      {
+        "matchName": "BCC_SPLITFIELD",
+        "displayName": " BCC+Split Field"
+      },
+      {
+        "matchName": "BCC_SPLITTONE",
+        "displayName": " BCC+Split Tone"
+      },
+      {
+        "matchName": "BCC_STMAP",
+        "displayName": " BCC+ST Map"
+      },
+      {
+        "matchName": "BCC_STREAKS",
+        "displayName": " BCC+Streaks"
+      },
+      {
+        "matchName": "BCC_SUNSET",
+        "displayName": " BCC+Sunset"
+      },
+      {
+        "matchName": "BCC_SUPERLED",
+        "displayName": " BCC+Super LED"
+      },
+      {
+        "matchName": "BCC_SWISHGLOW",
+        "displayName": " BCC+Swish Glow"
+      },
+      {
+        "matchName": "BCC_SWISH",
+        "displayName": " BCC+Swish Pan"
+      },
+      {
+        "matchName": "BCC_SWISHPRISM",
+        "displayName": " BCC+Swish Prism"
+      },
+      {
+        "matchName": "BCC_SWISHWARP",
+        "displayName": " BCC+Swish Warp"
+      },
+      {
+        "matchName": "BCC_TEXTUREWIPE",
+        "displayName": " BCC+Texture Wipe"
+      },
+      {
+        "matchName": "BCC_TEXTURES",
+        "displayName": " BCC+Textures"
+      },
+      {
+        "matchName": "BCC_THREESTRIP",
+        "displayName": " BCC+Three Strip"
+      },
+      {
+        "matchName": "BCC_TINT",
+        "displayName": " BCC+Tint"
+      },
+      {
+        "matchName": "BCC_TRANSFORM",
+        "displayName": " BCC+Transform"
+      },
+      {
+        "matchName": "BCC_TWOSTRIP",
+        "displayName": " BCC+Two Strip"
+      },
+      {
+        "matchName": "BCC_TWOWAYKEY",
+        "displayName": " BCC+Two Way Key"
+      },
+      {
+        "matchName": "BCC_UPRESML",
+        "displayName": " BCC+UpRes ML"
+      },
+      {
+        "matchName": "BCC_VIDEOGLITCHDISSOLVE",
+        "displayName": " BCC+Video Glitch Dissolve"
+      },
+      {
+        "matchName": "BCC_VIDEOGLITCH",
+        "displayName": " BCC+Video Glitch"
+      },
+      {
+        "matchName": "BCC_VIGNETTEWIPE",
+        "displayName": " BCC+Vignette Wipe"
+      },
+      {
+        "matchName": "BCC_VIGNETTE",
+        "displayName": " BCC+Vignette"
+      },
+      {
+        "matchName": "BCC_WIDEANGLELENS",
+        "displayName": " BCC+Wide Angle Lens"
+      },
+      {
+        "matchName": "BCC_WITNESSPROTECTIONML",
+        "displayName": " BCC+Witness Protection ML"
+      },
+      {
+        "matchName": "BCC_XRAY",
+        "displayName": " BCC+X-Ray"
+      },
+      {
+        "matchName": "PC_AlRoColorWarp",
+        "displayName": "Al Ro Color Warp"
+      },
+      {
+        "matchName": "PC_Aurora",
+        "displayName": "Aurora"
+      },
+      {
+        "matchName": "PC_ChromaticAberration",
+        "displayName": "Chromatic Aberration (Free)"
+      },
+      {
+        "matchName": "PC_ChromaticDistortion",
+        "displayName": "Chromatic Distortion"
+      },
+      {
+        "matchName": "PELP",
+        "displayName": "Crate's Light Wrap"
+      },
+      {
+        "matchName": "PC_CratesAlphaBlur",
+        "displayName": "Crates Alpha Blur (Free)"
+      },
+      {
+        "matchName": "PC_CratesASCII",
+        "displayName": "Crates ASCII (Free)"
+      },
+      {
+        "matchName": "PC_CratesBlackHole",
+        "displayName": "Crates Black Hole (Free)"
+      },
+      {
+        "matchName": "PC_CratesDistortion",
+        "displayName": "Crates Distortion"
+      },
+      {
+        "matchName": "PC_CratesEasyGlow",
+        "displayName": "Crates Easy Glow"
+      },
+      {
+        "matchName": "PC_CratesEasyGodray",
+        "displayName": "Crates Easy Godray (Free)"
+      },
+      {
+        "matchName": "PC_CratesEdgeBlur",
+        "displayName": "Crates Edge Blur (Free)"
+      },
+      {
+        "matchName": "PC_CratesFilmGrade",
+        "displayName": "Crates Film Grade"
+      },
+      {
+        "matchName": "PC_CratesFinalGrain",
+        "displayName": "Crates Final Grain"
+      },
+      {
+        "matchName": "PC_CratesGlass",
+        "displayName": "Crates Glass"
+      },
+      {
+        "matchName": "PC_CratesGlow",
+        "displayName": "Crates Glow"
+      },
+      {
+        "matchName": "PC_CratesHalftone",
+        "displayName": "Crates Halftone"
+      },
+      {
+        "matchName": "PC_CratesHeightRelight",
+        "displayName": "Crates Height Relight"
+      },
+      {
+        "matchName": "PC_CratesHologram",
+        "displayName": "Crates Hologram"
+      },
+      {
+        "matchName": "PC_CratesHyperGlitch",
+        "displayName": "Crates HyperGlitch"
+      },
+      {
+        "matchName": "PC_CratesLongGradient",
+        "displayName": "Crates Long Gradient"
+      },
+      {
+        "matchName": "PC_CratesLongShadow",
+        "displayName": "Crates Long Shadow (Free)"
+      },
+      {
+        "matchName": "PC_CratesPixelate",
+        "displayName": "Crates Pixelate"
+      },
+      {
+        "matchName": "PC_CratesRingBokeh",
+        "displayName": "Crates Ring Bokeh"
+      },
+      {
+        "matchName": "PC_CratesStarFlare",
+        "displayName": "Crates Star Flare (Free)"
+      },
+      {
+        "matchName": "PC_CratesUnmult",
+        "displayName": "Crates Unmult (Free)"
+      },
+      {
+        "matchName": "PC_CratesVHS",
+        "displayName": "Crates VHS"
+      },
+      {
+        "matchName": "PC_CRTFactory",
+        "displayName": "CRT Factory"
+      },
+      {
+        "matchName": "PC_CubicFractal",
+        "displayName": "Cubic Fractal"
+      },
+      {
+        "matchName": "PC_Kaleidoscoper",
+        "displayName": "Kaleidoscoper"
+      },
+      {
+        "matchName": "PC_LAFORGE",
+        "displayName": "LaForge Editor"
+      },
+      {
+        "matchName": "PC_LygiaKuwahara",
+        "displayName": "Lygia Kuwahara"
+      },
+      {
+        "matchName": "PC_LygiaNoiseBlur",
+        "displayName": "Lygia Noise Blur"
+      },
+      {
+        "matchName": "PC_RetroFilmEssentials",
+        "displayName": "Retro Film Essentials"
+      },
+      {
+        "matchName": "PC_SplitScreen",
+        "displayName": "Split Screen"
+      },
+      {
+        "matchName": "PC_TransitionChromaticAberratio",
+        "displayName": "Transition Chromatic Aberration (Free)"
+      },
+      {
+        "matchName": "PC_TransitionCratesASCII",
+        "displayName": "Transition Crates ASCII (Free)"
+      },
+      {
+        "matchName": "PC_TransitionCratesHyperGlitch",
+        "displayName": "Transition Crates HyperGlitch"
+      },
+      {
+        "matchName": "PC_TransitionCratesPixelate",
+        "displayName": "Transition Crates Pixelate"
+      },
+      {
+        "matchName": "PC_TransitionCRTFactory",
+        "displayName": "Transition CRT Factory"
+      },
+      {
+        "matchName": "PC_TransitionHologram",
+        "displayName": "Transition Hologram"
+      },
+      {
+        "matchName": "PC_TransitionRetroFilmEssential",
+        "displayName": "Transition Retro Film Essentials"
+      },
+      {
+        "matchName": "PC_TransitionVHS",
+        "displayName": "Transition VHS"
+      },
+      {
+        "matchName": "RG_MB_ParamCurve_AE",
+        "displayName": "Parametric Curve"
+      },
+      {
+        "matchName": "RG MB COLORISTA IV",
+        "displayName": "Colorista V"
+      },
+      {
+        "matchName": "RG Cosmo_II",
+        "displayName": "Cosmo II"
+      },
+      {
+        "matchName": "RG Denoiser3",
+        "displayName": "Denoiser III"
+      },
+      {
+        "matchName": "Magic_Bullet_Mojo_II",
+        "displayName": "Mojo II"
+      },
+      {
+        "matchName": "Magic_Bullet_Renoiser",
+        "displayName": "Renoiser"
+      },
+      {
+        "matchName": "Magic_Bullet_Suite_Magic_Bullet",
+        "displayName": "Film"
+      },
+      {
+        "matchName": "MB LookSuite3",
+        "displayName": "Magic Bullet Looks"
+      },
+      {
+        "matchName": "Universe_Blur_Blur_Premium",
+        "displayName": "uni.Blur"
+      },
+      {
+        "matchName": "Universe_Blur_Box_Bokeh",
+        "displayName": "uni.Bokeh"
+      },
+      {
+        "matchName": "Universe_Compound_Blur_Premium",
+        "displayName": "uni.Compound Blur"
+      },
+      {
+        "matchName": "Universe_Blur_Spot_Blur",
+        "displayName": "uni.Spot Blur"
+      },
+      {
+        "matchName": "Universe_CrumplePop_Finisher",
+        "displayName": "uni.Finisher"
+      },
+      {
+        "matchName": "Universe_CrumplePop_Fisheye_Fix",
+        "displayName": "uni.Fisheye Fixer"
+      },
+      {
+        "matchName": "Universe_CrumplePop_Grain16",
+        "displayName": "uni.Grain16"
+      },
+      {
+        "matchName": "Universe_CrumplePop_OverLight",
+        "displayName": "uni.OverLight"
+      },
+      {
+        "matchName": "Universe_CrumplePop_ShrinkRay",
+        "displayName": "uni.ShrinkRay"
+      },
+      {
+        "matchName": "Universe_Distort_Camera_Shake_P",
+        "displayName": "uni.Camera Shake"
+      },
+      {
+        "matchName": "Universe_Distort_Chromatic_Aber",
+        "displayName": "uni.Chromatic Aberration"
+      },
+      {
+        "matchName": "Universe_Distort_Heatwave",
+        "displayName": "uni.Heatwave"
+      },
+      {
+        "matchName": "Universe_Distort_Picture_in_Pic",
+        "displayName": "uni.Picture in Picture"
+      },
+      {
+        "matchName": "Universe_Distort_Prism_Displace",
+        "displayName": "uni.Prism Displacement"
+      },
+      {
+        "matchName": "Universe_Distort_RGB_Separation",
+        "displayName": "uni.RGB Separation"
+      },
+      {
+        "matchName": "Universe_Generators_Custom_Dith",
+        "displayName": "uni.Custom Dither"
+      },
+      {
+        "matchName": "Universe_Generators_Fractal_Bac",
+        "displayName": "uni.Fractal Background"
+      },
+      {
+        "matchName": "Universe_Generators_Gradient_Ra",
+        "displayName": "uni.Gradient Ramp"
+      },
+      {
+        "matchName": "Universe_Generators_Soft_Gradie",
+        "displayName": "uni.Soft Gradient Background"
+      },
+      {
+        "matchName": "Universe_Generators_Spectralici",
+        "displayName": "uni.Spectralicious"
+      },
+      {
+        "matchName": "Universe_Glow_Chromatic_Glow",
+        "displayName": "uni.Chromatic Glow"
+      },
+      {
+        "matchName": "Universe_Glow_Edge_Glow_Premium",
+        "displayName": "uni.Edge Glow"
+      },
+      {
+        "matchName": "Universe_Glow_Glimmer",
+        "displayName": "uni.Glimmer"
+      },
+      {
+        "matchName": "Universe_Glow_Glow",
+        "displayName": "uni.Glow"
+      },
+      {
+        "matchName": "Universe_Glow_Glo_Fi_Premium",
+        "displayName": "uni.Glo Fi"
+      },
+      {
+        "matchName": "Universe_Glow_Point_Zoom",
+        "displayName": "uni.Point Zoom"
+      },
+      {
+        "matchName": "RG_UNI_Glow_Quantum",
+        "displayName": "uni.Quantum"
+      },
+      {
+        "matchName": "Universe_M_G_Array_Gun",
+        "displayName": "uni.Array Gun"
+      },
+      {
+        "matchName": "Universe_Visualizations_HUD_Com",
+        "displayName": "uni.HUD Components"
+      },
+      {
+        "matchName": "Universe_Motion_Graphics_Draw_P",
+        "displayName": "uni.Line"
+      },
+      {
+        "matchName": "Universe_M_G_Progresso",
+        "displayName": "uni.Progresso"
+      },
+      {
+        "matchName": "RG_UNI_M_G_Reframe",
+        "displayName": "uni.Reframe"
+      },
+      {
+        "matchName": "Universe_Generators_TurNoise",
+        "displayName": "uni.Turbulence Noise"
+      },
+      {
+        "matchName": "RG_UNI_Stylize_Analog",
+        "displayName": "uni.Analog"
+      },
+      {
+        "matchName": "Universe_Stylize_Carousel",
+        "displayName": "uni.Carousel"
+      },
+      {
+        "matchName": "RG_UNI_Chromatown",
+        "displayName": "uni.ChromaTown"
+      },
+      {
+        "matchName": "RG_UNI_Stylize_Electrify",
+        "displayName": "uni.Electrify"
+      },
+      {
+        "matchName": "Universe_Stylize_Error_Diffuse_",
+        "displayName": "uni.Error Diffuse Dither"
+      },
+      {
+        "matchName": "Universe_Stylize_Glitch",
+        "displayName": "uni.Glitch"
+      },
+      {
+        "matchName": "Universe_Stylize_Halftone_Dithe",
+        "displayName": "uni.Halftone Dither"
+      },
+      {
+        "matchName": "Universe_Distort_Holomatrix",
+        "displayName": "uni.Holomatrix II"
+      },
+      {
+        "matchName": "Universe_Knoll_Light_Factory_EZ",
+        "displayName": "uni.Knoll Light Factory EZ"
+      },
+      {
+        "matchName": "Universe_Misfire_Premium",
+        "displayName": "uni.MisFire"
+      },
+      {
+        "matchName": "RG_UNI_Stylize_Multitone",
+        "displayName": "uni.Multitone"
+      },
+      {
+        "matchName": "Universe_Stylize_Noir_Moderne",
+        "displayName": "uni.Noir"
+      },
+      {
+        "matchName": "Universe_Stylize_Ordered_Dither",
+        "displayName": "uni.Ordered Dither"
+      },
+      {
+        "matchName": "Universe_CrumplePop_RetroGrade",
+        "displayName": "uni.RetroGrade"
+      },
+      {
+        "matchName": "Universe_Stylize_Sketchify",
+        "displayName": "uni.Sketchify"
+      },
+      {
+        "matchName": "Universe_Stylize_Symbol_Mapper",
+        "displayName": "uni.Symbol Mapper"
+      },
+      {
+        "matchName": "Universe_Stylize_Texturize",
+        "displayName": "uni.Texturize"
+      },
+      {
+        "matchName": "MX_UNI_Stylize_Texturize_Motion",
+        "displayName": "uni.Texturize Motion"
+      },
+      {
+        "matchName": "Universe_Stylize_Threshold_Dith",
+        "displayName": "uni.Threshold Dither"
+      },
+      {
+        "matchName": "Universe_Stylize_VHS",
+        "displayName": "uni.VHS"
+      },
+      {
+        "matchName": "Universe_Text_AV_Club",
+        "displayName": "uni.AV Club"
+      },
+      {
+        "matchName": "Universe_Text_Ecto",
+        "displayName": "uni.Ecto"
+      },
+      {
+        "matchName": "Universe_Text_Glo_Fi_II",
+        "displayName": "uni.Glo Fi II"
+      },
+      {
+        "matchName": "Universe_Text_Hacker_Text",
+        "displayName": "uni.Hacker Text"
+      },
+      {
+        "matchName": "Universe_Text_Long_Shadow",
+        "displayName": "uni.Long Shadow"
+      },
+      {
+        "matchName": "Universe_Text_Luster",
+        "displayName": "uni.Luster"
+      },
+      {
+        "matchName": "Universe_Text_Numbers",
+        "displayName": "uni.Numbers"
+      },
+      {
+        "matchName": "Universe_Text_Screen_Text",
+        "displayName": "uni.Screen Text"
+      },
+      {
+        "matchName": "Universe_Text_Text_Tile",
+        "displayName": "uni.Text Tile"
+      },
+      {
+        "matchName": "Universe_Utilities_Title_Motion",
+        "displayName": "uni.Title Motion"
+      },
+      {
+        "matchName": "Universe_Text_Type_Cast",
+        "displayName": "uni.Type Cast"
+      },
+      {
+        "matchName": "Universe_Text_Type_On",
+        "displayName": "uni.Type On"
+      },
+      {
+        "matchName": "RG_UNI_Text_Typographic",
+        "displayName": "uni.Typographic"
+      },
+      {
+        "matchName": "Universe_Transitions_Blinds",
+        "displayName": "uni.Blinds"
+      },
+      {
+        "matchName": "Universe_Transitions_Bokeh",
+        "displayName": "uni.Bokeh Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Camera_Sha",
+        "displayName": "uni.Camera Shake Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Carousel_T",
+        "displayName": "uni.Carousel Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Channel_Bl",
+        "displayName": "uni.Channel Blur"
+      },
+      {
+        "matchName": "Universe_Transitions_Channel_Su",
+        "displayName": "uni.Channel Surf"
+      },
+      {
+        "matchName": "Universe_Transitions_Clock_Wipe",
+        "displayName": "uni.Clock Wipe"
+      },
+      {
+        "matchName": "Universe_Transitions_Color_Mosa",
+        "displayName": "uni.Color Mosaic Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Color_Stri",
+        "displayName": "uni.Color Stripe"
+      },
+      {
+        "matchName": "Universe_Transitions_Cube",
+        "displayName": "uni.Cube"
+      },
+      {
+        "matchName": "Universe_Transitions_Diamond_Wa",
+        "displayName": "uni.Diamond Wave"
+      },
+      {
+        "matchName": "Universe_Transitions_Dolly_Fade",
+        "displayName": "uni.Dolly Fade"
+      },
+      {
+        "matchName": "Universe_Exposure_Blur_Premium",
+        "displayName": "uni.Exposure Blur"
+      },
+      {
+        "matchName": "Universe_Transitions_Film_Trans",
+        "displayName": "uni.Film Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Flicker_Cu",
+        "displayName": "uni.Flicker Cut"
+      },
+      {
+        "matchName": "Universe_Transitions_Fold",
+        "displayName": "uni.Fold"
+      },
+      {
+        "matchName": "Universe_Transitions_Glitch_Tra",
+        "displayName": "uni.Glitch Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_HalfLight",
+        "displayName": "uni.HalfLight"
+      },
+      {
+        "matchName": "Universe_Transitions_Inside_Cub",
+        "displayName": "uni.Inside Cube"
+      },
+      {
+        "matchName": "Universe_Transitions_Knoll_Ligh",
+        "displayName": "uni.Knoll Light Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Linear_Wip",
+        "displayName": "uni.Linear Wipe"
+      },
+      {
+        "matchName": "Universe_Transitions_RetroGrade",
+        "displayName": "uni.RetroGrade Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Rubics_Cub",
+        "displayName": "uni.Rubix Cube"
+      },
+      {
+        "matchName": "Universe_Transitions_Shape_Wipe",
+        "displayName": "uni.Shape Wipe"
+      },
+      {
+        "matchName": "Universe_Transitions_Slide",
+        "displayName": "uni.Slide"
+      },
+      {
+        "matchName": "Universe_Soft_Edge_Wipe_Premium",
+        "displayName": "uni.Soft Edge Wipe"
+      },
+      {
+        "matchName": "Universe_Transitions_Spectralic",
+        "displayName": "uni.Spectralicious Transition"
+      },
+      {
+        "matchName": "RG_UNI_Transition_Stretch",
+        "displayName": "uni.Stretch"
+      },
+      {
+        "matchName": "Universe_Swish_Pan_Premium",
+        "displayName": "uni.Swish Pan"
+      },
+      {
+        "matchName": "Universe_Transitions_Triangle_W",
+        "displayName": "uni.Triangle Wave"
+      },
+      {
+        "matchName": "Universe_Transitions_Turbulence",
+        "displayName": "uni.Turbulence Transition"
+      },
+      {
+        "matchName": "Universe_Transitions_Unfold",
+        "displayName": "uni.Unfold"
+      },
+      {
+        "matchName": "Universe_Transitions_VHS_Transi",
+        "displayName": "uni.VHS Transition"
+      },
+      {
+        "matchName": "RG_UNI_Transition_Warp",
+        "displayName": "uni.Warp"
+      },
+      {
+        "matchName": "Universe_Utilities_Logo_Motion",
+        "displayName": "uni.Logo Motion"
+      },
+      {
+        "matchName": "RG_UNI_Utilities_Modes",
+        "displayName": "uni.Modes"
+      },
+      {
+        "matchName": "Universe_Utilities_Palettes",
+        "displayName": "uni.Palettes"
+      },
+      {
+        "matchName": "RG_UNI_Utilities_Socialize",
+        "displayName": "uni.Socialize"
+      },
+      {
+        "matchName": "Universe_Utilities_Unmult_Premi",
+        "displayName": "uni.Unmult"
+      },
+      {
+        "matchName": "rgBang",
+        "displayName": "Bang"
+      },
+      {
+        "matchName": "RG_VFX_ChromaDisp_AE",
+        "displayName": "Chromatic Displacement"
+      },
+      {
+        "matchName": "RG_VFX_Depth_Generator_AE",
+        "displayName": "Depth Generator"
+      },
+      {
+        "matchName": "RG_KingPin_Tracker",
+        "displayName": "King Pin Tracker"
+      },
+      {
+        "matchName": "RG_Lens_Distortion",
+        "displayName": "Lens Distortion Matcher"
+      },
+      {
+        "matchName": "MX_Lens_Flare",
+        "displayName": "Real Lens Flares"
+      },
+      {
+        "matchName": "RG_VFX_OpticalGlow_AE",
+        "displayName": "Optical Glow"
+      },
+      {
+        "matchName": "Photron Primatte6",
+        "displayName": "Primatte Keyer 6"
+      },
+      {
+        "matchName": "rg.vfx.reflection",
+        "displayName": "Reflection"
+      },
+      {
+        "matchName": "rg.vfx.shadow",
+        "displayName": "Shadow"
+      },
+      {
+        "matchName": "RG_VFX_SpotClone_Tracker_AE",
+        "displayName": "Spot Clone Tracker"
+      },
+      {
+        "matchName": "RG_VFX_Supernova_AE",
+        "displayName": "Supercomp"
+      },
+      {
+        "matchName": "S_ChannelSwitcher",
+        "displayName": "S_ChannelSwitcher"
+      },
+      {
+        "matchName": "S_ClampChroma",
+        "displayName": "S_ClampChroma"
+      },
+      {
+        "matchName": "S_DuoTone",
+        "displayName": "S_DuoTone"
+      },
+      {
+        "matchName": "S_Gamma",
+        "displayName": "S_Gamma"
+      },
+      {
+        "matchName": "S_Hotspots",
+        "displayName": "S_Hotspots"
+      },
+      {
+        "matchName": "S_HueSatBright",
+        "displayName": "S_HueSatBright"
+      },
+      {
+        "matchName": "S_Invert",
+        "displayName": "S_Invert"
+      },
+      {
+        "matchName": "S_Monochrome",
+        "displayName": "S_Monochrome"
+      },
+      {
+        "matchName": "S_OCIOTransform",
+        "displayName": "S_OCIOTransform"
+      },
+      {
+        "matchName": "S_QuadTone",
+        "displayName": "S_QuadTone"
+      },
+      {
+        "matchName": "S_ShowBadColors",
+        "displayName": "S_ShowBadColors"
+      },
+      {
+        "matchName": "S_Threshold",
+        "displayName": "S_Threshold"
+      },
+      {
+        "matchName": "S_Tint",
+        "displayName": "S_Tint"
+      },
+      {
+        "matchName": "S_TriTone",
+        "displayName": "S_TriTone"
+      },
+      {
+        "matchName": "S_Beauty",
+        "displayName": "S_Beauty"
+      },
+      {
+        "matchName": "S_Blur",
+        "displayName": "S_Blur"
+      },
+      {
+        "matchName": "S_BlurChannels",
+        "displayName": "S_BlurChannels"
+      },
+      {
+        "matchName": "S_BlurChroma",
+        "displayName": "S_BlurChroma"
+      },
+      {
+        "matchName": "S_BlurDirectional",
+        "displayName": "S_BlurDirectional"
+      },
+      {
+        "matchName": "S_BlurMoCurves",
+        "displayName": "S_BlurMoCurves"
+      },
+      {
+        "matchName": "S_BlurMotion",
+        "displayName": "S_BlurMotion"
+      },
+      {
+        "matchName": "S_Convolve",
+        "displayName": "S_Convolve"
+      },
+      {
+        "matchName": "S_ConvolveComp",
+        "displayName": "S_ConvolveComp"
+      },
+      {
+        "matchName": "S_Deband",
+        "displayName": "S_Deband"
+      },
+      {
+        "matchName": "S_DefocusPrism",
+        "displayName": "S_DefocusPrism"
+      },
+      {
+        "matchName": "S_EdgeAwareBlur",
+        "displayName": "S_EdgeAwareBlur"
+      },
+      {
+        "matchName": "S_EdgeBlur",
+        "displayName": "S_EdgeBlur"
+      },
+      {
+        "matchName": "S_FreeLens",
+        "displayName": "S_FreeLens"
+      },
+      {
+        "matchName": "S_GrainRemove",
+        "displayName": "S_GrainRemove"
+      },
+      {
+        "matchName": "S_Median",
+        "displayName": "S_Median"
+      },
+      {
+        "matchName": "S_RackDefocus",
+        "displayName": "S_RackDefocus"
+      },
+      {
+        "matchName": "S_RackDfComp",
+        "displayName": "S_RackDfComp"
+      },
+      {
+        "matchName": "S_Sharpen",
+        "displayName": "S_Sharpen"
+      },
+      {
+        "matchName": "S_SoftFocus",
+        "displayName": "S_SoftFocus"
+      },
+      {
+        "matchName": "S_ZBlur",
+        "displayName": "S_ZBlur"
+      },
+      {
+        "matchName": "S_ZConvolve",
+        "displayName": "S_ZConvolve"
+      },
+      {
+        "matchName": "S_ZDefocus",
+        "displayName": "S_ZDefocus"
+      },
+      {
+        "matchName": "S_Effect",
+        "displayName": "S_Effect"
+      },
+      {
+        "matchName": "S_Transition",
+        "displayName": "S_Transition"
+      },
+      {
+        "matchName": "S_EdgeFlash",
+        "displayName": "S_EdgeFlash"
+      },
+      {
+        "matchName": "S_Layer",
+        "displayName": "S_Layer"
+      },
+      {
+        "matchName": "S_MathOps",
+        "displayName": "S_MathOps"
+      },
+      {
+        "matchName": "S_MatteOps",
+        "displayName": "S_MatteOps"
+      },
+      {
+        "matchName": "S_MatteOpsComp",
+        "displayName": "S_MatteOpsComp"
+      },
+      {
+        "matchName": "S_ZComp",
+        "displayName": "S_ZComp"
+      },
+      {
+        "matchName": "S_Distort",
+        "displayName": "S_Distort"
+      },
+      {
+        "matchName": "S_DistortBlur",
+        "displayName": "S_DistortBlur"
+      },
+      {
+        "matchName": "S_DistortChroma",
+        "displayName": "S_DistortChroma"
+      },
+      {
+        "matchName": "S_DistortRGB",
+        "displayName": "S_DistortRGB"
+      },
+      {
+        "matchName": "S_InfiniteZoom",
+        "displayName": "S_InfiniteZoom"
+      },
+      {
+        "matchName": "S_ParallaxStrips",
+        "displayName": "S_ParallaxStrips"
+      },
+      {
+        "matchName": "S_Shake",
+        "displayName": "S_Shake"
+      },
+      {
+        "matchName": "S_StretchFrameEdges",
+        "displayName": "S_StretchFrameEdges"
+      },
+      {
+        "matchName": "S_WarpBubble",
+        "displayName": "S_WarpBubble"
+      },
+      {
+        "matchName": "S_WarpBubble2",
+        "displayName": "S_WarpBubble2"
+      },
+      {
+        "matchName": "S_WarpChroma",
+        "displayName": "S_WarpChroma"
+      },
+      {
+        "matchName": "S_WarpCornerPin",
+        "displayName": "S_WarpCornerPin"
+      },
+      {
+        "matchName": "S_WarpDrops",
+        "displayName": "S_WarpDrops"
+      },
+      {
+        "matchName": "S_WarpFishEye",
+        "displayName": "S_WarpFishEye"
+      },
+      {
+        "matchName": "S_WarpMagnify",
+        "displayName": "S_WarpMagnify"
+      },
+      {
+        "matchName": "S_WarpPerspective",
+        "displayName": "S_WarpPerspective"
+      },
+      {
+        "matchName": "S_WarpPolar",
+        "displayName": "S_WarpPolar"
+      },
+      {
+        "matchName": "S_WarpPuddle",
+        "displayName": "S_WarpPuddle"
+      },
+      {
+        "matchName": "S_WarpPuff",
+        "displayName": "S_WarpPuff"
+      },
+      {
+        "matchName": "S_WarpRepeat",
+        "displayName": "S_WarpRepeat"
+      },
+      {
+        "matchName": "S_WarpTransform",
+        "displayName": "S_WarpTransform"
+      },
+      {
+        "matchName": "S_WarpVortex",
+        "displayName": "S_WarpVortex"
+      },
+      {
+        "matchName": "S_WarpWaves",
+        "displayName": "S_WarpWaves"
+      },
+      {
+        "matchName": "S_WarpWaves2",
+        "displayName": "S_WarpWaves2"
+      },
+      {
+        "matchName": "S_BokehLights",
+        "displayName": "S_BokehLights"
+      },
+      {
+        "matchName": "S_DropShadow",
+        "displayName": "S_DropShadow"
+      },
+      {
+        "matchName": "S_EdgeRays",
+        "displayName": "S_EdgeRays"
+      },
+      {
+        "matchName": "S_Flashbulbs",
+        "displayName": "S_Flashbulbs"
+      },
+      {
+        "matchName": "S_Glare",
+        "displayName": "S_Glare"
+      },
+      {
+        "matchName": "S_Glint",
+        "displayName": "S_Glint"
+      },
+      {
+        "matchName": "S_GlintRainbow",
+        "displayName": "S_GlintRainbow"
+      },
+      {
+        "matchName": "S_Glow",
+        "displayName": "S_Glow"
+      },
+      {
+        "matchName": "S_GlowAura",
+        "displayName": "S_GlowAura"
+      },
+      {
+        "matchName": "S_GlowDarks",
+        "displayName": "S_GlowDarks"
+      },
+      {
+        "matchName": "S_GlowDist",
+        "displayName": "S_GlowDist"
+      },
+      {
+        "matchName": "S_GlowEdges",
+        "displayName": "S_GlowEdges"
+      },
+      {
+        "matchName": "S_GlowNoise",
+        "displayName": "S_GlowNoise"
+      },
+      {
+        "matchName": "S_GlowOrthicon",
+        "displayName": "S_GlowOrthicon"
+      },
+      {
+        "matchName": "S_GlowRainbow",
+        "displayName": "S_GlowRainbow"
+      },
+      {
+        "matchName": "S_GlowRings",
+        "displayName": "S_GlowRings"
+      },
+      {
+        "matchName": "S_LensFlare",
+        "displayName": "S_LensFlare"
+      },
+      {
+        "matchName": "S_LensFlareAutoTrack",
+        "displayName": "S_LensFlareAutoTrack"
+      },
+      {
+        "matchName": "S_Light3D",
+        "displayName": "S_Light3D"
+      },
+      {
+        "matchName": "S_LightLeak",
+        "displayName": "S_LightLeak"
+      },
+      {
+        "matchName": "S_Rays",
+        "displayName": "S_Rays"
+      },
+      {
+        "matchName": "S_SpotLight",
+        "displayName": "S_SpotLight"
+      },
+      {
+        "matchName": "S_Streaks",
+        "displayName": "S_Streaks"
+      },
+      {
+        "matchName": "S_UltraGlow",
+        "displayName": "S_UltraGlow"
+      },
+      {
+        "matchName": "S_ZGlow",
+        "displayName": "S_ZGlow"
+      },
+      {
+        "matchName": "S_Aurora",
+        "displayName": "S_Aurora"
+      },
+      {
+        "matchName": "S_Caustics",
+        "displayName": "S_Caustics"
+      },
+      {
+        "matchName": "S_Clouds",
+        "displayName": "S_Clouds"
+      },
+      {
+        "matchName": "S_CloudsColorSmooth",
+        "displayName": "S_CloudsColorSmooth"
+      },
+      {
+        "matchName": "S_CloudsMultColor",
+        "displayName": "S_CloudsMultColor"
+      },
+      {
+        "matchName": "S_CloudsPerspective",
+        "displayName": "S_CloudsPerspective"
+      },
+      {
+        "matchName": "S_CloudsPsyko",
+        "displayName": "S_CloudsPsyko"
+      },
+      {
+        "matchName": "S_CloudsVortex",
+        "displayName": "S_CloudsVortex"
+      },
+      {
+        "matchName": "S_Dust",
+        "displayName": "S_Dust"
+      },
+      {
+        "matchName": "S_Gradient",
+        "displayName": "S_Gradient"
+      },
+      {
+        "matchName": "S_GradientMulti",
+        "displayName": "S_GradientMulti"
+      },
+      {
+        "matchName": "S_GradientRadial",
+        "displayName": "S_GradientRadial"
+      },
+      {
+        "matchName": "S_Grid",
+        "displayName": "S_Grid"
+      },
+      {
+        "matchName": "S_Grunge",
+        "displayName": "S_Grunge"
+      },
+      {
+        "matchName": "S_LaserBeam",
+        "displayName": "S_LaserBeam"
+      },
+      {
+        "matchName": "S_Luna",
+        "displayName": "S_Luna"
+      },
+      {
+        "matchName": "S_MuzzleFlash",
+        "displayName": "S_MuzzleFlash"
+      },
+      {
+        "matchName": "S_NightSky",
+        "displayName": "S_NightSky"
+      },
+      {
+        "matchName": "S_Shape",
+        "displayName": "S_Shape"
+      },
+      {
+        "matchName": "S_Sparkles",
+        "displayName": "S_Sparkles"
+      },
+      {
+        "matchName": "S_SparklesColor",
+        "displayName": "S_SparklesColor"
+      },
+      {
+        "matchName": "S_TextureCells",
+        "displayName": "S_TextureCells"
+      },
+      {
+        "matchName": "S_TextureChromaSpiral",
+        "displayName": "S_TextureChromaSpiral"
+      },
+      {
+        "matchName": "S_TextureFlux",
+        "displayName": "S_TextureFlux"
+      },
+      {
+        "matchName": "S_TextureFolded",
+        "displayName": "S_TextureFolded"
+      },
+      {
+        "matchName": "S_TextureLoops",
+        "displayName": "S_TextureLoops"
+      },
+      {
+        "matchName": "S_TextureMicro",
+        "displayName": "S_TextureMicro"
+      },
+      {
+        "matchName": "S_TextureMoire",
+        "displayName": "S_TextureMoire"
+      },
+      {
+        "matchName": "S_TextureNeurons",
+        "displayName": "S_TextureNeurons"
+      },
+      {
+        "matchName": "S_TextureNoiseEmboss",
+        "displayName": "S_TextureNoiseEmboss"
+      },
+      {
+        "matchName": "S_TextureNoisePaint",
+        "displayName": "S_TextureNoisePaint"
+      },
+      {
+        "matchName": "S_TexturePlasma",
+        "displayName": "S_TexturePlasma"
+      },
+      {
+        "matchName": "S_TextureSpots",
+        "displayName": "S_TextureSpots"
+      },
+      {
+        "matchName": "S_TextureTiles",
+        "displayName": "S_TextureTiles"
+      },
+      {
+        "matchName": "S_TextureWeave",
+        "displayName": "S_TextureWeave"
+      },
+      {
+        "matchName": "S_UltraZap",
+        "displayName": "S_UltraZap"
+      },
+      {
+        "matchName": "S_Zap",
+        "displayName": "S_Zap"
+      },
+      {
+        "matchName": "S_ZapFrom",
+        "displayName": "S_ZapFrom"
+      },
+      {
+        "matchName": "S_ZapTo",
+        "displayName": "S_ZapTo"
+      },
+      {
+        "matchName": "S_AutoPaint",
+        "displayName": "S_AutoPaint"
+      },
+      {
+        "matchName": "S_BandPass",
+        "displayName": "S_BandPass"
+      },
+      {
+        "matchName": "S_BleachBypass",
+        "displayName": "S_BleachBypass"
+      },
+      {
+        "matchName": "S_Brush",
+        "displayName": "S_Brush"
+      },
+      {
+        "matchName": "S_Cartoon",
+        "displayName": "S_Cartoon"
+      },
+      {
+        "matchName": "S_CartoonPaint",
+        "displayName": "S_CartoonPaint"
+      },
+      {
+        "matchName": "S_ColorFuse",
+        "displayName": "S_ColorFuse"
+      },
+      {
+        "matchName": "S_Crosshatch",
+        "displayName": "S_Crosshatch"
+      },
+      {
+        "matchName": "S_Diffuse",
+        "displayName": "S_Diffuse"
+      },
+      {
+        "matchName": "S_DigitalDamage",
+        "displayName": "S_DigitalDamage"
+      },
+      {
+        "matchName": "S_DogVision",
+        "displayName": "S_DogVision"
+      },
+      {
+        "matchName": "S_EdgeColorize",
+        "displayName": "S_EdgeColorize"
+      },
+      {
+        "matchName": "S_EdgeDetect",
+        "displayName": "S_EdgeDetect"
+      },
+      {
+        "matchName": "S_EdgeDetectDouble",
+        "displayName": "S_EdgeDetectDouble"
+      },
+      {
+        "matchName": "S_EdgesInDirection",
+        "displayName": "S_EdgesInDirection"
+      },
+      {
+        "matchName": "S_Emboss",
+        "displayName": "S_Emboss"
+      },
+      {
+        "matchName": "S_EmbossDistort",
+        "displayName": "S_EmbossDistort"
+      },
+      {
+        "matchName": "S_EmbossGlass",
+        "displayName": "S_EmbossGlass"
+      },
+      {
+        "matchName": "S_EmbossShiny",
+        "displayName": "S_EmbossShiny"
+      },
+      {
+        "matchName": "S_Etching",
+        "displayName": "S_Etching"
+      },
+      {
+        "matchName": "S_FilmDamage",
+        "displayName": "S_FilmDamage"
+      },
+      {
+        "matchName": "S_FilmEffect",
+        "displayName": "S_FilmEffect"
+      },
+      {
+        "matchName": "S_FlysEyeCircles",
+        "displayName": "S_FlysEyeCircles"
+      },
+      {
+        "matchName": "S_FlysEyeHex",
+        "displayName": "S_FlysEyeHex"
+      },
+      {
+        "matchName": "S_FlysEyeRect",
+        "displayName": "S_FlysEyeRect"
+      },
+      {
+        "matchName": "S_Grain",
+        "displayName": "S_Grain"
+      },
+      {
+        "matchName": "S_GrainStatic",
+        "displayName": "S_GrainStatic"
+      },
+      {
+        "matchName": "S_HalfTone",
+        "displayName": "S_HalfTone"
+      },
+      {
+        "matchName": "S_HalfToneColor",
+        "displayName": "S_HalfToneColor"
+      },
+      {
+        "matchName": "S_HalfToneRings",
+        "displayName": "S_HalfToneRings"
+      },
+      {
+        "matchName": "S_JpegDamage",
+        "displayName": "S_JpegDamage"
+      },
+      {
+        "matchName": "S_Kaleido",
+        "displayName": "S_Kaleido"
+      },
+      {
+        "matchName": "S_KaleidoPolar",
+        "displayName": "S_KaleidoPolar"
+      },
+      {
+        "matchName": "S_KaleidoRadial",
+        "displayName": "S_KaleidoRadial"
+      },
+      {
+        "matchName": "S_Mosaic",
+        "displayName": "S_Mosaic"
+      },
+      {
+        "matchName": "S_PixelMosh",
+        "displayName": "S_PixelMosh"
+      },
+      {
+        "matchName": "S_PixelSort",
+        "displayName": "S_PixelSort"
+      },
+      {
+        "matchName": "S_Posterize",
+        "displayName": "S_Posterize"
+      },
+      {
+        "matchName": "S_PrismLens",
+        "displayName": "S_PrismLens"
+      },
+      {
+        "matchName": "S_PseudoColor",
+        "displayName": "S_PseudoColor"
+      },
+      {
+        "matchName": "S_PsykoBlobs",
+        "displayName": "S_PsykoBlobs"
+      },
+      {
+        "matchName": "S_PsykoStripes",
+        "displayName": "S_PsykoStripes"
+      },
+      {
+        "matchName": "S_RomanTile",
+        "displayName": "S_RomanTile"
+      },
+      {
+        "matchName": "S_ScanLines",
+        "displayName": "S_ScanLines"
+      },
+      {
+        "matchName": "S_ScanLinesMono",
+        "displayName": "S_ScanLinesMono"
+      },
+      {
+        "matchName": "S_Sketch",
+        "displayName": "S_Sketch"
+      },
+      {
+        "matchName": "S_Solarize",
+        "displayName": "S_Solarize"
+      },
+      {
+        "matchName": "S_StripSlide",
+        "displayName": "S_StripSlide"
+      },
+      {
+        "matchName": "S_TileScramble",
+        "displayName": "S_TileScramble"
+      },
+      {
+        "matchName": "S_TVDamage",
+        "displayName": "S_TVDamage"
+      },
+      {
+        "matchName": "S_UltraGrain",
+        "displayName": "S_UltraGrain"
+      },
+      {
+        "matchName": "S_Vignette",
+        "displayName": "S_Vignette"
+      },
+      {
+        "matchName": "S_VintageColor2Strip",
+        "displayName": "S_VintageColor2Strip"
+      },
+      {
+        "matchName": "S_VintageColor3Strip",
+        "displayName": "S_VintageColor3Strip"
+      },
+      {
+        "matchName": "S_Zebrafy",
+        "displayName": "S_Zebrafy"
+      },
+      {
+        "matchName": "S_ZebrafyColor",
+        "displayName": "S_ZebrafyColor"
+      },
+      {
+        "matchName": "S_ZFogExponential",
+        "displayName": "S_ZFogExponential"
+      },
+      {
+        "matchName": "S_ZFogLinear",
+        "displayName": "S_ZFogLinear"
+      },
+      {
+        "matchName": "S_CutToDissolve",
+        "displayName": "S_CutToDissolve"
+      },
+      {
+        "matchName": "S_Feedback",
+        "displayName": "S_Feedback"
+      },
+      {
+        "matchName": "S_FeedbackBubble",
+        "displayName": "S_FeedbackBubble"
+      },
+      {
+        "matchName": "S_FeedbackDistort",
+        "displayName": "S_FeedbackDistort"
+      },
+      {
+        "matchName": "S_FieldRemove",
+        "displayName": "S_FieldRemove"
+      },
+      {
+        "matchName": "S_Flicker",
+        "displayName": "S_Flicker"
+      },
+      {
+        "matchName": "S_FlickerMatch",
+        "displayName": "S_FlickerMatch"
+      },
+      {
+        "matchName": "S_FlickerMatchColor",
+        "displayName": "S_FlickerMatchColor"
+      },
+      {
+        "matchName": "S_FlickerMatchMatte",
+        "displayName": "S_FlickerMatchMatte"
+      },
+      {
+        "matchName": "S_FlickerMchMatteColor",
+        "displayName": "S_FlickerMchMatteColor"
+      },
+      {
+        "matchName": "S_FlickerRemove",
+        "displayName": "S_FlickerRemove"
+      },
+      {
+        "matchName": "S_FlickerRemoveColor",
+        "displayName": "S_FlickerRemoveColor"
+      },
+      {
+        "matchName": "S_FlickerRemoveMatte",
+        "displayName": "S_FlickerRemoveMatte"
+      },
+      {
+        "matchName": "S_FlickerRmMatteColor",
+        "displayName": "S_FlickerRmMatteColor"
+      },
+      {
+        "matchName": "S_FreezeFrame",
+        "displayName": "S_FreezeFrame"
+      },
+      {
+        "matchName": "S_GetFrame",
+        "displayName": "S_GetFrame"
+      },
+      {
+        "matchName": "S_JitterFrames",
+        "displayName": "S_JitterFrames"
+      },
+      {
+        "matchName": "S_MotionDetect",
+        "displayName": "S_MotionDetect"
+      },
+      {
+        "matchName": "S_NearestColor",
+        "displayName": "S_NearestColor"
+      },
+      {
+        "matchName": "S_RandomEdits",
+        "displayName": "S_RandomEdits"
+      },
+      {
+        "matchName": "S_RepairFrames",
+        "displayName": "S_RepairFrames"
+      },
+      {
+        "matchName": "S_Retime",
+        "displayName": "S_Retime"
+      },
+      {
+        "matchName": "S_ReverseClip",
+        "displayName": "S_ReverseClip"
+      },
+      {
+        "matchName": "S_ReverseEdits",
+        "displayName": "S_ReverseEdits"
+      },
+      {
+        "matchName": "S_TimeAverage",
+        "displayName": "S_TimeAverage"
+      },
+      {
+        "matchName": "S_TimeDisplace",
+        "displayName": "S_TimeDisplace"
+      },
+      {
+        "matchName": "S_TimeSlice",
+        "displayName": "S_TimeSlice"
+      },
+      {
+        "matchName": "S_TimeWarpRGB",
+        "displayName": "S_TimeWarpRGB"
+      },
+      {
+        "matchName": "S_Trails",
+        "displayName": "S_Trails"
+      },
+      {
+        "matchName": "S_TrailsDiffuse",
+        "displayName": "S_TrailsDiffuse"
+      },
+      {
+        "matchName": "S_CardFlip",
+        "displayName": "S_CardFlip"
+      },
+      {
+        "matchName": "S_Dissolve",
+        "displayName": "S_Dissolve"
+      },
+      {
+        "matchName": "S_DissolveAutoPaint",
+        "displayName": "S_DissolveAutoPaint"
+      },
+      {
+        "matchName": "S_DissolveBlur",
+        "displayName": "S_DissolveBlur"
+      },
+      {
+        "matchName": "S_DissolveBubble",
+        "displayName": "S_DissolveBubble"
+      },
+      {
+        "matchName": "S_DissolveDefocus",
+        "displayName": "S_DissolveDefocus"
+      },
+      {
+        "matchName": "S_DissolveDiffuse",
+        "displayName": "S_DissolveDiffuse"
+      },
+      {
+        "matchName": "S_DissolveDigitalDamage",
+        "displayName": "S_DissolveDigitalDamage"
+      },
+      {
+        "matchName": "S_DissolveDistort",
+        "displayName": "S_DissolveDistort"
+      },
+      {
+        "matchName": "S_DissolveEdgeRays",
+        "displayName": "S_DissolveEdgeRays"
+      },
+      {
+        "matchName": "S_DissolveFilm",
+        "displayName": "S_DissolveFilm"
+      },
+      {
+        "matchName": "S_DissolveFlashbulbs",
+        "displayName": "S_DissolveFlashbulbs"
+      },
+      {
+        "matchName": "S_DissolveGlare",
+        "displayName": "S_DissolveGlare"
+      },
+      {
+        "matchName": "S_DissolveGlint",
+        "displayName": "S_DissolveGlint"
+      },
+      {
+        "matchName": "S_DissolveGlintRainbow",
+        "displayName": "S_DissolveGlintRainbow"
+      },
+      {
+        "matchName": "S_DissolveGlow",
+        "displayName": "S_DissolveGlow"
+      },
+      {
+        "matchName": "S_DissolveLensFlare",
+        "displayName": "S_DissolveLensFlare"
+      },
+      {
+        "matchName": "S_DissolveLuma",
+        "displayName": "S_DissolveLuma"
+      },
+      {
+        "matchName": "S_DissolvePixelMosh",
+        "displayName": "S_DissolvePixelMosh"
+      },
+      {
+        "matchName": "S_DissolvePixelSort",
+        "displayName": "S_DissolvePixelSort"
+      },
+      {
+        "matchName": "S_DissolvePuddle",
+        "displayName": "S_DissolvePuddle"
+      },
+      {
+        "matchName": "S_DissolveRays",
+        "displayName": "S_DissolveRays"
+      },
+      {
+        "matchName": "S_DissolveShake",
+        "displayName": "S_DissolveShake"
+      },
+      {
+        "matchName": "S_DissolveSpeckle",
+        "displayName": "S_DissolveSpeckle"
+      },
+      {
+        "matchName": "S_DissolveStatic",
+        "displayName": "S_DissolveStatic"
+      },
+      {
+        "matchName": "S_DissolveTiles",
+        "displayName": "S_DissolveTiles"
+      },
+      {
+        "matchName": "S_DissolveUltraGlow",
+        "displayName": "S_DissolveUltraGlow"
+      },
+      {
+        "matchName": "S_DissolveVortex",
+        "displayName": "S_DissolveVortex"
+      },
+      {
+        "matchName": "S_DissolveWaves",
+        "displayName": "S_DissolveWaves"
+      },
+      {
+        "matchName": "S_DissolveZap",
+        "displayName": "S_DissolveZap"
+      },
+      {
+        "matchName": "S_FilmRoll",
+        "displayName": "S_FilmRoll"
+      },
+      {
+        "matchName": "S_FlutterCut",
+        "displayName": "S_FlutterCut"
+      },
+      {
+        "matchName": "S_HyperPull",
+        "displayName": "S_HyperPull"
+      },
+      {
+        "matchName": "S_HyperPush",
+        "displayName": "S_HyperPush"
+      },
+      {
+        "matchName": "S_ParallaxStripsTransition",
+        "displayName": "S_ParallaxStripsTransition"
+      },
+      {
+        "matchName": "S_StripSlideTransition",
+        "displayName": "S_StripSlideTransition"
+      },
+      {
+        "matchName": "S_Swish3D",
+        "displayName": "S_Swish3D"
+      },
+      {
+        "matchName": "S_SwishPan",
+        "displayName": "S_SwishPan"
+      },
+      {
+        "matchName": "S_TVChannelChange",
+        "displayName": "S_TVChannelChange"
+      },
+      {
+        "matchName": "S_WhipLash",
+        "displayName": "S_WhipLash"
+      },
+      {
+        "matchName": "S_WipeBlobs",
+        "displayName": "S_WipeBlobs"
+      },
+      {
+        "matchName": "S_WipeBubble",
+        "displayName": "S_WipeBubble"
+      },
+      {
+        "matchName": "S_WipeCells",
+        "displayName": "S_WipeCells"
+      },
+      {
+        "matchName": "S_WipeChecker",
+        "displayName": "S_WipeChecker"
+      },
+      {
+        "matchName": "S_WipeCircle",
+        "displayName": "S_WipeCircle"
+      },
+      {
+        "matchName": "S_WipeClock",
+        "displayName": "S_WipeClock"
+      },
+      {
+        "matchName": "S_WipeClouds",
+        "displayName": "S_WipeClouds"
+      },
+      {
+        "matchName": "S_WipeDiffuse",
+        "displayName": "S_WipeDiffuse"
+      },
+      {
+        "matchName": "S_WipeDots",
+        "displayName": "S_WipeDots"
+      },
+      {
+        "matchName": "S_WipeDoubleWedge",
+        "displayName": "S_WipeDoubleWedge"
+      },
+      {
+        "matchName": "S_WipeFlux",
+        "displayName": "S_WipeFlux"
+      },
+      {
+        "matchName": "S_WipeFourWedges",
+        "displayName": "S_WipeFourWedges"
+      },
+      {
+        "matchName": "S_WipeLine",
+        "displayName": "S_WipeLine"
+      },
+      {
+        "matchName": "S_WipeMoire",
+        "displayName": "S_WipeMoire"
+      },
+      {
+        "matchName": "S_WipePixelate",
+        "displayName": "S_WipePixelate"
+      },
+      {
+        "matchName": "S_WipePlasma",
+        "displayName": "S_WipePlasma"
+      },
+      {
+        "matchName": "S_WipePointalize",
+        "displayName": "S_WipePointalize"
+      },
+      {
+        "matchName": "S_WipeRectangle",
+        "displayName": "S_WipeRectangle"
+      },
+      {
+        "matchName": "S_WipeRings",
+        "displayName": "S_WipeRings"
+      },
+      {
+        "matchName": "S_WipeStar",
+        "displayName": "S_WipeStar"
+      },
+      {
+        "matchName": "S_WipeStripes",
+        "displayName": "S_WipeStripes"
+      },
+      {
+        "matchName": "S_WipeTiles",
+        "displayName": "S_WipeTiles"
+      },
+      {
+        "matchName": "S_WipeWeave",
+        "displayName": "S_WipeWeave"
+      },
+      {
+        "matchName": "S_WipeWedge",
+        "displayName": "S_WipeWedge"
+      },
+      {
+        "matchName": "tc 3DStrokePath",
+        "displayName": "3D Stroke"
+      },
+      {
+        "matchName": "tc Shine",
+        "displayName": "Shine"
+      },
+      {
+        "matchName": "tc Starglow",
+        "displayName": "Starglow"
+      },
+      {
+        "matchName": "ADBE 3D Tracker",
+        "displayName": "3D 摄像机跟踪器"
+      },
+      {
+        "matchName": "ADBE 3D Glasses2",
+        "displayName": "3D 眼镜"
+      },
+      {
+        "matchName": "ADBE 3D Glasses",
+        "displayName": "3D 眼镜（旧版）"
+      },
+      {
+        "matchName": "VISINF Grain Implant",
+        "displayName": "添加颗粒"
+      },
+      {
+        "matchName": "ADBE Alpha Levels2",
+        "displayName": "Alpha 色阶"
+      },
+      {
+        "matchName": "ADBE Alpha Levels3",
+        "displayName": "Alpha 色阶"
+      },
+      {
+        "matchName": "ADBE Apply Color LUT2",
+        "displayName": "应用颜色 LUT"
+      },
+      {
+        "matchName": "ADBE Apply Color LUT",
+        "displayName": "应用颜色 LUT"
+      },
+      {
+        "matchName": "ADBE Arithmetic",
+        "displayName": "算术"
+      },
+      {
+        "matchName": "ADBE AudSpect",
+        "displayName": "音频频谱"
+      },
+      {
+        "matchName": "ADBE AudWave",
+        "displayName": "音频波形"
+      },
+      {
+        "matchName": "ADBE Aud BT",
+        "displayName": "低音和高音"
+      },
+      {
+        "matchName": "ADBE Aud Compressor",
+        "displayName": "压缩程序"
+      },
+      {
+        "matchName": "ADBE Aud Delay",
+        "displayName": "延迟"
+      },
+      {
+        "matchName": "ADBE Aud Distortion",
+        "displayName": "扭曲"
+      },
+      {
+        "matchName": "ADBE Aud_Flange",
+        "displayName": "变调与合声"
+      },
+      {
+        "matchName": "ADBE Aud Gate",
+        "displayName": "门"
+      },
+      {
+        "matchName": "ADBE Aud HiLo",
+        "displayName": "高通/低通"
+      },
+      {
+        "matchName": "ADBE Aud Stereo Mixer",
+        "displayName": "立体声混合器"
+      },
+      {
+        "matchName": "ADBE Aud Modulator",
+        "displayName": "调制器"
+      },
+      {
+        "matchName": "ADBE Param EQ",
+        "displayName": "参数均衡"
+      },
+      {
+        "matchName": "ADBE Aud Reverb",
+        "displayName": "混响"
+      },
+      {
+        "matchName": "ADBE Aud Reverse",
+        "displayName": "倒放"
+      },
+      {
+        "matchName": "ADBE Aud Tone",
+        "displayName": "音调"
+      },
+      {
+        "matchName": "ADBE AutoColor",
+        "displayName": "自动颜色"
+      },
+      {
+        "matchName": "ADBE AutoContrast",
+        "displayName": "自动对比度"
+      },
+      {
+        "matchName": "ADBE AutoLevels",
+        "displayName": "自动色阶"
+      },
+      {
+        "matchName": "ADBE AUX CHANNEL EXTRACT",
+        "displayName": "3D 通道提取"
+      },
+      {
+        "matchName": "ADBE Brightness & Contrast",
+        "displayName": "亮度和对比度"
+      },
+      {
+        "matchName": "ADBE Basic 3D",
+        "displayName": "基本 3D"
+      },
+      {
+        "matchName": "ADBE Basic Text2",
+        "displayName": "基本文字"
+      },
+      {
+        "matchName": "ADBE Laser",
+        "displayName": "光束"
+      },
+      {
+        "matchName": "ADBE Bevel Alpha",
+        "displayName": "斜面 Alpha"
+      },
+      {
+        "matchName": "ADBE Bevel Edges",
+        "displayName": "边缘斜面"
+      },
+      {
+        "matchName": "ADBE BEZMESH",
+        "displayName": "贝塞尔曲线变形"
+      },
+      {
+        "matchName": "ADBE Bilateral",
+        "displayName": "双向模糊"
+      },
+      {
+        "matchName": "ADBE Blend",
+        "displayName": "混合"
+      },
+      {
+        "matchName": "ADBE Block Dissolve",
+        "displayName": "块溶解"
+      },
+      {
+        "matchName": "ADBE Box Blur2",
+        "displayName": "快速方框模糊"
+      },
+      {
+        "matchName": "ADBE Box Blur",
+        "displayName": "方框模糊"
+      },
+      {
+        "matchName": "ADBE Broadcast Colors",
+        "displayName": "广播颜色"
+      },
+      {
+        "matchName": "ADBE Brush Strokes",
+        "displayName": "画笔描边"
+      },
+      {
+        "matchName": "ADBE Bulge",
+        "displayName": "凸出"
+      },
+      {
+        "matchName": "ADBE Calculations",
+        "displayName": "计算"
+      },
+      {
+        "matchName": "ADBE WRPMESH",
+        "displayName": "变形"
+      },
+      {
+        "matchName": "APC CardDanceCam",
+        "displayName": "卡片动画"
+      },
+      {
+        "matchName": "APC CardWipeCam",
+        "displayName": "卡片擦除"
+      },
+      {
+        "matchName": "ADBE Cartoonify",
+        "displayName": "卡通"
+      },
+      {
+        "matchName": "APC Caustics",
+        "displayName": "焦散"
+      },
+      {
+        "matchName": "ADBE Cell Pattern",
+        "displayName": "单元格图案"
+      },
+      {
+        "matchName": "ADBE Change To Color",
+        "displayName": "更改为颜色"
+      },
+      {
+        "matchName": "ADBE Change Color",
+        "displayName": "更改颜色"
+      },
+      {
+        "matchName": "ADBE Channel Combiner",
+        "displayName": "通道合成器"
+      },
+      {
+        "matchName": "ADBE Channel Blur",
+        "displayName": "通道模糊"
+      },
+      {
+        "matchName": "ADBE CHANNEL MIXER",
+        "displayName": "通道混合器"
+      },
+      {
+        "matchName": "ADBE Checkerboard",
+        "displayName": "棋盘"
+      },
+      {
+        "matchName": "ADBE Cineon Converter",
+        "displayName": "Cineon 转换器"
+      },
+      {
+        "matchName": "ADBE Cineon Converter2",
+        "displayName": "Cineon 转换器"
+      },
+      {
+        "matchName": "ADBE Circle",
+        "displayName": "圆形"
+      },
+      {
+        "matchName": "ADBE Color Link",
+        "displayName": "颜色链接"
+      },
+      {
+        "matchName": "ADBE Color Balance",
+        "displayName": "颜色平衡"
+      },
+      {
+        "matchName": "ADBE Color Balance 2",
+        "displayName": "颜色平衡"
+      },
+      {
+        "matchName": "ADBE Color Difference Key",
+        "displayName": "颜色差值键"
+      },
+      {
+        "matchName": "ADBE Color Emboss",
+        "displayName": "彩色浮雕"
+      },
+      {
+        "matchName": "ADBE Color Balance (HLS)",
+        "displayName": "颜色平衡 (HLS)"
+      },
+      {
+        "matchName": "ADBE Color Key",
+        "displayName": "颜色键"
+      },
+      {
+        "matchName": "ADBE Color Range",
+        "displayName": "颜色范围"
+      },
+      {
+        "matchName": "APC Colorama",
+        "displayName": "色光"
+      },
+      {
+        "matchName": "ADBE 4ColorGradient",
+        "displayName": "四色渐变"
+      },
+      {
+        "matchName": "ADBE Compound Arithmetic",
+        "displayName": "复合运算"
+      },
+      {
+        "matchName": "ADBE Compound Blur",
+        "displayName": "复合模糊"
+      },
+      {
+        "matchName": "ADBE Corner Pin",
+        "displayName": "边角定位"
+      },
+      {
+        "matchName": "ADBE CurvesCustom",
+        "displayName": "曲线"
+      },
+      {
+        "matchName": "ADBE CameraShakeDeblur",
+        "displayName": "摄像机抖动去模糊"
+      },
+      {
+        "matchName": "ADBE Deflicker",
+        "displayName": "颜色稳定器"
+      },
+      {
+        "matchName": "ADBE DEPTH FIELD",
+        "displayName": "场深度"
+      },
+      {
+        "matchName": "ADBE DEPTH MATTE",
+        "displayName": "深度遮罩"
+      },
+      {
+        "matchName": "ADBE Difference Matte2",
+        "displayName": "差值遮罩"
+      },
+      {
+        "matchName": "ADBE Difference",
+        "displayName": "时差"
+      },
+      {
+        "matchName": "ADBE Motion Blur",
+        "displayName": "定向模糊"
+      },
+      {
+        "matchName": "ADBE Displacement Map",
+        "displayName": "置换图"
+      },
+      {
+        "matchName": "ADBE Drop Shadow",
+        "displayName": "投影"
+      },
+      {
+        "matchName": "ADBE Dust & Scratches",
+        "displayName": "蒙尘与划痕"
+      },
+      {
+        "matchName": "ADBE Echo",
+        "displayName": "残影"
+      },
+      {
+        "matchName": "ADBE ELLIPSE",
+        "displayName": "椭圆"
+      },
+      {
+        "matchName": "ADBE Emboss",
+        "displayName": "浮雕"
+      },
+      {
+        "matchName": "ADBE Equalize",
+        "displayName": "色调均化"
+      },
+      {
+        "matchName": "ADBE Compander",
+        "displayName": "HDR 压缩扩展器"
+      },
+      {
+        "matchName": "ADBE Exposure2",
+        "displayName": "曝光度"
+      },
+      {
+        "matchName": "ADBE Exposure",
+        "displayName": "曝光度"
+      },
+      {
+        "matchName": "ADBE Checkbox Control",
+        "displayName": "复选框控制"
+      },
+      {
+        "matchName": "ADBE Slider Control",
+        "displayName": "滑块控制"
+      },
+      {
+        "matchName": "ADBE Layer Control",
+        "displayName": "图层控制"
+      },
+      {
+        "matchName": "ADBE Color Control",
+        "displayName": "颜色控制"
+      },
+      {
+        "matchName": "ADBE Point3D Control",
+        "displayName": "3D 点控制"
+      },
+      {
+        "matchName": "ADBE Point Control",
+        "displayName": "点控制"
+      },
+      {
+        "matchName": "ADBE Angle Control",
+        "displayName": "角度控制"
+      },
+      {
+        "matchName": "ADBE Dropdown Control",
+        "displayName": "下拉菜单控件"
+      },
+      {
+        "matchName": "ADBE Extract",
+        "displayName": "提取"
+      },
+      {
+        "matchName": "ADBE Eyedropper Fill",
+        "displayName": "吸管填充"
+      },
+      {
+        "matchName": "ADBE Fast Blur",
+        "displayName": "快速模糊（旧版）"
+      },
+      {
+        "matchName": "ADBE Reduce Interlace Flicker",
+        "displayName": "减少交错闪烁"
+      },
+      {
+        "matchName": "ADBE Fill",
+        "displayName": "填充"
+      },
+      {
+        "matchName": "ADBE Find Edges",
+        "displayName": "查找边缘"
+      },
+      {
+        "matchName": "APC Foam",
+        "displayName": "泡沫"
+      },
+      {
+        "matchName": "ADBE FOG_3D",
+        "displayName": "雾 3D"
+      },
+      {
+        "matchName": "ADBE Fractal",
+        "displayName": "分形"
+      },
+      {
+        "matchName": "ADBE Fractal Noise",
+        "displayName": "分形杂色"
+      },
+      {
+        "matchName": "ADBE Gaussian Blur",
+        "displayName": "高斯模糊（旧版）"
+      },
+      {
+        "matchName": "ADBE Gaussian Blur 2",
+        "displayName": "高斯模糊"
+      },
+      {
+        "matchName": "ADBE Glo2",
+        "displayName": "发光"
+      },
+      {
+        "matchName": "ADBE Gamma/Pedestal/Gain2",
+        "displayName": "灰度系数/基值/增益"
+      },
+      {
+        "matchName": "ADBE Gradient Wipe",
+        "displayName": "渐变擦除"
+      },
+      {
+        "matchName": "ADBE Grid",
+        "displayName": "网格"
+      },
+      {
+        "matchName": "ADBE GROW BOUNDS",
+        "displayName": "范围扩散"
+      },
+      {
+        "matchName": "ADBE HUE SATURATION",
+        "displayName": "色相/饱和度"
+      },
+      {
+        "matchName": "ADBE ID MATTE",
+        "displayName": "ID 遮罩"
+      },
+      {
+        "matchName": "ADBE ATG Extract",
+        "displayName": "内部/外部键"
+      },
+      {
+        "matchName": "ADBE Invert",
+        "displayName": "反转"
+      },
+      {
+        "matchName": "ADBE IRIS_WIPE",
+        "displayName": "光圈擦除"
+      },
+      {
+        "matchName": "ADBE KeyCleaner",
+        "displayName": "Key Cleaner"
+      },
+      {
+        "matchName": "ADBE Leave Color",
+        "displayName": "保留颜色"
+      },
+      {
+        "matchName": "ADBE Lens Flare",
+        "displayName": "镜头光晕"
+      },
+      {
+        "matchName": "ADBE Easy Levels",
+        "displayName": "色阶"
+      },
+      {
+        "matchName": "ADBE Easy Levels2",
+        "displayName": "色阶"
+      },
+      {
+        "matchName": "ADBE Pro Levels2",
+        "displayName": "色阶（单独控件）"
+      },
+      {
+        "matchName": "ADBE Pro Levels",
+        "displayName": "色阶（单独控件）"
+      },
+      {
+        "matchName": "ADBE Lightning",
+        "displayName": "闪光"
+      },
+      {
+        "matchName": "ADBE Lightning 2",
+        "displayName": "高级闪电"
+      },
+      {
+        "matchName": "ADBE Linear Color Key2",
+        "displayName": "线性颜色键"
+      },
+      {
+        "matchName": "ADBE Linear Wipe",
+        "displayName": "线性擦除"
+      },
+      {
+        "matchName": "ADBE LIQUIFY",
+        "displayName": "液化"
+      },
+      {
+        "matchName": "ADBE Luma Key",
+        "displayName": "亮度键"
+      },
+      {
+        "matchName": "ADBE Lumetri",
+        "displayName": "Lumetri 颜色"
+      },
+      {
+        "matchName": "ADBE Magnify",
+        "displayName": "放大"
+      },
+      {
+        "matchName": "VISINF Grain Duplication",
+        "displayName": "匹配颗粒"
+      },
+      {
+        "matchName": "ADBE Matte Choker",
+        "displayName": "遮罩阻塞工具"
+      },
+      {
+        "matchName": "ADBE Median",
+        "displayName": "中间值（旧版）"
+      },
+      {
+        "matchName": "ADBE Minimax",
+        "displayName": "最小/最大"
+      },
+      {
+        "matchName": "ADBE Mirror",
+        "displayName": "镜像"
+      },
+      {
+        "matchName": "ADBE Mosaic",
+        "displayName": "马赛克"
+      },
+      {
+        "matchName": "ADBE MESH WARP",
+        "displayName": "网格变形"
+      },
+      {
+        "matchName": "ADBE Noise2",
+        "displayName": "杂色"
+      },
+      {
+        "matchName": "ADBE Noise",
+        "displayName": "杂色"
+      },
+      {
+        "matchName": "ADBE Noise Alpha2",
+        "displayName": "杂色 Alpha"
+      },
+      {
+        "matchName": "ADBE Noise Alpha",
+        "displayName": "杂色 Alpha"
+      },
+      {
+        "matchName": "ADBE Noise HLS",
+        "displayName": "杂色 HLS"
+      },
+      {
+        "matchName": "ADBE Noise HLS2",
+        "displayName": "杂色 HLS"
+      },
+      {
+        "matchName": "ADBE Noise HLS Auto2",
+        "displayName": "杂色 HLS 自动"
+      },
+      {
+        "matchName": "ADBE Noise HLS Auto",
+        "displayName": "杂色 HLS 自动"
+      },
+      {
+        "matchName": "ADBE Numbers2",
+        "displayName": "编号"
+      },
+      {
+        "matchName": "ADBE OCIO CDL Transform",
+        "displayName": "OCIO CDL 变换"
+      },
+      {
+        "matchName": "ADBE OCIO Color Space Transform",
+        "displayName": "OCIO 颜色空间变换"
+      },
+      {
+        "matchName": "ADBE OCIO Display Transform",
+        "displayName": "OCIO 显示变换"
+      },
+      {
+        "matchName": "ADBE OCIO FILE Transform",
+        "displayName": "OCIO 文件转换"
+      },
+      {
+        "matchName": "ADBE OCIO Look Transform",
+        "displayName": "OCIO 外观变换"
+      },
+      {
+        "matchName": "ADBE Offset",
+        "displayName": "偏移"
+      },
+      {
+        "matchName": "ADBE Optics Compensation",
+        "displayName": "光学补偿"
+      },
+      {
+        "matchName": "ADBE PhotoFilterPS",
+        "displayName": "照片滤镜"
+      },
+      {
+        "matchName": "ADBE SelectiveColor",
+        "displayName": "可选颜色"
+      },
+      {
+        "matchName": "ADBE Vibrance",
+        "displayName": "自然饱和度"
+      },
+      {
+        "matchName": "ADBE Brightness & Contrast 2",
+        "displayName": "亮度和对比度"
+      },
+      {
+        "matchName": "ADBE PS Median",
+        "displayName": "中间值"
+      },
+      {
+        "matchName": "ADBE Black&White",
+        "displayName": "黑色和白色"
+      },
+      {
+        "matchName": "ADBE PSL Bevel Emboss",
+        "displayName": "Photoshop 斜面和浮雕"
+      },
+      {
+        "matchName": "ADBE PSL Drop Shadow",
+        "displayName": "Photoshop 投影"
+      },
+      {
+        "matchName": "ADBE PSL Inner Glow",
+        "displayName": "Photoshop 内发光"
+      },
+      {
+        "matchName": "ADBE PSL Inner Shadow",
+        "displayName": "Photoshop 内阴影"
+      },
+      {
+        "matchName": "ADBE PSL Outer Glow",
+        "displayName": "Photoshop 外发光"
+      },
+      {
+        "matchName": "ADBE PSL Solid Fill",
+        "displayName": "Photoshop 纯色填充"
+      },
+      {
+        "matchName": "ADBE PS Arbitrary Map",
+        "displayName": "PS 任意映射"
+      },
+      {
+        "matchName": "ADBE Paint Bucket",
+        "displayName": "油漆桶"
+      },
+      {
+        "matchName": "ADBE Playgnd",
+        "displayName": "粒子运动场"
+      },
+      {
+        "matchName": "ADBE Path Text",
+        "displayName": "路径文本"
+      },
+      {
+        "matchName": "ADBE Photo Filter",
+        "displayName": "照片滤镜"
+      },
+      {
+        "matchName": "ADBE Polar Coordinates",
+        "displayName": "极坐标"
+      },
+      {
+        "matchName": "ADBE Posterize",
+        "displayName": "色调分离"
+      },
+      {
+        "matchName": "ADBE Posterize Time",
+        "displayName": "抽帧"
+      },
+      {
+        "matchName": "ADBE ProfileToProfile",
+        "displayName": "颜色配置文件转换器"
+      },
+      {
+        "matchName": "ADBE HDR ToneMap",
+        "displayName": "HDR 高光压缩"
+      },
+      {
+        "matchName": "ADBE Radial Shadow",
+        "displayName": "径向阴影"
+      },
+      {
+        "matchName": "ADBE Radial Blur",
+        "displayName": "径向模糊"
+      },
+      {
+        "matchName": "ADBE Radial Wipe",
+        "displayName": "径向擦除"
+      },
+      {
+        "matchName": "APC Radio Waves",
+        "displayName": "无线电波"
+      },
+      {
+        "matchName": "ADBE Ramp",
+        "displayName": "梯度渐变"
+      },
+      {
+        "matchName": "VISINF Grain Removal",
+        "displayName": "移除颗粒"
+      },
+      {
+        "matchName": "ADBE RESHAPE",
+        "displayName": "改变形状"
+      },
+      {
+        "matchName": "ADBE Ripple",
+        "displayName": "波纹"
+      },
+      {
+        "matchName": "ADBE OFMotionBlur",
+        "displayName": "像素运动模糊"
+      },
+      {
+        "matchName": "ADBE Rolling Shutter",
+        "displayName": "果冻效应修复"
+      },
+      {
+        "matchName": "ADBE Timewarp",
+        "displayName": "时间扭曲"
+      },
+      {
+        "matchName": "ADBE Roughen Edges",
+        "displayName": "毛边"
+      },
+      {
+        "matchName": "ADBE Scatter",
+        "displayName": "散布"
+      },
+      {
+        "matchName": "ADBE Scribble Fill",
+        "displayName": "涂写"
+      },
+      {
+        "matchName": "ADBE Set Channels",
+        "displayName": "设置通道"
+      },
+      {
+        "matchName": "ADBE Set Matte3",
+        "displayName": "设置遮罩"
+      },
+      {
+        "matchName": "ADBE Set Matte2",
+        "displayName": "设置遮罩"
+      },
+      {
+        "matchName": "ADBE ShadowHighlight",
+        "displayName": "阴影/高光"
+      },
+      {
+        "matchName": "ADBE Camera Lens Blur",
+        "displayName": "摄像机镜头模糊"
+      },
+      {
+        "matchName": "ADBE Sharpen",
+        "displayName": "锐化"
+      },
+      {
+        "matchName": "APC Shatter",
+        "displayName": "碎片"
+      },
+      {
+        "matchName": "ADBE Shift Channels",
+        "displayName": "转换通道"
+      },
+      {
+        "matchName": "ADBE Simple Choker",
+        "displayName": "简单阻塞工具"
+      },
+      {
+        "matchName": "ADBE Smart Blur",
+        "displayName": "智能模糊"
+      },
+      {
+        "matchName": "ADBE SCHMEAR",
+        "displayName": "漩涡条纹"
+      },
+      {
+        "matchName": "ADBE Solid Composite",
+        "displayName": "固态层合成"
+      },
+      {
+        "matchName": "ADBE Spherize",
+        "displayName": "球面化"
+      },
+      {
+        "matchName": "ADBE Spill Suppressor",
+        "displayName": "溢出抑制"
+      },
+      {
+        "matchName": "ADBE Spill2",
+        "displayName": "Advanced Spill Suppressor"
+      },
+      {
+        "matchName": "ADBE SubspaceStabilizer",
+        "displayName": "变形稳定器"
+      },
+      {
+        "matchName": "ADBE Strobe",
+        "displayName": "闪光灯"
+      },
+      {
+        "matchName": "ADBE Stroke",
+        "displayName": "描边"
+      },
+      {
+        "matchName": "ADBE Texturize",
+        "displayName": "纹理化"
+      },
+      {
+        "matchName": "ADBE Three-Way Color Corrector",
+        "displayName": "三向颜色校正器"
+      },
+      {
+        "matchName": "ADBE Threshold",
+        "displayName": "阈值"
+      },
+      {
+        "matchName": "ADBE Threshold2",
+        "displayName": "阈值"
+      },
+      {
+        "matchName": "ADBE Tile",
+        "displayName": "动态拼贴"
+      },
+      {
+        "matchName": "ADBE Time Displacement",
+        "displayName": "时间置换"
+      },
+      {
+        "matchName": "ADBE Timecode",
+        "displayName": "时间码"
+      },
+      {
+        "matchName": "ADBE Tint",
+        "displayName": "色调"
+      },
+      {
+        "matchName": "ADBE Geometry",
+        "displayName": "变换"
+      },
+      {
+        "matchName": "ADBE Geometry2",
+        "displayName": "变换"
+      },
+      {
+        "matchName": "ADBE Tritone",
+        "displayName": "三色调"
+      },
+      {
+        "matchName": "ADBE Turbulent Displace",
+        "displayName": "湍流置换"
+      },
+      {
+        "matchName": "ADBE AIF Perlin Noise 3D",
+        "displayName": "湍流杂色"
+      },
+      {
+        "matchName": "ADBE Twirl",
+        "displayName": "旋转扭曲"
+      },
+      {
+        "matchName": "ADBE Unmult",
+        "displayName": "Unmult"
+      },
+      {
+        "matchName": "ADBE Remove Color Matting",
+        "displayName": "移除颜色遮罩"
+      },
+      {
+        "matchName": "ADBE Unsharp Mask2",
+        "displayName": "钝化蒙版"
+      },
+      {
+        "matchName": "ADBE Unsharp Mask",
+        "displayName": "钝化蒙版"
+      },
+      {
+        "matchName": "ADBE Upscale",
+        "displayName": "保留细节放大"
+      },
+      {
+        "matchName": "Mettle SkyBox Chromatic Aberrat",
+        "displayName": "VR 色差"
+      },
+      {
+        "matchName": "Mettle SkyBox Color Gradients",
+        "displayName": "VR 颜色渐变"
+      },
+      {
+        "matchName": "Mettle SkyBox Converter",
+        "displayName": "VR 转换器"
+      },
+      {
+        "matchName": "Mettle SkyBox Denoise",
+        "displayName": "VR 降噪"
+      },
+      {
+        "matchName": "Mettle SkyBox Digital Glitch",
+        "displayName": "VR 数字故障"
+      },
+      {
+        "matchName": "Mettle SkyBox Fractal Noise",
+        "displayName": "VR 分形杂色"
+      },
+      {
+        "matchName": "Mettle SkyBox Blur",
+        "displayName": "VR 模糊"
+      },
+      {
+        "matchName": "Mettle SkyBox Glow",
+        "displayName": "VR 发光"
+      },
+      {
+        "matchName": "Mettle SkyBox Project 2D",
+        "displayName": "VR 平面到球面"
+      },
+      {
+        "matchName": "Mettle SkyBox Rotate Sphere",
+        "displayName": "VR 旋转球面"
+      },
+      {
+        "matchName": "Mettle SkyBox Sharpen",
+        "displayName": "VR 锐化"
+      },
+      {
+        "matchName": "Mettle SkyBox Viewer",
+        "displayName": "VR 球面到平面"
+      },
+      {
+        "matchName": "APC Vegas",
+        "displayName": "勾画"
+      },
+      {
+        "matchName": "ADBE Venetian Blinds",
+        "displayName": "百叶窗"
+      },
+      {
+        "matchName": "ADBE DigitalVideoLimiter",
+        "displayName": "视频限幅器"
+      },
+      {
+        "matchName": "APC Wave World",
+        "displayName": "波形环境"
+      },
+      {
+        "matchName": "ADBE Wave Warp",
+        "displayName": "波形变形"
+      },
+      {
+        "matchName": "ADBE Write-on",
+        "displayName": "写入"
+      },
+      {
+        "matchName": "ADBE TheSauceCode",
+        "displayName": "TheSauceCode"
+      },
+      {
+        "matchName": "ADBE Samurai",
+        "displayName": "Roto 笔刷和调整边缘"
+      },
+      {
+        "matchName": "ADBE Paint",
+        "displayName": "绘画"
+      },
+      {
+        "matchName": "ADBE FreePin3",
+        "displayName": "操控"
+      },
+      {
+        "matchName": "ADBE RefineRBMatte",
+        "displayName": "调整实边遮罩"
+      },
+      {
+        "matchName": "ADBE RefineMatte",
+        "displayName": "调整遮罩"
+      },
+      {
+        "matchName": "ADBE RefineMatte2",
+        "displayName": "调整柔和遮罩"
+      },
+      {
+        "matchName": "ADBE Color Swirl",
+        "displayName": "彩色旋绕"
+      },
+      {
+        "matchName": "ADBE Getting Jiggy",
+        "displayName": "开始活跃"
+      },
+      {
+        "matchName": "ADBE Separate XYZ Position",
+        "displayName": "分离 XYZ 位置"
+      },
+      {
+        "matchName": "ADBE Separate XYZ Scale",
+        "displayName": "分离 XYZ 比例"
+      },
+      {
+        "matchName": "ADBE CM InsetVideoFramed",
+        "displayName": "插入视频 - 加框"
+      },
+      {
+        "matchName": "ADBE CM InsetVideoTorn",
+        "displayName": "插入视频 - 撕边"
+      },
+      {
+        "matchName": "ADBE CM MoodLightAmorph",
+        "displayName": "情绪照明 - 无定形"
+      },
+      {
+        "matchName": "ADBE CM MoodLightDigital",
+        "displayName": "情绪照明 - 数字化"
+      },
+      {
+        "matchName": "ADBE CM MoodLightStreaks",
+        "displayName": "情绪照明 - 窄条光线"
+      },
+      {
+        "matchName": "ADBE CM CrackedTiles",
+        "displayName": "碎砖块拼贴"
+      },
+      {
+        "matchName": "ADBE CM LightLeaksMarkers",
+        "displayName": "漏光 - 图层标记"
+      },
+      {
+        "matchName": "ADBE CM LightLeaksRandom",
+        "displayName": "漏光 - 随机"
+      },
+      {
+        "matchName": "ADBE CM OpacityFlashMarkers",
+        "displayName": "不透明闪烁 - 图层标记"
+      },
+      {
+        "matchName": "ADBE CM OpacityFlashRandom",
+        "displayName": "不透明闪烁 - 随机"
+      },
+      {
+        "matchName": "ADBE CM CropEdges",
+        "displayName": "裁切边缘"
+      },
+      {
+        "matchName": "ADBE CM AutoscrollHorizontal",
+        "displayName": "自动滚动 - 水平"
+      },
+      {
+        "matchName": "ADBE CM AutoscrollVertical",
+        "displayName": "自动滚动 - 垂直"
+      },
+      {
+        "matchName": "ADBE CM Throw",
+        "displayName": "随时间漂移"
+      },
+      {
+        "matchName": "ADBE CM FadeInOutFrames",
+        "displayName": "淡入淡出（帧）"
+      },
+      {
+        "matchName": "ADBE CM FadeInOutmsec",
+        "displayName": "淡入淡出（毫秒）"
+      },
+      {
+        "matchName": "ADBE CM Spin",
+        "displayName": "随时间旋转"
+      },
+      {
+        "matchName": "ADBE CM ScaleBounceMarkers",
+        "displayName": "缩放回弹 - 图层标记"
+      },
+      {
+        "matchName": "ADBE CM ScaleBounceRandom",
+        "displayName": "缩放回弹 - 随机"
+      },
+      {
+        "matchName": "ADBE CM WiggleGelatin",
+        "displayName": "摆动 - 凝结"
+      },
+      {
+        "matchName": "ADBE CM WigglePosition",
+        "displayName": "摆动 - 位置"
+      },
+      {
+        "matchName": "ADBE CM WiggleRotation",
+        "displayName": "摆动 - 旋转"
+      },
+      {
+        "matchName": "ADBE CM WiggleScale",
+        "displayName": "摆动 - 缩放"
+      },
+      {
+        "matchName": "ADBE CM WiggleShear",
+        "displayName": "摆动 - 修剪"
+      },
+      {
+        "matchName": "ADBE CM Wigglerama",
+        "displayName": "摆动的罗摩"
+      },
+      {
+        "matchName": "ADBE CM DissolveUnmelt",
+        "displayName": "溶解 - 凝固"
+      },
+      {
+        "matchName": "ADBE CM Zoom2DSpin",
+        "displayName": "缩放 - 2D 旋转"
+      },
+      {
+        "matchName": "ADBE CM Zoom3DTumble",
+        "displayName": "缩放 - 3D 翻滚"
+      },
+      {
+        "matchName": "ADBE CM ZoomWobble",
+        "displayName": "缩放 - 摇摆"
+      },
+      {
+        "matchName": "ADBE CM ZoomBubble",
+        "displayName": "缩放 - 气泡"
+      },
+      {
+        "matchName": "ADBE CM ZoomSpiral",
+        "displayName": "缩放 - 螺旋"
+      },
+      {
+        "matchName": "ADBE CM SlideVariable",
+        "displayName": "滑动 - 变量"
+      },
+      {
+        "matchName": "ADBE CM FlyToInset",
+        "displayName": "飞动嵌入"
+      },
+      {
+        "matchName": "ADBE CM CornerReveal",
+        "displayName": "边角显示"
+      },
+      {
+        "matchName": "ADBE CM GridWipe",
+        "displayName": "网格擦除"
+      },
+      {
+        "matchName": "ADBE CM TransComplete",
+        "displayName": "过渡主控"
+      },
+      {
+        "matchName": "ADBE CM TransStretch",
+        "displayName": "伸缩主控"
+      },
+      {
+        "matchName": "ADBE CM TransDissolve",
+        "displayName": "溶解主控"
+      },
+      {
+        "matchName": "ADBE CM TransFade",
+        "displayName": "淡入淡出主控"
+      },
+      {
+        "matchName": "ADBE CM TransFadeMask",
+        "displayName": "蒙版淡化控制"
+      },
+      {
+        "matchName": "ADBE CM TransWipe",
+        "displayName": "擦除主控"
+      },
+      {
+        "matchName": "ADBE CM TransWipeFeath",
+        "displayName": "擦除主控"
+      },
+      {
+        "matchName": "ADBE CM TransCard",
+        "displayName": "卡片擦除主控"
+      },
+      {
+        "matchName": "ADBE CM TransSlide",
+        "displayName": "滑动主控"
+      },
+      {
+        "matchName": "ADBE CM TransCorner",
+        "displayName": "伸缩主控（边角）"
+      },
+      {
+        "matchName": "ADBE CM TransDirection",
+        "displayName": "伸缩主控（边缘）"
+      },
+      {
+        "matchName": "ADBE CM TransIris",
+        "displayName": "光圈擦除主控"
+      },
+      {
+        "matchName": "ADBE CM TransRadial",
+        "displayName": "径向擦除主控"
+      },
+      {
+        "matchName": "ADBE DE Jiggle",
+        "displayName": "微动"
+      },
+      {
+        "matchName": "ADBE DE Jiggle At Marker",
+        "displayName": "微动（标记）"
+      },
+      {
+        "matchName": "ADBE DE Jiggle On Beat",
+        "displayName": "微动（节拍）"
+      },
+      {
+        "matchName": "ADBE DE Jiggle Random",
+        "displayName": "微动（随机）"
+      },
+      {
+        "matchName": "ADBE DE Pulse",
+        "displayName": "脉冲"
+      },
+      {
+        "matchName": "ADBE DE Pulse At Marker",
+        "displayName": "脉冲（标记）"
+      },
+      {
+        "matchName": "ADBE DE Pulse On Beat",
+        "displayName": "脉冲（节拍）"
+      },
+      {
+        "matchName": "ADBE DE Pulse Random",
+        "displayName": "脉冲（随机）"
+      },
+      {
+        "matchName": "ADBE DE Bounce",
+        "displayName": "回弹"
+      },
+      {
+        "matchName": "ADBE DE Bounce At Marker",
+        "displayName": "回弹（标记）"
+      },
+      {
+        "matchName": "ADBE DE Bounce On Beat",
+        "displayName": "回弹（节拍）"
+      },
+      {
+        "matchName": "ADBE DE Bounce Random",
+        "displayName": "回弹（随机）"
+      },
+      {
+        "matchName": "ADBE DE Opacity Pulse",
+        "displayName": "不透明脉冲"
+      },
+      {
+        "matchName": "ADBE DE Opacity Pulse At Marker",
+        "displayName": "不透明脉冲（标记）"
+      },
+      {
+        "matchName": "ADBE DE Opacity Pulse On Beat",
+        "displayName": "不透明脉冲（节拍）"
+      },
+      {
+        "matchName": "ADBE DE Opacity Pulse Random",
+        "displayName": "不透明脉冲（随机）"
+      },
+      {
+        "matchName": "ADBE DE Oscillate",
+        "displayName": "振动"
+      },
+      {
+        "matchName": "ADBE DE Oscillate At Marker",
+        "displayName": "振动（标记）"
+      },
+      {
+        "matchName": "ADBE DE Oscillate On Beat",
+        "displayName": "振动（节拍）"
+      },
+      {
+        "matchName": "ADBE DE Oscillate Random",
+        "displayName": "振动（随机）"
+      },
+      {
+        "matchName": "ADBE DE Pendulum",
+        "displayName": "钟摆"
+      },
+      {
+        "matchName": "ADBE DE Pendulum At Marker",
+        "displayName": "钟摆（标记）"
+      },
+      {
+        "matchName": "ADBE DE Pendulum On Beat",
+        "displayName": "钟摆（节拍）"
+      },
+      {
+        "matchName": "ADBE DE Pendulum Random",
+        "displayName": "钟摆（随机）"
+      },
+      {
+        "matchName": "ADBE DE Swarm",
+        "displayName": "云集"
+      },
+      {
+        "matchName": "ADBE DE Follow",
+        "displayName": "跟随"
+      },
+      {
+        "matchName": "ADBE DE Orbit",
+        "displayName": "轨道"
+      },
+      {
+        "matchName": "ADBE DE Orbit 3D",
+        "displayName": "轨道 3D"
+      },
+      {
+        "matchName": "ADBE DE Random Motion 1D",
+        "displayName": "随机运动 1D"
+      },
+      {
+        "matchName": "ADBE DE Random Motion",
+        "displayName": "随机运动"
+      },
+      {
+        "matchName": "ADBE DE Random Rotation",
+        "displayName": "随机旋转"
+      },
+      {
+        "matchName": "ADBE DE Random Rotation 3D",
+        "displayName": "随机旋转 3D"
+      },
+      {
+        "matchName": "ADBE DE Random Opacity",
+        "displayName": "随机不透明度"
+      },
+      {
+        "matchName": "ADBE DE Random Scale",
+        "displayName": "随机缩放"
+      },
+      {
+        "matchName": "ADBE DE Random Fill Color",
+        "displayName": "随机填充颜色"
+      },
+      {
+        "matchName": "ADBE DE Z Spring",
+        "displayName": "Z 反弹"
+      },
+      {
+        "matchName": "ADBE DE Z Spring At Marker",
+        "displayName": "Z 反弹（标记）"
+      },
+      {
+        "matchName": "ADBE DE Wobble Bounce",
+        "displayName": "摇摆回弹"
+      },
+      {
+        "matchName": "ADBE DE Wobble Bounce At Marker",
+        "displayName": "摇摆回弹（标记）"
+      },
+      {
+        "matchName": "ADBE DE Wobble Bounce On Beat",
+        "displayName": "摇摆回弹（节拍）"
+      },
+      {
+        "matchName": "ADBE DE Wobble Bounce Random",
+        "displayName": "摇摆回弹（随机）"
+      },
+      {
+        "matchName": "ADBE CM Animated Shape Control",
+        "displayName": "动画形状控制"
+      },
+      {
+        "matchName": "ADBE CM Animated Shape 2",
+        "displayName": "追踪控制"
+      },
+      {
+        "matchName": "ADBE CM Animated Shape 3",
+        "displayName": "动画形状控制"
+      },
+      {
+        "matchName": "ADBE Sample Image",
+        "displayName": "采样图像"
+      },
+      {
+        "matchName": "ADBE Stereo 3D Controls",
+        "displayName": "立体 3D 控件"
+      },
+      {
+        "matchName": "Pseudo/ADBE Animal Head66",
+        "displayName": "脸部跟踪点"
+      },
+      {
+        "matchName": "Pseudo/ADBE Animal Head14",
+        "displayName": "脸部测量值"
+      },
+      {
+        "matchName": "Pseudo/ADBE Trace Path",
+        "displayName": "追踪路径"
+      },
+      {
+        "matchName": "Pseudo/ADBE Pattern Template",
+        "displayName": "图案模板"
+      },
+      {
+        "matchName": "Pseudo/ADBE Counter Controls",
+        "displayName": "Counter Controls"
+      },
+      {
+        "matchName": "Pseudo/ADBE Currency Controls",
+        "displayName": "货币控件"
+      },
+      {
+        "matchName": "Pseudo/ADBE Percentage Controls",
+        "displayName": "百分比控件"
+      },
+      {
+        "matchName": "Pseudo/ADBE Timer Controls",
+        "displayName": "定时器控件"
+      },
+      {
+        "matchName": "Pseudo/ADBE 2D Text Box",
+        "displayName": "2D 文本框"
+      }
+    ],
+    "capabilities": [
+      "shape.create",
+      "animation.keyframes",
+      "effect.add"
+    ],
+    "supportedKinds": [
+      "ae.nativeShape"
+    ],
+    "bridgeVersion": "0.1.0"
+  },
+  "initialContext": {
+    "activeComp": false,
+    "comp": null,
+    "selectionCount": 0
+  },
+  "tempComp": {
+    "id": 123,
+    "name": "__AE_BROWSE_CEP_TEST_cep-host-1791981162921-de010fe9"
+  },
+  "createdInstance": {
+    "compId": 123,
+    "layerId": 135,
+    "instanceId": "cep-host-1791981162921-de010fe9-main",
+    "reused": false,
+    "packId": "local.motion.basics",
+    "assetId": "rounded-card",
+    "parameters": {
+      "width": 440,
+      "height": 220,
+      "radius": 35,
+      "color": [
+        0.80000001192093,
+        0.25,
+        0.10000000149012,
+        1
+      ],
+      "duration": 0.6,
+      "motion": "pop"
+    },
+    "observed": {
+      "size": [
+        440,
+        220
+      ],
+      "radius": 35,
+      "color": [
+        0.80000001192093,
+        0.25,
+        0.10000000149012,
+        1
+      ],
+      "position": [
+        320,
+        180,
+        0
+      ],
+      "geometryPropertyState": [
+        {
+          "keys": 0,
+          "expression": false
+        },
+        {
+          "keys": 0,
+          "expression": false
+        },
+        {
+          "keys": 0,
+          "expression": false
+        }
+      ],
+      "animation": [
+        {
+          "channel": "ADBE Scale",
+          "keys": [
+            {
+              "time": 0,
+              "value": [
+                0,
+                0,
+                100
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            },
+            {
+              "time": 0.3,
+              "value": [
+                108,
+                108,
+                100
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 360,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            },
+            {
+              "time": 0.6,
+              "value": [
+                100,
+                100,
+                100
+              ],
+              "inType": "6612",
+              "outType": "6612",
+              "inEase": [
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": -26.6666666666667,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ],
+              "outEase": [
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                },
+                {
+                  "speed": 0,
+                  "influence": 16.666666667
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "channel": "ADBE Position",
+          "keys": [
+            
+          ]
+        },
+        {
+          "channel": "ADBE Opacity",
+          "keys": [
+            
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "descriptor": {
+            "id": "soften",
+            "matchName": "ADBE Gaussian Blur 2",
+            "required": false,
+            "target": "output",
+            "settings": [
+              
+            ],
+            "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+          },
+          "enabled": true,
+          "propertyState": [
+            
+          ]
+        }
+      ],
+      "effectsTotal": 1
+    },
+    "modified": false
+  },
+  "testLayerIds": [
+    140,
+    138,
+    137,
+    136,
+    135
+  ],
+  "after": {
+    "itemCount": 0,
+    "items": [
+      
+    ],
+    "projectFile": null
+  },
+  "passed": 16,
+  "failed": 0,
+  "skipped": 0,
+  "endedAtMs": 1791981215501,
+  "endedAt": "2026-10-14T12:33:35Z",
+  "ok": true
+}
