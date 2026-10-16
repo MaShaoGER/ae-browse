@@ -1,0 +1,78 @@
+{
+  "finished": true,
+  "node": {
+    "passed": 223,
+    "failed": 0,
+    "groups": [
+      {
+        "name": "boundaries",
+        "finished": true,
+        "passed": 103,
+        "failed": 0
+      },
+      {
+        "name": "native-plan",
+        "finished": true,
+        "passed": 46,
+        "failed": 0
+      },
+      {
+        "name": "library-service",
+        "finished": true,
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "name": "host-bridge",
+        "finished": true,
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "name": "host-dispatch",
+        "finished": true,
+        "passed": 23,
+        "failed": 0
+      },
+      {
+        "name": "shape-preview",
+        "finished": true,
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "name": "basic-shapes",
+        "finished": true,
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "name": "cep-build",
+        "finished": true,
+        "passed": 7,
+        "failed": 0
+      }
+    ]
+  },
+  "ae": {
+    "runId": "basic-shapes-1792127866624-56498e",
+    "finished": true,
+    "passed": 26,
+    "failed": 0,
+    "cleanup": {
+      "absentByItemScan": true,
+      "baselineItemsAndLayerIdsNamesUnchanged": true,
+      "originalViewerRestored": true,
+      "itemCount": 0,
+      "projectSaved": false
+    }
+  },
+  "pixels": {
+    "finished": true,
+    "passed": 9,
+    "failed": 0
+  },
+  "builtHostMatchesTested": true,
+  "hostSha256": "57b992f877b1147da1b2bb73027a4c1b3db8b42907565aaeb93c8cbf8f665cc6",
+  "brokenLinks": []
+}

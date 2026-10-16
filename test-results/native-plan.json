@@ -1,8 +1,8 @@
 {
   "finished": true,
-  "timestamp": "2026-10-15T11:31:52.667Z",
+  "timestamp": "2026-10-16T05:21:21.183Z",
   "scope": "Pure ES3 graph/parameter plan; no AE mutation.",
-  "passed": 35,
+  "passed": 46,
   "failed": 0,
   "results": [
     {
@@ -143,6 +143,50 @@
     },
     {
       "name": "同一输入多次编译不会修改源数据",
+      "passed": true
+    },
+    {
+      "name": "椭圆使用独立宽高，不要求矩形圆角绑定",
+      "passed": true
+    },
+    {
+      "name": "polygon 编译边数、半径与旋转",
+      "passed": true
+    },
+    {
+      "name": "polygon 编译边数、半径与旋转",
+      "passed": true
+    },
+    {
+      "name": "star 编译边数、半径与旋转",
+      "passed": true
+    },
+    {
+      "name": "拒绝非法或超预算的多边形边数 2",
+      "passed": true
+    },
+    {
+      "name": "拒绝非法或超预算的多边形边数 3.5",
+      "passed": true
+    },
+    {
+      "name": "拒绝非法或超预算的多边形边数 65",
+      "passed": true
+    },
+    {
+      "name": "星形内半径必须小于外半径且大于零 0",
+      "passed": true
+    },
+    {
+      "name": "星形内半径必须小于外半径且大于零 120",
+      "passed": true
+    },
+    {
+      "name": "星形内半径必须小于外半径且大于零 140",
+      "passed": true
+    },
+    {
+      "name": "多边形不能绕过单几何节点限制",
       "passed": true
     }
   ]

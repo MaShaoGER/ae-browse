@@ -1,4 +1,4 @@
-/* Narrow AE adapter used by the explicit round-trip tests, not a completed browser panel. */
+/* AE native geometry adapter shared by the CEP host and explicit round-trip tests. */
 var AEBrowseNative = (function () {
     var PREFIX = 'AEBrowse:';
     function fail(code, message) { AEBrowsePlan.fail(code, message); }
@@ -48,14 +48,37 @@ var AEBrowseNative = (function () {
     }
     function geometry(layer, metadata) {
         var contents = layer.property('ADBE Root Vectors Group').property(metadata.groupIndex).property('ADBE Vectors Group');
-        return { rectangle: contents.property(metadata.rectangleIndex), fill: contents.property(metadata.fillIndex) };
+        var type = metadata.geometryType || 'rectangle', shape = contents.property(metadata.shapeIndex || metadata.rectangleIndex);
+        var expected = 'ADBE Vector Shape - Star';
+        if (type === 'rectangle') { expected = 'ADBE Vector Shape - Rect'; }
+        else if (type === 'ellipse') { expected = 'ADBE Vector Shape - Ellipse'; }
+        if (!shape || shape.matchName !== expected) { fail('E_INSTANCE_CHANGED', '实例图形结构已经更改。'); }
+        return { shape: shape, fill: contents.property(metadata.fillIndex) };
+    }
+    function geometryFields(type) {
+        if (type === 'rectangle') { return [['size', 'ADBE Vector Rect Size'], ['radius', 'ADBE Vector Rect Roundness']]; }
+        if (type === 'ellipse') { return [['size', 'ADBE Vector Ellipse Size']]; }
+        var result = [['points', 'ADBE Vector Star Points'], ['outerRadius', 'ADBE Vector Star Outer Radius'], ['rotation', 'ADBE Vector Star Rotation']];
+        if (type === 'star') { result.push(['innerRadius', 'ADBE Vector Star Inner Radius']); }
+        return result;
+    }
+    function appearanceProperties(layer, metadata) {
+        var shape = geometry(layer, metadata), fields = geometryFields(metadata.geometryType || 'rectangle'), result = [];
+        for (var i = 0; i < fields.length; i++) { result.push({ key: fields[i][0], property: shape.shape.property(fields[i][1]) }); }
+        result.push({ key: 'color', property: shape.fill.property('ADBE Vector Fill Color') });
+        return result;
+    }
+    function writeGeometry(layer, metadata, plan) {
+        var properties = appearanceProperties(layer, metadata);
+        for (var i = 0; i < properties.length; i++) { properties[i].property.setValue(plan[properties[i].key]); }
     }
     function easeValues(values) { var result = []; for (var i = 0; i < values.length; i++) { result.push({ speed: values[i].speed, influence: values[i].influence }); } return result; }
     function snapshot(layer, metadata) {
         var shape = geometry(layer, metadata), transform = layer.property('ADBE Transform Group');
-        var result = { size: shape.rectangle.property('ADBE Vector Rect Size').value, radius: shape.rectangle.property('ADBE Vector Rect Roundness').value, color: shape.fill.property('ADBE Vector Fill Color').value, position: transform.property('ADBE Position').valueAtTime(metadata.insertTime, true), geometryPropertyState: [], animation: [], effects: [], effectsTotal: layer.property('ADBE Effect Parade').numProperties };
-        var geometryProperties = [shape.rectangle.property('ADBE Vector Rect Size'), shape.rectangle.property('ADBE Vector Rect Roundness'), shape.fill.property('ADBE Vector Fill Color')];
-        for (var g = 0; g < geometryProperties.length; g++) { result.geometryPropertyState.push({ keys: geometryProperties[g].numKeys, expression: geometryProperties[g].expressionEnabled }); }
+        var result = { position: transform.property('ADBE Position').valueAtTime(metadata.insertTime, true), geometryPropertyState: [], animation: [], effects: [], effectsTotal: layer.property('ADBE Effect Parade').numProperties };
+        var geometryProperties = appearanceProperties(layer, metadata);
+        for (var g = 0; g < geometryProperties.length; g++) { var gp = geometryProperties[g]; result[gp.key] = gp.property.value; result.geometryPropertyState.push({ keys: gp.property.numKeys, expression: gp.property.expressionEnabled }); }
+        if (metadata.geometryType === 'polygon' || metadata.geometryType === 'star') { result.polystarType = shape.shape.property('ADBE Vector Star Type').value; }
         var channels = ['ADBE Scale', 'ADBE Position', 'ADBE Opacity'];
         for (var i = 0; i < channels.length; i++) {
             var property = transform.property(channels[i]), keys = [];
@@ -78,9 +101,13 @@ var AEBrowseNative = (function () {
         var metadata = meta(layer, true), observed;
         try { observed = snapshot(layer, metadata); } catch (error) { if (error.code) { throw error; } fail('E_INSTANCE_CHANGED', '实例图形结构已经更改。'); }
         var values = AEBrowsePlan.clone(metadata.parameters);
-        if (metadata.bindings.size instanceof Array) { values[metadata.bindings.size[0]] = observed.size[0]; values[metadata.bindings.size[1]] = observed.size[1]; }
-        else { values[metadata.bindings.size] = observed.size; }
-        values[metadata.bindings.radius] = observed.radius; values[metadata.bindings.color] = observed.color;
+        for (var key in metadata.bindings) {
+            if (Object.prototype.hasOwnProperty.call(metadata.bindings, key)) {
+                var target = metadata.bindings[key];
+                if (target instanceof Array) { for (var b = 0; b < target.length; b++) { values[target[b]] = observed[key][b]; } }
+                else { values[target] = observed[key]; }
+            }
+        }
         return { packId: metadata.packId, assetId: metadata.assetId, parameters: values, observed: observed, modified: !AEBrowsePlan.same(observed, metadata.baseline) };
     }
     function create(comp, loaded, overrides, options) {
@@ -102,13 +129,15 @@ var AEBrowseNative = (function () {
             var group = layer.property('ADBE Root Vectors Group').addProperty('ADBE Vector Group');
             var groupIndex = group.propertyIndex;
             var contents = group.property('ADBE Vectors Group');
-            var rectangleIndex = contents.addProperty('ADBE Vector Shape - Rect').propertyIndex;
+            var shapeMatchName = 'ADBE Vector Shape - Star';
+            if (plan.geometryType === 'rectangle') { shapeMatchName = 'ADBE Vector Shape - Rect'; }
+            else if (plan.geometryType === 'ellipse') { shapeMatchName = 'ADBE Vector Shape - Ellipse'; }
+            var shapeIndex = contents.addProperty(shapeMatchName).propertyIndex;
             var fillIndex = contents.addProperty('ADBE Vector Graphic - Fill').propertyIndex;
-            var metadata = { schemaVersion: 1, instanceId: instanceId, packId: loaded.manifest.pack.id, packVersion: loaded.manifest.pack.version, sourceSignature: sourceSignature, assetId: loaded.asset.id, parameters: plan.parameters, bindings: plan.bindings, insertTime: plan.insertTime, groupIndex: groupIndex, rectangleIndex: rectangleIndex, fillIndex: fillIndex, effects: [] };
+            var metadata = { schemaVersion: 1, instanceId: instanceId, packId: loaded.manifest.pack.id, packVersion: loaded.manifest.pack.version, sourceSignature: sourceSignature, assetId: loaded.asset.id, parameters: plan.parameters, bindings: plan.bindings, insertTime: plan.insertTime, groupIndex: groupIndex, geometryType: plan.geometryType, shapeIndex: shapeIndex, rectangleIndex: shapeIndex, fillIndex: fillIndex, effects: [] };
             var shape = geometry(layer, metadata);
-            shape.rectangle.property('ADBE Vector Rect Size').setValue(plan.size);
-            shape.rectangle.property('ADBE Vector Rect Roundness').setValue(plan.radius);
-            shape.fill.property('ADBE Vector Fill Color').setValue(plan.color);
+            if (plan.geometryType === 'polygon' || plan.geometryType === 'star') { shape.shape.property('ADBE Vector Star Type').setValue(plan.geometryType === 'polygon' ? 2 : 1); }
+            writeGeometry(layer, metadata, plan);
             var transform = layer.property('ADBE Transform Group');
             transform.property('ADBE Position').setValue(plan.position);
             layer.inPoint = plan.insertTime;
@@ -159,11 +188,11 @@ var AEBrowseNative = (function () {
         var comp = layer.containingComp;
         var plan = AEBrowsePlan.plan(loaded.asset, loaded.payload, values, { width: comp.width, height: comp.height, duration: comp.duration, insertTime: metadata.insertTime, installedEffects: installedEffects() });
         if (plan.motion !== metadata.parameters.motion || plan.parameters.duration !== metadata.parameters.duration) { fail('E_ANIMATION_UPDATE_UNSUPPORTED', '这个测试入口只更新外观，不重写动画。'); }
-        var shape = geometry(layer, metadata), properties = [shape.rectangle.property('ADBE Vector Rect Size'), shape.rectangle.property('ADBE Vector Rect Roundness'), shape.fill.property('ADBE Vector Fill Color')];
-        for (var i = 0; i < properties.length; i++) { if (properties[i].numKeys > 0 || properties[i].expressionEnabled) { fail('E_INSTANCE_MODIFIED', '外观参数已有动画或表达式。'); } }
-        var old = [properties[0].value, properties[1].value, properties[2].value];
-        try { properties[0].setValue(plan.size); properties[1].setValue(plan.radius); properties[2].setValue(plan.color); }
-        catch (error) { for (i = 0; i < properties.length; i++) { properties[i].setValue(old[i]); } throw error; }
+        if (plan.geometryType !== (metadata.geometryType || 'rectangle')) { fail('E_INSTANCE_IDENTITY', '更新不能改变实例的几何类型。'); }
+        var properties = appearanceProperties(layer, metadata), old = [];
+        for (var i = 0; i < properties.length; i++) { if (properties[i].property.numKeys > 0 || properties[i].property.expressionEnabled) { fail('E_INSTANCE_MODIFIED', '外观参数已有动画或表达式。'); } old.push(properties[i].property.value); }
+        try { writeGeometry(layer, metadata, plan); }
+        catch (error) { for (i = 0; i < properties.length; i++) { properties[i].property.setValue(old[i]); } throw error; }
         metadata.parameters = plan.parameters; metadata.baseline = snapshot(layer, metadata);
         layer.comment = PREFIX + JSON.stringify(metadata);
         return capture(layer);

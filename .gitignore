@@ -24,3 +24,7 @@ Desktop.ini
 /test-results/cep-isolated-bootstrap.json
 /test-results/**/library-data/
 /test-results/local-only/
+
+# Basic-shape scratch registrations, diagnostic runs and generated scripts.
+# Selected final reports and PNG evidence are deliberately tracked with git add -f.
+/test-results/basic-shapes-*/

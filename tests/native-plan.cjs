@@ -44,6 +44,34 @@ test('效果目标不存在被拒绝', () => { const a = clone(asset); a.effects
 test('附属文件不会被这个适配器静默丢弃', () => { const a = clone(asset); a.resources = ['image.png']; rejects(() => plan({}, { asset: a }), 'E_RESOURCE_ADAPTER_REQUIRED'); });
 test('字体依赖需要额外适配器', () => { const a = clone(asset); a.requirements.fonts = ['Font']; rejects(() => plan({}, { asset: a }), 'E_RESOURCE_ADAPTER_REQUIRED'); });
 test('同一输入多次编译不会修改源数据', () => { const before = JSON.stringify({ asset, payload }); plan({ width: 400 }); plan(); assert.equal(JSON.stringify({ asset, payload }), before); });
+function shapeFixture(type) {
+  const a = clone(asset), p = clone(payload);
+  p.states = [];
+  p.nodes[1] = { id: 'card', parent: 'output', type };
+  if (type === 'ellipse') p.nodes[1].size = { bind: ['width', 'height'] };
+  else {
+    for (const [id, value] of [['points', 5], ['outerRadius', 120], ['innerRadius', 55], ['rotation', 18]]) a.parameters.push({ id, type: 'number', default: value });
+    for (const key of ['points', 'outerRadius', 'rotation']) p.nodes[1][key] = { bind: key };
+    if (type === 'star') p.nodes[1].innerRadius = { bind: 'innerRadius' };
+  }
+  return { asset: a, payload: p };
+}
+test('椭圆使用独立宽高，不要求矩形圆角绑定', () => {
+  const p = plan({ width: 280, height: 160 }, shapeFixture('ellipse'));
+  assert.equal(p.geometryType, 'ellipse'); assert.deepEqual(p.size, [280, 160]);
+  assert.equal(p.bindings.radius, undefined);
+});
+for (const [type, points] of [['polygon', 3], ['polygon', 6], ['star', 5]]) test(type + ' 编译边数、半径与旋转', () => {
+  const p = plan({ points, outerRadius: 140, innerRadius: 60, rotation: 30 }, shapeFixture(type));
+  assert.equal(p.geometryType, type); assert.equal(p.points, points); assert.equal(p.outerRadius, 140); assert.equal(p.rotation, 30);
+  assert.equal(p.innerRadius, type === 'star' ? 60 : undefined);
+});
+for (const points of [2, 3.5, 65]) test('拒绝非法或超预算的多边形边数 ' + points, () => rejects(() => plan({ points }, shapeFixture('polygon')), 'E_GEOMETRY_VALUE'));
+for (const innerRadius of [0, 120, 140]) test('星形内半径必须小于外半径且大于零 ' + innerRadius, () => rejects(() => plan({ innerRadius }, shapeFixture('star')), 'E_GEOMETRY_VALUE'));
+test('多边形不能绕过单几何节点限制', () => {
+  const fixture = shapeFixture('polygon'); fixture.payload.nodes.push({ id: 'extra', type: 'ellipse', parent: 'output', size: { bind: ['width', 'height'] } });
+  rejects(() => plan({}, fixture), 'E_NODE_KIND_UNSUPPORTED');
+});
 const passed = results.filter(result => result.passed).length;
 const failed = results.length - passed;
 fs.writeFileSync(path.join(root, 'test-results/native-plan.json'), JSON.stringify({ finished: true, timestamp: new Date().toISOString(), scope: 'Pure ES3 graph/parameter plan; no AE mutation.', passed, failed, results }, null, 2));

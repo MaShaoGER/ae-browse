@@ -30,6 +30,8 @@ Group.prototype.addProperty = function (name) {
     var group = new Group(name);
     if (name === 'ADBE Vector Group') { group.add(new Group('ADBE Vectors Group')); }
     else if (name === 'ADBE Vector Shape - Rect') { group.add(new Property('ADBE Vector Rect Size', [100, 100])); group.add(new Property('ADBE Vector Rect Roundness', 0)); }
+    else if (name === 'ADBE Vector Shape - Ellipse') { group.add(new Property('ADBE Vector Ellipse Size', [100, 100])); }
+    else if (name === 'ADBE Vector Shape - Star') { for (var key in { 'ADBE Vector Star Type': 1, 'ADBE Vector Star Points': 5, 'ADBE Vector Star Outer Radius': 100, 'ADBE Vector Star Inner Radius': 50, 'ADBE Vector Star Rotation': 0 }) group.add(new Property(key, { 'ADBE Vector Star Type': 1, 'ADBE Vector Star Points': 5, 'ADBE Vector Star Outer Radius': 100, 'ADBE Vector Star Inner Radius': 50, 'ADBE Vector Star Rotation': 0 }[key])); }
     else if (name === 'ADBE Vector Graphic - Fill') { group.add(new Property('ADBE Vector Fill Color', [1, 1, 1, 1])); }
     group.enabled = true; return this.add(group);
 };
@@ -241,6 +243,33 @@ test('Reentrant host calls report busy and do not alter the outer operation', ()
   assert.equal(dispatch(context, request('getContext')).ok, true);
 });
 
+for (const type of ['ellipse', 'polygon', 'star']) test('Create and capture ' + type + ' through the real dispatcher', () => {
+  const context = host(), source = clone(loaded);
+  source.asset.effects = []; source.payload.states = [];
+  source.payload.nodes[1] = { id: 'card', parent: 'output', type };
+  if (type === 'ellipse') source.payload.nodes[1].size = { bind: ['width', 'height'] };
+  else {
+    for (const [id, value] of [['points', 6], ['outerRadius', 120], ['innerRadius', 55], ['rotation', 30]]) source.asset.parameters.push({ id, type: 'number', default: value });
+    for (const key of ['points', 'outerRadius', 'rotation']) source.payload.nodes[1][key] = { bind: key };
+    if (type === 'star') source.payload.nodes[1].innerRadius = { bind: 'innerRadius' };
+  }
+  source.manifest.assets = [clone(source.asset)];
+  const value = createRequest({ payload: { loaded: source, parameters: {}, insertTime: .5 } });
+  const response = dispatch(context, value);
+  assert.equal(response.ok, true, JSON.stringify(response.diagnostics));
+  assert.equal(response.data.modified, false);
+  if (type === 'ellipse') assert.deepEqual(response.data.observed.size, [320, 180]);
+  else { assert.equal(response.data.observed.points, 6); assert.equal(response.data.observed.outerRadius, 120); assert.equal(response.data.observed.rotation, 30); }
+  const repeated = dispatch(context, value); assert.equal(repeated.data.layerId, response.data.layerId); assert.equal(evaluate(context, 'app.calls.created'), 1);
+  context.loadedJSON = JSON.stringify(source);
+  const overrides = type === 'ellipse' ? { width: 280, height: 160 } : { outerRadius: 150, rotation: 45 };
+  context.overridesJSON = JSON.stringify(overrides);
+  const updated = evaluate(context, 'AEBrowseNative.updateAppearance(app.project.activeItem.layer(1), JSON.parse(loadedJSON), JSON.parse(overridesJSON))');
+  assert.equal(updated.modified, false);
+  for (const key of Object.keys(overrides)) assert.equal(updated.parameters[key], overrides[key]);
+  vm.runInContext("app.project.activeItem.layer(1).property('ADBE Root Vectors Group').property(1).property('ADBE Vectors Group').property(1).property(1).setValue(99)", context);
+  assert.equal(evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1)).modified'), true);
+});
 const passed = results.filter(result => result.passed).length;
 const failed = results.length - passed;
 fs.mkdirSync(path.join(root, 'test-results'), { recursive: true });

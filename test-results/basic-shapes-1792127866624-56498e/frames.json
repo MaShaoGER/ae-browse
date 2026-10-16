@@ -1,0 +1,115 @@
+{
+  "ok": true,
+  "compId": "112",
+  "compName": "__AEBrowse_BasicShapes_basic-shapes-1792127866624-56498e",
+  "captureId": "76b2986fb780314e91b6c788c5f69ae3",
+  "frames": [
+    {
+      "time": 0.23333333333333,
+      "path": "D:\\project\\ae-browse\\test-results\\basic-shapes-1792127866624-56498e\\frames\\112_0_233333_0_76b2986f.png",
+      "width": 960,
+      "height": 640,
+      "sizeBytes": 2462,
+      "sha256": "065549a1d2f1b703bfd28cfacaed8015eb6edcc87aded9e1ebf9a087437a43cd",
+      "source": "comp",
+      "method": "saveFrameToPng",
+      "compId": "112",
+      "sourceBitDepth": 8,
+      "bitDepth": 8,
+      "compWidth": 960,
+      "compHeight": 640,
+      "resolutionFactor": [
+        1,
+        1
+      ]
+    },
+    {
+      "time": 0.46666666666667,
+      "path": "D:\\project\\ae-browse\\test-results\\basic-shapes-1792127866624-56498e\\frames\\112_0_466667_1_76b2986f.png",
+      "width": 960,
+      "height": 640,
+      "sizeBytes": 24730,
+      "sha256": "493daeae1c6f01577481dd2fe310b177f3167e2348ffe5fffe9a247c47ba6970",
+      "source": "comp",
+      "method": "saveFrameToPng",
+      "compId": "112",
+      "sourceBitDepth": 8,
+      "bitDepth": 8,
+      "compWidth": 960,
+      "compHeight": 640,
+      "resolutionFactor": [
+        1,
+        1
+      ]
+    },
+    {
+      "time": 0.86666666666667,
+      "path": "D:\\project\\ae-browse\\test-results\\basic-shapes-1792127866624-56498e\\frames\\112_0_866667_2_76b2986f.png",
+      "width": 960,
+      "height": 640,
+      "sizeBytes": 30502,
+      "sha256": "94066192b99813f3cd919e6e9782d221eadb4d129c3674662d9dd43db56ba816",
+      "source": "comp",
+      "method": "saveFrameToPng",
+      "compId": "112",
+      "sourceBitDepth": 8,
+      "bitDepth": 8,
+      "compWidth": 960,
+      "compHeight": 640,
+      "resolutionFactor": [
+        1,
+        1
+      ]
+    }
+  ],
+  "grid": {
+    "path": "D:\\project\\ae-browse\\test-results\\basic-shapes-1792127866624-56498e\\frames\\76b2986fb780314e91b6c788c5f69ae3-grid.png",
+    "width": 1280,
+    "height": 854,
+    "sha256": "01308a698f2bc3d0c49822e67681d8866644007003f387a949a577b2d8ead84a",
+    "columns": 2,
+    "rows": 2,
+    "cellWidth": 638,
+    "cellHeight": 425,
+    "scaled": true,
+    "cells": [
+      {
+        "index": 0,
+        "time": 0.23333333333333,
+        "x": 0,
+        "y": 0,
+        "w": 638,
+        "h": 425
+      },
+      {
+        "index": 1,
+        "time": 0.46666666666667,
+        "x": 642,
+        "y": 0,
+        "w": 638,
+        "h": 425
+      },
+      {
+        "index": 2,
+        "time": 0.86666666666667,
+        "x": 0,
+        "y": 429,
+        "w": 638,
+        "h": 425
+      }
+    ]
+  },
+  "imageBudget": {
+    "totalBase64Chars": 48040,
+    "totalLimitBase64Chars": 12582912,
+    "perImageLimitBase64Chars": 4718592
+  },
+  "warnings": [
+    "The grid image was scaled to fit within grid_max_side."
+  ],
+  "execution_source": {
+    "mode": "live",
+    "project_path": null
+  },
+  "publicationNote": "Session routing identifiers omitted for repository publication; recorded capture results and image hashes are unchanged."
+}

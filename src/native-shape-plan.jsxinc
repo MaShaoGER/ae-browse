@@ -53,20 +53,33 @@ var AEBrowsePlan = (function () {
         if (!object(payload) || payload.formatVersion !== 1 || !(payload.nodes instanceof Array)) { fail('E_PAYLOAD_VERSION', '图形描述格式不支持。'); }
         if (!object(context) || !finite(context.width) || !finite(context.height) || !finite(context.duration) || context.width <= 0 || context.height <= 0 || context.duration <= 0) { fail('E_NO_ACTIVE_COMP', '需要有效的目标合成。'); }
         var parsed = parameters(asset, overrides || {}), values = parsed.values;
-        var nodes = {}, layerNode = null, rectangleNode = null, fillNode = null, i, key;
+        var nodes = {}, layerNode = null, shapeNode = null, fillNode = null, i, key;
         for (i = 0; i < payload.nodes.length; i++) {
             var node = payload.nodes[i];
             if (!object(node) || !validId(node.id) || own(nodes, '$' + node.id)) { fail('E_NODE_ID', '图形节点 ID 无效或重复。'); }
             nodes['$' + node.id] = node;
             if (node.type === 'shapeLayer' && layerNode === null) { layerNode = node; }
-            else if (node.type === 'rectangle' && rectangleNode === null) { rectangleNode = node; }
+            else if ((node.type === 'rectangle' || node.type === 'ellipse' || node.type === 'polygon' || node.type === 'star') && shapeNode === null) { shapeNode = node; }
             else if (node.type === 'fill' && fillNode === null) { fillNode = node; }
-            else { fail('E_NODE_KIND_UNSUPPORTED', '当前测试适配器支持一个形状层、一个矩形和一个填充。'); }
+            else { fail('E_NODE_KIND_UNSUPPORTED', '当前适配器支持一个形状层、一个基础几何图形和一个填充。'); }
         }
-        if (!layerNode || !rectangleNode || !fillNode || rectangleNode.parent !== layerNode.id || fillNode.parent !== rectangleNode.id) { fail('E_NODE_GRAPH', '图形节点层级不支持。'); }
+        if (!layerNode || !shapeNode || !fillNode || shapeNode.parent !== layerNode.id || fillNode.parent !== shapeNode.id) { fail('E_NODE_GRAPH', '图形节点层级不支持。'); }
         if (layerNode.anchor !== 'center' || layerNode.position !== 'compCenter') { fail('E_POSITION_MODE', '当前测试适配器使用中心锚点与合成中心定位。'); }
-        var size = binding(rectangleNode.size, values), radius = binding(rectangleNode.roundness, values), color = binding(fillNode.color, values);
-        if (!vector(size, 2, false) || size[0] <= 0 || size[1] <= 0 || !finite(radius) || radius < 0 || !vector(color, 4, true)) { fail('E_GEOMETRY_VALUE', '图形尺寸、圆角或颜色无效。'); }
+        var geometry = {}, bindings = { color: fillNode.color.bind }, color = binding(fillNode.color, values);
+        if (!vector(color, 4, true)) { fail('E_GEOMETRY_VALUE', '图形颜色无效。'); }
+        if (shapeNode.type === 'rectangle' || shapeNode.type === 'ellipse') {
+            geometry.size = binding(shapeNode.size, values); bindings.size = clone(shapeNode.size.bind);
+            if (!vector(geometry.size, 2, false) || geometry.size[0] <= 0 || geometry.size[1] <= 0) { fail('E_GEOMETRY_VALUE', '图形尺寸无效。'); }
+            if (shapeNode.type === 'rectangle') {
+                geometry.radius = binding(shapeNode.roundness, values); bindings.radius = shapeNode.roundness.bind;
+                if (!finite(geometry.radius) || geometry.radius < 0) { fail('E_GEOMETRY_VALUE', '圆角无效。'); }
+            }
+        } else {
+            var fields = ['points', 'outerRadius', 'rotation'];
+            if (shapeNode.type === 'star') { fields.push('innerRadius'); }
+            for (i = 0; i < fields.length; i++) { key = fields[i]; geometry[key] = binding(shapeNode[key], values); bindings[key] = shapeNode[key].bind; }
+            if (!finite(geometry.points) || Math.floor(geometry.points) !== geometry.points || geometry.points < 3 || geometry.points > 64 || !finite(geometry.outerRadius) || geometry.outerRadius <= 0 || !finite(geometry.rotation) || shapeNode.type === 'star' && (!finite(geometry.innerRadius) || geometry.innerRadius <= 0 || geometry.innerRadius >= geometry.outerRadius)) { fail('E_GEOMETRY_VALUE', '边数或角数须为 3–64 的整数；星形内半径须大于零并小于外半径。'); }
+        }
         var states = payload.states || [], stateIds = {};
         if (!(states instanceof Array)) { fail('E_STATE_FORMAT', '状态必须是数组。'); }
         for (i = 0; i < states.length; i++) {
@@ -113,7 +126,9 @@ var AEBrowsePlan = (function () {
                 diagnostics.push({ code: 'W_EFFECT_MISSING', message: '跳过不可用的可选效果：' + effect.matchName, effectId: effect.id });
             } else { selectedEffects.push(clone(effect)); }
         }
-        return { assetId: asset.id, name: asset.name, parameters: values, bindings: { size: clone(rectangleNode.size.bind), radius: rectangleNode.roundness.bind, color: fillNode.color.bind }, size: size, radius: radius, color: color, position: [context.width / 2, context.height / 2], insertTime: insertTime, duration: duration, motion: motion, animation: animation, effects: selectedEffects, diagnostics: diagnostics };
+        var result = { assetId: asset.id, name: asset.name, parameters: values, bindings: bindings, geometryType: shapeNode.type, color: color, position: [context.width / 2, context.height / 2], insertTime: insertTime, duration: duration, motion: motion, animation: animation, effects: selectedEffects, diagnostics: diagnostics };
+        for (key in geometry) { if (own(geometry, key)) { result[key] = geometry[key]; } }
+        return result;
     }
     function same(a, b) {
         if (typeof a === 'number' && typeof b === 'number') { return Math.abs(a - b) < 0.00001; }

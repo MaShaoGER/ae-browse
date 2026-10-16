@@ -1,0 +1,530 @@
+{
+  "schemaVersion": 1,
+  "pack": {
+    "id": "local.aebrowse.basics",
+    "version": "0.1.0",
+    "name": "基础图形库",
+    "author": "AE Browse",
+    "description": "圆角卡片、圆形、椭圆、三角形、六边形和星形。",
+    "license": "示例内容允许复制及修改"
+  },
+  "assets": [
+    {
+      "id": "rounded-card",
+      "name": "圆角卡片",
+      "kind": "ae.nativeShape",
+      "source": "assets/rounded-card.json",
+      "tags": [
+        "卡片",
+        "背景"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes",
+          "effect.add"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "width",
+          "label": "宽度",
+          "type": "number",
+          "default": 320,
+          "min": 1,
+          "max": 4096,
+          "unit": "px",
+          "help": "以图形中心为基准调整宽度。"
+        },
+        {
+          "id": "height",
+          "label": "高度",
+          "type": "number",
+          "default": 180,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "radius",
+          "label": "圆角",
+          "type": "number",
+          "default": 24,
+          "min": 0,
+          "max": 90,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.2,
+            0.5,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.6,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "调整尺寸、圆角、颜色及入场动画后添加到当前合成。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "基础图形",
+          "previewShape": "rectangle"
+        }
+      }
+    },
+    {
+      "id": "circle",
+      "name": "圆形",
+      "kind": "ae.nativeShape",
+      "source": "assets/circle.json",
+      "tags": [
+        "基础图形",
+        "圆形",
+        "圆"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "diameter",
+          "label": "直径",
+          "type": "number",
+          "default": 180,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.16,
+            0.72,
+            0.65,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.6,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "调整尺寸、颜色和入场动画后添加到当前合成。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "基础图形",
+          "previewShape": "ellipse"
+        }
+      }
+    },
+    {
+      "id": "ellipse",
+      "name": "椭圆",
+      "kind": "ae.nativeShape",
+      "source": "assets/ellipse.json",
+      "tags": [
+        "基础图形",
+        "椭圆",
+        "圆"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "width",
+          "label": "宽度",
+          "type": "number",
+          "default": 260,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "height",
+          "label": "高度",
+          "type": "number",
+          "default": 150,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.28,
+            0.58,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.6,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "调整尺寸、颜色和入场动画后添加到当前合成。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "基础图形",
+          "previewShape": "ellipse"
+        }
+      }
+    },
+    {
+      "id": "triangle",
+      "name": "三角形",
+      "kind": "ae.nativeShape",
+      "source": "assets/triangle.json",
+      "tags": [
+        "基础图形",
+        "三角形",
+        "多边形"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "outerRadius",
+          "label": "外半径",
+          "type": "number",
+          "default": 110,
+          "min": 1,
+          "max": 2048,
+          "unit": "px"
+        },
+        {
+          "id": "points",
+          "label": "边数",
+          "type": "number",
+          "default": 3,
+          "min": 3,
+          "max": 64,
+          "unit": ""
+        },
+        {
+          "id": "rotation",
+          "label": "旋转",
+          "type": "number",
+          "default": 0,
+          "min": -360,
+          "max": 360,
+          "unit": "°"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            1,
+            0.52,
+            0.28,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.6,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "可调整边数、外半径、旋转、颜色与入场动画。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "基础图形",
+          "previewShape": "polygon"
+        }
+      }
+    },
+    {
+      "id": "hexagon",
+      "name": "六边形",
+      "kind": "ae.nativeShape",
+      "source": "assets/hexagon.json",
+      "tags": [
+        "基础图形",
+        "六边形",
+        "多边形"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "outerRadius",
+          "label": "外半径",
+          "type": "number",
+          "default": 110,
+          "min": 1,
+          "max": 2048,
+          "unit": "px"
+        },
+        {
+          "id": "points",
+          "label": "边数",
+          "type": "number",
+          "default": 6,
+          "min": 3,
+          "max": 64,
+          "unit": ""
+        },
+        {
+          "id": "rotation",
+          "label": "旋转",
+          "type": "number",
+          "default": 0,
+          "min": -360,
+          "max": 360,
+          "unit": "°"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.62,
+            0.48,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.6,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "可调整边数、外半径、旋转、颜色与入场动画。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "基础图形",
+          "previewShape": "polygon"
+        }
+      }
+    },
+    {
+      "id": "star",
+      "name": "星形",
+      "kind": "ae.nativeShape",
+      "source": "assets/star.json",
+      "tags": [
+        "基础图形",
+        "星形",
+        "星形"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "outerRadius",
+          "label": "外半径",
+          "type": "number",
+          "default": 110,
+          "min": 1,
+          "max": 2048,
+          "unit": "px"
+        },
+        {
+          "id": "innerRadius",
+          "label": "内半径",
+          "type": "number",
+          "default": 50,
+          "min": 1,
+          "max": 2047,
+          "unit": "px"
+        },
+        {
+          "id": "points",
+          "label": "角数",
+          "type": "number",
+          "default": 5,
+          "min": 3,
+          "max": 64,
+          "unit": ""
+        },
+        {
+          "id": "rotation",
+          "label": "旋转",
+          "type": "number",
+          "default": 0,
+          "min": -360,
+          "max": 360,
+          "unit": "°"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            1,
+            0.76,
+            0.22,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.6,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "内半径须小于外半径；可调整角数、旋转、颜色与入场动画。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "基础图形",
+          "previewShape": "star"
+        }
+      }
+    }
+  ]
+}

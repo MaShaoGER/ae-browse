@@ -1,0 +1,178 @@
+{
+  "finished": true,
+  "runId": "basic-shapes-1792127866624-56498e",
+  "scope": "Offline PNG pixel checks only; actual AE capture metadata is in frames.json. No AE calls.",
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Three real frames have the expected canvas",
+      "passed": true
+    },
+    {
+      "name": "Frame before insertion is fully transparent",
+      "passed": true
+    },
+    {
+      "name": "rounded-card has expected extent, fill and entrance growth",
+      "passed": true,
+      "bbox": [
+        40,
+        90,
+        280,
+        230
+      ],
+      "expectedSize": [
+        240,
+        140
+      ],
+      "actualSize": [
+        240,
+        140
+      ],
+      "centerRGBA": [
+        51,
+        128,
+        255,
+        255
+      ],
+      "middleOpaquePixels": 20328,
+      "finalOpaquePixels": 33108
+    },
+    {
+      "name": "circle has expected extent, fill and entrance growth",
+      "passed": true,
+      "bbox": [
+        70,
+        70,
+        250,
+        250
+      ],
+      "expectedSize": [
+        180,
+        180
+      ],
+      "actualSize": [
+        180,
+        180
+      ],
+      "centerRGBA": [
+        41,
+        184,
+        166,
+        255
+      ],
+      "middleOpaquePixels": 15496,
+      "finalOpaquePixels": 25472
+    },
+    {
+      "name": "ellipse has expected extent, fill and entrance growth",
+      "passed": true,
+      "bbox": [
+        30,
+        85,
+        290,
+        235
+      ],
+      "expectedSize": [
+        260,
+        150
+      ],
+      "actualSize": [
+        260,
+        150
+      ],
+      "centerRGBA": [
+        71,
+        148,
+        255,
+        255
+      ],
+      "middleOpaquePixels": 18648,
+      "finalOpaquePixels": 30668
+    },
+    {
+      "name": "triangle has expected extent, fill and entrance growth",
+      "passed": true,
+      "bbox": [
+        65,
+        51,
+        255,
+        215
+      ],
+      "expectedSize": [
+        191,
+        165
+      ],
+      "actualSize": [
+        190,
+        164
+      ],
+      "centerRGBA": [
+        255,
+        133,
+        71,
+        255
+      ],
+      "middleOpaquePixels": 9592,
+      "finalOpaquePixels": 15734
+    },
+    {
+      "name": "hexagon has expected extent, fill and entrance growth",
+      "passed": true,
+      "bbox": [
+        65,
+        50,
+        255,
+        270
+      ],
+      "expectedSize": [
+        191,
+        220
+      ],
+      "actualSize": [
+        190,
+        220
+      ],
+      "centerRGBA": [
+        158,
+        122,
+        255,
+        255
+      ],
+      "middleOpaquePixels": 19092,
+      "finalOpaquePixels": 31400
+    },
+    {
+      "name": "star has expected extent, fill and entrance growth",
+      "passed": true,
+      "bbox": [
+        56,
+        51,
+        264,
+        248
+      ],
+      "expectedSize": [
+        210,
+        199
+      ],
+      "actualSize": [
+        208,
+        197
+      ],
+      "centerRGBA": [
+        255,
+        194,
+        56,
+        255
+      ],
+      "middleOpaquePixels": 9852,
+      "finalOpaquePixels": 16188
+    },
+    {
+      "name": "Entrance pixels remain inside the final shape regions",
+      "passed": true,
+      "outsideBbox": null
+    }
+  ]
+}

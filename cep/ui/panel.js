@@ -27,12 +27,7 @@
     });
   }
   function drawPreview() {
-    var width = Number(values.width) || 320, height = Number(values.height) || 180;
-    var scale = Math.min(200 / width, 94 / height, 1), color = values.color || [.2, .5, 1, 1];
-    var el = byId('card-preview');
-    el.style.width = Math.max(1, width * scale) + 'px'; el.style.height = Math.max(1, height * scale) + 'px';
-    el.style.borderRadius = Math.max(0, Number(values.radius) || 0) * scale + 'px';
-    el.style.backgroundColor = 'rgba(' + color.slice(0, 3).map(function (n) { return Math.round(n * 255); }).join(',') + ',' + color[3] + ')';
+    AEBrowsePreview.draw(byId('card-preview'), selected, values, 200, 94);
   }
   function hex(color) { return '#' + color.slice(0, 3).map(function (value) { return Math.round(value * 255).toString(16).padStart(2, '0'); }).join(''); }
   function numberInput(descriptor, value, changed) {
@@ -54,7 +49,7 @@
       else if (descriptor.type === 'enum') {
         input = document.createElement('select');
         descriptor.options.forEach(function (value) { var option = document.createElement('option'); option.value = value; option.textContent = { none: '无动画', pop: '缩放入场', slide: '滑入', fade: '淡入' }[value] || value; input.appendChild(option); });
-        input.value = descriptor.default; input.addEventListener('change', function () { changed(input.value); });
+        input.value = descriptor.default; input.addEventListener('change', function () { changed(input.value); drawPreview(); });
       } else if (descriptor.type === 'color') {
         input = document.createElement('input'); input.type = 'color'; input.value = hex(descriptor.default); input.title = '面板选色器（尚未接入 AE 原生选色）';
         input.addEventListener('input', function () { var value = input.value; changed([parseInt(value.slice(1, 3), 16) / 255, parseInt(value.slice(3, 5), 16) / 255, parseInt(value.slice(5, 7), 16) / 255, values[descriptor.id][3]]); drawPreview(); });
@@ -106,6 +101,8 @@
         (function (asset) {
           var button = document.createElement('button'); button.type = 'button'; button.className = 'asset-card'; button.dataset.id = asset.id;
           var thumb = document.createElement('div'); thumb.className = 'asset-thumb'; var shape = document.createElement('div'); shape.className = 'thumb-shape'; thumb.appendChild(shape); button.appendChild(thumb);
+          var defaults = {}; (asset.parameters || []).forEach(function (parameter) { defaults[parameter.id] = parameter.default; });
+          AEBrowsePreview.draw(shape, asset, defaults, 76, 46);
           var name = document.createElement('span'); name.className = 'asset-label'; name.textContent = asset.name || asset.id; button.appendChild(name);
           var state = document.createElement('span'); state.className = 'asset-state ' + (asset.status === 'blocked' ? 'blocked' : '');
           state.textContent = asset.status === 'blocked' ? '不可用 · 查看原因' : '参数可编辑'; button.appendChild(state);
@@ -199,8 +196,8 @@
   async function start() {
     if (demo) {
       var manifest = window.AEBrowseDemo;
-      var entry = Object.assign({}, manifest.assets[0], { packId: manifest.pack.id, fingerprint: 'demo', valid: true, status: 'needs-host-check', diagnostics: [{ severity: 'warning', message: '界面演示模式：导入按钮关闭。' }] });
-      service = { listLibraries: async function () { return [{ id: manifest.pack.id, name: manifest.pack.name, directory: 'examples/portable-demo', status: 'available' }]; }, listAssets: async function (_, query) { return [entry].filter(function (asset) { return !query || (asset.name + asset.tags.join(' ')).indexOf(query) >= 0; }); } };
+      var entries = manifest.assets.map(function (asset) { return Object.assign({}, asset, { packId: manifest.pack.id, fingerprint: 'demo', valid: true, status: 'needs-host-check', diagnostics: [{ severity: 'warning', message: '界面演示模式：导入按钮关闭。' }] }); });
+      service = { listLibraries: async function () { return [{ id: manifest.pack.id, name: manifest.pack.name, directory: 'examples/basic-shapes', status: 'available' }]; }, listAssets: async function (_, query) { return entries.filter(function (asset) { return !query || (asset.name + asset.tags.join(' ')).indexOf(query) >= 0; }); } };
       ['add-library', 'refresh-library', 'remove-library', 'refresh-host'].forEach(function (id) { byId(id).hidden = true; });
       byId('context').textContent = '浏览器界面演示 · 未连接 AE'; byId('runtime').textContent = 'UI preview'; await renderLibraries(); status('可查看布局与参数近似预览；实际导入需要 CEP。'); return;
     }

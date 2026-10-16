@@ -2,7 +2,7 @@
 
 用于 Adobe After Effects 的图形库浏览器。把图形整理成可复制的文件夹，在 CEP 面板中浏览、搜索和调整参数，再添加到当前合成。
 
-当前版本 **0.2.0，开发版**。已验证的导入范围是**一个形状层、一个矩形与填充组成的圆角卡片**；其他图形和素材类型仍在后续计划中。
+当前版本 **0.2.0，开发版**。本地构建支持**圆角矩形、圆形、椭圆、三角形、六边形、星形**，每个实例是可编辑的原生形状层。六图形核心创建与回读已通过实机测试；最新构建的真实 CEP 面板交互仍待专项验收。
 
 ![AE Browse 开发面板](test-results/cep-ui-demo.jpg)
 
@@ -20,8 +20,8 @@
 
 - **图形库登记与恢复**：添加包含 `pack.json` 的文件夹；源文件只读，移除登记不会删除源图形库。
 - **搜索与诊断**：按名称和标签搜索，显示中文提示、素材错误和依赖检查结果；损坏素材单独停用。
-- **卡片参数**：调整宽度、高度、圆角、颜色、入场动画和时长，支持 `pop`、`slide`、`fade`、`none`。
-- **面板预览**：基础卡片的近似外观预览，颜色使用面板选色器和预览色块。
+- **图形参数**：按类型调整宽高、直径、圆角、边数或角数、内外半径和旋转；共用颜色、时长与 `pop`、`slide`、`fade`、`none` 动画选择。
+- **面板预览**：六种基础图形的近似外观预览，颜色使用面板选色器和预览色块。
 - **导入与回读**：检查目标合成、素材内容指纹和参数，创建后读取实际图层属性。
 - **执行保护**：宿主请求串行处理；创建请求超时后保留待确认状态，不自动重复创建。
 
@@ -77,9 +77,9 @@ npm run preview
 
 ### 4. 添加示例图形库
 
-1. 在面板添加 `examples/portable-demo/` 文件夹；本机完整路径为 `D:\project\ae-browse\examples\portable-demo`。
+1. 使用最新构建时，在面板添加 `examples/basic-shapes/` 文件夹；本机完整路径为 `D:\project\ae-browse\examples\basic-shapes`。原圆角卡片示例 `examples/portable-demo/` 仍可使用。
 2. 在 AE 打开目标合成，在面板点击“刷新合成”。
-3. 选择圆角卡片，调整尺寸、颜色和动画参数。
+3. 选择图形，调整尺寸、颜色和动画参数。
 4. 点击“添加到当前合成”，查看创建与回读结果。
 
 没有活动合成时仍可浏览图形库。面板预览不包含真实效果栈与动画渲染，实际外观以 AE 为准。
@@ -90,7 +90,7 @@ npm run preview
 ae-browse/
 ├─ cep/                  CEP 面板、宿主通信桥、Node 图形库服务与 Adobe 依赖
 ├─ src/                  图形包校验器、ES3 计划编译器与 AE 执行层
-├─ examples/portable-demo/ 可复制的示例图形包：pack.json + assets/
+├─ examples/             basic-shapes 六图形库与 portable-demo 圆角卡片库
 ├─ scripts/              构建、开发安装、界面演示与实机测试辅助脚本
 ├─ tests/                Node 检查与单独调用的 AE 宿主测试
 ├─ docs/                 协议、实现路径、安装说明与分层验证报告
@@ -117,11 +117,12 @@ npm run validate
 
 | 验证层 | 已有记录 | 证据 |
 | --- | --- | --- |
-| Node 包、预检、计划与模拟宿主 | 2026-10-15：重新运行，197 个用例/检查组通过，0 失败 | [包预检](test-results/boundaries.json)、[CEP 包结构](test-results/cep-build.json)、[分组说明](docs/CEP_BUILD_REPORT.md) |
-| 真实 AE 属性与 CEP 最小闭环 | 2026-10-14：16 项属性检查通过，面板加载、登记、创建与回读通过 | [实机报告](docs/CEP_LIVE_TEST_REPORT.md) |
-| 真实渲染 | 2026-10-14：3 个采样帧及变化范围检查；此前另有导出重建往返记录 | [实机报告](docs/CEP_LIVE_TEST_REPORT.md)、[往返报告](docs/ROUNDTRIP_TEST_REPORT.md) |
+| Node 包、预检、计划与模拟宿主 | 2026-10-16：223 个用例/检查组通过，0 失败 | [包预检](test-results/boundaries.json)、[CEP 包结构](test-results/cep-build.json)、[六图形报告](docs/BASIC_SHAPES_TEST_REPORT.md) |
+| 真实 AE 属性 | 2026-10-16：六图形与四种动画，26 项通过 | [六图形报告](docs/BASIC_SHAPES_TEST_REPORT.md) |
+| CEP 最小闭环 | 2026-10-14：旧卡片版本面板加载、登记、创建与回读通过 | [旧版实机报告](docs/CEP_LIVE_TEST_REPORT.md) |
+| 真实渲染 | 2026-10-16：三帧及 9 项离线像素检查通过 | [六图形报告](docs/BASIC_SHAPES_TEST_REPORT.md)、[既有往返报告](docs/ROUNDTRIP_TEST_REPORT.md) |
 
-本次仓库整理只重新运行 Node 检查与示例包校验，未重新执行 AE 属性或渲染检查。这些是不同层面的证据，Node 模拟不代表真实 AE 属性或像素结果。AE 宿主测试需要单独启动：使用明确标识的临时合成，结束后扫描确认清理，不保存或覆盖用户工程；不会随普通 Node 测试自动运行。
+Node 模拟、真实 AE 属性与像素结果分开统计。AE 宿主测试需要单独启动：使用明确标识的临时合成，结束后扫描确认清理，不保存或覆盖用户工程；不会随普通 Node 测试自动运行。本轮新构建保存在 `dist/AE Browse/`，现有开发扩展安装仍保留 2026-10-14 版本，尚未覆盖升级。
 
 ## 后续计划与限制
 

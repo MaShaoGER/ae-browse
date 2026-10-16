@@ -36,7 +36,7 @@ test('JSX 已合并 JSON、计划与正式分发入口，加载不读包或写 A
 });
 test('浏览器演示包含可复制示例的真实清单', () => {
   const context = vm.createContext({ window: {} }); vm.runInContext(fs.readFileSync(path.join(out, 'cep/ui/demo-data.js'), 'utf8'), context);
-  assert.deepEqual(JSON.parse(JSON.stringify(context.window.AEBrowseDemo)), JSON.parse(fs.readFileSync(path.join(root, 'examples/portable-demo/pack.json'), 'utf8')));
+  assert.deepEqual(JSON.parse(JSON.stringify(context.window.AEBrowseDemo)), JSON.parse(fs.readFileSync(path.join(root, 'examples/basic-shapes/pack.json'), 'utf8')));
 });
 test('构建清单中的文件指纹都与当前产物一致，测试样例没有打包', () => {
   const info = JSON.parse(fs.readFileSync(path.join(out, 'build-info.json'), 'utf8'));

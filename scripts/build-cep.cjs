@@ -30,7 +30,7 @@ const hostSources = ['json-compat.jsxinc', 'native-shape-plan.jsxinc', 'native-s
 const host = hostSources.map(file => '/* Source: src/' + file + ' */\n' + fs.readFileSync(path.join(root, 'src', file), 'utf8')).join('\n\n');
 fs.mkdirSync(path.join(out, 'jsx'), { recursive: true });
 fs.writeFileSync(path.join(out, 'jsx/host.jsx'), '/* AE Browse 0.2.0 - generated; edit src files instead. */\n' + host, 'utf8');
-const demo = fs.readFileSync(path.join(root, 'examples/portable-demo/pack.json'), 'utf8');
+const demo = fs.readFileSync(path.join(root, 'examples/basic-shapes/pack.json'), 'utf8');
 fs.writeFileSync(path.join(out, 'cep/ui/demo-data.js'), 'window.AEBrowseDemo = ' + JSON.stringify(JSON.parse(demo)).replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029') + ';\n');
 function inventory(directory, prefix = '') {
   let files = [];

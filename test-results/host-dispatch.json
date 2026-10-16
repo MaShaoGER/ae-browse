@@ -1,8 +1,8 @@
 {
   "finished": true,
-  "timestamp": "2026-10-15T11:31:53.660Z",
+  "timestamp": "2026-10-16T05:21:22.233Z",
   "scope": "Node VM mocks plus actual ES3 plan/native adapter; no live AE calls or rendered pixel checks.",
-  "passed": 20,
+  "passed": 23,
   "failed": 0,
   "results": [
     {
@@ -83,6 +83,18 @@
     },
     {
       "name": "Reentrant host calls report busy and do not alter the outer operation",
+      "passed": true
+    },
+    {
+      "name": "Create and capture ellipse through the real dispatcher",
+      "passed": true
+    },
+    {
+      "name": "Create and capture polygon through the real dispatcher",
+      "passed": true
+    },
+    {
+      "name": "Create and capture star through the real dispatcher",
       "passed": true
     }
   ]
