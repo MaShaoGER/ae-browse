@@ -1,0 +1,40 @@
+{
+  "finished": true,
+  "startedAtMs": 1792217780129,
+  "projectItemCount": 0,
+  "projectSaved": false,
+  "context": {
+    "protocolVersion": 1,
+    "requestId": "installed-context",
+    "ok": true,
+    "data": {
+      "activeComp": false,
+      "comp": null,
+      "selectionCount": 0
+    },
+    "diagnostics": [
+      
+    ],
+    "timing": {
+      "hostMs": 0
+    }
+  },
+  "malformed": {
+    "protocolVersion": 1,
+    "requestId": "installed-guard",
+    "ok": false,
+    "data": null,
+    "diagnostics": [
+      {
+        "code": "E_REQUEST_FORMAT",
+        "severity": "error",
+        "phase": "host",
+        "message": "请求操作、目标或数据格式无效。"
+      }
+    ],
+    "timing": {
+      "hostMs": 1
+    }
+  },
+  "menuCommand": 5068
+}

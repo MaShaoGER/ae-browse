@@ -49,7 +49,7 @@ var AEBrowsePlan = (function () {
     function plan(asset, payload, overrides, context) {
         scan(asset, 0); scan(payload, 0); scan(overrides, 0);
         if (!object(asset) || asset.kind !== 'ae.nativeShape') { fail('E_KIND_UNSUPPORTED', '当前测试适配器只生成原生形状。'); }
-        if (asset.resources && (!(asset.resources instanceof Array) || asset.resources.length > 0) || asset.requirements && asset.requirements.fonts !== undefined) { fail('E_RESOURCE_ADAPTER_REQUIRED', '附属资源或字体需要额外适配器，当前入口不忽略它们。'); }
+        if ((asset.resources && (!(asset.resources instanceof Array) || asset.resources.length > 0)) || (asset.requirements && asset.requirements.fonts !== undefined)) { fail('E_RESOURCE_ADAPTER_REQUIRED', '附属资源或字体需要额外适配器，当前入口不忽略它们。'); }
         if (!object(payload) || payload.formatVersion !== 1 || !(payload.nodes instanceof Array)) { fail('E_PAYLOAD_VERSION', '图形描述格式不支持。'); }
         if (!object(context) || !finite(context.width) || !finite(context.height) || !finite(context.duration) || context.width <= 0 || context.height <= 0 || context.duration <= 0) { fail('E_NO_ACTIVE_COMP', '需要有效的目标合成。'); }
         var parsed = parameters(asset, overrides || {}), values = parsed.values;
@@ -78,7 +78,7 @@ var AEBrowsePlan = (function () {
             var fields = ['points', 'outerRadius', 'rotation'];
             if (shapeNode.type === 'star') { fields.push('innerRadius'); }
             for (i = 0; i < fields.length; i++) { key = fields[i]; geometry[key] = binding(shapeNode[key], values); bindings[key] = shapeNode[key].bind; }
-            if (!finite(geometry.points) || Math.floor(geometry.points) !== geometry.points || geometry.points < 3 || geometry.points > 64 || !finite(geometry.outerRadius) || geometry.outerRadius <= 0 || !finite(geometry.rotation) || shapeNode.type === 'star' && (!finite(geometry.innerRadius) || geometry.innerRadius <= 0 || geometry.innerRadius >= geometry.outerRadius)) { fail('E_GEOMETRY_VALUE', '边数或角数须为 3–64 的整数；星形内半径须大于零并小于外半径。'); }
+            if (!finite(geometry.points) || Math.floor(geometry.points) !== geometry.points || geometry.points < 3 || geometry.points > 64 || !finite(geometry.outerRadius) || geometry.outerRadius <= 0 || !finite(geometry.rotation) || (shapeNode.type === 'star' && (!finite(geometry.innerRadius) || geometry.innerRadius <= 0 || geometry.innerRadius >= geometry.outerRadius))) { fail('E_GEOMETRY_VALUE', '边数或角数须为 3–64 的整数；星形内半径须大于零并小于外半径。'); }
         }
         var states = payload.states || [], stateIds = {};
         if (!(states instanceof Array)) { fail('E_STATE_FORMAT', '状态必须是数组。'); }
@@ -92,7 +92,7 @@ var AEBrowsePlan = (function () {
         var insertTime = context.insertTime === undefined ? 0 : context.insertTime;
         var duration = motion === 'none' ? 0 : values.duration;
         if (!finite(insertTime) || insertTime < 0 || insertTime >= context.duration) { fail('E_INSERT_TIME', '插入时间必须位于目标合成内。'); }
-        if (!finite(duration) || duration < 0 || motion !== 'none' && duration <= 0 || insertTime + duration > context.duration + 0.000001) { fail('E_DURATION_OUTSIDE_COMP', '动画时长超过目标合成可用区间。'); }
+        if (!finite(duration) || duration < 0 || (motion !== 'none' && duration <= 0) || insertTime + duration > context.duration + 0.000001) { fail('E_DURATION_OUTSIDE_COMP', '动画时长超过目标合成可用区间。'); }
         var animation = null, recipes = payload.animations || [], recipeIds = {};
         if (!(recipes instanceof Array)) { fail('E_ANIMATION_FORMAT', '动画必须是数组。'); }
         for (i = 0; i < recipes.length; i++) {

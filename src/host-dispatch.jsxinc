@@ -1,6 +1,6 @@
 /* Fixed JSON-only CEP entry. Files and scripts from graphic packs are never loaded here. */
 var AEBrowseHost = (function () {
-    var PROTOCOL_VERSION = 1, BRIDGE_VERSION = '0.1.0', busy = false;
+    var PROTOCOL_VERSION = 1, BRIDGE_VERSION = '0.2.0', busy = false;
     var CAPABILITIES = ['shape.create', 'animation.keyframes', 'effect.add'];
     function fail(code, message) { var error = new Error(message); error.code = code; throw error; }
     function own(value, key) { return Object.prototype.hasOwnProperty.call(value, key); }
@@ -117,12 +117,12 @@ var AEBrowseHost = (function () {
         }
         return found;
     }
-    function instanceData(comp, layer, instanceId, reused) {
+    function instanceData(comp, layer, instanceId, reused, captured) {
         if (!layer || !integer(layer.id) || layer.containingComp !== comp) { fail('E_INSTANCE_READBACK', '无法确认创建图层身份。'); }
         var meta = metadata(layer);
         if (!meta || meta.schemaVersion !== 1 || meta.instanceId !== instanceId) { fail('E_INSTANCE_IDENTITY', '实例身份与请求不一致。'); }
-        var captured = AEBrowseNative.capture(layer);
-        return { compId: comp.id, layerId: layer.id, instanceId: instanceId, reused: !!reused, packId: captured.packId, assetId: captured.assetId, parameters: captured.parameters, observed: captured.observed, modified: captured.modified };
+        captured = captured || AEBrowseNative.capture(layer);
+        return { compId: comp.id, layerId: layer.id, layerName: String(layer.name), instanceId: instanceId, reused: !!reused, packId: captured.packId, packVersion: meta.packVersion, assetId: captured.assetId, insertTime: meta.insertTime, parameters: captured.parameters, observed: captured.observed, modified: captured.modified };
     }
     function instantiate(request) {
         var comp = targetComp(request.target);
@@ -168,6 +168,47 @@ var AEBrowseHost = (function () {
         if (found === null) { fail('E_INSTANCE_MISSING', '目标图层已不存在。'); }
         return { data: instanceData(comp, found, target.instanceId, true), diagnostics: [] };
     }
+    function selectedInstance(request) {
+        var comp = targetComp(request.target), selection = comp.selectedLayers;
+        if (selection.length !== 1) { fail('E_SELECTION_COUNT', '请在 AE 中只选择一个 AE Browse 图层。'); }
+        var layer = selection[0], meta = metadata(layer);
+        if (!meta || !id(meta.instanceId)) { fail('E_INSTANCE_UNKNOWN', '所选图层不是有效的 AE Browse 实例。'); }
+        return { data: instanceData(comp, layer, meta.instanceId, false), diagnostics: [] };
+    }
+    function updateInstance(request) {
+        var comp = targetComp(request.target), target = request.target, payload = request.payload;
+        if (!id(request.operationId)) { fail('E_OPERATION_ID', '更新请求需要稳定的操作 ID。'); }
+        if (!integer(target.layerId) || !id(target.instanceId)) { fail('E_TARGET_FORMAT', '更新需要有效的图层和实例 ID。'); }
+        var selection = comp.selectedLayers;
+        if (selection.length !== 1 || selection[0].id !== target.layerId) { fail('E_SELECTION_CHANGED', '所选图层已经改变，请重新读取所选实例。'); }
+        var layer = selection[0], meta = metadata(layer);
+        if (!meta || meta.instanceId !== target.instanceId || meta.schemaVersion !== 1) { fail('E_INSTANCE_IDENTITY', '实例身份与读取时不一致。'); }
+        if (!object(payload.expected) || !object(payload.expected.parameters) || !object(payload.expected.observed)) { fail('E_EXPECTED_REQUIRED', '更新需要读取时的参数与属性快照。'); }
+        if (!object(payload.parameters)) { fail('E_PAYLOAD_FORMAT', '更新参数需要对象。'); }
+        var loaded = loadedData(payload.loaded), opened = false, data;
+        try {
+            app.beginUndoGroup('AE Browse · 更新外观'); opened = true;
+            // Recheck selection after entering the host operation, before any property write.
+            if (targetComp(target) !== comp || comp.selectedLayers.length !== 1 || comp.selectedLayers[0].id !== target.layerId) { fail('E_SELECTION_CHANGED', '执行前所选图层已经改变。'); }
+            data = AEBrowseNative.updateAppearance(layer, loaded, payload.parameters, {
+                expected: payload.expected,
+                finalize: function (captured) {
+                    var result = instanceData(comp, layer, target.instanceId, false, captured);
+                    AEBrowseJSON.stringify(result);
+                    return result;
+                }
+            });
+        } finally { if (opened) { app.endUndoGroup(); } }
+        return { data: data, diagnostics: [] };
+    }
+    function importLocal(request) {
+        var comp = targetComp(request.target), opened = false;
+        try {
+            app.beginUndoGroup('AE Browse · 添加本地素材'); opened = true;
+            if (targetComp(request.target) !== comp) { fail('E_CONTEXT_CHANGED', '目标合成已经改变。'); }
+            return {data:AEBrowseLocal.create(comp, request.payload.local, request.operationId, request.payload.insertTime), diagnostics:[]};
+        } finally { if (opened) { app.endUndoGroup(); } }
+    }
     function dispatch(requestJSON) {
         var start = now(), requestId = null, response = { protocolVersion: PROTOCOL_VERSION, requestId: null, ok: false, data: null, diagnostics: [], timing: { hostMs: 0 } }, acquired = false;
         try {
@@ -176,7 +217,7 @@ var AEBrowseHost = (function () {
             if (object(request) && id(request.requestId)) { requestId = request.requestId; response.requestId = requestId; }
             if (!object(request) || request.protocolVersion !== PROTOCOL_VERSION) { fail('E_PROTOCOL_VERSION', '宿主通信协议版本不支持。'); }
             if (requestId === null) { fail('E_REQUEST_ID', '请求需要有效的通信 ID。'); }
-            if (typeof request.operation !== 'string' || !request.operation || request.operation.length > 128 || !object(request.payload) || !own(request, 'target') || request.target !== null && !object(request.target)) { fail('E_REQUEST_FORMAT', '请求操作、目标或数据格式无效。'); }
+            if (typeof request.operation !== 'string' || !request.operation || request.operation.length > 128 || !object(request.payload) || !own(request, 'target') || (request.target !== null && !object(request.target))) { fail('E_REQUEST_FORMAT', '请求操作、目标或数据格式无效。'); }
             if (busy) { fail('E_HOST_BUSY', '宿主正在处理另一个请求。'); }
             busy = true; acquired = true;
             var result;
@@ -184,12 +225,17 @@ var AEBrowseHost = (function () {
             else if (request.operation === 'getContext') { result = { data: context(), diagnostics: [] }; }
             else if (request.operation === 'instantiateAsset') { result = instantiate(request); }
             else if (request.operation === 'readInstance') { result = readInstance(request); }
+            else if (request.operation === 'getSelectedInstance') { result = selectedInstance(request); }
+            else if (request.operation === 'updateInstance') { result = updateInstance(request); }
+            else if (request.operation === 'importLocalAsset') { result = importLocal(request); }
             else { fail('E_OPERATION_UNSUPPORTED', '当前入口尚未支持操作：' + request.operation); }
             response.data = result.data; response.diagnostics = result.diagnostics; response.ok = true;
         } catch (error) {
             response.data = null; response.ok = false;
             response.diagnostics.push({ code: error.code || 'E_HOST_OPERATION', severity: 'error', phase: 'host', message: String(error.message || error) });
             if (error.cleanupFailed || error.cleanupError) { response.diagnostics.push({ code: 'E_CLEANUP_FAILED', severity: 'error', phase: 'cleanup', message: '本次创建的图层未能确认清理，请检查目标合成。' }); }
+            if (error.rollbackConfirmed) { response.diagnostics.push({ code: 'I_UPDATE_ROLLED_BACK', severity: 'info', phase: 'rollback', message: '更新失败，已回读确认原外观和实例信息恢复。' }); }
+            if (error.rollbackFailed) { response.diagnostics.push({ code: 'E_ROLLBACK_FAILED', severity: 'error', phase: 'rollback', message: '无法确认原外观完整恢复，请检查该图层并使用撤销。' }); }
         } finally { if (acquired) { busy = false; } response.timing.hostMs = Math.max(0, now() - start); }
         try { return AEBrowseJSON.stringify(response); }
         catch (serializationError) { return AEBrowseJSON.stringify({ protocolVersion: PROTOCOL_VERSION, requestId: requestId, ok: false, data: null, diagnostics: [{ code: serializationError.code || 'E_RESPONSE_SERIALIZE', severity: 'error', phase: 'host', message: '宿主结果无法序列化。' }], timing: { hostMs: Math.max(0, now() - start) } }); }

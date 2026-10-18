@@ -1,0 +1,39 @@
+{"runId":"local-1792284531922","finished":true,"results":[{"name":"SVG compatibility import","passed":true,"detail":{"protocolVersion":1,"requestId":"req-0-importLocalAsset","ok":true,"data":{"compId":51,"layerId":64,"layerIds":[64],"sourceItemId":63,"reused":false,"rasterized":true},"diagnostics":[
+
+],"timing":{"hostMs":47}}},{"name":"SVG displayed at original size and centered","passed":true,"detail":{"scale":[25,25,100],"width":1280,"height":800}},{"name":"Duplicate request creates one layer","passed":true,"detail":{"protocolVersion":1,"requestId":"req-2-importLocalAsset","ok":true,"data":{"compId":51,"layerId":64,"layerIds":[64],"reused":true},"diagnostics":[
+
+],"timing":{"hostMs":2}}},{"name":"PNG import","passed":true,"detail":{"protocolVersion":1,"requestId":"req-3-importLocalAsset","ok":true,"data":{"compId":51,"layerId":66,"layerIds":[66],"sourceItemId":65,"reused":false,"rasterized":false},"diagnostics":[
+
+],"timing":{"hostMs":10}}},{"name":"Missing file leaves existing layers intact","passed":true,"detail":{"protocolVersion":1,"requestId":"req-4-importLocalAsset","ok":false,"data":null,"diagnostics":[{"code":"E_LOCAL_MISSING","severity":"error","phase":"host","message":"素材缓存已不存在，请刷新素材并重试。"}],"timing":{"hostMs":5}}},{"name":"Existing native shape creation","passed":true,"detail":{"protocolVersion":1,"requestId":"req-5-instantiateAsset","ok":true,"data":{"compId":51,"layerId":67,"layerName":"圆角卡片","instanceId":"native-smoke","reused":false,"packId":"local.aebrowse.basics","packVersion":"0.1.0","assetId":"rounded-card","insertTime":0.25,"parameters":{"width":320,"height":180,"radius":24,"color":[0.20000000298023,0.5,1,1],"duration":0.6,"motion":"none"},"observed":{"position":[480,320,0],"geometryPropertyState":[{"keys":0,"expression":false},{"keys":0,"expression":false},{"keys":0,"expression":false}],"animation":[{"channel":"ADBE Scale","keys":[
+
+]},{"channel":"ADBE Position","keys":[
+
+]},{"channel":"ADBE Opacity","keys":[
+
+]}],"effects":[
+
+],"effectsTotal":0,"size":[320,180],"radius":24,"color":[0.20000000298023,0.5,1,1]},"modified":false},"diagnostics":[
+
+],"timing":{"hostMs":173}}},{"name":"Existing instance read","passed":true,"detail":{"protocolVersion":1,"requestId":"req-6-getSelectedInstance","ok":true,"data":{"compId":51,"layerId":67,"layerName":"圆角卡片","instanceId":"native-smoke","reused":false,"packId":"local.aebrowse.basics","packVersion":"0.1.0","assetId":"rounded-card","insertTime":0.25,"parameters":{"width":320,"height":180,"radius":24,"color":[0.20000000298023,0.5,1,1],"duration":0.6,"motion":"none"},"observed":{"position":[480,320,0],"geometryPropertyState":[{"keys":0,"expression":false},{"keys":0,"expression":false},{"keys":0,"expression":false}],"animation":[{"channel":"ADBE Scale","keys":[
+
+]},{"channel":"ADBE Position","keys":[
+
+]},{"channel":"ADBE Opacity","keys":[
+
+]}],"effects":[
+
+],"effectsTotal":0,"size":[320,180],"radius":24,"color":[0.20000000298023,0.5,1,1]},"modified":false},"diagnostics":[
+
+],"timing":{"hostMs":9}}},{"name":"Existing instance update","passed":true,"detail":{"protocolVersion":1,"requestId":"update-smoke","ok":true,"data":{"compId":51,"layerId":67,"layerName":"圆角卡片","instanceId":"native-smoke","reused":false,"packId":"local.aebrowse.basics","packVersion":"0.1.0","assetId":"rounded-card","insertTime":0.25,"parameters":{"width":260,"height":180,"radius":24,"color":[0.20000000298023,0.5,1,1],"duration":0.6,"motion":"none"},"observed":{"position":[480,320,0],"geometryPropertyState":[{"keys":0,"expression":false},{"keys":0,"expression":false},{"keys":0,"expression":false}],"animation":[{"channel":"ADBE Scale","keys":[
+
+]},{"channel":"ADBE Position","keys":[
+
+]},{"channel":"ADBE Opacity","keys":[
+
+]}],"effects":[
+
+],"effectsTotal":0,"size":[260,180],"radius":24,"color":[0.20000000298023,0.5,1,1]},"modified":false},"diagnostics":[
+
+],"timing":{"hostMs":82}}}],"before":[
+
+],"created":[{"id":63,"name":"81260539b968c5ac70be23fd810459beaa64d6889b27d857a0012e0cdb84622d.png"},{"id":65,"name":"81260539b968c5ac70be23fd810459beaa64d6889b27d857a0012e0cdb84622d.png"},{"id":51,"name":"__AEBrowse_Local_local-1792284531922"}],"frameRequested":true,"passed":8,"failed":0}

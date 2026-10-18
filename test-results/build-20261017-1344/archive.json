@@ -1,0 +1,9 @@
+{
+  "finished": true,
+  "scope": "Offline ZIP contents and CRC/SHA-256 checks; no AE.",
+  "path": "D:\\project\\ae-browse\\dist\\AE Browse-0.2.0-dev-20261017.zip",
+  "files": 21,
+  "allFilesMatch": true,
+  "bytes": 172578,
+  "sha256": "1150da513aca6493cd821a8b7145e16938d0aa187467aa8716717358b09fccb9"
+}

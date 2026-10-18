@@ -28,3 +28,14 @@ Desktop.ini
 # Basic-shape scratch registrations, diagnostic runs and generated scripts.
 # Selected final reports and PNG evidence are deliberately tracked with git add -f.
 /test-results/basic-shapes-*/
+/test-results/instance-update-*/
+/test-results/instance-alpha-*/
+/test-results/instance-logic-*/
+/test-results/build-test-*/
+/test-results/active-build-test-path.txt
+
+# Local-folder scratch runs; retain selected final evidence, not embedded scripts/caches.
+/test-results/local-folder-probe-*/
+/test-results/local-folder-final/run.jsx
+/test-results/local-folder-final/config.json
+/test-results/local-folder-final/raster.json

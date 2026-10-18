@@ -1,0 +1,258 @@
+{
+  "startedAt": "2026-10-17T06:19:47.841Z",
+  "finished": true,
+  "scope": "Node-only real-file library/planner stability; isolated package copies and registrations; no AE calls.",
+  "requestedMinutes": 20,
+  "mode": "persistent-service",
+  "seed": 268206,
+  "cycles": 1548,
+  "passed": 3498,
+  "failed": 0,
+  "cases": {
+    "randomized plans preserve dimensions, color, time and geometry": 1548,
+    "invalid geometry leaves the request queue usable": 1548,
+    "concurrent reads return independent snapshots": 310,
+    "changed source refuses preparation and recovers after explicit registration": 92
+  },
+  "samples": [
+    {
+      "elapsedSeconds": 0,
+      "cycles": 0,
+      "passed": 0,
+      "failed": 0,
+      "heapMiB": 5.34,
+      "rssMiB": 47.42,
+      "windowCases": 0,
+      "p95Ms": 0,
+      "maxMs": 0
+    },
+    {
+      "elapsedSeconds": 60.5,
+      "cycles": 79,
+      "passed": 179,
+      "failed": 0,
+      "heapMiB": 5.04,
+      "rssMiB": 63.24,
+      "windowCases": 179,
+      "p95Ms": 10.3,
+      "maxMs": 44.49
+    },
+    {
+      "elapsedSeconds": 121,
+      "cycles": 157,
+      "passed": 356,
+      "failed": 0,
+      "heapMiB": 5.13,
+      "rssMiB": 86.83,
+      "windowCases": 177,
+      "p95Ms": 10.46,
+      "maxMs": 48.99
+    },
+    {
+      "elapsedSeconds": 181.4,
+      "cycles": 235,
+      "passed": 531,
+      "failed": 0,
+      "heapMiB": 5.2,
+      "rssMiB": 78.48,
+      "windowCases": 175,
+      "p95Ms": 9.77,
+      "maxMs": 49.5
+    },
+    {
+      "elapsedSeconds": 241.8,
+      "cycles": 313,
+      "passed": 708,
+      "failed": 0,
+      "heapMiB": 5.2,
+      "rssMiB": 81.3,
+      "windowCases": 177,
+      "p95Ms": 9.29,
+      "maxMs": 52.74
+    },
+    {
+      "elapsedSeconds": 302.3,
+      "cycles": 391,
+      "passed": 884,
+      "failed": 0,
+      "heapMiB": 5.27,
+      "rssMiB": 90.32,
+      "windowCases": 176,
+      "p95Ms": 9.15,
+      "maxMs": 45.92
+    },
+    {
+      "elapsedSeconds": 362.8,
+      "cycles": 469,
+      "passed": 1060,
+      "failed": 0,
+      "heapMiB": 5.25,
+      "rssMiB": 98.07,
+      "windowCases": 176,
+      "p95Ms": 9.63,
+      "maxMs": 52.83
+    },
+    {
+      "elapsedSeconds": 423.3,
+      "cycles": 547,
+      "passed": 1237,
+      "failed": 0,
+      "heapMiB": 5.3,
+      "rssMiB": 98.58,
+      "windowCases": 177,
+      "p95Ms": 9.05,
+      "maxMs": 54.55
+    },
+    {
+      "elapsedSeconds": 483.7,
+      "cycles": 625,
+      "passed": 1412,
+      "failed": 0,
+      "heapMiB": 5.28,
+      "rssMiB": 98.99,
+      "windowCases": 175,
+      "p95Ms": 8.98,
+      "maxMs": 47.81
+    },
+    {
+      "elapsedSeconds": 544.2,
+      "cycles": 703,
+      "passed": 1589,
+      "failed": 0,
+      "heapMiB": 5.35,
+      "rssMiB": 98.97,
+      "windowCases": 177,
+      "p95Ms": 9.46,
+      "maxMs": 46.92
+    },
+    {
+      "elapsedSeconds": 604.7,
+      "cycles": 781,
+      "passed": 1765,
+      "failed": 0,
+      "heapMiB": 5.33,
+      "rssMiB": 99.21,
+      "windowCases": 176,
+      "p95Ms": 10.04,
+      "maxMs": 48.08
+    },
+    {
+      "elapsedSeconds": 665.2,
+      "cycles": 859,
+      "passed": 1941,
+      "failed": 0,
+      "heapMiB": 5.32,
+      "rssMiB": 99.37,
+      "windowCases": 176,
+      "p95Ms": 9.54,
+      "maxMs": 48.92
+    },
+    {
+      "elapsedSeconds": 725.7,
+      "cycles": 937,
+      "passed": 2118,
+      "failed": 0,
+      "heapMiB": 5.31,
+      "rssMiB": 99.61,
+      "windowCases": 177,
+      "p95Ms": 9.04,
+      "maxMs": 46.7
+    },
+    {
+      "elapsedSeconds": 786.2,
+      "cycles": 1015,
+      "passed": 2293,
+      "failed": 0,
+      "heapMiB": 5.32,
+      "rssMiB": 99.58,
+      "windowCases": 175,
+      "p95Ms": 9.17,
+      "maxMs": 43.78
+    },
+    {
+      "elapsedSeconds": 846.6,
+      "cycles": 1093,
+      "passed": 2470,
+      "failed": 0,
+      "heapMiB": 5.33,
+      "rssMiB": 98.93,
+      "windowCases": 177,
+      "p95Ms": 9.22,
+      "maxMs": 47.69
+    },
+    {
+      "elapsedSeconds": 907,
+      "cycles": 1171,
+      "passed": 2646,
+      "failed": 0,
+      "heapMiB": 5.36,
+      "rssMiB": 99.32,
+      "windowCases": 176,
+      "p95Ms": 9.33,
+      "maxMs": 47.04
+    },
+    {
+      "elapsedSeconds": 967.6,
+      "cycles": 1249,
+      "passed": 2822,
+      "failed": 0,
+      "heapMiB": 5.36,
+      "rssMiB": 99.75,
+      "windowCases": 176,
+      "p95Ms": 9.17,
+      "maxMs": 44.31
+    },
+    {
+      "elapsedSeconds": 1028,
+      "cycles": 1327,
+      "passed": 2999,
+      "failed": 0,
+      "heapMiB": 5.36,
+      "rssMiB": 100.85,
+      "windowCases": 177,
+      "p95Ms": 9.26,
+      "maxMs": 48.54
+    },
+    {
+      "elapsedSeconds": 1088.4,
+      "cycles": 1405,
+      "passed": 3174,
+      "failed": 0,
+      "heapMiB": 5.35,
+      "rssMiB": 101.84,
+      "windowCases": 175,
+      "p95Ms": 9.09,
+      "maxMs": 45.8
+    },
+    {
+      "elapsedSeconds": 1148.9,
+      "cycles": 1483,
+      "passed": 3351,
+      "failed": 0,
+      "heapMiB": 5.36,
+      "rssMiB": 101.34,
+      "windowCases": 177,
+      "p95Ms": 9.22,
+      "maxMs": 47.92
+    },
+    {
+      "elapsedSeconds": 1200.1,
+      "cycles": 1548,
+      "passed": 3498,
+      "failed": 0,
+      "heapMiB": 5.31,
+      "rssMiB": 101.01,
+      "windowCases": 147,
+      "p95Ms": 9.29,
+      "maxMs": 48.14
+    }
+  ],
+  "cleanup": {
+    "registrationEmpty": true,
+    "isolatedSourceBytesRestored": true,
+    "userRegistryAccessed": false,
+    "executedAE": false
+  },
+  "endedAt": "2026-10-17T06:39:47.951Z",
+  "elapsedSeconds": 1200.1
+}

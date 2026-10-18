@@ -1,0 +1,30 @@
+{
+  "finished": true,
+  "layoutChecks": [
+    {
+      "width": 780,
+      "ratio": "75",
+      "detailsRight": 780,
+      "buttonBottom": 554,
+      "mainBottom": 579.5,
+      "overflow": false
+    },
+    {
+      "width": 560,
+      "ratio": "75",
+      "detailsRight": 560,
+      "buttonBottom": 340,
+      "mainBottom": 365.5,
+      "overflow": false
+    },
+    {
+      "width": 300,
+      "ratio": "75",
+      "detailsRight": 300,
+      "buttonBottom": 345.5,
+      "mainBottom": 365.5,
+      "overflow": false
+    }
+  ],
+  "uiErrors": []
+}

@@ -1,0 +1,161 @@
+{
+  "runId": "instance-update-1792217454259-d1cd0f",
+  "hostSha256": "a903f8944e754d0cb7af7fe683865bf51d841d7070be7f35505a6e1a2d731922",
+  "aeVersion": "26.0x67",
+  "startedAtMs": 1792217454718,
+  "finished": true,
+  "tests": [
+    {
+      "name": "RGBA alpha 0 writes native fill opacity",
+      "passed": true,
+      "details": {
+        "declaredAlpha": 0,
+        "actualFillOpacity": 0
+      }
+    },
+    {
+      "name": "RGBA alpha 0.25 writes native fill opacity",
+      "passed": true,
+      "details": {
+        "declaredAlpha": 0.25,
+        "actualFillOpacity": 25
+      }
+    },
+    {
+      "name": "RGBA alpha 1 writes native fill opacity",
+      "passed": true,
+      "details": {
+        "declaredAlpha": 1,
+        "actualFillOpacity": 100
+      }
+    },
+    {
+      "name": "rounded-card / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "Opaque legacy baselines remain editable",
+      "passed": true
+    },
+    {
+      "name": "Manual native fill opacity remains protected",
+      "passed": true
+    },
+    {
+      "name": "Serialization failure restores actual opacity and exact metadata",
+      "passed": true
+    }
+  ],
+  "baseline": [],
+  "beforeActiveId": null,
+  "passed": 30,
+  "failed": 0,
+  "temporary": {
+    "id": 382,
+    "name": "__AEBrowse_Alpha_instance-update-1792217454259-d1cd0f"
+  },
+  "awaitingPixelCaptureAndCleanup": false,
+  "endedAtMs": 1792217466143,
+  "cleanup": {
+    "attempted": true,
+    "removed": true,
+    "absentByItemScan": true,
+    "originalItemsAndLayerIdentitiesUnchanged": true,
+    "projectSaved": false,
+    "remaining": [],
+    "itemCount": 0,
+    "projectFile": null
+  }
+}

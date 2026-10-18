@@ -1,0 +1,68 @@
+/* Native AE importer for immutable local-file snapshots prepared by the Node service. */
+var AEBrowseLocal = (function () {
+    function fail(code, message) { var e = new Error(message); e.code = code; throw e; }
+    function create(comp, local, operationId, insertTime) {
+        if (!local || typeof local.path !== 'string' || typeof local.fingerprint !== 'string' || !/^[a-f0-9]{64}$/.test(local.fingerprint) ||
+            typeof local.name !== 'string' || !local.name || local.name.length > 1024 || !/^\.(svg|png|jpe?g)$/.test(local.extension) ||
+            local.path.replace(/\\/g, '/').split('/').pop() !== local.fingerprint + local.extension || /[\x00-\x1f]/.test(local.path)) { fail('E_LOCAL_FORMAT', '本地素材导入数据无效。'); }
+        if (typeof operationId !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(operationId) || typeof insertTime !== 'number' || !isFinite(insertTime) || insertTime < 0 || insertTime >= comp.duration) { fail('E_LOCAL_FORMAT', '导入身份或插入时间无效。'); }
+        var i, meta, reused = [], beforeItems = {}, beforeLayers = {}, imported = null, rasterized = false, fallback = null;
+        for (i = 1; i <= comp.numLayers; i++) {
+            var layer = comp.layer(i); beforeLayers['$' + layer.id] = true;
+            try { meta = AEBrowseJSON.parse(layer.comment); } catch (_) { meta = null; }
+            if (meta && meta.aeBrowseLocal === 1 && meta.operationId === operationId) {
+                if (meta.fingerprint !== local.fingerprint || meta.insertTime !== insertTime) { fail('E_INSTANCE_CONFLICT', '操作 ID 已被其他素材使用。'); }
+                reused.push(layer.id);
+            }
+        }
+        if (reused.length) { return { compId: comp.id, layerId: reused[0], layerIds: reused, reused:true }; }
+        var file = new File(local.path);
+        if (!file.exists) { fail('E_LOCAL_MISSING', '素材缓存已不存在，请刷新素材并重试。'); }
+        for (i = 1; i <= app.project.numItems; i++) { beforeItems['$' + app.project.item(i).id] = true; }
+        try {
+            var options = new ImportOptions(file);
+            if (local.extension === '.svg') {
+                if (options.canImportAs(ImportAsType.COMP)) { options.importAs = ImportAsType.COMP; }
+                else {
+                    fallback = local.fallback;
+                    if (!fallback || fallback.extension !== '.png' || typeof fallback.path !== 'string' || !/^[a-f0-9]{64}$/.test(fallback.fingerprint) ||
+                        fallback.path.replace(/\\/g, '/').split('/').pop() !== fallback.fingerprint + '.png' ||
+                        typeof fallback.displayWidth !== 'number' || !isFinite(fallback.displayWidth) || fallback.displayWidth < 1 || fallback.displayWidth > 30000 ||
+                        typeof fallback.displayHeight !== 'number' || !isFinite(fallback.displayHeight) || fallback.displayHeight < 1 || fallback.displayHeight > 30000) { fail('E_SVG_UNSUPPORTED', '当前 AE 需要 SVG 兼容图片，请刷新素材后重新添加。'); }
+                    file = new File(fallback.path);
+                    if (!file.exists) { fail('E_LOCAL_MISSING', 'SVG 兼容图片已不存在，请重新添加。'); }
+                    options = new ImportOptions(file); options.importAs = ImportAsType.FOOTAGE; options.sequence = false; rasterized = true;
+                }
+            } else {
+                if (!options.canImportAs(ImportAsType.FOOTAGE)) { fail('E_LOCAL_UNSUPPORTED', '当前 AE 无法导入这张图片。'); }
+                options.importAs = ImportAsType.FOOTAGE; options.sequence = false;
+            }
+            imported = app.project.importFile(options);
+            if (!imported) { fail('E_LOCAL_UNSUPPORTED', 'AE 未返回有效的导入素材。'); }
+            if (imported instanceof CompItem) {
+                // Keep SVG's layer grouping and coordinates intact in a precomp.
+                // Its shape paths remain editable by opening the precomp in AE.
+                if (!imported.numLayers) { fail('E_LOCAL_EMPTY', 'SVG 没有可导入的图层。'); }
+                imported.duration = comp.duration;
+                for (i = 1; i <= imported.numLayers; i++) { imported.layer(i).outPoint = comp.duration; }
+            }
+            var placed = comp.layers.add(imported);
+            placed.name = local.name;
+            placed.startTime = insertTime; placed.inPoint = insertTime; placed.outPoint = comp.duration;
+            placed.property('ADBE Transform Group').property('ADBE Position').setValue([comp.width / 2, comp.height / 2]);
+            if (rasterized) { placed.property('ADBE Transform Group').property('ADBE Scale').setValue([fallback.displayWidth / imported.width * 100, fallback.displayHeight / imported.height * 100]); }
+            placed.comment = AEBrowseJSON.stringify({aeBrowseLocal:1, operationId:operationId, fingerprint:local.fingerprint, insertTime:insertTime});
+            var observed = AEBrowseJSON.parse(placed.comment);
+            if (observed.operationId !== operationId || placed.containingComp !== comp) { fail('E_LOCAL_READBACK', '导入后无法确认图层身份。'); }
+            var result = {compId:comp.id, layerId:placed.id, layerIds:[placed.id], sourceItemId:imported.id, reused:false, rasterized:rasterized};
+            AEBrowseJSON.stringify(result); return result;
+        } catch (error) {
+            for (i = comp.numLayers; i >= 1; i--) { if (!beforeLayers['$' + comp.layer(i).id]) { try { comp.layer(i).remove(); } catch (_) { error.cleanupFailed = true; } } }
+            for (i = app.project.numItems; i >= 1; i--) { if (!beforeItems['$' + app.project.item(i).id]) { try { app.project.item(i).remove(); } catch (_) { error.cleanupFailed = true; } } }
+            for (i = 1; i <= comp.numLayers; i++) { if (!beforeLayers['$' + comp.layer(i).id]) { error.cleanupFailed = true; } }
+            for (i = 1; i <= app.project.numItems; i++) { if (!beforeItems['$' + app.project.item(i).id]) { error.cleanupFailed = true; } }
+            throw error;
+        }
+    }
+    return {create:create};
+})();

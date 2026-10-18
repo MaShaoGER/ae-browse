@@ -1,0 +1,20 @@
+{
+  "finished": true,
+  "scope": "Offline PNG pixels; no AE",
+  "passed": 7,
+  "failed": 0,
+  "renderSize": [
+    1280,
+    800
+  ],
+  "aeFrameSize": [
+    960,
+    640
+  ],
+  "aeAlphaBounds": [
+    336,
+    236,
+    624,
+    404
+  ]
+}

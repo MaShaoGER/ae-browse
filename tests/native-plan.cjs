@@ -68,6 +68,9 @@ for (const [type, points] of [['polygon', 3], ['polygon', 6], ['star', 5]]) test
 });
 for (const points of [2, 3.5, 65]) test('拒绝非法或超预算的多边形边数 ' + points, () => rejects(() => plan({ points }, shapeFixture('polygon')), 'E_GEOMETRY_VALUE'));
 for (const innerRadius of [0, 120, 140]) test('星形内半径必须小于外半径且大于零 ' + innerRadius, () => rejects(() => plan({ innerRadius }, shapeFixture('star')), 'E_GEOMETRY_VALUE'));
+test('星形角数不能因内外半径有效而跳过整数与预算约束', () => {
+  for (const points of [3.5, 65]) rejects(() => plan({ points, outerRadius: 120, innerRadius: 55 }, shapeFixture('star')), 'E_GEOMETRY_VALUE');
+});
 test('多边形不能绕过单几何节点限制', () => {
   const fixture = shapeFixture('polygon'); fixture.payload.nodes.push({ id: 'extra', type: 'ellipse', parent: 'output', size: { bind: ['width', 'height'] } });
   rejects(() => plan({}, fixture), 'E_NODE_KIND_UNSUPPORTED');

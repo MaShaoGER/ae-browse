@@ -1,0 +1,15 @@
+{
+  "finished": true,
+  "scope": "Real CEP handlers, local registry and CEF pointer input; no AE writes",
+  "registration": {
+    "status": "目录已载入，源文件保持独立。",
+    "location": "D:\\project\\ae-browse\\assets\\local",
+    "count": 1,
+    "name": "蓝色卡片",
+    "preview": true,
+    "busy": false
+  },
+  "searchEmpty": 0,
+  "dividerRatio": 42,
+  "context": "请打开目标合成；图形库仍可浏览"
+}

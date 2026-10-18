@@ -32,7 +32,7 @@ Group.prototype.addProperty = function (name) {
     else if (name === 'ADBE Vector Shape - Rect') { group.add(new Property('ADBE Vector Rect Size', [100, 100])); group.add(new Property('ADBE Vector Rect Roundness', 0)); }
     else if (name === 'ADBE Vector Shape - Ellipse') { group.add(new Property('ADBE Vector Ellipse Size', [100, 100])); }
     else if (name === 'ADBE Vector Shape - Star') { for (var key in { 'ADBE Vector Star Type': 1, 'ADBE Vector Star Points': 5, 'ADBE Vector Star Outer Radius': 100, 'ADBE Vector Star Inner Radius': 50, 'ADBE Vector Star Rotation': 0 }) group.add(new Property(key, { 'ADBE Vector Star Type': 1, 'ADBE Vector Star Points': 5, 'ADBE Vector Star Outer Radius': 100, 'ADBE Vector Star Inner Radius': 50, 'ADBE Vector Star Rotation': 0 }[key])); }
-    else if (name === 'ADBE Vector Graphic - Fill') { group.add(new Property('ADBE Vector Fill Color', [1, 1, 1, 1])); }
+    else if (name === 'ADBE Vector Graphic - Fill') { group.add(new Property('ADBE Vector Fill Color', [1, 1, 1, 1])); group.add(new Property('ADBE Vector Fill Opacity', 100)); }
     group.enabled = true; return this.add(group);
 };
 function ShapeLayer(comp) {
@@ -131,7 +131,7 @@ test('Protocol, request identity, shape and unsupported mutations are guarded', 
   diagnostic(dispatch(context, request('getContext', { requestId: '' })), 'E_REQUEST_ID');
   diagnostic(dispatch(context, request('getContext', { payload: null })), 'E_REQUEST_FORMAT');
   diagnostic(dispatch(context, request('getContext', { target: 'arbitrary' })), 'E_REQUEST_FORMAT');
-  diagnostic(dispatch(context, request('updateInstance')), 'E_OPERATION_UNSUPPORTED');
+  diagnostic(dispatch(context, request('unsupportedMutation')), 'E_OPERATION_UNSUPPORTED');
   diagnostic(dispatch(context, request('evalScript', { payload: { source: 'app.failWrite=true' } })), 'E_OPERATION_UNSUPPORTED');
   diagnostic(dispatch(context, ' '.repeat(4 * 1024 * 1024 + 1)), 'E_REQUEST_LIMIT');
   diagnostic(dispatch(context, '{"protocolVersion":1,"constructor":{}}'), 'E_RESERVED_KEY');
@@ -142,6 +142,13 @@ test('Create rejects changed context and absence before opening undo or writing'
   diagnostic(dispatch(context, createRequest({ target: { compId: 8 } })), 'E_CONTEXT_CHANGED');
   vm.runInContext('app.project.activeItem = null;', context);
   diagnostic(dispatch(context, createRequest()), 'E_NO_ACTIVE_COMP');
+  assert.deepEqual(evaluate(context, 'app.calls'), { created: 0, removed: 0, begin: 0, end: 0 });
+});
+test('A valid comp target does not bypass request shape validation', () => {
+  const context = host();
+  for (const overrides of [{ payload: null }, { payload: [] }, { operation: '' }, { operation: 'x'.repeat(129) }]) {
+    diagnostic(dispatch(context, request('getContext', { target: { compId: 7 }, ...overrides })), 'E_REQUEST_FORMAT');
+  }
   assert.deepEqual(evaluate(context, 'app.calls'), { created: 0, removed: 0, begin: 0, end: 0 });
 });
 test('Host validates loaded schema, manifest membership, version and capability requirements', () => {
@@ -269,6 +276,155 @@ for (const type of ['ellipse', 'polygon', 'star']) test('Create and capture ' + 
   for (const key of Object.keys(overrides)) assert.equal(updated.parameters[key], overrides[key]);
   vm.runInContext("app.project.activeItem.layer(1).property('ADBE Root Vectors Group').property(1).property('ADBE Vectors Group').property(1).property(1).setValue(99)", context);
   assert.equal(evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1)).modified'), true);
+});
+function editable(context) {
+  const created = dispatch(context, createRequest());
+  assert.equal(created.ok, true, JSON.stringify(created));
+  vm.runInContext('app.project.activeItem.selectedLayers = [app.project.activeItem.layer(1)];', context);
+  return created.data;
+}
+function updateRequest(instance, overrides = {}) {
+  return request('updateInstance', { operationId: 'update-1',
+    target: { compId: instance.compId, layerId: instance.layerId, instanceId: instance.instanceId },
+    payload: { loaded: clone(loaded), parameters: { ...instance.parameters, width: 460, radius: 28 },
+      expected: { parameters: instance.parameters, observed: instance.observed } }, ...overrides });
+}
+test('Read selected instance requires exactly one tool layer and never writes', () => {
+  const context = host(), instance = editable(context), before = evaluate(context, 'app.calls');
+  const response = dispatch(context, request('getSelectedInstance', { target: { compId: 7 } }));
+  assert.equal(response.ok, true, JSON.stringify(response));
+  assert.equal(response.data.layerId, instance.layerId);
+  assert.equal(response.data.packVersion, '0.1.0');
+  assert.equal(response.data.insertTime, .5);
+  assert.deepEqual(response.data.parameters, instance.parameters);
+  vm.runInContext('app.project.activeItem.selectedLayers = [];', context);
+  diagnostic(dispatch(context, request('getSelectedInstance', { target: { compId: 7 } })), 'E_SELECTION_COUNT');
+  vm.runInContext('var c = app.project.activeItem; c.selectedLayers = [c.layer(1), c.layer(1)];', context);
+  diagnostic(dispatch(context, request('getSelectedInstance', { target: { compId: 7 } })), 'E_SELECTION_COUNT');
+  vm.runInContext('var c = app.project.activeItem; c.selectedLayers = [c.layer(1)]; c.layer(1).comment = "user layer";', context);
+  diagnostic(dispatch(context, request('getSelectedInstance', { target: { compId: 7 } })), 'E_INSTANCE_UNKNOWN');
+  assert.deepEqual(evaluate(context, 'app.calls'), before);
+});
+test('Update changes appearance on the same layer while preserving original animation', () => {
+  const context = host(), instance = editable(context);
+  const response = dispatch(context, updateRequest(instance));
+  assert.equal(response.ok, true, JSON.stringify(response));
+  assert.equal(response.data.layerId, instance.layerId);
+  assert.equal(response.data.instanceId, instance.instanceId);
+  assert.deepEqual(response.data.observed.size, [460, 180]);
+  assert.equal(response.data.observed.radius, 28);
+  assert.equal(response.data.modified, false);
+  assert.deepEqual(response.data.observed.animation, instance.observed.animation);
+  assert.equal(evaluate(context, 'app.project.activeItem.numLayers'), 1);
+  assert.equal(evaluate(context, 'app.calls.created'), 1);
+  assert.equal(evaluate(context, 'app.calls.removed'), 0);
+  assert.equal(evaluate(context, 'app.calls.begin'), evaluate(context, 'app.calls.end'));
+});
+test('Update refuses a switched selection, instance identity, comp or stale read snapshot', () => {
+  for (const [code, mutate] of [
+    ['E_SELECTION_CHANGED', c => vm.runInContext('app.project.activeItem.selectedLayers = [];', c)],
+    ['E_INSTANCE_IDENTITY', (c, value) => { value.target.instanceId = 'other-instance'; }],
+    ['E_CONTEXT_CHANGED', (c, value) => { value.target.compId = 8; }],
+    ['E_INSTANCE_STALE', (c, value) => { value.payload.expected.parameters.width = 100; }],
+    ['E_EXPECTED_REQUIRED', (c, value) => { delete value.payload.expected; }]
+  ]) {
+    const context = host(), instance = editable(context), value = updateRequest(clone(instance));
+    const before = evaluate(context, 'app.project.activeItem.layer(1).comment'); mutate(context, value);
+    diagnostic(dispatch(context, value), code);
+    assert.equal(evaluate(context, 'app.project.activeItem.layer(1).comment'), before, code);
+    assert.deepEqual(evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1)).observed'), instance.observed, code);
+  }
+});
+test('Update rejects changed package sources, version, animation, locked and manually edited layers', () => {
+  for (const [code, mutate] of [
+    ['E_INSTANCE_SOURCE_CHANGED', (c, value) => { value.payload.loaded.payload.nodes[0].name = 'different'; }],
+    ['E_INSTANCE_SOURCE_CHANGED', (c, value) => { value.payload.loaded.manifest.pack.version = '1.0.1'; }],
+    ['E_ANIMATION_UPDATE_UNSUPPORTED', (c, value) => { value.payload.parameters.motion = 'fade'; }],
+    ['E_SELECTION_LOCKED', c => vm.runInContext('app.project.activeItem.layer(1).locked = true;', c)],
+    ['E_INSTANCE_MODIFIED', c => vm.runInContext("app.project.activeItem.layer(1).property('ADBE Transform Group').property('ADBE Scale').setValueAtTime(.9, [20,20]);", c)]
+  ]) {
+    const context = host(), instance = editable(context), value = updateRequest(instance);
+    mutate(context, value);
+    const before = evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1))');
+    const comment = evaluate(context, 'app.project.activeItem.layer(1).comment');
+    diagnostic(dispatch(context, value), code);
+    assert.deepEqual(evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1))'), before, code);
+    assert.equal(evaluate(context, 'app.project.activeItem.layer(1).comment'), comment, code);
+  }
+});
+test('A second update from an old snapshot cannot overwrite the first update', () => {
+  const context = host(), instance = editable(context), value = updateRequest(instance);
+  assert.equal(dispatch(context, value).ok, true);
+  value.requestId = 'request-stale'; value.operationId = 'update-2'; value.payload.parameters.width = 600;
+  diagnostic(dispatch(context, value), 'E_INSTANCE_STALE');
+  assert.deepEqual(evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1)).observed.size'), [460, 180]);
+});
+function fillOpacity(context) { return evaluate(context, "app.project.activeItem.layer(1).property('ADBE Root Vectors Group').property(1).property('ADBE Vectors Group').property(2).property('ADBE Vector Fill Opacity').value"); }
+test('RGBA alpha controls native fill opacity without changing the fade animation', () => {
+  for (const [alpha, opacity] of [[0, 0], [.25, 25], [1, 100]]) {
+    const context = host(), value = createRequest();
+    value.payload.parameters = { color: [.2,.5,1,alpha], motion: 'fade' };
+    const result = dispatch(context, value); assert.equal(result.ok, true, JSON.stringify(result));
+    assert.equal(fillOpacity(context), opacity);
+    assert.equal(result.data.parameters.color[3], alpha);
+    assert.deepEqual(result.data.observed.animation[2].keys.map(key => key.value), [0,100]);
+    assert.equal(result.data.modified, false);
+  }
+});
+test('Alpha updates preserve layer identity and allow returning to an opaque fill', () => {
+  const context = host(), instance = editable(context), value = updateRequest(instance);
+  value.payload.parameters.color = [.2,.5,1,.25];
+  const first = dispatch(context, value); assert.equal(first.ok, true, JSON.stringify(first));
+  assert.equal(fillOpacity(context), 25);
+  assert.equal(first.data.layerId, instance.layerId); assert.equal(first.data.modified, false);
+  const opaque = updateRequest(first.data); opaque.payload.parameters.color = [.2,.5,1,1];
+  const second = dispatch(context, opaque); assert.equal(second.ok, true, JSON.stringify(second));
+  assert.equal(fillOpacity(context), 100); assert.equal(second.data.modified, false);
+  assert.deepEqual(second.data.observed.animation, instance.observed.animation);
+});
+test('Manual fill opacity edits and animation are protected, including old opaque baselines', () => {
+  for (const mutation of ["p.setValue(40)", "p.setValueAtTime(.5, 100)", "p.expressionEnabled = true"]) {
+    const context = host(), instance = editable(context);
+    // Pre-alpha releases have no opacity field in their saved baseline.
+    assert.equal(Object.hasOwn(instance.observed, 'fillOpacity'), false);
+    vm.runInContext("var p = app.project.activeItem.layer(1).property('ADBE Root Vectors Group').property(1).property('ADBE Vectors Group').property(2).property('ADBE Vector Fill Opacity'); " + mutation, context);
+    diagnostic(dispatch(context, updateRequest(instance)), 'E_INSTANCE_MODIFIED');
+    assert.equal(evaluate(context, 'app.project.activeItem.numLayers'), 1);
+  }
+});
+test('A failed alpha update restores the original opacity and exact metadata', () => {
+  const context = host(), instance = editable(context), value = updateRequest(instance);
+  const before = evaluate(context, 'app.project.activeItem.layer(1).comment');
+  value.payload.parameters.color = [.2,.5,1,.25];
+  vm.runInContext("var stringify = AEBrowseJSON.stringify; AEBrowseJSON.stringify = function(v) { if(v && v.layerId && v.parameters.width === 460) { app.atSerializationOpacity = app.project.activeItem.layer(1).property('ADBE Root Vectors Group').property(1).property('ADBE Vectors Group').property(2).property('ADBE Vector Fill Opacity').value; throw new Error('response serialization failed'); } return stringify(v); };", context);
+  const response = dispatch(context, value); diagnostic(response, 'I_UPDATE_ROLLED_BACK');
+  assert.equal(evaluate(context, 'app.atSerializationOpacity'), 25);
+  assert.equal(fillOpacity(context), 100); assert.equal(evaluate(context, 'app.project.activeItem.layer(1).comment'), before);
+  assert.deepEqual(evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1)).observed'), instance.observed);
+});
+// These failures occur after the first geometry write. Each must restore both properties and the exact comment.
+for (const stage of ['property', 'baseline', 'metadata', 'readback', 'serialization']) test('Update rolls back geometry and metadata after ' + stage + ' failure', () => {
+  const context = host(), instance = editable(context), before = evaluate(context, 'app.project.activeItem.layer(1).comment');
+  if (stage === 'property') vm.runInContext("var p = app.project.activeItem.layer(1).property('ADBE Root Vectors Group').property(1).property('ADBE Vectors Group').property(1).property('ADBE Vector Rect Roundness'); var set = p.setValue; p.setValue = function(v) { this.setValue = set; throw new Error('one write failed'); };", context);
+  if (stage === 'baseline') vm.runInContext("var p = app.project.activeItem.layer(1).property('ADBE Transform Group').property('ADBE Position'); var read = p.valueAtTime, count = 0; p.valueAtTime = function(t) { count++; if (count === 2) throw new Error('baseline failed'); return read.call(this,t); };", context);
+  if (stage === 'metadata') vm.runInContext("var l = app.project.activeItem.layer(1), text = l.comment, once = true; Object.defineProperty(l, 'comment', {get:function(){return text;},set:function(v){if(once){once=false;throw new Error('comment failed');}text=v;}});", context);
+  if (stage === 'readback') vm.runInContext("var p = app.project.activeItem.layer(1).property('ADBE Transform Group').property('ADBE Position'); var read = p.valueAtTime, count = 0; p.valueAtTime = function(t) { count++; if(count === 3) throw new Error('readback failed'); return read.call(this,t); };", context);
+  if (stage === 'serialization') vm.runInContext("var stringify = AEBrowseJSON.stringify; AEBrowseJSON.stringify = function(v) { if(v && v.layerId && v.parameters.width === 460) throw new Error('response serialization failed'); return stringify(v); };", context);
+  const result = dispatch(context, updateRequest(instance));
+  assert.equal(result.ok, false, 'injected failure was swallowed: ' + JSON.stringify(result));
+  assert.ok(result.diagnostics.some(d => d.code === 'I_UPDATE_ROLLED_BACK'), JSON.stringify(result));
+  assert.equal(evaluate(context, 'app.project.activeItem.layer(1).comment'), before);
+  assert.deepEqual(evaluate(context, 'AEBrowseNative.capture(app.project.activeItem.layer(1)).observed'), instance.observed);
+  assert.equal(evaluate(context, 'app.project.activeItem.numLayers'), 1);
+  assert.equal(evaluate(context, 'app.calls.begin'), evaluate(context, 'app.calls.end'));
+});
+test('Update reports unconfirmed rollback and keeps the layer when restoration fails', () => {
+  const context = host(), instance = editable(context);
+  vm.runInContext("var p = app.project.activeItem.layer(1).property('ADBE Root Vectors Group').property(1).property('ADBE Vectors Group').property(1).property('ADBE Vector Rect Roundness'); p.setValue = function() { app.failWrite = true; throw new Error('persistent failure'); };", context);
+  diagnostic(dispatch(context, updateRequest(instance)), 'E_ROLLBACK_FAILED');
+  assert.equal(evaluate(context, 'app.project.activeItem.numLayers'), 1);
+  assert.equal(evaluate(context, 'app.calls.removed'), 0);
+  assert.equal(evaluate(context, 'app.calls.begin'), evaluate(context, 'app.calls.end'));
 });
 const passed = results.filter(result => result.passed).length;
 const failed = results.length - passed;

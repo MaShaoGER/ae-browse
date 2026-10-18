@@ -1,0 +1,80 @@
+{
+  "runId": "instance-update-1792217370243-3d531b",
+  "hostSha256": "c31d4f4520d70268b5bcf1f27db8cf7e71745119a5ddb57c065f51603ef789ab",
+  "finished": true,
+  "startedAtMs": 1792217370671,
+  "scope": "Actual AE malformed-request and native-plan guards; no pixel checks.",
+  "tests": [
+    {
+      "name": "A package with resources is refused before creating a layer",
+      "passed": false,
+      "error": "Error: Unexpected success: {\"protocolVersion\":1,\"requestId\":\"instance-update-1792217370243-3d531b-guard-1\",\"ok\":true,\"data\":{\"compId\":275,\"layerId\":287,\"layerName\":\"圆角卡片\",\"instanceId\":\"instance-update-1792217370243-3d531b-0\",\"reused\":false,\"packId\":\"local.aebrowse.basics\",\"packVersion\":\"0.1.0\",\"assetId\":\"rounded-card\",\"insertTime\":0.25,\"parameters\":{\"width\":320,\"height\":180,\"radius\":24,\"color\":[0.20000000298023,0.5,1,1],\"duration\":0.6,\"motion\":\"pop\"},\"observed\":{\"position\":[320,180,0],\"geometryPropertyState\":[{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false}],\"animation\":[{\"channel\":\"ADBE Scale\",\"keys\":[{\"time\":0,\"value\":[0,0,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.3,\"value\":[108,108,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.6,\"value\":[100,100,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]}]},{\"channel\":\"ADBE Position\",\"keys\":[\u000a\u000a]},{\"channel\":\"ADBE Opacity\",\"keys\":[\u000a\u000a]}],\"effects\":[\u000a\u000a],\"effectsTotal\":0,\"size\":[320,180],\"radius\":24,\"color\":[0.20000000298023,0.5,1,1]},\"modified\":false},\"diagnostics\":[\u000a\u000a],\"timing\":{\"hostMs\":163}}",
+      "line": 2327
+    },
+    {
+      "name": "Malformed resource declarations are refused before creating a layer",
+      "passed": false,
+      "error": "Error: Unexpected success: {\"protocolVersion\":1,\"requestId\":\"instance-update-1792217370243-3d531b-guard-2\",\"ok\":true,\"data\":{\"compId\":275,\"layerId\":288,\"layerName\":\"圆角卡片\",\"instanceId\":\"instance-update-1792217370243-3d531b-1\",\"reused\":false,\"packId\":\"local.aebrowse.basics\",\"packVersion\":\"0.1.0\",\"assetId\":\"rounded-card\",\"insertTime\":0.25,\"parameters\":{\"width\":320,\"height\":180,\"radius\":24,\"color\":[0.20000000298023,0.5,1,1],\"duration\":0.6,\"motion\":\"pop\"},\"observed\":{\"position\":[320,180,0],\"geometryPropertyState\":[{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false}],\"animation\":[{\"channel\":\"ADBE Scale\",\"keys\":[{\"time\":0,\"value\":[0,0,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.3,\"value\":[108,108,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.6,\"value\":[100,100,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]}]},{\"channel\":\"ADBE Position\",\"keys\":[\u000a\u000a]},{\"channel\":\"ADBE Opacity\",\"keys\":[\u000a\u000a]}],\"effects\":[\u000a\u000a],\"effectsTotal\":0,\"size\":[320,180],\"radius\":24,\"color\":[0.20000000298023,0.5,1,1]},\"modified\":false},\"diagnostics\":[\u000a\u000a],\"timing\":{\"hostMs\":138}}",
+      "line": 2327
+    },
+    {
+      "name": "Fractional star points are refused even when its radii are valid",
+      "passed": false,
+      "error": "Error: Unexpected success: {\"protocolVersion\":1,\"requestId\":\"instance-update-1792217370243-3d531b-guard-3\",\"ok\":true,\"data\":{\"compId\":275,\"layerId\":289,\"layerName\":\"星形\",\"instanceId\":\"instance-update-1792217370243-3d531b-2\",\"reused\":false,\"packId\":\"local.aebrowse.basics\",\"packVersion\":\"0.1.0\",\"assetId\":\"star\",\"insertTime\":0.25,\"parameters\":{\"outerRadius\":110,\"innerRadius\":50,\"points\":3.5,\"rotation\":0,\"color\":[1,0.75999999046326,0.21999999880791,1],\"duration\":0.6,\"motion\":\"pop\"},\"observed\":{\"position\":[320,180,0],\"geometryPropertyState\":[{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false}],\"animation\":[{\"channel\":\"ADBE Scale\",\"keys\":[{\"time\":0,\"value\":[0,0,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.3,\"value\":[108,108,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.6,\"value\":[100,100,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]}]},{\"channel\":\"ADBE Position\",\"keys\":[\u000a\u000a]},{\"channel\":\"ADBE Opacity\",\"keys\":[\u000a\u000a]}],\"effects\":[\u000a\u000a],\"effectsTotal\":0,\"points\":3.5,\"outerRadius\":110,\"rotation\":0,\"innerRadius\":50,\"color\":[1,0.75999999046326,0.21999999880791,1],\"polystarType\":1},\"modified\":false},\"diagnostics\":[\u000a\u000a],\"timing\":{\"hostMs\":133}}",
+      "line": 2327
+    },
+    {
+      "name": "Out-of-range star points remain refused without relying on descriptor limits",
+      "passed": false,
+      "error": "Error: Unexpected success: {\"protocolVersion\":1,\"requestId\":\"instance-update-1792217370243-3d531b-guard-4\",\"ok\":true,\"data\":{\"compId\":275,\"layerId\":290,\"layerName\":\"星形\",\"instanceId\":\"instance-update-1792217370243-3d531b-3\",\"reused\":false,\"packId\":\"local.aebrowse.basics\",\"packVersion\":\"0.1.0\",\"assetId\":\"star\",\"insertTime\":0.25,\"parameters\":{\"outerRadius\":110,\"innerRadius\":50,\"points\":65,\"rotation\":0,\"color\":[1,0.75999999046326,0.21999999880791,1],\"duration\":0.6,\"motion\":\"pop\"},\"observed\":{\"position\":[320,180,0],\"geometryPropertyState\":[{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false},{\"keys\":0,\"expression\":false}],\"animation\":[{\"channel\":\"ADBE Scale\",\"keys\":[{\"time\":0,\"value\":[0,0,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.3,\"value\":[108,108,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":360,\"influence\":16.666666667},{\"speed\":360,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]},{\"time\":0.6,\"value\":[100,100,100],\"inType\":\"6612\",\"outType\":\"6612\",\"inEase\":[{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":-26.6666666666667,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}],\"outEase\":[{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667},{\"speed\":0,\"influence\":16.666666667}]}]},{\"channel\":\"ADBE Position\",\"keys\":[\u000a\u000a]},{\"channel\":\"ADBE Opacity\",\"keys\":[\u000a\u000a]}],\"effects\":[\u000a\u000a],\"effectsTotal\":0,\"points\":65,\"outerRadius\":110,\"rotation\":0,\"innerRadius\":50,\"color\":[1,0.75999999046326,0.21999999880791,1],\"polystarType\":1},\"modified\":false},\"diagnostics\":[\u000a\u000a],\"timing\":{\"hostMs\":153}}",
+      "line": 2327
+    },
+    {
+      "name": "A null payload is refused even with a valid composition target",
+      "passed": false,
+      "error": "Error: Unexpected success: {\"protocolVersion\":1,\"requestId\":\"instance-update-1792217370243-3d531b-guard-5\",\"ok\":true,\"data\":{\"activeComp\":true,\"comp\":{\"id\":275,\"name\":\"__AEBrowse_Logic_instance-update-1792217370243-3d531b\",\"width\":640,\"height\":360,\"duration\":3,\"time\":0,\"frameRate\":30},\"selectionCount\":0},\"diagnostics\":[\u000a\u000a],\"timing\":{\"hostMs\":1}}",
+      "line": 2327
+    },
+    {
+      "name": "An array payload is refused even with a valid composition target",
+      "passed": false,
+      "error": "Error: Unexpected success: {\"protocolVersion\":1,\"requestId\":\"instance-update-1792217370243-3d531b-guard-6\",\"ok\":true,\"data\":{\"activeComp\":true,\"comp\":{\"id\":275,\"name\":\"__AEBrowse_Logic_instance-update-1792217370243-3d531b\",\"width\":640,\"height\":360,\"duration\":3,\"time\":0,\"frameRate\":30},\"selectionCount\":0},\"diagnostics\":[\u000a\u000a],\"timing\":{\"hostMs\":1}}",
+      "line": 2327
+    },
+    {
+      "name": "An empty operation is refused as a malformed request",
+      "passed": false,
+      "error": "Error: Expected E_REQUEST_FORMAT: [{\"code\":\"E_OPERATION_UNSUPPORTED\",\"severity\":\"error\",\"phase\":\"host\",\"message\":\"当前入口尚未支持操作：\"}]",
+      "line": 2327
+    },
+    {
+      "name": "An oversized operation is refused as a malformed request",
+      "passed": false,
+      "error": "Error: Expected E_REQUEST_FORMAT: [{\"code\":\"E_OPERATION_UNSUPPORTED\",\"severity\":\"error\",\"phase\":\"host\",\"message\":\"当前入口尚未支持操作：xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}]",
+      "line": 2327
+    },
+    {
+      "name": "A normal read-only request remains usable after malformed requests",
+      "passed": true
+    }
+  ],
+  "baseline": [
+    
+  ],
+  "cleanup": {
+    "absentByItemScan": true,
+    "remaining": [
+      
+    ],
+    "originalItemsAndLayerIdentitiesUnchanged": true,
+    "itemCount": 0,
+    "projectSaved": false
+  },
+  "temporary": {
+    "id": 275,
+    "name": "__AEBrowse_Logic_instance-update-1792217370243-3d531b"
+  },
+  "passed": 1,
+  "failed": 8,
+  "endedAtMs": 1792217371441
+}

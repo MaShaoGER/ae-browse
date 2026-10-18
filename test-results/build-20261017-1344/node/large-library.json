@@ -1,0 +1,106 @@
+{
+  "finished": true,
+  "scope": "Node real-file scaling at 100/1000/5000 assets; isolated copies and registry, no AE.",
+  "passed": 12,
+  "failed": 0,
+  "levels": [
+    {
+      "count": 100,
+      "manifestBytes": 46991,
+      "checks": [
+        {
+          "name": "register all declared entries",
+          "passed": true,
+          "ms": 27.32,
+          "status": "available"
+        },
+        {
+          "name": "search and isolate the damaged asset",
+          "passed": true,
+          "ms": 0.74,
+          "searchMatches": 10,
+          "blocked": 1
+        },
+        {
+          "name": "prepare an asset from the large manifest",
+          "passed": true,
+          "ms": 8.99,
+          "hostAssetCount": 1
+        },
+        {
+          "name": "restore registration and preserve source after removal",
+          "passed": true,
+          "ms": 21.69,
+          "sourceBytesUnchanged": true,
+          "registrationEmpty": true
+        }
+      ]
+    },
+    {
+      "count": 1000,
+      "manifestBytes": 469992,
+      "checks": [
+        {
+          "name": "register all declared entries",
+          "passed": true,
+          "ms": 58.21,
+          "status": "available"
+        },
+        {
+          "name": "search and isolate the damaged asset",
+          "passed": true,
+          "ms": 4.29,
+          "searchMatches": 100,
+          "blocked": 1
+        },
+        {
+          "name": "prepare an asset from the large manifest",
+          "passed": true,
+          "ms": 38.04,
+          "hostAssetCount": 1
+        },
+        {
+          "name": "restore registration and preserve source after removal",
+          "passed": true,
+          "ms": 56.24,
+          "sourceBytesUnchanged": true,
+          "registrationEmpty": true
+        }
+      ]
+    },
+    {
+      "count": 5000,
+      "manifestBytes": 2353992,
+      "checks": [
+        {
+          "name": "register all declared entries",
+          "passed": true,
+          "ms": 190.41,
+          "status": "available"
+        },
+        {
+          "name": "search and isolate the damaged asset",
+          "passed": true,
+          "ms": 20.3,
+          "searchMatches": 500,
+          "blocked": 1
+        },
+        {
+          "name": "prepare an asset from the large manifest",
+          "passed": true,
+          "ms": 150.07,
+          "hostAssetCount": 1
+        },
+        {
+          "name": "restore registration and preserve source after removal",
+          "passed": true,
+          "ms": 189.06,
+          "sourceBytesUnchanged": true,
+          "registrationEmpty": true
+        }
+      ]
+    }
+  ],
+  "directory": "D:\\project\\ae-browse\\test-results\\local-only\\large-library-qwD2J3",
+  "finishedAt": "2026-10-17T06:15:03.800Z"
+}

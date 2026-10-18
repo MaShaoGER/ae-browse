@@ -1,0 +1,167 @@
+{
+  "runId": "instance-update-1792197117477-3cc138",
+  "hostSha256": "9f77ec95330e6d39a65c10883d4c9322ba254453e0f4f4f1c212729edc933d18",
+  "aeVersion": "26.0x67",
+  "startedAtMs": 1792197158715,
+  "finished": true,
+  "tests": [
+    {
+      "name": "rounded-card / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "Selection changes stop before mutation",
+      "passed": true
+    },
+    {
+      "name": "Locked layers remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "Source version changes stop before mutation",
+      "passed": true
+    },
+    {
+      "name": "Manual appearance changes are preserved",
+      "passed": true
+    },
+    {
+      "name": "Serialization failure restores actual geometry and exact metadata",
+      "passed": true
+    },
+    {
+      "name": "Successful update rejects another write from the old snapshot",
+      "passed": true
+    }
+  ],
+  "frames": [],
+  "baseline": [],
+  "cleanup": {
+    "absentByItemScan": true,
+    "itemCount": 0,
+    "remaining": [],
+    "projectSaved": false,
+    "originalItemsAndLayerIdentitiesUnchanged": true
+  },
+  "beforeActiveId": null,
+  "temporary": {
+    "id": 1,
+    "name": "__AEBrowse_Update_instance-update-1792197117477-3cc138"
+  },
+  "awaitingPixelCaptureAndCleanup": false,
+  "passed": 30,
+  "failed": 0,
+  "endedAtMs": 1792197166862,
+  "finalScan": {
+    "projectLocator": {
+      "locatorKind": "jsx",
+      "projectId": null
+    },
+    "total": 0,
+    "offset": 0,
+    "limit": 50,
+    "returned": 0,
+    "hasMore": false,
+    "nextOffset": null,
+    "items": [],
+    "execution_source": {
+      "instance_id": "e192a60d0821a83e0364c2896f99ab24",
+      "workspace_id": "workspace_c5b37b33f4011bc5fec193e949678edb",
+      "context_id": "e192a60d0821a83e0364c2896f99ab24:ecbd0277399c682d33dec11173104b12",
+      "mode": "live",
+      "project_path": null
+    }
+  }
+}

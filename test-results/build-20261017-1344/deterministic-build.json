@@ -1,0 +1,9 @@
+{
+  "finished": true,
+  "scope": "Node-only rebuild byte comparison; no AE.",
+  "fileCount": 21,
+  "identical": true,
+  "mismatches": [],
+  "hostSha256": "a903f8944e754d0cb7af7fe683865bf51d841d7070be7f35505a6e1a2d731922",
+  "verifiedAt": "2026-10-17T06:18:07.269Z"
+}

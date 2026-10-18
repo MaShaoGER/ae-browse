@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node tests/boundaries.cjs",
     "test:plan": "node tests/native-plan.cjs",
-    "test:cep": "node tests/library-service.cjs && node tests/host-bridge.cjs && node tests/host-dispatch.cjs && node tests/shape-preview.cjs && node tests/basic-shapes.cjs && node tests/cep-build.cjs",
+    "test:local": "node tests/local-folders.cjs && node tests/svg-compat.cjs && node tests/local-import.cjs",
+    "test:cep": "node tests/library-service.cjs && node tests/host-bridge.cjs && node tests/host-dispatch.cjs && node tests/instance-editor.cjs && node tests/shape-preview.cjs && node tests/basic-shapes.cjs && node tests/live-test-preparation.cjs && node tests/cep-build.cjs",
     "build": "node scripts/build-cep.cjs",
     "preview": "node scripts/preview-panel.cjs",
     "validate": "node scripts/validate-pack.cjs examples/portable-demo"

@@ -1,0 +1,37 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-17T06:14:59.744Z",
+  "scope": "Node real-file library registration, validation and plan preparation; isolated test registration only; no AE.",
+  "passed": 7,
+  "failed": 0,
+  "results": [
+    {
+      "name": "rounded-card registers and prepares through the real library service",
+      "passed": true
+    },
+    {
+      "name": "circle registers and prepares through the real library service",
+      "passed": true
+    },
+    {
+      "name": "ellipse registers and prepares through the real library service",
+      "passed": true
+    },
+    {
+      "name": "triangle registers and prepares through the real library service",
+      "passed": true
+    },
+    {
+      "name": "hexagon registers and prepares through the real library service",
+      "passed": true
+    },
+    {
+      "name": "star registers and prepares through the real library service",
+      "passed": true
+    },
+    {
+      "name": "invalid star rejected before host dispatch",
+      "passed": true
+    }
+  ]
+}

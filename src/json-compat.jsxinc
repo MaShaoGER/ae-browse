@@ -73,7 +73,7 @@ var AEBrowseJSON = (function () {
             if (token === 'true') { at += 4; return true; }
             if (token === 'null') { at += 4; return null; }
             if (source.substr(at, 5) === 'false') { at += 5; return false; }
-            if (character === '-' || /[0-9]/.test(character) && character !== '') {
+            if (character === '-' || (/[0-9]/.test(character) && character !== '')) {
                 numberStart = at;
                 if (character === '-') { at++; }
                 if (source.charAt(at) === '0') { at++; }
@@ -104,7 +104,7 @@ var AEBrowseJSON = (function () {
         for (var i = 0; i < source.length; i++) {
             character = source.charAt(i); code = source.charCodeAt(i);
             if (character === '"' || character === '\\') { result += '\\' + character; }
-            else if (code < 32 || code === 0x2028 || code === 0x2029 || code >= 0xD800 && code <= 0xDFFF) {
+            else if (code < 32 || code === 0x2028 || code === 0x2029 || (code >= 0xD800 && code <= 0xDFFF)) {
                 hex = code.toString(16); result += '\\u' + ('0000' + hex).substr(hex.length);
             } else { result += character; }
         }

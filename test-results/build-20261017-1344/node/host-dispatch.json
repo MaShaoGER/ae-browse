@@ -1,0 +1,165 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-17T06:14:59.516Z",
+  "scope": "Node VM mocks plus actual ES3 plan/native adapter; no live AE calls or rendered pixel checks.",
+  "passed": 39,
+  "failed": 0,
+  "results": [
+    {
+      "name": "ES3 JSON roundtrips Chinese, controls, quotes and Unicode separators without eval",
+      "passed": true
+    },
+    {
+      "name": "JSON parser rejects execution text, malformed numbers, controls and trailing data",
+      "passed": true
+    },
+    {
+      "name": "JSON rejects dangerous and duplicate keys at every depth",
+      "passed": true
+    },
+    {
+      "name": "JSON enforces nesting, value, size and finite-number bounds",
+      "passed": true
+    },
+    {
+      "name": "JSON stringify supports pretty output, replacers and standard omission rules",
+      "passed": true
+    },
+    {
+      "name": "Read-only host info and context expose only implemented capabilities and mutate nothing",
+      "passed": true
+    },
+    {
+      "name": "Protocol, request identity, shape and unsupported mutations are guarded",
+      "passed": true
+    },
+    {
+      "name": "Create rejects changed context and absence before opening undo or writing",
+      "passed": true
+    },
+    {
+      "name": "A valid comp target does not bypass request shape validation",
+      "passed": true
+    },
+    {
+      "name": "Host validates loaded schema, manifest membership, version and capability requirements",
+      "passed": true
+    },
+    {
+      "name": "Plan errors and missing required effects stop before any AE writes",
+      "passed": true
+    },
+    {
+      "name": "Actual native adapter creates, captures and reuses one layer for one stable operation",
+      "passed": true
+    },
+    {
+      "name": "A changed stable operation cannot create another layer or overwrite the instance",
+      "passed": true
+    },
+    {
+      "name": "Optional unavailable effects return diagnostics while the native shape survives",
+      "passed": true
+    },
+    {
+      "name": "Read instance requires stable comp, layer and instance identity and remains read-only",
+      "passed": true
+    },
+    {
+      "name": "Adapter write failure cleans its own layer and reliably closes undo",
+      "passed": true
+    },
+    {
+      "name": "Post-create capture failure removes only this operation layer and reads cleanup back",
+      "passed": true
+    },
+    {
+      "name": "Readback failure on reused instances never deletes the existing layer",
+      "passed": true
+    },
+    {
+      "name": "Failed cleanup is explicit and undo still closes",
+      "passed": true
+    },
+    {
+      "name": "Failed adapter cleanup before a result is returned is detected by the dispatcher scan",
+      "passed": true
+    },
+    {
+      "name": "Reentrant host calls report busy and do not alter the outer operation",
+      "passed": true
+    },
+    {
+      "name": "Create and capture ellipse through the real dispatcher",
+      "passed": true
+    },
+    {
+      "name": "Create and capture polygon through the real dispatcher",
+      "passed": true
+    },
+    {
+      "name": "Create and capture star through the real dispatcher",
+      "passed": true
+    },
+    {
+      "name": "Read selected instance requires exactly one tool layer and never writes",
+      "passed": true
+    },
+    {
+      "name": "Update changes appearance on the same layer while preserving original animation",
+      "passed": true
+    },
+    {
+      "name": "Update refuses a switched selection, instance identity, comp or stale read snapshot",
+      "passed": true
+    },
+    {
+      "name": "Update rejects changed package sources, version, animation, locked and manually edited layers",
+      "passed": true
+    },
+    {
+      "name": "A second update from an old snapshot cannot overwrite the first update",
+      "passed": true
+    },
+    {
+      "name": "RGBA alpha controls native fill opacity without changing the fade animation",
+      "passed": true
+    },
+    {
+      "name": "Alpha updates preserve layer identity and allow returning to an opaque fill",
+      "passed": true
+    },
+    {
+      "name": "Manual fill opacity edits and animation are protected, including old opaque baselines",
+      "passed": true
+    },
+    {
+      "name": "A failed alpha update restores the original opacity and exact metadata",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after property failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after baseline failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after metadata failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after readback failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after serialization failure",
+      "passed": true
+    },
+    {
+      "name": "Update reports unconfirmed rollback and keeps the layer when restoration fails",
+      "passed": true
+    }
+  ]
+}

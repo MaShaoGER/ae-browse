@@ -10,17 +10,20 @@
 <body>
   <header class="topbar">
     <div><strong>AE Browse</strong><span class="edition">图形库</span></div>
-    <button id="refresh-host" class="quiet" type="button">刷新合成</button>
+    <div class="host-tools"><button id="read-instance" type="button" disabled>读取所选实例</button><button id="refresh-host" class="quiet" type="button">刷新合成</button></div>
   </header>
   <div class="library-tools">
     <label class="sr-only" for="library">选择图形库</label>
     <select id="library"><option value="">尚未添加图形库</option></select>
-    <button id="add-library" type="button">添加库</button>
+    <button id="add-folder" type="button" title="读取 SVG、PNG、JPG，包含子文件夹">添加文件夹</button>
+    <button id="enter-path" class="quiet" type="button" title="直接输入本地素材目录">输入路径</button>
+    <button id="add-library" class="quiet" type="button" title="添加含 pack.json 的参数图形库">添加图形包</button>
     <button id="refresh-library" class="quiet" type="button" title="重新检查文件">刷新</button>
     <button id="remove-library" class="quiet" type="button" title="只移除登记，不删除文件">移除</button>
   </div>
+  <p id="library-location" class="library-location" title=""></p>
   <div id="path-entry" hidden>
-    <label for="library-path">图形库文件夹（含 pack.json）</label>
+    <label id="path-label" for="library-path">素材文件夹（SVG / PNG / JPG）</label>
     <div class="path-controls"><input id="library-path" type="text" placeholder="D:\图形库"><button id="register-path" type="button">载入</button><button id="cancel-path" class="quiet" type="button">取消</button></div>
   </div>
   <div class="search-tools">
@@ -32,6 +35,7 @@
       <div id="grid" class="grid"></div>
       <p id="empty" class="empty">添加一个图形库开始浏览。<br>示例库位于 examples/portable-demo。</p>
     </section>
+    <div id="pane-divider" class="pane-divider" role="separator" tabindex="0" aria-label="调整素材列表与详情大小" aria-orientation="vertical" aria-valuemin="25" aria-valuemax="75" aria-valuenow="52" title="拖动调整大小；双击恢复；方向键微调"></div>
     <aside class="details" aria-label="素材详情">
       <div id="detail-empty" class="empty">选择素材，查看参数与使用提示。</div>
       <div id="detail" hidden>
@@ -41,6 +45,9 @@
         <p id="asset-help" class="help"></p>
         <form id="parameters" autocomplete="off"></form>
         <ul id="asset-diagnostics" class="diagnostics"></ul>
+        <p id="instance-info" class="instance-info" hidden></p>
+        <button id="update-instance" class="primary" type="button" hidden disabled>更新所选图形</button>
+        <p id="update-help" class="parameter-help" hidden>仅更新外观，保留原动画。修改后点击应用；更换所选图层后请重新读取。</p>
         <button id="instantiate" class="primary" type="button" disabled>添加到当前合成</button>
         <p id="result" class="result" aria-live="polite"></p>
       </div>
@@ -52,6 +59,9 @@
   <script src="bridge/host-bridge.js"></script>
   <script src="ui/demo-data.js"></script>
   <script src="ui/shape-preview.js"></script>
+  <script src="ui/instance-editor.js"></script>
+  <script src="ui/panel-layout.js"></script>
+  <script src="ui/svg-raster.js"></script>
   <script src="ui/panel.js"></script>
 </body>
 </html>

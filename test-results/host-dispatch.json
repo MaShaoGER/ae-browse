@@ -1,8 +1,8 @@
 {
   "finished": true,
-  "timestamp": "2026-10-16T05:21:22.233Z",
+  "timestamp": "2026-10-18T10:49:07.516Z",
   "scope": "Node VM mocks plus actual ES3 plan/native adapter; no live AE calls or rendered pixel checks.",
-  "passed": 23,
+  "passed": 39,
   "failed": 0,
   "results": [
     {
@@ -35,6 +35,10 @@
     },
     {
       "name": "Create rejects changed context and absence before opening undo or writing",
+      "passed": true
+    },
+    {
+      "name": "A valid comp target does not bypass request shape validation",
       "passed": true
     },
     {
@@ -95,6 +99,66 @@
     },
     {
       "name": "Create and capture star through the real dispatcher",
+      "passed": true
+    },
+    {
+      "name": "Read selected instance requires exactly one tool layer and never writes",
+      "passed": true
+    },
+    {
+      "name": "Update changes appearance on the same layer while preserving original animation",
+      "passed": true
+    },
+    {
+      "name": "Update refuses a switched selection, instance identity, comp or stale read snapshot",
+      "passed": true
+    },
+    {
+      "name": "Update rejects changed package sources, version, animation, locked and manually edited layers",
+      "passed": true
+    },
+    {
+      "name": "A second update from an old snapshot cannot overwrite the first update",
+      "passed": true
+    },
+    {
+      "name": "RGBA alpha controls native fill opacity without changing the fade animation",
+      "passed": true
+    },
+    {
+      "name": "Alpha updates preserve layer identity and allow returning to an opaque fill",
+      "passed": true
+    },
+    {
+      "name": "Manual fill opacity edits and animation are protected, including old opaque baselines",
+      "passed": true
+    },
+    {
+      "name": "A failed alpha update restores the original opacity and exact metadata",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after property failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after baseline failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after metadata failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after readback failure",
+      "passed": true
+    },
+    {
+      "name": "Update rolls back geometry and metadata after serialization failure",
+      "passed": true
+    },
+    {
+      "name": "Update reports unconfirmed rollback and keeps the layer when restoration fails",
       "passed": true
     }
   ]

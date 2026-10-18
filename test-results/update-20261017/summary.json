@@ -1,0 +1,136 @@
+{
+  "finished": true,
+  "date": "2026-10-17",
+  "runId": "instance-update-1792197117477-3cc138",
+  "node": {
+    "passed": 240,
+    "failed": 0,
+    "groups": [
+      {
+        "name": "boundaries",
+        "passed": 103,
+        "failed": 0
+      },
+      {
+        "name": "native-plan",
+        "passed": 46,
+        "failed": 0
+      },
+      {
+        "name": "library-service",
+        "passed": 12,
+        "failed": 0
+      },
+      {
+        "name": "host-bridge",
+        "passed": 20,
+        "failed": 0
+      },
+      {
+        "name": "host-dispatch",
+        "passed": 34,
+        "failed": 0
+      },
+      {
+        "name": "instance-editor",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "name": "shape-preview",
+        "passed": 5,
+        "failed": 0
+      },
+      {
+        "name": "basic-shapes",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "name": "cep-build",
+        "passed": 7,
+        "failed": 0
+      }
+    ]
+  },
+  "ae": {
+    "passed": 30,
+    "failed": 0,
+    "cleanup": {
+      "absentByItemScan": true,
+      "itemCount": 0,
+      "remaining": [],
+      "projectSaved": false,
+      "originalItemsAndLayerIdentitiesUnchanged": true
+    }
+  },
+  "cep": {
+    "sixShapeWorkflows": 6,
+    "selectionChangeProtection": true,
+    "timeout": {
+      "passed": true,
+      "delayMs": 24000,
+      "timeoutMs": 20000,
+      "calls": 1,
+      "creationUnlocked": true,
+      "editCleared": true,
+      "layerCount": 6
+    },
+    "reopen": {
+      "passed": true,
+      "libraries": [
+        "local.motion.basics",
+        "local.aebrowse.basics"
+      ],
+      "editingCleared": true,
+      "ready": "已连接 AE，选择图形库开始。"
+    },
+    "cleanup": {
+      "absentByItemScan": true,
+      "itemCount": 0,
+      "remaining": [],
+      "projectSaved": false
+    },
+    "interactionMethod": "Actual CEP event handlers via developer interface; physical mouse and docking not certified."
+  },
+  "pixels": {
+    "passed": 9,
+    "failed": 0,
+    "frames": 3
+  },
+  "builtHostSha256": "9f77ec95330e6d39a65c10883d4c9322ba254453e0f4f4f1c212729edc933d18",
+  "builtHostMatchesTested": true,
+  "installedFilesVerified": 20,
+  "frameEvidence": [
+    {
+      "file": "frames/1_0_100000_0_76019e03.png",
+      "sha256": "065549a1d2f1b703bfd28cfacaed8015eb6edcc87aded9e1ebf9a087437a43cd"
+    },
+    {
+      "file": "frames/1_0_450000_1_76019e03.png",
+      "sha256": "a41464e9d981afbea7c724b22d4a3fd2734bd7737085677d7c072853b040dd07"
+    },
+    {
+      "file": "frames/1_1_050000_2_76019e03.png",
+      "sha256": "55a4438c70b4ee9aada0f99bc9ad3aef9845816acf7eed0e520fa871605f5697"
+    },
+    {
+      "file": "frames/76019e038ea5548f9b64f7ceffa73a46-grid.png",
+      "sha256": "2d544bce665d47be582196ca1413b4abf4dccc3fb722a9c592650656604ec549"
+    }
+  ],
+  "remaining": [
+    "physical CEP mouse interaction",
+    "docking",
+    "large-library performance",
+    "transactional export",
+    "signed ZXP"
+  ],
+  "package": {
+    "path": "D:\\project\\ae-browse\\dist\\AE-Browse-instance-update-2026-10-17.zip",
+    "sha256": "ddc8003ff696397ff4bc6dd130b271e3d5110ef0edf458b3f29a1b2612191553",
+    "filesVerified": 21,
+    "matchesBuildInventory": true
+  },
+  "brokenDocumentationLinks": []
+}

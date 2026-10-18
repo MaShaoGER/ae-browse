@@ -1,0 +1,89 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-17T06:14:59.203Z",
+  "scope": "Node-only mock CEP evalScript transport; no AE access or project mutation.",
+  "passed": 20,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Node 与浏览器导出相同的桥接入口",
+      "passed": true
+    },
+    {
+      "name": "CEP 混合上下文同时暴露浏览器全局与 Node 导出",
+      "passed": true
+    },
+    {
+      "name": "没有 CEP 接口时给出中文错误",
+      "passed": true
+    },
+    {
+      "name": "JSON 字符串安全覆盖中文引号路径换行及脚本注入文本",
+      "passed": true
+    },
+    {
+      "name": "请求捕获提交时的数据快照",
+      "passed": true
+    },
+    {
+      "name": "并行创建请求进入串行队列且通信 ID 独立",
+      "passed": true
+    },
+    {
+      "name": "宿主业务错误以 ok:false 结果返回",
+      "passed": true
+    },
+    {
+      "name": "写入超时保留宿主锁并等待迟到结果且不自动重试",
+      "passed": true
+    },
+    {
+      "name": "读取超时也等待活动 AE 调用返回后才继续",
+      "passed": true
+    },
+    {
+      "name": "未知请求 ID 与重复旧回调不能解锁当前请求",
+      "passed": true
+    },
+    {
+      "name": "无法解析的写入回调阻止后续调用直到有效结果",
+      "passed": true
+    },
+    {
+      "name": "不完整写入协议保留待确认状态",
+      "passed": true
+    },
+    {
+      "name": "已返回的只读无效协议解除活动锁并报告错误",
+      "passed": true
+    },
+    {
+      "name": "CEP evalScript 错误文本不能确认写入结果",
+      "passed": true
+    },
+    {
+      "name": "evalScript 同步抛错也不能证明 AE 未执行",
+      "passed": true
+    },
+    {
+      "name": "迟到宿主失败结果可回读且不触发创建重试",
+      "passed": true
+    },
+    {
+      "name": "取消只撤销尚未派发的队列项",
+      "passed": true
+    },
+    {
+      "name": "批量取消队列不影响已经执行的请求",
+      "passed": true
+    },
+    {
+      "name": "关闭桥接拒绝未完成请求且不会派发队列或新请求",
+      "passed": true
+    },
+    {
+      "name": "循环数据和无效操作在进入宿主前失败",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "finished": true,
+  "scope": "Node VM codec differential checks against native JSON; no AE access.",
+  "seed": 7777809,
+  "generated": 10000,
+  "passed": 10008,
+  "failed": 0,
+  "finishedAt": "2026-10-17T06:15:02.893Z"
+}

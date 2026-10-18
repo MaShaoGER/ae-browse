@@ -1,0 +1,33 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-18T10:49:07.569Z",
+  "scope": "Node-only editor contract; no live AE.",
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Read binds an immutable snapshot to the selected tool instance",
+      "passed": true
+    },
+    {
+      "name": "Apply sends the bound identity and old snapshot and preflights at original insert time",
+      "passed": true
+    },
+    {
+      "name": "Switching comp or clearing the editor prevents sending an update",
+      "passed": true
+    },
+    {
+      "name": "Unavailable source version and manual modifications cannot become editable",
+      "passed": true
+    },
+    {
+      "name": "A timeout clears editable state and cannot cause an automatic write retry",
+      "passed": true
+    },
+    {
+      "name": "Clearing the editor during preflight stops the queued write",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "verifiedAt": "2026-10-17T06:15:47.1856723Z",
+  "backupDirectory": "D:\\project\\ae-browse\\test-results\\local-only\\extension-backup-20261017-1415",
+  "backupFiles": 22,
+  "installedFiles": 20,
+  "backupVerified": true,
+  "installedMatchesBuild": true,
+  "libraryRegistryUnchanged": true,
+  "debugDisabledRetained": true,
+  "files": [
+    {
+      "path": ".debug.disabled",
+      "sha256": "9A146D77A39C6DDA7489CADF6871B5834593A1601AE3BA84DB949854FF1A2EB2"
+    },
+    {
+      "path": "build-info.json",
+      "sha256": "00DC9456BF25DCBBB7116E5A0B70035300E005BEB26987DBE45AC556F4A67E58"
+    },
+    {
+      "path": "cep\\index.html",
+      "sha256": "1B12317C748D823C6FD3DFB76240C8064DE8AFF5989F87F37ACC78F726891AFB"
+    },
+    {
+      "path": "cep\\bridge\\host-bridge.js",
+      "sha256": "1BD2D2DCE8DED6D3FAF0BAE5490DC5FF11C934E571F6B9DD36D1D3502CF0EF9D"
+    },
+    {
+      "path": "cep\\CSXS\\manifest.xml",
+      "sha256": "611E643587694D4951F2F662BD3EB2A199763ADA9E5122793A247FCBCD9E5A11"
+    },
+    {
+      "path": "cep\\node\\library-service.cjs",
+      "sha256": "0FA8F46A66C90BC9F55C74D9A880F10131C04481CE8A09906CA24FB0927D3388"
+    },
+    {
+      "path": "cep\\ui\\demo-data.js",
+      "sha256": "1A008284FAD311313732F5092A093D1E8F126AA65AF31E95E0B4E73D5A1825AB"
+    },
+    {
+      "path": "cep\\ui\\instance-editor.js",
+      "sha256": "4BAD2857F0439E10CAEF02BF665CB3113D1CD53B65B47D33A272B1FBF3BD6F82"
+    },
+    {
+      "path": "cep\\ui\\panel.css",
+      "sha256": "A8025D1F1029B959EA3081A719E3669CB6A88835E5C43F675E9AA3F396997A1D"
+    },
+    {
+      "path": "cep\\ui\\panel.js",
+      "sha256": "AD8C5BDD55A89AAFF58EFD9891936D3668BA921C1D64BCCD59823D702B57668D"
+    },
+    {
+      "path": "cep\\ui\\shape-preview.js",
+      "sha256": "4C8F4C972276244AD4190649ED0D44B505B91C2668AE43A4490F5EDA2C1069AD"
+    },
+    {
+      "path": "cep\\vendor\\Adobe-SDK-License.pdf",
+      "sha256": "32E814081EFD3495074202F7F8717AAD14743B2D17B55298E92D7C4ECE495383"
+    },
+    {
+      "path": "cep\\vendor\\CSInterface.js",
+      "sha256": "3C45400984772B88CDF4604B4763A29219F8071FDEDB9A1FA19D997349003783"
+    },
+    {
+      "path": "cep\\vendor\\README.md",
+      "sha256": "E7E527B453B60D88D46071F77435E4227095A952770AD2FF3069414227A9E403"
+    },
+    {
+      "path": "CSXS\\manifest.xml",
+      "sha256": "611E643587694D4951F2F662BD3EB2A199763ADA9E5122793A247FCBCD9E5A11"
+    },
+    {
+      "path": "jsx\\host.jsx",
+      "sha256": "9F77EC95330E6D39A65C10883D4C9322BA254453E0F4F4F1C212729EDC933D18"
+    },
+    {
+      "path": "src\\host-dispatch.jsxinc",
+      "sha256": "DFEA6A88E3565E5FB4AA7B19824F3AE43D9C3F44B1EB164C7E1A10F50CFDC9A5"
+    },
+    {
+      "path": "src\\host-loader.jsx",
+      "sha256": "4C5466AE15CF9772BC0FA94D00D5C9FE7AC9CDACCDD3E74D2A9A8291B76142D9"
+    },
+    {
+      "path": "src\\json-compat.jsxinc",
+      "sha256": "4AFB8EB1D0986FAAA2E7B4CDCCDC035A7FAE5DC3BF56B8E1CEA9E5273AF9192E"
+    },
+    {
+      "path": "src\\native-shape-adapter.jsxinc",
+      "sha256": "3219212D6C0A0897344622CFDA0492A3749FEE845BA28BBEE2E9E3243C4BB378"
+    },
+    {
+      "path": "src\\native-shape-plan.jsxinc",
+      "sha256": "F5DD43E7929363B11EF8316801C7DEE05433C73C4ABECBBE97724466A7E5AF9A"
+    },
+    {
+      "path": "src\\pack-validator.cjs",
+      "sha256": "D73212C3A7BDB03E0513A6B1C142342DAD137075BA0A300FF1CFF529B66C3073"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-17T06:14:59.616Z",
+  "scope": "Node preview geometry only; no browser, CEP or AE access.",
+  "passed": 5,
+  "failed": 0,
+  "results": [
+    {
+      "name": "圆形以直径保持等宽等高，切换图形时清理旧裁剪",
+      "passed": true
+    },
+    {
+      "name": "椭圆保留宽高比例",
+      "passed": true
+    },
+    {
+      "name": "四边形旋转零度的预览顶点与 AE 朝向一致",
+      "passed": true
+    },
+    {
+      "name": "五角星使用交替半径的十个顶点",
+      "passed": true
+    },
+    {
+      "name": "非法输入不会产生无限尺寸或无限顶点循环",
+      "passed": true
+    }
+  ]
+}

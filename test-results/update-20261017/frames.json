@@ -1,0 +1,117 @@
+{
+  "ok": true,
+  "compId": "1",
+  "compName": "__AEBrowse_Update_instance-update-1792197117477-3cc138",
+  "captureId": "76019e038ea5548f9b64f7ceffa73a46",
+  "frames": [
+    {
+      "time": 0.1,
+      "path": "D:\\project\\ae-browse\\test-results\\instance-update-1792197117477-3cc138\\frames\\1_0_100000_0_76019e03.png",
+      "width": 960,
+      "height": 640,
+      "sizeBytes": 2462,
+      "sha256": "065549a1d2f1b703bfd28cfacaed8015eb6edcc87aded9e1ebf9a087437a43cd",
+      "source": "comp",
+      "method": "saveFrameToPng",
+      "compId": "1",
+      "sourceBitDepth": 8,
+      "bitDepth": 8,
+      "compWidth": 960,
+      "compHeight": 640,
+      "resolutionFactor": [
+        1,
+        1
+      ]
+    },
+    {
+      "time": 0.46666666666667,
+      "path": "D:\\project\\ae-browse\\test-results\\instance-update-1792197117477-3cc138\\frames\\1_0_450000_1_76019e03.png",
+      "width": 960,
+      "height": 640,
+      "sizeBytes": 20150,
+      "sha256": "a41464e9d981afbea7c724b22d4a3fd2734bd7737085677d7c072853b040dd07",
+      "source": "comp",
+      "method": "saveFrameToPng",
+      "compId": "1",
+      "sourceBitDepth": 8,
+      "bitDepth": 8,
+      "compWidth": 960,
+      "compHeight": 640,
+      "resolutionFactor": [
+        1,
+        1
+      ]
+    },
+    {
+      "time": 1.06666666666667,
+      "path": "D:\\project\\ae-browse\\test-results\\instance-update-1792197117477-3cc138\\frames\\1_1_050000_2_76019e03.png",
+      "width": 960,
+      "height": 640,
+      "sizeBytes": 24788,
+      "sha256": "55a4438c70b4ee9aada0f99bc9ad3aef9845816acf7eed0e520fa871605f5697",
+      "source": "comp",
+      "method": "saveFrameToPng",
+      "compId": "1",
+      "sourceBitDepth": 8,
+      "bitDepth": 8,
+      "compWidth": 960,
+      "compHeight": 640,
+      "resolutionFactor": [
+        1,
+        1
+      ]
+    }
+  ],
+  "grid": {
+    "path": "D:\\project\\ae-browse\\test-results\\instance-update-1792197117477-3cc138\\frames\\76019e038ea5548f9b64f7ceffa73a46-grid.png",
+    "width": 1280,
+    "height": 854,
+    "sha256": "2d544bce665d47be582196ca1413b4abf4dccc3fb722a9c592650656604ec549",
+    "columns": 2,
+    "rows": 2,
+    "cellWidth": 638,
+    "cellHeight": 425,
+    "scaled": true,
+    "cells": [
+      {
+        "index": 0,
+        "time": 0.1,
+        "x": 0,
+        "y": 0,
+        "w": 638,
+        "h": 425
+      },
+      {
+        "index": 1,
+        "time": 0.46666666666667,
+        "x": 642,
+        "y": 0,
+        "w": 638,
+        "h": 425
+      },
+      {
+        "index": 2,
+        "time": 1.06666666666667,
+        "x": 0,
+        "y": 429,
+        "w": 638,
+        "h": 425
+      }
+    ]
+  },
+  "imageBudget": {
+    "totalBase64Chars": 41844,
+    "totalLimitBase64Chars": 12582912,
+    "perImageLimitBase64Chars": 4718592
+  },
+  "warnings": [
+    "The grid image was scaled to fit within grid_max_side."
+  ],
+  "execution_source": {
+    "instance_id": "e192a60d0821a83e0364c2896f99ab24",
+    "workspace_id": "workspace_c5b37b33f4011bc5fec193e949678edb",
+    "context_id": "e192a60d0821a83e0364c2896f99ab24:ecbd0277399c682d33dec11173104b12",
+    "mode": "live",
+    "project_path": null
+  }
+}

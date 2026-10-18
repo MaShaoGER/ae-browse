@@ -1,0 +1,49 @@
+{
+  "finished": true,
+  "date": "2026-10-18",
+  "version": "0.2.0 development",
+  "node": {
+    "passed": 189,
+    "scope": "Package, preflight and simulated host only",
+    "failed": 0
+  },
+  "ae": {
+    "passed": 8,
+    "scope": "Real temporary-comp property checks",
+    "failed": 0
+  },
+  "cep": {
+    "dividerPointerInput": true,
+    "folderBrowser": true,
+    "viewportSizes": [
+      "780x640",
+      "560x420",
+      "300x420"
+    ],
+    "svgImport": true,
+    "duplicateClickOneLayer": true
+  },
+  "pixels": {
+    "passed": 7,
+    "failed": 0,
+    "realAEFrames": 1
+  },
+  "cleanup": {
+    "projectSaved": false,
+    "temporaryItemsRemaining": 0
+  },
+  "localAssetDirectory": "D:\\project\\ae-browse\\assets\\local",
+  "installation": {
+    "backup": "D:\\project\\ae-browse\\test-results\\local-only\\extension-backup-local-20261018-084712",
+    "installedMatches": true,
+    "debugPort": 9234,
+    "backupVerified": true,
+    "finalBuildFiles": 25,
+    "debugConfigurationDisabled": true
+  },
+  "limitations": [
+    "SVG imports on this machine use a transparent PNG fallback, not editable vectors.",
+    "Physical Windows frame resizing and docking were not certified.",
+    "JPG import is implemented; live smoke tests used SVG and PNG."
+  ]
+}

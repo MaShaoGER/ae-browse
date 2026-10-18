@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "runId": "instance-update-1792217441031-ef52fa",
+  "frames": [
+    {
+      "time": 0.2,
+      "path": "D:/project/ae-browse/test-results/build-20261017-1344/ae/update/frame-0.png",
+      "existsImmediately": false,
+      "originalPath": "D:/project/ae-browse/test-results/instance-update-1792217441031-ef52fa/frame-0.png"
+    },
+    {
+      "time": 0.4,
+      "path": "D:/project/ae-browse/test-results/build-20261017-1344/ae/update/frame-1.png",
+      "existsImmediately": false,
+      "originalPath": "D:/project/ae-browse/test-results/instance-update-1792217441031-ef52fa/frame-1.png"
+    },
+    {
+      "time": 1.1,
+      "path": "D:/project/ae-browse/test-results/build-20261017-1344/ae/update/frame-2.png",
+      "existsImmediately": false,
+      "originalPath": "D:/project/ae-browse/test-results/instance-update-1792217441031-ef52fa/frame-2.png"
+    }
+  ],
+  "startedAt": "2026-10-17T06:10:50.938Z",
+  "finished": true,
+  "endedAt": "2026-10-17T06:10:52.964Z"
+}

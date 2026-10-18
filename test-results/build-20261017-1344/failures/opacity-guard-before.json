@@ -1,0 +1,165 @@
+{
+  "runId": "instance-update-1792217105694-36793a",
+  "hostSha256": "4318a2726e35608d24d4701336fcb84f4e52f45e675186c06c4d034a2866b081",
+  "aeVersion": "26.0x67",
+  "startedAtMs": 1792217106155,
+  "finished": true,
+  "tests": [
+    {
+      "name": "RGBA alpha 0 writes native fill opacity",
+      "passed": true,
+      "details": {
+        "declaredAlpha": 0,
+        "actualFillOpacity": 0
+      }
+    },
+    {
+      "name": "RGBA alpha 0.25 writes native fill opacity",
+      "passed": true,
+      "details": {
+        "declaredAlpha": 0.25,
+        "actualFillOpacity": 25
+      }
+    },
+    {
+      "name": "RGBA alpha 1 writes native fill opacity",
+      "passed": true,
+      "details": {
+        "declaredAlpha": 1,
+        "actualFillOpacity": 100
+      }
+    },
+    {
+      "name": "rounded-card / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / none updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / pop updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / slide updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / fade updates alpha and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "Opaque legacy baselines remain editable",
+      "passed": true
+    },
+    {
+      "name": "Manual native fill opacity remains protected",
+      "passed": false,
+      "error": "Error: Expected rejection",
+      "line": 2327
+    },
+    {
+      "name": "Serialization failure restores actual opacity and exact metadata",
+      "passed": false,
+      "error": "Error: [{\"code\":\"E_INSTANCE_STALE\",\"severity\":\"error\",\"phase\":\"host\",\"message\":\"实例在读取后已经变化，请重新读取所选实例。\"}]",
+      "line": 2327
+    }
+  ],
+  "baseline": [],
+  "beforeActiveId": null,
+  "passed": 28,
+  "failed": 2,
+  "temporary": {
+    "id": 169,
+    "name": "__AEBrowse_Alpha_instance-update-1792217105694-36793a"
+  },
+  "awaitingPixelCaptureAndCleanup": false,
+  "endedAtMs": 1792217116894,
+  "cleanup": {
+    "attempted": true,
+    "removed": true,
+    "absentByItemScan": true,
+    "originalItemsAndLayerIdentitiesUnchanged": true,
+    "projectSaved": false,
+    "remaining": [],
+    "itemCount": 0,
+    "projectFile": null
+  }
+}

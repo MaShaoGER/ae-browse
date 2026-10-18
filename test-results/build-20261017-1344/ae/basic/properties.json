@@ -1,0 +1,134 @@
+{
+  "runId": "basic-shapes-1792217428700-d205a0",
+  "builtHostSha256": "a903f8944e754d0cb7af7fe683865bf51d841d7070be7f35505a6e1a2d731922",
+  "aeVersion": "26.0x67",
+  "startedAtMs": 1792217429159,
+  "finished": true,
+  "scope": "Actual AE geometry and animation properties; separate rendered checks follow.",
+  "tests": [
+    {
+      "name": "rounded-card / none creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / pop creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / slide creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / fade creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "circle / none creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "circle / pop creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "circle / slide creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "circle / fade creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "ellipse / none creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "ellipse / pop creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "ellipse / slide creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "ellipse / fade creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "triangle / none creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "triangle / pop creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "triangle / slide creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "triangle / fade creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "hexagon / none creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "hexagon / pop creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "hexagon / slide creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "hexagon / fade creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "star / none creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "star / pop creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "star / slide creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "star / fade creates and reads native properties",
+      "passed": true
+    },
+    {
+      "name": "Invalid star geometry stops before any layer creation",
+      "passed": true
+    },
+    {
+      "name": "Six shapes can coexist as native editable layers",
+      "passed": true
+    }
+  ],
+  "temporary": {
+    "id": 303,
+    "name": "__AEBrowse_BasicShapes_basic-shapes-1792217428700-d205a0"
+  },
+  "baseline": [],
+  "beforeActiveId": null,
+  "projectFile": null,
+  "passed": 26,
+  "failed": 0,
+  "awaitingPixelCaptureAndCleanup": false,
+  "cleanup": {
+    "attempted": true,
+    "removed": true,
+    "absentByItemScan": true,
+    "originalItemsAndLayerIdentitiesUnchanged": true,
+    "projectSaved": false,
+    "remaining": [],
+    "itemCount": 0,
+    "projectFile": null
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "finished": true,
+  "scope": "Offline real PNG alpha checks only; no AE access.",
+  "passed": 4,
+  "failed": 0,
+  "results": [
+    {
+      "name": "960 by 640 canvas",
+      "passed": true
+    },
+    {
+      "name": "RGBA alpha rasterizes to 0",
+      "passed": true,
+      "center": [
+        160,
+        320
+      ],
+      "expectedAlpha": 0,
+      "actualRGBA": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RGBA alpha rasterizes to 64",
+      "passed": true,
+      "center": [
+        480,
+        320
+      ],
+      "expectedAlpha": 64,
+      "actualRGBA": [
+        13,
+        32,
+        64,
+        64
+      ]
+    },
+    {
+      "name": "RGBA alpha rasterizes to 255",
+      "passed": true,
+      "center": [
+        800,
+        320
+      ],
+      "expectedAlpha": 255,
+      "actualRGBA": [
+        51,
+        128,
+        255,
+        255
+      ]
+    }
+  ]
+}

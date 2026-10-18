@@ -1,0 +1,50 @@
+{
+  "finished": true,
+  "scope": "Offline real PNG alpha values; no AE calls.",
+  "passed": 1,
+  "failed": 2,
+  "results": [
+    {
+      "center": [
+        160,
+        320
+      ],
+      "expectedAlpha": 0,
+      "actualRGBA": [
+        51,
+        128,
+        255,
+        255
+      ],
+      "passed": false
+    },
+    {
+      "center": [
+        480,
+        320
+      ],
+      "expectedAlpha": 64,
+      "actualRGBA": [
+        51,
+        128,
+        255,
+        255
+      ],
+      "passed": false
+    },
+    {
+      "center": [
+        800,
+        320
+      ],
+      "expectedAlpha": 255,
+      "actualRGBA": [
+        51,
+        128,
+        255,
+        255
+      ],
+      "passed": true
+    }
+  ]
+}

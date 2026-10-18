@@ -1,0 +1,37 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-17T06:15:00.540Z",
+  "scope": "Node subprocess fixture preparation and sealed VM routing only; no real AE calls.",
+  "passed": 7,
+  "failed": 0,
+  "results": [
+    {
+      "name": "update fixture selects the intended temporary composition and leaves AE open",
+      "passed": true
+    },
+    {
+      "name": "update fixture selects the intended temporary composition and leaves AE open",
+      "passed": true
+    },
+    {
+      "name": "alpha fixture selects the intended temporary composition and leaves AE open",
+      "passed": true
+    },
+    {
+      "name": "logic fixture selects the intended temporary composition and leaves AE open",
+      "passed": true
+    },
+    {
+      "name": "invalid preparation arguments refuse without creating a fixture: --suite missing",
+      "passed": true
+    },
+    {
+      "name": "invalid preparation arguments refuse without creating a fixture: --unknown",
+      "passed": true
+    },
+    {
+      "name": "basic-shape preparation also keeps the explicitly launched AE instance open",
+      "passed": true
+    }
+  ]
+}

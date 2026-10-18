@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "runId": "basic-shapes-1792217428700-d205a0",
+  "frames": [
+    {
+      "time": 0.2,
+      "path": "D:/project/ae-browse/test-results/build-20261017-1344/ae/basic/frame-0.png",
+      "existsImmediately": false,
+      "originalPath": "D:/project/ae-browse/test-results/basic-shapes-1792217428700-d205a0/frame-0.png"
+    },
+    {
+      "time": 0.4,
+      "path": "D:/project/ae-browse/test-results/build-20261017-1344/ae/basic/frame-1.png",
+      "existsImmediately": false,
+      "originalPath": "D:/project/ae-browse/test-results/basic-shapes-1792217428700-d205a0/frame-1.png"
+    },
+    {
+      "time": 1.1,
+      "path": "D:/project/ae-browse/test-results/build-20261017-1344/ae/basic/frame-2.png",
+      "existsImmediately": false,
+      "originalPath": "D:/project/ae-browse/test-results/basic-shapes-1792217428700-d205a0/frame-2.png"
+    }
+  ],
+  "startedAt": "2026-10-17T06:10:37.627Z",
+  "finished": true,
+  "endedAt": "2026-10-17T06:10:39.686Z"
+}

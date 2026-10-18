@@ -1,0 +1,28 @@
+{
+  "finished": true,
+  "name": "__AEBrowse_CEP_Local_1792285246801",
+  "result": {
+    "result": "已添加 · 图层 81 · SVG 已通过高清透明图片兼容导入",
+    "status": "已完成导入。"
+  },
+  "observed": {
+    "layers": 1,
+    "name": "蓝色卡片",
+    "scale": [
+      25,
+      25,
+      100
+    ],
+    "width": 1280,
+    "height": 800
+  },
+  "cleanup": {
+    "remaining": [],
+    "removed": [
+      68,
+      80
+    ],
+    "projectItems": 0,
+    "projectSaved": false
+  }
+}

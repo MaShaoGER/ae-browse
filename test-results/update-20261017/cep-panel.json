@@ -1,0 +1,289 @@
+{
+  "runId": "__AEBrowse_Panel_1792198067981",
+  "startedAt": "2026-10-17T00:47:48.236Z",
+  "comp": {
+    "id": 38,
+    "name": "__AEBrowse_Panel_1792198067981"
+  },
+  "checks": [
+    {
+      "id": "rounded-card",
+      "passed": true,
+      "layerId": 50,
+      "changedField": "width",
+      "value": 340,
+      "animationPreserved": true,
+      "duplicateClicksCreatedOnce": true,
+      "form": {
+        "motionDisabled": true,
+        "durationDisabled": true,
+        "updateVisible": true,
+        "params": [
+          {
+            "id": "width",
+            "value": "320"
+          },
+          {
+            "id": "height",
+            "value": "180"
+          },
+          {
+            "id": "radius",
+            "value": "24"
+          },
+          {
+            "id": "color",
+            "value": "#3380ff"
+          },
+          {
+            "id": "duration",
+            "value": "0.6"
+          },
+          {
+            "id": "motion",
+            "value": "pop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "circle",
+      "passed": true,
+      "layerId": 51,
+      "changedField": "diameter",
+      "value": 200,
+      "animationPreserved": true,
+      "duplicateClicksCreatedOnce": true,
+      "form": {
+        "motionDisabled": true,
+        "durationDisabled": true,
+        "updateVisible": true,
+        "params": [
+          {
+            "id": "diameter",
+            "value": "180"
+          },
+          {
+            "id": "color",
+            "value": "#29b8a6"
+          },
+          {
+            "id": "duration",
+            "value": "0.6"
+          },
+          {
+            "id": "motion",
+            "value": "pop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ellipse",
+      "passed": true,
+      "layerId": 52,
+      "changedField": "width",
+      "value": 280,
+      "animationPreserved": true,
+      "duplicateClicksCreatedOnce": true,
+      "form": {
+        "motionDisabled": true,
+        "durationDisabled": true,
+        "updateVisible": true,
+        "params": [
+          {
+            "id": "width",
+            "value": "260"
+          },
+          {
+            "id": "height",
+            "value": "150"
+          },
+          {
+            "id": "color",
+            "value": "#4794ff"
+          },
+          {
+            "id": "duration",
+            "value": "0.6"
+          },
+          {
+            "id": "motion",
+            "value": "pop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "triangle",
+      "passed": true,
+      "layerId": 53,
+      "changedField": "outerRadius",
+      "value": 130,
+      "animationPreserved": true,
+      "duplicateClicksCreatedOnce": true,
+      "form": {
+        "motionDisabled": true,
+        "durationDisabled": true,
+        "updateVisible": true,
+        "params": [
+          {
+            "id": "outerRadius",
+            "value": "110"
+          },
+          {
+            "id": "points",
+            "value": "3"
+          },
+          {
+            "id": "rotation",
+            "value": "0"
+          },
+          {
+            "id": "color",
+            "value": "#ff8547"
+          },
+          {
+            "id": "duration",
+            "value": "0.6"
+          },
+          {
+            "id": "motion",
+            "value": "pop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hexagon",
+      "passed": true,
+      "layerId": 54,
+      "changedField": "outerRadius",
+      "value": 130,
+      "animationPreserved": true,
+      "duplicateClicksCreatedOnce": true,
+      "form": {
+        "motionDisabled": true,
+        "durationDisabled": true,
+        "updateVisible": true,
+        "params": [
+          {
+            "id": "outerRadius",
+            "value": "110"
+          },
+          {
+            "id": "points",
+            "value": "6"
+          },
+          {
+            "id": "rotation",
+            "value": "0"
+          },
+          {
+            "id": "color",
+            "value": "#9e7aff"
+          },
+          {
+            "id": "duration",
+            "value": "0.6"
+          },
+          {
+            "id": "motion",
+            "value": "pop"
+          }
+        ]
+      }
+    },
+    {
+      "id": "star",
+      "passed": true,
+      "layerId": 55,
+      "changedField": "outerRadius",
+      "value": 130,
+      "animationPreserved": true,
+      "duplicateClicksCreatedOnce": true,
+      "form": {
+        "motionDisabled": true,
+        "durationDisabled": true,
+        "updateVisible": true,
+        "params": [
+          {
+            "id": "outerRadius",
+            "value": "110"
+          },
+          {
+            "id": "innerRadius",
+            "value": "50"
+          },
+          {
+            "id": "points",
+            "value": "5"
+          },
+          {
+            "id": "rotation",
+            "value": "0"
+          },
+          {
+            "id": "color",
+            "value": "#ffc238"
+          },
+          {
+            "id": "duration",
+            "value": "0.6"
+          },
+          {
+            "id": "motion",
+            "value": "pop"
+          }
+        ]
+      }
+    }
+  ],
+  "cleanup": {
+    "absentByItemScan": true,
+    "itemCount": 0,
+    "remaining": [],
+    "projectSaved": false
+  },
+  "selectionChangeProtection": true,
+  "timeout": {
+    "passed": true,
+    "delayMs": 24000,
+    "timeoutMs": 20000,
+    "calls": 1,
+    "creationUnlocked": true,
+    "editCleared": true,
+    "layerCount": 6
+  },
+  "reopen": {
+    "passed": true,
+    "libraries": [
+      "local.motion.basics",
+      "local.aebrowse.basics"
+    ],
+    "editingCleared": true,
+    "ready": "已连接 AE，选择图形库开始。"
+  },
+  "finalScan": {
+    "projectLocator": {
+      "locatorKind": "jsx",
+      "projectId": null
+    },
+    "total": 0,
+    "offset": 0,
+    "limit": 50,
+    "returned": 0,
+    "hasMore": false,
+    "nextOffset": null,
+    "items": [],
+    "execution_source": {
+      "instance_id": "e192a60d0821a83e0364c2896f99ab24",
+      "workspace_id": "workspace_c5b37b33f4011bc5fec193e949678edb",
+      "context_id": "e192a60d0821a83e0364c2896f99ab24:ecbd0277399c682d33dec11173104b12",
+      "mode": "live",
+      "project_path": null
+    }
+  },
+  "finished": true,
+  "endedAt": "2026-10-17T01:03:47.871Z"
+}

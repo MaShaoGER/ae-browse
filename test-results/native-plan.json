@@ -1,8 +1,8 @@
 {
   "finished": true,
-  "timestamp": "2026-10-16T05:21:21.183Z",
+  "timestamp": "2026-10-18T10:48:56.225Z",
   "scope": "Pure ES3 graph/parameter plan; no AE mutation.",
-  "passed": 46,
+  "passed": 47,
   "failed": 0,
   "results": [
     {
@@ -183,6 +183,10 @@
     },
     {
       "name": "星形内半径必须小于外半径且大于零 140",
+      "passed": true
+    },
+    {
+      "name": "星形角数不能因内外半径有效而跳过整数与预算约束",
       "passed": true
     },
     {

@@ -1,0 +1,141 @@
+{
+  "finished": true,
+  "runId": "instance-update-1792197117477-3cc138",
+  "scope": "Offline PNG checks only; no AE access.",
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Three frames use the 960 by 640 canvas",
+      "passed": true
+    },
+    {
+      "name": "Before insertion is transparent",
+      "passed": true
+    },
+    {
+      "name": "rounded-card reflects updated dimensions/color and preserved entrance",
+      "passed": true,
+      "actualSize": [
+        240,
+        130
+      ],
+      "expectedSize": [
+        240,
+        130
+      ],
+      "centerRGBA": [
+        229,
+        77,
+        51,
+        255
+      ],
+      "middleArea": 18648,
+      "finalArea": 30436
+    },
+    {
+      "name": "circle reflects updated dimensions/color and preserved entrance",
+      "passed": true,
+      "actualSize": [
+        150,
+        150
+      ],
+      "expectedSize": [
+        150,
+        150
+      ],
+      "centerRGBA": [
+        229,
+        77,
+        51,
+        255
+      ],
+      "middleArea": 10764,
+      "finalArea": 17708
+    },
+    {
+      "name": "ellipse reflects updated dimensions/color and preserved entrance",
+      "passed": true,
+      "actualSize": [
+        240,
+        130
+      ],
+      "expectedSize": [
+        240,
+        130
+      ],
+      "centerRGBA": [
+        229,
+        77,
+        51,
+        255
+      ],
+      "middleArea": 14936,
+      "finalArea": 24532
+    },
+    {
+      "name": "triangle reflects updated dimensions/color and preserved entrance",
+      "passed": true,
+      "actualSize": [
+        127,
+        146
+      ],
+      "expectedSize": [
+        128,
+        147
+      ],
+      "centerRGBA": [
+        229,
+        77,
+        51,
+        255
+      ],
+      "middleArea": 5704,
+      "finalArea": 9470
+    },
+    {
+      "name": "hexagon reflects updated dimensions/color and preserved entrance",
+      "passed": true,
+      "actualSize": [
+        170,
+        148
+      ],
+      "expectedSize": [
+        170,
+        147
+      ],
+      "centerRGBA": [
+        229,
+        77,
+        51,
+        255
+      ],
+      "middleArea": 11376,
+      "finalArea": 18852
+    },
+    {
+      "name": "star reflects updated dimensions/color and preserved entrance",
+      "passed": true,
+      "actualSize": [
+        160,
+        157
+      ],
+      "expectedSize": [
+        161,
+        158
+      ],
+      "centerRGBA": [
+        229,
+        77,
+        51,
+        255
+      ],
+      "middleArea": 5797,
+      "finalArea": 9518
+    },
+    {
+      "name": "Entrance stays inside final shape regions",
+      "passed": true
+    }
+  ]
+}

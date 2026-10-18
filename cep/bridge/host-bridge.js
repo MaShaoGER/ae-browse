@@ -9,7 +9,7 @@
   'use strict';
   var serial = 0;
   var session = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
-  var readOperations = { getHostInfo: true, getContext: true, readInstance: true, captureAsset: true };
+  var readOperations = { getHostInfo: true, getContext: true, readInstance: true, getSelectedInstance: true, captureAsset: true };
 
   function nextId(kind) { serial += 1; return kind + '-' + session + '-' + serial; }
   function bridgeError(code, message, requestId) {

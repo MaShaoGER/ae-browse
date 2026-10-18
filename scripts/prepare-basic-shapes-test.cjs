@@ -32,7 +32,7 @@ async function main() {
   };
   const scriptPath = path.join(directory, 'run.jsx');
   fs.writeFileSync(path.join(directory, 'config.json'), JSON.stringify(config, null, 2));
-  fs.writeFileSync(scriptPath, host + '\nvar AEBrowseShapesConfig = ' + JSON.stringify(config) + ';\n' +
+  fs.writeFileSync(scriptPath, 'app.exitAfterLaunchAndEval = false;\n' + host + '\nvar AEBrowseShapesConfig = ' + JSON.stringify(config) + ';\n' +
     fs.readFileSync(path.join(root, 'tests/ae-basic-shapes.jsx'), 'utf8'));
   console.log(JSON.stringify({ prepared: true, executedAE: false, runId,
     scriptPath: forward(scriptPath), reportPath: config.reportPath, tempName: config.tempName,

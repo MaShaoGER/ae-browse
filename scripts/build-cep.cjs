@@ -26,7 +26,7 @@ function tree(directory, target) {
 tree(path.join(root, 'cep'), path.join(out, 'cep'));
 copy(path.join(root, 'cep/CSXS/manifest.xml'), path.join(out, 'CSXS/manifest.xml'));
 tree(path.join(root, 'src'), path.join(out, 'src'));
-const hostSources = ['json-compat.jsxinc', 'native-shape-plan.jsxinc', 'native-shape-adapter.jsxinc', 'host-dispatch.jsxinc'];
+const hostSources = ['json-compat.jsxinc', 'native-shape-plan.jsxinc', 'native-shape-adapter.jsxinc', 'local-file-adapter.jsxinc', 'host-dispatch.jsxinc'];
 const host = hostSources.map(file => '/* Source: src/' + file + ' */\n' + fs.readFileSync(path.join(root, 'src', file), 'utf8')).join('\n\n');
 fs.mkdirSync(path.join(out, 'jsx'), { recursive: true });
 fs.writeFileSync(path.join(out, 'jsx/host.jsx'), '/* AE Browse 0.2.0 - generated; edit src files instead. */\n' + host, 'utf8');

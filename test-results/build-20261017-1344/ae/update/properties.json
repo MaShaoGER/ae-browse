@@ -1,0 +1,150 @@
+{
+  "runId": "instance-update-1792217441031-ef52fa",
+  "hostSha256": "a903f8944e754d0cb7af7fe683865bf51d841d7070be7f35505a6e1a2d731922",
+  "aeVersion": "26.0x67",
+  "startedAtMs": 1792217441479,
+  "finished": true,
+  "tests": [
+    {
+      "name": "rounded-card / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "rounded-card / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "circle / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "ellipse / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "triangle / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "hexagon / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / none updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / pop updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / slide updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "star / fade updates on the same layer and preserves animation",
+      "passed": true
+    },
+    {
+      "name": "Selection changes stop before mutation",
+      "passed": true
+    },
+    {
+      "name": "Locked layers remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "Source version changes stop before mutation",
+      "passed": true
+    },
+    {
+      "name": "Manual appearance changes are preserved",
+      "passed": true
+    },
+    {
+      "name": "Serialization failure restores actual geometry and exact metadata",
+      "passed": true
+    },
+    {
+      "name": "Successful update rejects another write from the old snapshot",
+      "passed": true
+    }
+  ],
+  "frames": [],
+  "baseline": [],
+  "cleanup": {
+    "attempted": true,
+    "removed": true,
+    "absentByItemScan": true,
+    "originalItemsAndLayerIdentitiesUnchanged": true,
+    "projectSaved": false,
+    "remaining": [],
+    "itemCount": 0,
+    "projectFile": null
+  },
+  "beforeActiveId": null,
+  "temporary": {
+    "id": 345,
+    "name": "__AEBrowse_Update_instance-update-1792217441031-ef52fa"
+  },
+  "awaitingPixelCaptureAndCleanup": false,
+  "passed": 30,
+  "failed": 0,
+  "endedAtMs": 1792217450926
+}

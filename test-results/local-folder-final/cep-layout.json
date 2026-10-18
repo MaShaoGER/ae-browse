@@ -1,0 +1,33 @@
+{
+  "finished": true,
+  "scope": "Real CEP emulated viewport; no physical window resize or docking",
+  "checks": [
+    {
+      "width": 780,
+      "height": 640,
+      "overflow": false,
+      "orientation": "vertical",
+      "buttonBottom": 471.5,
+      "mainBottom": 575,
+      "statusBottom": 640
+    },
+    {
+      "width": 560,
+      "height": 420,
+      "overflow": false,
+      "orientation": "vertical",
+      "buttonBottom": 360.8333435058594,
+      "mainBottom": 361,
+      "statusBottom": 420
+    },
+    {
+      "width": 300,
+      "height": 420,
+      "overflow": false,
+      "orientation": "horizontal",
+      "buttonBottom": 361.28125,
+      "mainBottom": 361,
+      "statusBottom": 420
+    }
+  ]
+}

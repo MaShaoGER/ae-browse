@@ -1,0 +1,64 @@
+{
+  "runId": "instance-update-1792217404550-d8d1d3",
+  "hostSha256": "a903f8944e754d0cb7af7fe683865bf51d841d7070be7f35505a6e1a2d731922",
+  "finished": true,
+  "startedAtMs": 1792217405001,
+  "scope": "Actual AE malformed-request and native-plan guards; no pixel checks.",
+  "tests": [
+    {
+      "name": "A package with resources is refused before creating a layer",
+      "passed": true
+    },
+    {
+      "name": "Malformed resource declarations are refused before creating a layer",
+      "passed": true
+    },
+    {
+      "name": "Fractional star points are refused even when its radii are valid",
+      "passed": true
+    },
+    {
+      "name": "Out-of-range star points remain refused without relying on descriptor limits",
+      "passed": true
+    },
+    {
+      "name": "A null payload is refused even with a valid composition target",
+      "passed": true
+    },
+    {
+      "name": "An array payload is refused even with a valid composition target",
+      "passed": true
+    },
+    {
+      "name": "An empty operation is refused as a malformed request",
+      "passed": true
+    },
+    {
+      "name": "An oversized operation is refused as a malformed request",
+      "passed": true
+    },
+    {
+      "name": "A normal read-only request remains usable after malformed requests",
+      "passed": true
+    }
+  ],
+  "baseline": [
+    
+  ],
+  "cleanup": {
+    "absentByItemScan": true,
+    "remaining": [
+      
+    ],
+    "originalItemsAndLayerIdentitiesUnchanged": true,
+    "itemCount": 0,
+    "projectSaved": false
+  },
+  "temporary": {
+    "id": 291,
+    "name": "__AEBrowse_Logic_instance-update-1792217404550-d8d1d3"
+  },
+  "passed": 9,
+  "failed": 0,
+  "endedAtMs": 1792217405384
+}

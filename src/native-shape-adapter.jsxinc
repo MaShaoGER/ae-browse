@@ -66,18 +66,37 @@ var AEBrowseNative = (function () {
         var shape = geometry(layer, metadata), fields = geometryFields(metadata.geometryType || 'rectangle'), result = [];
         for (var i = 0; i < fields.length; i++) { result.push({ key: fields[i][0], property: shape.shape.property(fields[i][1]) }); }
         result.push({ key: 'color', property: shape.fill.property('ADBE Vector Fill Color') });
+        result.push({ key: 'fillOpacity', property: shape.fill.property('ADBE Vector Fill Opacity') });
         return result;
+    }
+    function appearanceValue(plan, key) {
+        // AE stores a fourth color component but renders transparency through
+        // the fill's own opacity, independently of the layer's entrance animation.
+        return key === 'fillOpacity' ? plan.color[3] * 100 : plan[key];
     }
     function writeGeometry(layer, metadata, plan) {
         var properties = appearanceProperties(layer, metadata);
-        for (var i = 0; i < properties.length; i++) { properties[i].property.setValue(plan[properties[i].key]); }
+        for (var i = 0; i < properties.length; i++) { properties[i].property.setValue(appearanceValue(plan, properties[i].key)); }
     }
     function easeValues(values) { var result = []; for (var i = 0; i < values.length; i++) { result.push({ speed: values[i].speed, influence: values[i].influence }); } return result; }
     function snapshot(layer, metadata) {
         var shape = geometry(layer, metadata), transform = layer.property('ADBE Transform Group');
         var result = { position: transform.property('ADBE Position').valueAtTime(metadata.insertTime, true), geometryPropertyState: [], animation: [], effects: [], effectsTotal: layer.property('ADBE Effect Parade').numProperties };
         var geometryProperties = appearanceProperties(layer, metadata);
-        for (var g = 0; g < geometryProperties.length; g++) { var gp = geometryProperties[g]; result[gp.key] = gp.property.value; result.geometryPropertyState.push({ keys: gp.property.numKeys, expression: gp.property.expressionEnabled }); }
+        for (var g = 0; g < geometryProperties.length; g++) {
+            var gp = geometryProperties[g];
+            if (gp.key === 'fillOpacity') {
+                // Opaque, unanimated legacy instances have no opacity field in
+                // their baseline. Keep that representation readable, while any
+                // manual opacity value, keyframe or expression remains visible.
+                if (gp.property.value !== 100 || gp.property.numKeys > 0 || gp.property.expressionEnabled || (metadata.baseline && Object.prototype.hasOwnProperty.call(metadata.baseline, 'fillOpacity'))) {
+                    result.fillOpacity = { value: gp.property.value, keys: gp.property.numKeys, expression: gp.property.expressionEnabled };
+                }
+                continue;
+            }
+            result[gp.key] = gp.property.value;
+            result.geometryPropertyState.push({ keys: gp.property.numKeys, expression: gp.property.expressionEnabled });
+        }
         if (metadata.geometryType === 'polygon' || metadata.geometryType === 'star') { result.polystarType = shape.shape.property('ADBE Vector Star Type').value; }
         var channels = ['ADBE Scale', 'ADBE Position', 'ADBE Opacity'];
         for (var i = 0; i < channels.length; i++) {
@@ -177,25 +196,42 @@ var AEBrowseNative = (function () {
             return { layer: layer, reused: false, diagnostics: plan.diagnostics };
         } catch (error) { if (layer !== null) { layer.remove(); } throw error; }
     }
-    function updateAppearance(layer, loaded, overrides) {
+    function updateAppearance(layer, loaded, overrides, options) {
+        options = options || {};
         var metadata = meta(layer, true);
         if (layer.locked) { fail('E_SELECTION_LOCKED', '图层已锁定。'); }
         if (metadata.packId !== loaded.manifest.pack.id || metadata.assetId !== loaded.asset.id) { fail('E_INSTANCE_IDENTITY', '素材身份不匹配。'); }
+        if (metadata.packVersion !== loaded.manifest.pack.version || metadata.sourceSignature !== JSON.stringify({ payload: loaded.payload, effects: loaded.asset.effects || [] })) { fail('E_INSTANCE_SOURCE_CHANGED', '实例来源版本或内容已经变化，请使用创建时的图形库。'); }
         var current = capture(layer);
         if (current.modified) { fail('E_INSTANCE_MODIFIED', '实例已手工修改，当前更新已停止。'); }
+        if (options.expected && (!AEBrowsePlan.same(options.expected.parameters, current.parameters) || !AEBrowsePlan.same(options.expected.observed, current.observed))) { fail('E_INSTANCE_STALE', '实例在读取后已经变化，请重新读取所选实例。'); }
         var values = AEBrowsePlan.clone(metadata.parameters);
         for (var key in overrides) { if (Object.prototype.hasOwnProperty.call(overrides, key)) { values[key] = overrides[key]; } }
         var comp = layer.containingComp;
         var plan = AEBrowsePlan.plan(loaded.asset, loaded.payload, values, { width: comp.width, height: comp.height, duration: comp.duration, insertTime: metadata.insertTime, installedEffects: installedEffects() });
         if (plan.motion !== metadata.parameters.motion || plan.parameters.duration !== metadata.parameters.duration) { fail('E_ANIMATION_UPDATE_UNSUPPORTED', '这个测试入口只更新外观，不重写动画。'); }
         if (plan.geometryType !== (metadata.geometryType || 'rectangle')) { fail('E_INSTANCE_IDENTITY', '更新不能改变实例的几何类型。'); }
-        var properties = appearanceProperties(layer, metadata), old = [];
-        for (var i = 0; i < properties.length; i++) { if (properties[i].property.numKeys > 0 || properties[i].property.expressionEnabled) { fail('E_INSTANCE_MODIFIED', '外观参数已有动画或表达式。'); } old.push(properties[i].property.value); }
-        try { writeGeometry(layer, metadata, plan); }
-        catch (error) { for (i = 0; i < properties.length; i++) { properties[i].property.setValue(old[i]); } throw error; }
-        metadata.parameters = plan.parameters; metadata.baseline = snapshot(layer, metadata);
-        layer.comment = PREFIX + JSON.stringify(metadata);
-        return capture(layer);
+        var properties = appearanceProperties(layer, metadata), old = [], oldComment = layer.comment;
+        for (var i = 0; i < properties.length; i++) { if (properties[i].property.numKeys > 0 || properties[i].property.expressionEnabled) { fail('E_INSTANCE_MODIFIED', '外观参数已有动画或表达式。'); } old.push(AEBrowsePlan.clone(properties[i].property.value)); }
+        try {
+            writeGeometry(layer, metadata, plan);
+            for (i = 0; i < properties.length; i++) { if (!AEBrowsePlan.same(properties[i].property.value, appearanceValue(plan, properties[i].key))) { fail('E_INSTANCE_READBACK', '宿主改变了外观参数，更新已停止。'); } }
+            metadata.parameters = plan.parameters; metadata.baseline = snapshot(layer, metadata);
+            layer.comment = PREFIX + JSON.stringify(metadata);
+            var captured = capture(layer);
+            if (captured.modified || !AEBrowsePlan.same(captured.parameters, plan.parameters)) { fail('E_INSTANCE_READBACK', '更新回读与预期参数不一致。'); }
+            // Host response construction and serialization remain inside the rollback boundary.
+            return options.finalize ? options.finalize(captured) : captured;
+        } catch (error) {
+            for (i = 0; i < properties.length; i++) { try { properties[i].property.setValue(old[i]); } catch (_) {} }
+            try { layer.comment = oldComment; } catch (_) {}
+            try {
+                var originalMetadata = JSON.parse(oldComment.substring(PREFIX.length));
+                error.rollbackConfirmed = layer.comment === oldComment && AEBrowsePlan.same(snapshot(layer, originalMetadata), current.observed);
+            } catch (_) { error.rollbackConfirmed = false; }
+            error.rollbackFailed = !error.rollbackConfirmed;
+            throw error;
+        }
     }
     function makeFolder(directory) { if (!directory.exists) { if (!directory.parent.exists) { makeFolder(directory.parent); } if (!directory.create()) { fail('E_EXPORT_WRITE', '无法创建导出目录。'); } } }
     function writeJSON(file, value) {
