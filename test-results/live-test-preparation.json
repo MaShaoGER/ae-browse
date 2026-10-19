@@ -1,6 +1,6 @@
 {
   "finished": true,
-  "timestamp": "2026-10-18T10:49:08.564Z",
+  "timestamp": "2026-10-19T07:37:54.570Z",
   "scope": "Node subprocess fixture preparation and sealed VM routing only; no real AE calls.",
   "passed": 7,
   "failed": 0,

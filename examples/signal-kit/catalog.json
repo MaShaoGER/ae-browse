@@ -1,0 +1,110 @@
+{
+  "name": "讯号 SIGNAL",
+  "version": "0.1.0",
+  "palette": {
+    "blue": "#2454F4",
+    "ink": "#152A52",
+    "ice": "#EEF3FF",
+    "orange": "#FF6A3D",
+    "steel": "#A4B5D6",
+    "white": "#FFFFFF"
+  },
+  "assets": [
+    {
+      "id": "orbit",
+      "name": "双轨讯号",
+      "file": "svg/装饰/双轨讯号.svg",
+      "width": 400,
+      "height": 400,
+      "use": "片头主视觉；可拆分轨道和卫星分别旋转"
+    },
+    {
+      "id": "burst",
+      "name": "放射星芒",
+      "file": "svg/装饰/放射星芒.svg",
+      "width": 320,
+      "height": 320,
+      "use": "节奏点、重点强调或缩放转场"
+    },
+    {
+      "id": "arrow",
+      "name": "折线推进",
+      "file": "svg/装饰/折线推进.svg",
+      "width": 480,
+      "height": 160,
+      "use": "段落切换或内容推进方向"
+    },
+    {
+      "id": "brackets",
+      "name": "取景角标",
+      "file": "svg/装饰/取景角标.svg",
+      "width": 480,
+      "height": 320,
+      "use": "视频取景框；中心可放画面"
+    },
+    {
+      "id": "bars",
+      "name": "音频节拍",
+      "file": "svg/装饰/音频节拍.svg",
+      "width": 332,
+      "height": 220,
+      "use": "声音、访谈、播客的节奏标识"
+    },
+    {
+      "id": "dots",
+      "name": "点阵肌理",
+      "file": "svg/装饰/点阵肌理.svg",
+      "width": 288,
+      "height": 160,
+      "use": "用于版面空白区域；不建议铺满整个画面"
+    },
+    {
+      "id": "wave",
+      "name": "连续波形",
+      "file": "svg/装饰/连续波形.svg",
+      "width": 560,
+      "height": 180,
+      "use": "数据、信号或连接关系的辅助线"
+    },
+    {
+      "id": "title",
+      "name": "开场标题底板",
+      "file": "svg/版式/开场标题底板.svg",
+      "width": 960,
+      "height": 400,
+      "use": "标题放在 x=64…744、y=100…264 内；文字在 AE 另建"
+    },
+    {
+      "id": "lower-third",
+      "name": "双层字幕条",
+      "file": "svg/版式/双层字幕条.svg",
+      "width": 960,
+      "height": 224,
+      "use": "上方短标签，下方姓名或标题；保留右侧箭头"
+    },
+    {
+      "id": "data-card",
+      "name": "数据卡片",
+      "file": "svg/版式/数据卡片.svg",
+      "width": 560,
+      "height": 400,
+      "use": "左侧填写数值，右侧为装饰性趋势柱；无真实数据含义"
+    },
+    {
+      "id": "capsule",
+      "name": "栏目胶囊",
+      "file": "svg/版式/栏目胶囊.svg",
+      "width": 560,
+      "height": 144,
+      "use": "文字放在 x=142…454；适合栏目名或行动提示"
+    },
+    {
+      "id": "dial",
+      "name": "进度环标",
+      "file": "svg/装饰/进度环标.svg",
+      "width": 320,
+      "height": 320,
+      "use": "静态 75% 视觉示例；真实进度需在 AE 编辑路径或添加修剪路径"
+    }
+  ]
+}

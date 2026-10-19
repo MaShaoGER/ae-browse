@@ -39,3 +39,7 @@ Desktop.ini
 /test-results/local-folder-final/run.jsx
 /test-results/local-folder-final/config.json
 /test-results/local-folder-final/raster.json
+
+# Generated live SVG test scripts and content-addressed scratch snapshots.
+/test-results/workflow-*/ae-properties.jsx
+/test-results/workflow-*/svg-shapes-*/

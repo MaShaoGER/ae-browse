@@ -1,0 +1,82 @@
+/* Trusted SVG geometry adapter. No SVG markup or executable source reaches AE. */
+var AEBrowseSVGNative = (function () {
+    function fail(message) { var e = new Error(message); e.code = 'E_SVG_PLAN'; throw e; }
+    function array(value) { return value instanceof Array; }
+    function number(value, low, high) { return typeof value === 'number' && isFinite(value) && value >= low && value <= high; }
+    function validate(plan) {
+        if (!plan || plan.version !== 1 || !number(plan.width, 1, 30000) || !number(plan.height, 1, 30000) || !array(plan.elements) || plan.elements.length < 1 || plan.elements.length > 512) { fail('SVG 形状计划无效或超出预算。'); }
+        var total = 0;
+        function color(value) { if (value === null) { return; } if (!array(value) || value.length !== 4) { fail('SVG 颜色格式无效。'); } for (var c = 0; c < 4; c++) { if (!number(value[c], 0, 1)) { fail('SVG 颜色范围无效。'); } } }
+        for (var i = 0; i < plan.elements.length; i++) {
+            var el = plan.elements[i];
+            if (!el || typeof el.name !== 'string' || el.name.length > 1024 || !array(el.paths) || el.paths.length < 1 || el.paths.length > 2048 || !number(el.opacity, 0, 1) || !number(el.strokeWidth, 0, 1000000) || !number(el.miterLimit, 1, 1000000) || (el.fillRule !== 'nonzero' && el.fillRule !== 'evenodd') || !/^(butt|round|square)$/.test(el.lineCap) || !/^(miter|round|bevel)$/.test(el.lineJoin)) { fail('SVG 图形外观数据无效。'); }
+            color(el.fill); color(el.stroke);
+            if (el.fill === null && el.stroke === null) { fail('SVG 图形没有填充或描边。'); }
+            for (var j = 0; j < el.paths.length; j++) {
+                var p = el.paths[j];
+                if (!p || !array(p.vertices) || p.vertices.length < 2 || typeof p.closed !== 'boolean' || !array(p.inTangents) || !array(p.outTangents) || p.vertices.length !== p.inTangents.length || p.vertices.length !== p.outTangents.length) { fail('SVG 路径结构无效。'); }
+                total += p.vertices.length; if (total > 20000) { fail('SVG 路径超出顶点预算。'); }
+                for (var k = 0; k < p.vertices.length; k++) {
+                    var pairs = [p.vertices[k], p.inTangents[k], p.outTangents[k]];
+                    for (var n = 0; n < pairs.length; n++) { if (!array(pairs[n]) || pairs[n].length !== 2 || !number(pairs[n][0], -100000000, 100000000) || !number(pairs[n][1], -100000000, 100000000)) { fail('SVG 路径坐标无效。'); } }
+                }
+            }
+        }
+        return true;
+    }
+    function create(comp, plan, name, insertTime) {
+        validate(plan);
+        var layer = null;
+        try {
+            layer = comp.layers.addShape(); layer.name = name;
+            var tr = layer.property('ADBE Transform Group');
+            tr.property('ADBE Anchor Point').setValue([plan.width / 2, plan.height / 2]);
+            tr.property('ADBE Position').setValue([comp.width / 2, comp.height / 2]);
+            layer.startTime = insertTime; layer.inPoint = insertTime; layer.outPoint = comp.duration;
+            // SVG paints later elements on top; AE renders the first shape group on top.
+            for (var i = plan.elements.length - 1; i >= 0; i--) {
+                var el = plan.elements[i], root = layer.property('ADBE Root Vectors Group');
+                var groupIndex = root.addProperty('ADBE Vector Group').propertyIndex;
+                var group = root.property(groupIndex); group.name = el.name;
+                for (var j = 0; j < el.paths.length; j++) {
+                    var contents = layer.property('ADBE Root Vectors Group').property(groupIndex).property('ADBE Vectors Group');
+                    contents.addProperty('ADBE Vector Shape - Group');
+                }
+                var fillIndex = null, strokeIndex = null;
+                contents = layer.property('ADBE Root Vectors Group').property(groupIndex).property('ADBE Vectors Group');
+                if (el.fill !== null) { fillIndex = contents.addProperty('ADBE Vector Graphic - Fill').propertyIndex; }
+                contents = layer.property('ADBE Root Vectors Group').property(groupIndex).property('ADBE Vectors Group');
+                if (el.stroke !== null) { strokeIndex = contents.addProperty('ADBE Vector Graphic - Stroke').propertyIndex; }
+                // Adding properties invalidates indexed groups: acquire fresh references after all additions.
+                group = layer.property('ADBE Root Vectors Group').property(groupIndex); contents = group.property('ADBE Vectors Group');
+                group.property('ADBE Vector Transform Group').property('ADBE Vector Group Opacity').setValue(el.opacity * 100);
+                for (j = 0; j < el.paths.length; j++) {
+                    var p = el.paths[j], shape = new Shape();
+                    shape.vertices = p.vertices; shape.inTangents = p.inTangents; shape.outTangents = p.outTangents; shape.closed = p.closed;
+                    contents.property(j + 1).property('ADBE Vector Shape').setValue(shape);
+                    var observed = contents.property(j + 1).property('ADBE Vector Shape').value;
+                    if (observed.vertices.length !== p.vertices.length || observed.closed !== p.closed) { fail('SVG 形状回读不一致。'); }
+                    for (var v = 0; v < p.vertices.length; v++) { for (var axis = 0; axis < 2; axis++) { if (Math.abs(observed.vertices[v][axis] - p.vertices[v][axis]) > 0.01 || Math.abs(observed.inTangents[v][axis] - p.inTangents[v][axis]) > 0.01 || Math.abs(observed.outTangents[v][axis] - p.outTangents[v][axis]) > 0.01) { fail('SVG 路径或切线回读不一致。'); } } }
+                }
+                if (fillIndex !== null) {
+                    var fill = contents.property(fillIndex);
+                    fill.property('ADBE Vector Fill Color').setValue(el.fill.slice(0, 3)); fill.property('ADBE Vector Fill Opacity').setValue(el.fill[3] * 100);
+                    fill.property('ADBE Vector Fill Rule').setValue(el.fillRule === 'evenodd' ? 2 : 1);
+                }
+                if (strokeIndex !== null) {
+                    var stroke = contents.property(strokeIndex);
+                    stroke.property('ADBE Vector Stroke Color').setValue(el.stroke.slice(0, 3)); stroke.property('ADBE Vector Stroke Opacity').setValue(el.stroke[3] * 100);
+                    stroke.property('ADBE Vector Stroke Width').setValue(el.strokeWidth);
+                    var cap = 1, join = 1;
+                    if (el.lineCap === 'round') { cap = 2; } else if (el.lineCap === 'square') { cap = 3; }
+                    if (el.lineJoin === 'round') { join = 2; } else if (el.lineJoin === 'bevel') { join = 3; }
+                    stroke.property('ADBE Vector Stroke Line Cap').setValue(cap);
+                    stroke.property('ADBE Vector Stroke Line Join').setValue(join);
+                    if (join === 1) { stroke.property('ADBE Vector Stroke Miter Limit').setValue(el.miterLimit); }
+                }
+            }
+            return layer;
+        } catch (error) { if (layer) { try { layer.remove(); } catch (_) { error.cleanupFailed = true; } } throw error; }
+    }
+    return { validate: validate, create: create };
+})();

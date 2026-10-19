@@ -1,0 +1,20 @@
+{
+  "removed": [
+    {
+      "id": 454,
+      "name": "__AEBrowse_roundtrip-1792217519704_restored"
+    },
+    {
+      "id": 422,
+      "name": "__AEBrowse_roundtrip-1792217519704_original"
+    }
+  ],
+  "remaining": [
+
+  ],
+  "absentByItemScan": true,
+  "originalItemsAndLayerIdentitiesUnchanged": true,
+  "itemCount": 0,
+  "projectSaved": false,
+  "projectFile": null
+}

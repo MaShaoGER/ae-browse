@@ -1,0 +1,14 @@
+{
+  "scope": "Actual CEP/CEF drag-and-drop verification attempt",
+  "finished": false,
+  "status": "not-run",
+  "attempts": 2,
+  "reason": "AE launch processes exited without the run-specific bootstrap result. No actual CEP drop checks were executed.",
+  "passed": 0,
+  "failed": 0,
+  "nativeFilePathVerified": false,
+  "physicalExplorerDragVerified": false,
+  "aePropertyTestsRun": false,
+  "pixelChecksRun": false,
+  "projectSaveRequested": false
+}

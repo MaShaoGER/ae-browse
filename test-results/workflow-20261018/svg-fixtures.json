@@ -1,0 +1,715 @@
+[
+  {
+    "name": "rounded-card",
+    "source": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"320\" height=\"200\"><rect x=\"16\" y=\"16\" width=\"288\" height=\"168\" rx=\"24\" fill=\"#5386ed\"/></svg>",
+    "plan": {
+      "version": 1,
+      "width": 320,
+      "height": 200,
+      "elements": [
+        {
+          "name": "rect 1",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  40,
+                  16
+                ],
+                [
+                  280,
+                  16
+                ],
+                [
+                  304,
+                  40
+                ],
+                [
+                  304,
+                  160
+                ],
+                [
+                  280,
+                  184
+                ],
+                [
+                  40,
+                  184
+                ],
+                [
+                  16,
+                  160
+                ],
+                [
+                  16,
+                  40
+                ]
+              ],
+              "inTangents": [
+                [
+                  -13.254833995939048,
+                  3.552713678800501e-15
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  -13.254833995939041
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  13.254833995939066,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  13.254833995939038
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  13.254833995939066,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  13.254833995939038
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  -13.254833995939041,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  -1.7763568394002505e-15,
+                  -13.254833995939041
+                ]
+              ],
+              "closed": true
+            }
+          ],
+          "fill": [
+            0.3254901960784314,
+            0.5254901960784314,
+            0.9294117647058824,
+            1
+          ],
+          "stroke": null,
+          "strokeWidth": 1,
+          "lineCap": "butt",
+          "lineJoin": "miter",
+          "miterLimit": 4,
+          "fillRule": "nonzero",
+          "opacity": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "compound-stroke",
+    "source": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"320\" height=\"200\"><path fill=\"#ec704a\" fill-rule=\"evenodd\" d=\"M20 20H180V180H20Z M60 60H140V140H60Z\"/><path d=\"M220 40v120h65\" fill=\"none\" stroke=\"#53c8ba\" stroke-width=\"12\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+    "plan": {
+      "version": 1,
+      "width": 320,
+      "height": 200,
+      "elements": [
+        {
+          "name": "path 1",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  20,
+                  20
+                ],
+                [
+                  180,
+                  20
+                ],
+                [
+                  180,
+                  180
+                ],
+                [
+                  20,
+                  180
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": true
+            },
+            {
+              "vertices": [
+                [
+                  60,
+                  60
+                ],
+                [
+                  140,
+                  60
+                ],
+                [
+                  140,
+                  140
+                ],
+                [
+                  60,
+                  140
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": true
+            }
+          ],
+          "fill": [
+            0.9254901960784314,
+            0.4392156862745098,
+            0.2901960784313726,
+            1
+          ],
+          "stroke": null,
+          "strokeWidth": 1,
+          "lineCap": "butt",
+          "lineJoin": "miter",
+          "miterLimit": 4,
+          "fillRule": "evenodd",
+          "opacity": 1
+        },
+        {
+          "name": "path 2",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  220,
+                  40
+                ],
+                [
+                  220,
+                  160
+                ],
+                [
+                  285,
+                  160
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": false
+            }
+          ],
+          "fill": null,
+          "stroke": [
+            0.3254901960784314,
+            0.7843137254901961,
+            0.7294117647058823,
+            1
+          ],
+          "strokeWidth": 12,
+          "lineCap": "round",
+          "lineJoin": "round",
+          "miterLimit": 4,
+          "fillRule": "nonzero",
+          "opacity": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "curves-transform",
+    "source": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"320\" height=\"200\" viewBox=\"0 0 160 100\"><g transform=\"translate(5 5)\"><path d=\"M5 50Q30 5 55 50T105 50\" fill=\"none\" stroke=\"#e4b95e\" stroke-width=\"3\" stroke-linecap=\"square\"/><ellipse cx=\"125\" cy=\"30\" rx=\"12\" ry=\"20\" fill=\"#7398ed\" fill-opacity=\"0.5\"/><polygon points=\"20,65 45,90 5,90\" fill=\"#9bc57a\" opacity=\"0.7\"/></g></svg>",
+    "plan": {
+      "version": 1,
+      "width": 320,
+      "height": 200,
+      "elements": [
+        {
+          "name": "path 1",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  20,
+                  110
+                ],
+                [
+                  120,
+                  110
+                ],
+                [
+                  220,
+                  110
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  -33.33333333333334,
+                  -60
+                ],
+                [
+                  -33.33333333333334,
+                  60
+                ]
+              ],
+              "outTangents": [
+                [
+                  33.333333333333336,
+                  -60
+                ],
+                [
+                  33.33333333333334,
+                  60
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": false
+            }
+          ],
+          "fill": null,
+          "stroke": [
+            0.8941176470588236,
+            0.7254901960784313,
+            0.3686274509803922,
+            1
+          ],
+          "strokeWidth": 6,
+          "lineCap": "square",
+          "lineJoin": "miter",
+          "miterLimit": 4,
+          "fillRule": "nonzero",
+          "opacity": 1
+        },
+        {
+          "name": "ellipse 2",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  284,
+                  70
+                ],
+                [
+                  260,
+                  110
+                ],
+                [
+                  236,
+                  70
+                ],
+                [
+                  260,
+                  30
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  -22.09138999323173
+                ],
+                [
+                  13.254833995939066,
+                  0
+                ],
+                [
+                  0,
+                  22.091389993231743
+                ],
+                [
+                  -13.254833995939038,
+                  3.552713678800501e-15
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  22.09138999323173
+                ],
+                [
+                  -13.254833995939038,
+                  0
+                ],
+                [
+                  0,
+                  -22.09138999323173
+                ],
+                [
+                  13.254833995939066,
+                  0
+                ]
+              ],
+              "closed": true
+            }
+          ],
+          "fill": [
+            0.45098039215686275,
+            0.596078431372549,
+            0.9294117647058824,
+            0.5
+          ],
+          "stroke": null,
+          "strokeWidth": 2,
+          "lineCap": "butt",
+          "lineJoin": "miter",
+          "miterLimit": 4,
+          "fillRule": "nonzero",
+          "opacity": 1
+        },
+        {
+          "name": "polygon 3",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  50,
+                  140
+                ],
+                [
+                  100,
+                  190
+                ],
+                [
+                  20,
+                  190
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": true
+            }
+          ],
+          "fill": [
+            0.6078431372549019,
+            0.7725490196078432,
+            0.47843137254901963,
+            1
+          ],
+          "stroke": null,
+          "strokeWidth": 2,
+          "lineCap": "butt",
+          "lineJoin": "miter",
+          "miterLimit": 4,
+          "fillRule": "nonzero",
+          "opacity": 0.7
+        }
+      ]
+    }
+  },
+  {
+    "name": "paint-order",
+    "source": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"320\" height=\"200\"><rect x=\"20\" y=\"20\" width=\"200\" height=\"140\" fill=\"#ff0000\"/><rect x=\"100\" y=\"60\" width=\"200\" height=\"120\" fill=\"#0000ff\"/></svg>",
+    "plan": {
+      "version": 1,
+      "width": 320,
+      "height": 200,
+      "elements": [
+        {
+          "name": "rect 1",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  20,
+                  20
+                ],
+                [
+                  220,
+                  20
+                ],
+                [
+                  220,
+                  160
+                ],
+                [
+                  20,
+                  160
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": true
+            }
+          ],
+          "fill": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "stroke": null,
+          "strokeWidth": 1,
+          "lineCap": "butt",
+          "lineJoin": "miter",
+          "miterLimit": 4,
+          "fillRule": "nonzero",
+          "opacity": 1
+        },
+        {
+          "name": "rect 2",
+          "paths": [
+            {
+              "vertices": [
+                [
+                  100,
+                  60
+                ],
+                [
+                  300,
+                  60
+                ],
+                [
+                  300,
+                  180
+                ],
+                [
+                  100,
+                  180
+                ]
+              ],
+              "inTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "outTangents": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": true
+            }
+          ],
+          "fill": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "stroke": null,
+          "strokeWidth": 1,
+          "lineCap": "butt",
+          "lineJoin": "miter",
+          "miterLimit": 4,
+          "fillRule": "nonzero",
+          "opacity": 1
+        }
+      ]
+    }
+  }
+]

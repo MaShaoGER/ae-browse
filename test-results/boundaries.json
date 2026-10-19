@@ -1,12 +1,12 @@
 {
   "finished": true,
-  "timestamp": "2026-10-18T10:48:56.614Z",
+  "timestamp": "2026-10-19T07:37:50.741Z",
   "scope": "Node package contract, real file relocation, and simulated host preflight; no AE layer generation or rendering.",
   "passed": 103,
   "failed": 0,
   "total": 103,
-  "metadata1000Ms": 237.99,
-  "fixtures": "test-results/fixtures-1792320536294-82608",
+  "metadata1000Ms": 152.06,
+  "fixtures": "test-results/fixtures-1792395470522-33432",
   "results": [
     {
       "group": "package",
@@ -529,7 +529,7 @@
     "finished": true,
     "aeVersion": "26.0x67",
     "startedAtMs": 1792216329890,
-    "snapshotAgeMs": 104206726,
+    "snapshotAgeMs": 179140860,
     "effectCount": 1583,
     "gaussianBlurAvailable": true,
     "activeComp": false,

@@ -1,0 +1,26 @@
+{
+  "finished": true,
+  "timestamp": "2026-10-17T06:12:03.655Z",
+  "copiedFrom": "D:/project/ae-browse/test-results/roundtrip-1792217519704/导出的 图形包",
+  "copiedTo": "D:/project/ae-browse/test-results/roundtrip-1792217519704/再复制的 图形包",
+  "contentUnchanged": true,
+  "originalFingerprint": "481fbdab86ca3866894a61094b56a179b793e53d8dd51d7521f312eb5aafaa88",
+  "copiedFingerprint": "481fbdab86ca3866894a61094b56a179b793e53d8dd51d7521f312eb5aafaa88",
+  "contract": {
+    "schemaVersion": 1,
+    "canRegister": true,
+    "allContractValid": true,
+    "assetCount": 1,
+    "assets": [
+      {
+        "id": "rounded-card",
+        "valid": true,
+        "canImport": true,
+        "status": "ready",
+        "skippedEffects": []
+      }
+    ],
+    "diagnostics": []
+  },
+  "scope": "Real exported files copied to a different Unicode directory; narrow adapter capabilities verified by this run."
+}

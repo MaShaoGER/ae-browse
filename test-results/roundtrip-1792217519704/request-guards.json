@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "name": "重复的相同请求仍可复用实例",
+      "passed": true
+    },
+    {
+      "name": "同一操作 ID 的不同插入时间不会误复用",
+      "passed": true
+    },
+    {
+      "name": "同一操作 ID 的不同包版本不会误复用",
+      "passed": true
+    },
+    {
+      "name": "同一操作 ID 的不同效果内容不会误复用",
+      "passed": true
+    },
+    {
+      "name": "二维尺寸参数能够更新并回读",
+      "passed": true
+    }
+  ],
+  "cleaned": true,
+  "passed": 5,
+  "failed": 0,
+  "runId": "roundtrip-1792217519704",
+  "finished": true,
+  "cleanup": {
+    "absentByItemScan": true,
+    "remaining": [
+
+    ],
+    "itemCount": 0,
+    "originalItemCountRestored": true,
+    "projectSaved": false
+  }
+}

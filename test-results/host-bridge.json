@@ -1,6 +1,6 @@
 {
   "finished": true,
-  "timestamp": "2026-10-18T10:49:07.199Z",
+  "timestamp": "2026-10-19T07:37:53.185Z",
   "scope": "Node-only mock CEP evalScript transport; no AE access or project mutation.",
   "passed": 20,
   "failed": 0,

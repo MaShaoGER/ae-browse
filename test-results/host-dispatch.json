@@ -1,6 +1,6 @@
 {
   "finished": true,
-  "timestamp": "2026-10-18T10:49:07.516Z",
+  "timestamp": "2026-10-19T07:37:53.515Z",
   "scope": "Node VM mocks plus actual ES3 plan/native adapter; no live AE calls or rendered pixel checks.",
   "passed": 39,
   "failed": 0,

@@ -1,0 +1,93 @@
+{
+  "scope": "Node-only isolated filesystem and UI event boundary; no live AE",
+  "finished": true,
+  "finishedAt": "2026-10-19T07:37:52.172Z",
+  "passed": 21,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Dragging selected files never registers unselected siblings or subfolders",
+      "passed": true
+    },
+    {
+      "name": "Mixed folders and file parents are registered independently and directory scans recurse",
+      "passed": true
+    },
+    {
+      "name": "Repeated paths, case aliases on Windows and repeated drops do not duplicate libraries or assets",
+      "passed": true
+    },
+    {
+      "name": "Dragging another selected sibling merges only that file into its parent group",
+      "passed": true
+    },
+    {
+      "name": "Registrations and file selections survive service restart",
+      "passed": true
+    },
+    {
+      "name": "Dropped SVG and PNG reuse verified immutable import snapshots",
+      "passed": true
+    },
+    {
+      "name": "Changed sources cannot import using an old drop snapshot",
+      "passed": true
+    },
+    {
+      "name": "A missing file reports partial results without hiding other selected files",
+      "passed": true
+    },
+    {
+      "name": "Unsupported, missing and relative inputs are reported while valid inputs remain usable",
+      "passed": true
+    },
+    {
+      "name": "Oversized and active SVG files are blocked rather than becoming importable",
+      "passed": true
+    },
+    {
+      "name": "The settings directory cannot be registered through drag and drop",
+      "passed": true
+    },
+    {
+      "name": "Empty and excessive batches fail before modifying the registry",
+      "passed": true
+    },
+    {
+      "name": "Concurrent batches serialize and retain both file selections",
+      "passed": true
+    },
+    {
+      "name": "Removing a dropped file group preserves source files and other registrations",
+      "passed": true
+    },
+    {
+      "name": "Malformed persisted selections cannot escape the registered directory",
+      "passed": true
+    },
+    {
+      "name": "UI extracts native paths synchronously and never guesses a path from a file name",
+      "passed": true
+    },
+    {
+      "name": "Nested drag enter/leave keeps the highlight until the pointer leaves the panel",
+      "passed": true
+    },
+    {
+      "name": "A drop captures all file paths, hides the overlay and suppresses browser navigation",
+      "passed": true
+    },
+    {
+      "name": "Busy/demo state rejects drops and sets the cursor to none",
+      "passed": true
+    },
+    {
+      "name": "URLs and text cannot navigate the panel or register arbitrary paths",
+      "passed": true
+    },
+    {
+      "name": "Missing native paths report an actionable error and disposal removes handlers",
+      "passed": true
+    }
+  ]
+}

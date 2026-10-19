@@ -1,0 +1,755 @@
+{
+  "runId": "roundtrip-1792217519704",
+  "hostSha256": "a903f8944e754d0cb7af7fe683865bf51d841d7070be7f35505a6e1a2d731922",
+  "startedAt": "2026-10-17T06:11:59.733Z",
+  "finished": true,
+  "frames": [
+    {
+      "prefix": "original",
+      "index": 0,
+      "time": 0.7,
+      "path": "D:/project/ae-browse/test-results/roundtrip-1792217519704/original-0.png",
+      "sha256": "ab07634d890e2af8fd274d30b605b9e7d672c276dc9f2f99a8706adbf78a5941"
+    },
+    {
+      "prefix": "original",
+      "index": 1,
+      "time": 1.1,
+      "path": "D:/project/ae-browse/test-results/roundtrip-1792217519704/original-1.png",
+      "sha256": "2cdd77373daba79eb0b23b579feda336ff59842633bd0c263b9859afcd429c16"
+    },
+    {
+      "prefix": "original",
+      "index": 2,
+      "time": 1.5,
+      "path": "D:/project/ae-browse/test-results/roundtrip-1792217519704/original-2.png",
+      "sha256": "9ef7af430f7d90b121dd93837fe74bf67edf7c1df6ffc302a9d0a04225147cca"
+    },
+    {
+      "prefix": "restored",
+      "index": 0,
+      "time": 0.7,
+      "path": "D:/project/ae-browse/test-results/roundtrip-1792217519704/restored-0.png",
+      "sha256": "ab07634d890e2af8fd274d30b605b9e7d672c276dc9f2f99a8706adbf78a5941"
+    },
+    {
+      "prefix": "restored",
+      "index": 1,
+      "time": 1.1,
+      "path": "D:/project/ae-browse/test-results/roundtrip-1792217519704/restored-1.png",
+      "sha256": "2cdd77373daba79eb0b23b579feda336ff59842633bd0c263b9859afcd429c16"
+    },
+    {
+      "prefix": "restored",
+      "index": 2,
+      "time": 1.5,
+      "path": "D:/project/ae-browse/test-results/roundtrip-1792217519704/restored-2.png",
+      "sha256": "9ef7af430f7d90b121dd93837fe74bf67edf7c1df6ffc302a9d0a04225147cca"
+    }
+  ],
+  "pixelComparison": [
+    {
+      "time": 0.7,
+      "identicalSha256": true
+    },
+    {
+      "time": 1.1,
+      "identicalSha256": true
+    },
+    {
+      "time": 1.5,
+      "identicalSha256": true
+    }
+  ],
+  "cleanup": {
+    "removed": [
+      {
+        "id": 454,
+        "name": "__AEBrowse_roundtrip-1792217519704_restored"
+      },
+      {
+        "id": 422,
+        "name": "__AEBrowse_roundtrip-1792217519704_original"
+      }
+    ],
+    "remaining": [],
+    "absentByItemScan": true,
+    "originalItemsAndLayerIdentitiesUnchanged": true,
+    "itemCount": 0,
+    "projectSaved": false,
+    "projectFile": null
+  },
+  "originalChecks": {
+    "passed": 24,
+    "failed": 0
+  },
+  "fileCopy": {
+    "finished": true,
+    "timestamp": "2026-10-17T06:12:03.655Z",
+    "copiedFrom": "D:/project/ae-browse/test-results/roundtrip-1792217519704/导出的 图形包",
+    "copiedTo": "D:/project/ae-browse/test-results/roundtrip-1792217519704/再复制的 图形包",
+    "contentUnchanged": true,
+    "originalFingerprint": "481fbdab86ca3866894a61094b56a179b793e53d8dd51d7521f312eb5aafaa88",
+    "copiedFingerprint": "481fbdab86ca3866894a61094b56a179b793e53d8dd51d7521f312eb5aafaa88",
+    "contract": {
+      "schemaVersion": 1,
+      "canRegister": true,
+      "allContractValid": true,
+      "assetCount": 1,
+      "assets": [
+        {
+          "id": "rounded-card",
+          "valid": true,
+          "canImport": true,
+          "status": "ready",
+          "skippedEffects": []
+        }
+      ],
+      "diagnostics": []
+    },
+    "scope": "Real exported files copied to a different Unicode directory; narrow adapter capabilities verified by this run."
+  },
+  "properties": {
+    "runId": "roundtrip-1792217519704",
+    "startedAtMs": 1792217520076,
+    "aeVersion": "26.0x67",
+    "finished": false,
+    "phase": "restored",
+    "before": {
+      "projectItemCount": 0,
+      "projectPath": null
+    },
+    "results": [
+      {
+        "name": "从中文与空格目录读取包与图形描述",
+        "passed": true
+      },
+      {
+        "name": "由包参数生成实际可编辑形状",
+        "passed": true
+      },
+      {
+        "name": "动画关键帧相对插入时间生成",
+        "passed": true
+      },
+      {
+        "name": "效果顺序与基础参数实际读取一致",
+        "passed": true
+      },
+      {
+        "name": "外观更新保留图层身份与动画",
+        "passed": true
+      },
+      {
+        "name": "回读实例的外观与效果保存为独立图形包",
+        "passed": true
+      },
+      {
+        "name": "已有导出文件不会静默覆盖",
+        "passed": true
+      },
+      {
+        "name": "重复导入同一操作不会生成重复图层",
+        "passed": true
+      },
+      {
+        "name": "同一操作 ID 的不同参数不会覆盖已有实例",
+        "passed": true
+      },
+      {
+        "name": "非法尺寸在创建图层前被拒绝",
+        "passed": true
+      },
+      {
+        "name": "超出合成的动画时长在写入前被拒绝",
+        "passed": true
+      },
+      {
+        "name": "无目标合成时给出上下文错误",
+        "passed": true
+      },
+      {
+        "name": "必需效果缺失在写入前被拒绝",
+        "passed": true
+      },
+      {
+        "name": "可选效果缺失可降级为真实图形",
+        "passed": true
+      },
+      {
+        "name": "必需效果属性写入失败会清理已创建图层",
+        "passed": true
+      },
+      {
+        "name": "可选效果属性失配只移除失败效果",
+        "passed": true
+      },
+      {
+        "name": "锁定图层的更新被拒绝",
+        "passed": true
+      },
+      {
+        "name": "手工修改图形后停止自动更新并保留修改",
+        "passed": true
+      },
+      {
+        "name": "手工外观关键帧即使当前值相同也被保护",
+        "passed": true
+      },
+      {
+        "name": "手工效果关键帧即使当前值相同也被保护",
+        "passed": true
+      },
+      {
+        "name": "修改缓动也会被识别为手工修改",
+        "passed": true
+      },
+      {
+        "name": "实际生成动画模式：none",
+        "passed": true
+      },
+      {
+        "name": "实际生成动画模式：slide",
+        "passed": true
+      },
+      {
+        "name": "实际生成动画模式：fade",
+        "passed": true
+      },
+      {
+        "name": "复制导出的包可再次读取并生成原生图形",
+        "passed": true
+      },
+      {
+        "name": "往返前后参数与动画效果数据一致",
+        "passed": true
+      },
+      {
+        "name": "换合成尺寸和帧率后仍按新合成中心定位",
+        "passed": true
+      }
+    ],
+    "temporaryComps": [
+      {
+        "id": 422,
+        "name": "__AEBrowse_roundtrip-1792217519704_original"
+      },
+      {
+        "id": 434,
+        "name": "__AEBrowse_roundtrip-1792217519704_cases"
+      },
+      {
+        "id": 454,
+        "name": "__AEBrowse_roundtrip-1792217519704_restored"
+      },
+      {
+        "id": 467,
+        "name": "__AEBrowse_roundtrip-1792217519704_portrait"
+      }
+    ],
+    "config": {
+      "runId": "roundtrip-1792217519704",
+      "root": "D:/project/ae-browse/test-results/roundtrip-1792217519704",
+      "library": "D:/project/ae-browse/test-results/roundtrip-1792217519704/源图形库 中文",
+      "exported": "D:/project/ae-browse/test-results/roundtrip-1792217519704/导出的 图形包",
+      "copied": "D:/project/ae-browse/test-results/roundtrip-1792217519704/再复制的 图形包"
+    },
+    "originalCompId": 422,
+    "originalLayerId": 446,
+    "originalSnapshot": {
+      "packId": "local.motion.basics",
+      "assetId": "rounded-card",
+      "parameters": {
+        "width": 430,
+        "height": 240,
+        "radius": 30,
+        "color": [
+          0.20000000298023,
+          0.85000002384186,
+          0.44999998807907,
+          1
+        ],
+        "duration": 0.8,
+        "motion": "pop"
+      },
+      "observed": {
+        "position": [
+          320,
+          180,
+          0
+        ],
+        "geometryPropertyState": [
+          {
+            "keys": 0,
+            "expression": false
+          },
+          {
+            "keys": 0,
+            "expression": false
+          },
+          {
+            "keys": 0,
+            "expression": false
+          }
+        ],
+        "animation": [
+          {
+            "channel": "ADBE Scale",
+            "keys": [
+              {
+                "time": 0,
+                "value": [
+                  0,
+                  0,
+                  100
+                ],
+                "inType": "6612",
+                "outType": "6612",
+                "inEase": [
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ],
+                "outEase": [
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ]
+              },
+              {
+                "time": 0.4,
+                "value": [
+                  108,
+                  108,
+                  100
+                ],
+                "inType": "6612",
+                "outType": "6612",
+                "inEase": [
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ],
+                "outEase": [
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ]
+              },
+              {
+                "time": 0.8,
+                "value": [
+                  100,
+                  100,
+                  100
+                ],
+                "inType": "6612",
+                "outType": "6612",
+                "inEase": [
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ],
+                "outEase": [
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "channel": "ADBE Position",
+            "keys": []
+          },
+          {
+            "channel": "ADBE Opacity",
+            "keys": []
+          }
+        ],
+        "effects": [
+          {
+            "descriptor": {
+              "id": "soften",
+              "matchName": "ADBE Gaussian Blur 2",
+              "required": true,
+              "target": "output",
+              "settings": [
+                {
+                  "path": [
+                    {
+                      "matchName": "ADBE Gaussian Blur 2-0001",
+                      "occurrence": 1
+                    }
+                  ],
+                  "valueType": "number",
+                  "value": 8
+                }
+              ],
+              "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+            },
+            "enabled": true,
+            "propertyState": [
+              {
+                "keys": 0,
+                "expression": false
+              }
+            ]
+          },
+          {
+            "descriptor": {
+              "id": "tint",
+              "matchName": "ADBE Fill",
+              "required": true,
+              "target": "output",
+              "settings": [
+                {
+                  "path": [
+                    {
+                      "matchName": "ADBE Fill-0002",
+                      "occurrence": 1
+                    }
+                  ],
+                  "valueType": "color",
+                  "value": [
+                    1,
+                    0.60000002384186,
+                    0.10000000149012,
+                    1
+                  ]
+                }
+              ]
+            },
+            "enabled": true,
+            "propertyState": [
+              {
+                "keys": 0,
+                "expression": false
+              }
+            ]
+          }
+        ],
+        "effectsTotal": 2,
+        "size": [
+          430,
+          240
+        ],
+        "radius": 30,
+        "color": [
+          0.20000000298023,
+          0.85000002384186,
+          0.44999998807907,
+          1
+        ]
+      },
+      "modified": false
+    },
+    "casesCompRemoved": true,
+    "finishedAtMs": 1792217521481,
+    "passed": 27,
+    "failed": 0,
+    "baseline": [],
+    "previousActiveId": null,
+    "restoredCompId": 454,
+    "restoredLayerId": 466,
+    "restoredSnapshot": {
+      "packId": "local.motion.basics",
+      "assetId": "rounded-card",
+      "parameters": {
+        "width": 430,
+        "height": 240,
+        "radius": 30,
+        "color": [
+          0.20000000298023,
+          0.85000002384186,
+          0.44999998807907,
+          1
+        ],
+        "duration": 0.8,
+        "motion": "pop"
+      },
+      "observed": {
+        "position": [
+          320,
+          180,
+          0
+        ],
+        "geometryPropertyState": [
+          {
+            "keys": 0,
+            "expression": false
+          },
+          {
+            "keys": 0,
+            "expression": false
+          },
+          {
+            "keys": 0,
+            "expression": false
+          }
+        ],
+        "animation": [
+          {
+            "channel": "ADBE Scale",
+            "keys": [
+              {
+                "time": 0,
+                "value": [
+                  0,
+                  0,
+                  100
+                ],
+                "inType": "6612",
+                "outType": "6612",
+                "inEase": [
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ],
+                "outEase": [
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ]
+              },
+              {
+                "time": 0.4,
+                "value": [
+                  108,
+                  108,
+                  100
+                ],
+                "inType": "6612",
+                "outType": "6612",
+                "inEase": [
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 270,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ],
+                "outEase": [
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ]
+              },
+              {
+                "time": 0.8,
+                "value": [
+                  100,
+                  100,
+                  100
+                ],
+                "inType": "6612",
+                "outType": "6612",
+                "inEase": [
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": -20,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ],
+                "outEase": [
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  },
+                  {
+                    "speed": 0,
+                    "influence": 16.666666667
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "channel": "ADBE Position",
+            "keys": []
+          },
+          {
+            "channel": "ADBE Opacity",
+            "keys": []
+          }
+        ],
+        "effects": [
+          {
+            "descriptor": {
+              "id": "soften",
+              "matchName": "ADBE Gaussian Blur 2",
+              "required": true,
+              "target": "output",
+              "settings": [
+                {
+                  "path": [
+                    {
+                      "matchName": "ADBE Gaussian Blur 2-0001",
+                      "occurrence": 1
+                    }
+                  ],
+                  "valueType": "number",
+                  "value": 8
+                }
+              ],
+              "help": "可选高斯模糊；参数映射需要宿主适配器实际验证。"
+            },
+            "enabled": true,
+            "propertyState": [
+              {
+                "keys": 0,
+                "expression": false
+              }
+            ]
+          },
+          {
+            "descriptor": {
+              "id": "tint",
+              "matchName": "ADBE Fill",
+              "required": true,
+              "target": "output",
+              "settings": [
+                {
+                  "path": [
+                    {
+                      "matchName": "ADBE Fill-0002",
+                      "occurrence": 1
+                    }
+                  ],
+                  "valueType": "color",
+                  "value": [
+                    1,
+                    0.60000002384186,
+                    0.10000000149012,
+                    1
+                  ]
+                }
+              ]
+            },
+            "enabled": true,
+            "propertyState": [
+              {
+                "keys": 0,
+                "expression": false
+              }
+            ]
+          }
+        ],
+        "effectsTotal": 2,
+        "size": [
+          430,
+          240
+        ],
+        "radius": 30,
+        "color": [
+          0.20000000298023,
+          0.85000002384186,
+          0.44999998807907,
+          1
+        ]
+      },
+      "modified": false
+    },
+    "portraitCompRemoved": true
+  },
+  "endedAt": "2026-10-17T06:12:06.919Z",
+  "ok": true
+}

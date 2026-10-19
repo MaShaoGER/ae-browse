@@ -1,0 +1,627 @@
+{
+  "schemaVersion": 1,
+  "pack": {
+    "id": "local.aebrowse.signal",
+    "version": "0.1.0",
+    "name": "讯号 SIGNAL 图形包",
+    "author": "AE Browse",
+    "description": "科技资讯与栏目包装案例：蓝、白、橙；7 个参数图形预设，另附 12 个复合 SVG。",
+    "license": "本案例原创图形允许复制、修改及商用；不包含第三方素材。"
+  },
+  "assets": [
+    {
+      "id": "title-bar",
+      "name": "标题底板",
+      "kind": "ae.nativeShape",
+      "source": "assets/title-bar.json",
+      "tags": [
+        "讯号",
+        "SIGNAL",
+        "科技资讯",
+        "标题底板"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "width",
+          "label": "宽度",
+          "type": "number",
+          "default": 928,
+          "min": 1,
+          "max": 4096,
+          "unit": "px",
+          "help": "以图形中心为基准调整宽度。"
+        },
+        {
+          "id": "height",
+          "label": "高度",
+          "type": "number",
+          "default": 368,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "radius",
+          "label": "圆角",
+          "type": "number",
+          "default": 28,
+          "min": 0,
+          "max": 184,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.1411764705882353,
+            0.32941176470588235,
+            0.9568627450980393,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.55,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "slide",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "讯号案例的单图形预设。可调整外观和入场动画；组合图形请使用附带的 svg 文件夹。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "讯号包装",
+          "previewShape": "rectangle"
+        }
+      }
+    },
+    {
+      "id": "label",
+      "name": "栏目标签",
+      "kind": "ae.nativeShape",
+      "source": "assets/label.json",
+      "tags": [
+        "讯号",
+        "SIGNAL",
+        "科技资讯",
+        "栏目标签"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "width",
+          "label": "宽度",
+          "type": "number",
+          "default": 180,
+          "min": 1,
+          "max": 4096,
+          "unit": "px",
+          "help": "以图形中心为基准调整宽度。"
+        },
+        {
+          "id": "height",
+          "label": "高度",
+          "type": "number",
+          "default": 64,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "radius",
+          "label": "圆角",
+          "type": "number",
+          "default": 12,
+          "min": 0,
+          "max": 32,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            1,
+            0.41568627450980394,
+            0.23921568627450981,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.4,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "slide",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "讯号案例的单图形预设。可调整外观和入场动画；组合图形请使用附带的 svg 文件夹。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "讯号包装",
+          "previewShape": "rectangle"
+        }
+      }
+    },
+    {
+      "id": "satellite",
+      "name": "卫星圆点",
+      "kind": "ae.nativeShape",
+      "source": "assets/satellite.json",
+      "tags": [
+        "讯号",
+        "SIGNAL",
+        "科技资讯",
+        "卫星圆点"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "diameter",
+          "label": "直径",
+          "type": "number",
+          "default": 30,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            1,
+            0.41568627450980394,
+            0.23921568627450981,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.45,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "讯号案例的单图形预设。可调整外观和入场动画；组合图形请使用附带的 svg 文件夹。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "讯号包装",
+          "previewShape": "ellipse"
+        }
+      }
+    },
+    {
+      "id": "lens",
+      "name": "椭圆底片",
+      "kind": "ae.nativeShape",
+      "source": "assets/lens.json",
+      "tags": [
+        "讯号",
+        "SIGNAL",
+        "科技资讯",
+        "椭圆底片"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "width",
+          "label": "宽度",
+          "type": "number",
+          "default": 356,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "height",
+          "label": "高度",
+          "type": "number",
+          "default": 124,
+          "min": 1,
+          "max": 4096,
+          "unit": "px"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.9333333333333333,
+            0.9529411764705882,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.65,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "fade",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "讯号案例的单图形预设。可调整外观和入场动画；组合图形请使用附带的 svg 文件夹。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "讯号包装",
+          "previewShape": "ellipse"
+        }
+      }
+    },
+    {
+      "id": "pointer",
+      "name": "方向三角",
+      "kind": "ae.nativeShape",
+      "source": "assets/pointer.json",
+      "tags": [
+        "讯号",
+        "SIGNAL",
+        "科技资讯",
+        "方向三角"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "outerRadius",
+          "label": "外半径",
+          "type": "number",
+          "default": 46,
+          "min": 1,
+          "max": 2048,
+          "unit": "px"
+        },
+        {
+          "id": "points",
+          "label": "边数",
+          "type": "number",
+          "default": 3,
+          "min": 3,
+          "max": 64,
+          "unit": ""
+        },
+        {
+          "id": "rotation",
+          "label": "旋转",
+          "type": "number",
+          "default": 90,
+          "min": -360,
+          "max": 360,
+          "unit": "°"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.1411764705882353,
+            0.32941176470588235,
+            0.9568627450980393,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.4,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "slide",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "讯号案例的单图形预设。可调整外观和入场动画；组合图形请使用附带的 svg 文件夹。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "讯号包装",
+          "previewShape": "polygon"
+        }
+      }
+    },
+    {
+      "id": "hex",
+      "name": "六边标记",
+      "kind": "ae.nativeShape",
+      "source": "assets/hex.json",
+      "tags": [
+        "讯号",
+        "SIGNAL",
+        "科技资讯",
+        "六边标记"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "outerRadius",
+          "label": "外半径",
+          "type": "number",
+          "default": 72,
+          "min": 1,
+          "max": 2048,
+          "unit": "px"
+        },
+        {
+          "id": "points",
+          "label": "边数",
+          "type": "number",
+          "default": 6,
+          "min": 3,
+          "max": 64,
+          "unit": ""
+        },
+        {
+          "id": "rotation",
+          "label": "旋转",
+          "type": "number",
+          "default": 30,
+          "min": -360,
+          "max": 360,
+          "unit": "°"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            0.1411764705882353,
+            0.32941176470588235,
+            0.9568627450980393,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.5,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "讯号案例的单图形预设。可调整外观和入场动画；组合图形请使用附带的 svg 文件夹。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "讯号包装",
+          "previewShape": "polygon"
+        }
+      }
+    },
+    {
+      "id": "spark",
+      "name": "八角星芒",
+      "kind": "ae.nativeShape",
+      "source": "assets/spark.json",
+      "tags": [
+        "讯号",
+        "SIGNAL",
+        "科技资讯",
+        "八角星芒"
+      ],
+      "requirements": {
+        "aeMin": "26.0",
+        "capabilities": [
+          "shape.create",
+          "animation.keyframes"
+        ]
+      },
+      "parameters": [
+        {
+          "id": "outerRadius",
+          "label": "外半径",
+          "type": "number",
+          "default": 100,
+          "min": 1,
+          "max": 2048,
+          "unit": "px"
+        },
+        {
+          "id": "innerRadius",
+          "label": "内半径",
+          "type": "number",
+          "default": 34,
+          "min": 1,
+          "max": 2047,
+          "unit": "px"
+        },
+        {
+          "id": "points",
+          "label": "角数",
+          "type": "number",
+          "default": 8,
+          "min": 3,
+          "max": 64,
+          "unit": ""
+        },
+        {
+          "id": "rotation",
+          "label": "旋转",
+          "type": "number",
+          "default": 0,
+          "min": -360,
+          "max": 360,
+          "unit": "°"
+        },
+        {
+          "id": "color",
+          "label": "颜色",
+          "type": "color",
+          "default": [
+            1,
+            0.41568627450980394,
+            0.23921568627450981,
+            1
+          ]
+        },
+        {
+          "id": "duration",
+          "label": "入场时长",
+          "type": "number",
+          "default": 0.5,
+          "min": 0.01,
+          "max": 10,
+          "unit": "s"
+        },
+        {
+          "id": "motion",
+          "label": "入场动画",
+          "type": "enum",
+          "default": "pop",
+          "options": [
+            "none",
+            "pop",
+            "slide",
+            "fade"
+          ]
+        }
+      ],
+      "effects": [],
+      "help": {
+        "summary": "讯号案例的单图形预设。可调整外观和入场动画；组合图形请使用附带的 svg 文件夹。"
+      },
+      "extensions": {
+        "local.aebrowse": {
+          "category": "讯号包装",
+          "previewShape": "star"
+        }
+      }
+    }
+  ]
+}

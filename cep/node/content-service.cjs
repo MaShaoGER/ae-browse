@@ -59,6 +59,7 @@ function createContentService(options) {
     const seen = new Set();
     for (const entry of value.folders) {
       if (!entry || typeof entry.id !== 'string' || !/^folder-[a-f0-9]{32}$/.test(entry.id) || seen.has(entry.id) || typeof entry.directory !== 'string' || !path.isAbsolute(entry.directory) || typeof entry.name !== 'string') fail('E_FOLDER_REGISTRY', '本地文件夹登记格式无效。');
+      if (entry.files !== undefined && (!Array.isArray(entry.files) || !entry.files.length || entry.files.length > 1000 || entry.files.some(name => typeof name !== 'string' || !name || name === '.' || name === '..' || /[\\/\x00]/.test(name) || !mime[path.extname(name).toLowerCase()]))) fail('E_FOLDER_REGISTRY', '本地文件登记格式无效。');
       seen.add(entry.id);
     }
     return value.folders;
@@ -70,17 +71,24 @@ function createContentService(options) {
       if (!(await fs.stat(root)).isDirectory()) fail('E_LOCAL_FOLDER', '本地素材文件夹不可用。');
       async function walk(directory, depth) {
         if (depth > 16) fail('E_LOCAL_LIMIT', '子文件夹超过 16 层，请选择更具体的素材目录。');
-        const names = (await fs.readdir(directory, { withFileTypes:true })).sort((a,b) => a.name.localeCompare(b.name, 'zh-CN'));
+        const names = (entry.files ? entry.files.map(name => ({ name })) : await fs.readdir(directory, { withFileTypes:true })).sort((a,b) => a.name.localeCompare(b.name, 'zh-CN'));
         for (const name of names) {
           if (++count > 10000 || assets.length >= 1000) fail('E_LOCAL_LIMIT', '文件夹较大，请按子目录分别添加（最多 1000 素材）。');
           const file = path.join(directory, name.name);
-          if (name.isSymbolicLink()) continue;
-          const actual = await fs.realpath(file);
+          let actual, stat;
+          try {
+            stat = await fs.lstat(file);
+            if (stat.isSymbolicLink()) { if (entry.files) diagnostics.push(diagnostic('E_LOCAL_LINK', '已跳过链接：' + name.name)); continue; }
+            actual = await fs.realpath(file);
+          } catch (error) {
+            if (!entry.files) throw error;
+            diagnostics.push(diagnostic('E_LOCAL_READ', '文件不可用：' + name.name)); continue;
+          }
           if (!inside(root, actual)) continue;
-          if (name.isDirectory()) { await walk(actual, depth + 1); continue; }
+          if (stat.isDirectory()) { if (!entry.files) await walk(actual, depth + 1); continue; }
           const extension = path.extname(name.name).toLowerCase(); if (!mime[extension]) continue;
           const relativePath = path.relative(root, file).split(path.sep).join('/');
-          const asset = { id:'file-' + hash(relativePath).slice(0,32), packId:entry.id, kind:extension === '.svg' ? 'local.svg' : 'local.image', name:path.basename(name.name, path.extname(name.name)), relativePath, extension, parameters:[], tags:[relativePath,extension.slice(1)], valid:true, status:'available', diagnostics:[], help:{ summary: extension === '.svg' ? '添加到合成中心。当前 AE 脚本不支持矢量导入时，使用高清透明图片；原 SVG 保留。' : '图片添加到当前合成中心。原始文件保持不变。' } };
+          const asset = { id:'file-' + hash(relativePath).slice(0,32), packId:entry.id, kind:extension === '.svg' ? 'local.svg' : 'local.image', name:path.basename(name.name, path.extname(name.name)), relativePath, extension, parameters:[], tags:[relativePath,extension.slice(1)], valid:true, status:'available', diagnostics:[], help:{ summary: extension === '.svg' ? '添加到合成中心。默认生成可编辑形状，也可选择透明图片。' : '图片添加到当前合成中心。' } };
           try {
             const bytes = await readFile(actual); total += bytes.length;
             if (total > 64 * 1024 * 1024) fail('E_LOCAL_LIMIT', '当前目录超过 64 MB 读取预算，请按子目录分别添加。');
@@ -93,10 +101,10 @@ function createContentService(options) {
         }
       }
       await walk(root, 0);
-      return { assets, library:{ ...entry, sourceType:'folder', status:'available', assetCount:assets.length, diagnostics } };
+      return { assets, library:{ ...entry, sourceType:entry.files ? 'files' : 'folder', status:diagnostics.length ? 'partial' : 'available', assetCount:assets.length, diagnostics } };
     } catch (error) {
       diagnostics.push(diagnostic(error.code || 'E_LOCAL_FOLDER', error.message || '无法读取文件夹。'));
-      return { assets, library:{ ...entry, sourceType:'folder', status: assets.length ? 'partial' : 'unavailable', assetCount:assets.length, diagnostics } };
+      return { assets, library:{ ...entry, sourceType:entry.files ? 'files' : 'folder', status: assets.length ? 'partial' : 'unavailable', assetCount:assets.length, diagnostics } };
     }
   }
   const ready = (async () => {
@@ -111,20 +119,58 @@ function createContentService(options) {
   ready.catch(() => {});
   function enqueue(fn) { const result = queue.then(() => ready).then(fn); queue = result.catch(() => {}); return result; }
   function item(id) { const value = cache.get(id); if (!value) fail('E_LIBRARY_NOT_FOUND', '这个文件夹尚未登记。'); return value; }
+  const pathKey = value => process.platform === 'win32' ? value.toLowerCase() : value;
+  async function registerLocal(directory, files) {
+    if (typeof directory !== 'string' || !directory.trim() || !path.isAbsolute(directory)) fail('E_LOCAL_FOLDER', '请选择本地素材文件夹。');
+    const root = await fs.realpath(directory), canonicalData = await fs.realpath(dataDir);
+    if (root === canonicalData || inside(root, canonicalData) || inside(canonicalData, root)) fail('E_DATA_DIRECTORY_OVERLAP', '请选择独立于 AE Browse 设置目录的素材文件夹。');
+    if (!(await fs.stat(root)).isDirectory()) fail('E_LOCAL_FOLDER', '请选择文件夹。');
+    const id = 'folder-' + hash(pathKey(root) + (files ? '\0files' : '')).slice(0,32);
+    const previous = entries.find(e => e.id === id);
+    const entry = { id, name:(files ? '散文件 · ' : '') + (path.basename(root) || root), directory:root };
+    if (files) {
+      const names = new Map();
+      for (const name of [...(previous && previous.files || []), ...files]) names.set(pathKey(name), name);
+      entry.files = [...names.values()];
+      if (entry.files.length > 1000) fail('E_LOCAL_LIMIT', '同一目录最多登记 1000 个散文件。');
+    }
+    if (!previous && entries.length >= 1000) fail('E_LOCAL_LIMIT', '本地素材登记已达 1000 项，请先移除不用的登记。');
+    const scanned = await scan(entry);
+    if (scanned.library.status === 'unavailable') fail('E_LOCAL_FOLDER', scanned.library.diagnostics[0].message);
+    if (!previous || JSON.stringify(previous) !== JSON.stringify(entry)) await persist(previous ? entries.map(e => e.id === id ? entry : e) : [...entries,entry]);
+    cache.set(id, scanned); return { library:copy(scanned.library) };
+  }
   const api = {
     registerLibrary: directory => packs.registerLibrary(directory),
-    registerFolder(directory) { return enqueue(async () => {
-      if (typeof directory !== 'string' || !directory.trim()) fail('E_LOCAL_FOLDER', '请选择素材文件夹。');
-      const root = await fs.realpath(directory), canonicalData = await fs.realpath(dataDir);
-      if (root === canonicalData || inside(root, canonicalData) || inside(canonicalData, root)) fail('E_DATA_DIRECTORY_OVERLAP', '请选择独立于 AE Browse 设置目录的素材文件夹。');
-      if (!(await fs.stat(root)).isDirectory()) fail('E_LOCAL_FOLDER', '请选择文件夹。');
-      const normalized = process.platform === 'win32' ? root.toLowerCase() : root;
-      const id = 'folder-' + hash(normalized).slice(0,32);
-      const entry = { id, name:path.basename(root) || root, directory:root };
-      const scanned = await scan(entry);
-      if (scanned.library.status === 'unavailable') fail('E_LOCAL_FOLDER', scanned.library.diagnostics[0].message);
-      if (!entries.some(e => e.id === id)) await persist([...entries,entry]);
-      cache.set(id, scanned); return { library:copy(scanned.library) };
+    registerFolder(directory) { return enqueue(() => registerLocal(directory)); },
+    registerDroppedPaths(paths) { return enqueue(async () => {
+      if (!Array.isArray(paths) || !paths.length || paths.length > 1000) fail('E_LOCAL_DROP', '请拖入 1–1000 个本地文件或文件夹。');
+      const rejected = [], seen = new Set(), folders = [], groups = new Map(), libraries = [];
+      let accepted = 0, duplicates = 0;
+      for (const input of paths) {
+        try {
+          if (typeof input !== 'string' || !path.isAbsolute(input) || input.includes('\0')) fail('E_LOCAL_DROP', '无法取得本地完整路径，请使用“添加文件夹”或“输入路径”。');
+          if ((await fs.lstat(input)).isSymbolicLink()) fail('E_LOCAL_LINK', '请拖入原始文件或文件夹，暂不接收链接。');
+          const actual = await fs.realpath(input), key = pathKey(actual), stat = await fs.stat(actual);
+          if (seen.has(key)) { duplicates++; continue; }
+          seen.add(key);
+          if (stat.isDirectory()) folders.push(actual);
+          else if (stat.isFile() && mime[path.extname(actual).toLowerCase()]) {
+            const parent = path.dirname(actual), groupKey = pathKey(parent);
+            if (!groups.has(groupKey)) groups.set(groupKey, { directory:parent, files:[] });
+            groups.get(groupKey).files.push(path.basename(actual));
+          } else fail('E_LOCAL_TYPE', '仅支持 SVG、PNG、JPG/JPEG 文件和普通文件夹。');
+        } catch (error) { rejected.push({ path:typeof input === 'string' ? input : '', code:error.code || 'E_LOCAL_READ', message:error.message }); }
+      }
+      for (const directory of folders) {
+        try { libraries.push((await registerLocal(directory)).library); accepted++; }
+        catch (error) { rejected.push({path:directory, code:error.code || 'E_LOCAL_READ', message:error.message}); }
+      }
+      for (const group of groups.values()) {
+        try { libraries.push((await registerLocal(group.directory, group.files)).library); accepted += group.files.length; }
+        catch (error) { for (const name of group.files) rejected.push({path:path.join(group.directory,name), code:error.code || 'E_LOCAL_READ', message:error.message}); }
+      }
+      return { libraries, accepted, duplicates, rejected };
     }); },
     async listLibraries() { const folders = await enqueue(() => entries.map(e => copy(item(e.id).library))); return (await packs.listLibraries()).concat(folders); },
     removeLibrary(id) { return isFolder(id) ? enqueue(async () => { const exists = entries.some(e => e.id === id); if(exists) await persist(entries.filter(e => e.id !== id)); cache.delete(id); return { removed:exists }; }) : packs.removeLibrary(id); },

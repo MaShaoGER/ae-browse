@@ -1,0 +1,59 @@
+{
+  "formatVersion": 1,
+  "nodes": [
+    {
+      "id": "output",
+      "type": "shapeLayer",
+      "anchor": "center",
+      "position": "compCenter"
+    },
+    {
+      "id": "geometry",
+      "parent": "output",
+      "type": "polygon",
+      "outerRadius": {
+        "bind": "outerRadius"
+      },
+      "points": {
+        "bind": "points"
+      },
+      "rotation": {
+        "bind": "rotation"
+      }
+    },
+    {
+      "id": "fill",
+      "parent": "geometry",
+      "type": "fill",
+      "color": {
+        "bind": "color"
+      }
+    }
+  ],
+  "states": [],
+  "animations": [
+    {
+      "id": "pop",
+      "target": "output",
+      "channel": "scale",
+      "timeOrigin": "insertTime",
+      "duration": {
+        "bind": "duration"
+      },
+      "values": [
+        [
+          0,
+          0
+        ],
+        [
+          108,
+          108
+        ],
+        [
+          100,
+          100
+        ]
+      ]
+    }
+  ]
+}

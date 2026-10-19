@@ -1,0 +1,57 @@
+{
+  "finished": true,
+  "scope": "Offline PNG pixels; does not communicate with AE",
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "name": "rounded-card browser/AE appearance",
+      "passed": true,
+      "differentPixelFraction": 0.0,
+      "meanPremultipliedDifference": 0.34058474264705874,
+      "frame": "D:\\project\\ae-browse\\test-results\\workflow-20261018\\renders\\rounded-card\\129_0_000000_0_729af885.png"
+    },
+    {
+      "name": "card center color and transparent corner",
+      "passed": true
+    },
+    {
+      "name": "compound-stroke browser/AE appearance",
+      "passed": true,
+      "differentPixelFraction": 0.0,
+      "meanPremultipliedDifference": 0.4928240502450979,
+      "frame": "D:\\project\\ae-browse\\test-results\\workflow-20261018\\renders\\compound-stroke\\142_0_000000_0_db9ac900.png"
+    },
+    {
+      "name": "compound hole remains transparent",
+      "passed": true
+    },
+    {
+      "name": "curves-transform browser/AE appearance",
+      "passed": true,
+      "differentPixelFraction": 0.000265625,
+      "meanPremultipliedDifference": 0.29871518075980397,
+      "frame": "D:\\project\\ae-browse\\test-results\\workflow-20261018\\renders\\curves-transform\\155_0_000000_0_b1c7d178.png"
+    },
+    {
+      "name": "fill and group opacity",
+      "passed": true
+    },
+    {
+      "name": "paint-order browser/AE appearance",
+      "passed": true,
+      "differentPixelFraction": 3.125e-05,
+      "meanPremultipliedDifference": 0.30862372855392156,
+      "frame": "D:\\project\\ae-browse\\test-results\\workflow-20261018\\renders\\paint-order\\168_0_000000_0_fb88c16e.png"
+    },
+    {
+      "name": "later SVG element paints over earlier element",
+      "passed": true
+    },
+    {
+      "name": "opaque white matte confirms alpha blending",
+      "passed": true,
+      "meanDifference": 0.1881953125
+    }
+  ]
+}

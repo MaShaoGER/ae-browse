@@ -1,0 +1,49 @@
+{
+  "scope": "Isolated Edge Chromium UI + real Node content service; CEP File.path and host responses simulated; no live AE or physical OS drag",
+  "finished": true,
+  "finishedAt": "2026-10-18T14:27:06.535Z",
+  "passed": 10,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Panel drag highlight follows enter/leave without obscuring events",
+      "passed": true
+    },
+    {
+      "name": "Dropping a folder renders recursive real filesystem assets",
+      "passed": true
+    },
+    {
+      "name": "Multiple files form a selected-only group and clear an old search",
+      "passed": true
+    },
+    {
+      "name": "Repeated rapid drops are guarded while the first is registering",
+      "passed": true
+    },
+    {
+      "name": "Readiness guards block drops while a host result is unconfirmed",
+      "passed": true
+    },
+    {
+      "name": "A partial batch retains valid material and shows a rejected file reason",
+      "passed": true
+    },
+    {
+      "name": "Absent native paths show a fallback instead of registering a guessed path",
+      "passed": true
+    },
+    {
+      "name": "Panel reload restores actual dropped registrations and source-only selections",
+      "passed": true
+    },
+    {
+      "name": "Narrow/wide layouts avoid horizontal overflow and the overlay fits the viewport",
+      "passed": true
+    },
+    {
+      "name": "The complete drop flow never requests any AE write operation",
+      "passed": true
+    }
+  ]
+}

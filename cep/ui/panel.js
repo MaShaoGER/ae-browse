@@ -4,6 +4,26 @@
   var service, bridge, cs, editor, selected = null, assets = [], libraries = [], values = {}, hostInfo = null, context = null;
   var busy = false, searchRevision = 0, libraryRevision = 0, lateTimer = null, pathMode = 'folder';
   var demo = new URLSearchParams(window.location.search).get('demo') === '1';
+  function preference(key, value) { try { if (value !== undefined) localStorage.setItem('ae-browse.' + key, value); return localStorage.getItem('ae-browse.' + key); } catch (_) { return null; } }
+  function closeManagement() { byId('source-management').open = false; }
+  document.addEventListener('click', function (event) { if (!byId('source-management').contains(event.target)) closeManagement(); });
+  document.addEventListener('keydown', function (event) { if (event.key === 'Escape') { closeManagement(); byId('path-entry').hidden = true; } });
+  var fileDrop = AEBrowseFileDrop.bind({
+    target:document, overlay:byId('drop-overlay'),
+    canDrop:function () { var state = bridge && bridge.getState(); return !!service && !demo && !busy && !(state && (state.busy || state.unconfirmed)); },
+    onError:report,
+    onPaths:function (paths) { return task(async function () {
+      status('正在读取拖入的素材…');
+      var result = await service.registerDroppedPaths(paths);
+      byId('search').value = '';
+      await renderLibraries(result.libraries[0] && result.libraries[0].id);
+      var issues = result.rejected.map(function (item) { return item.path + '：' + item.message; });
+      result.libraries.forEach(function (library) {
+        if (library.status !== 'available') (library.diagnostics || []).forEach(function (item) { issues.push(library.name + '：' + item.message); });
+      });
+      status('已接收 ' + result.accepted + ' 项，载入 ' + result.libraries.length + ' 组素材' + (result.duplicates ? '；忽略 ' + result.duplicates + ' 个重复项目' : '') + (issues.length ? '；' + issues.join('；') : '。选择素材后可添加到合成。'), !!issues.length);
+    }); }
+  });
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
   function status(message, error) { byId('status').textContent = message; byId('status').classList.toggle('error', !!error); }
   function report(error) { var detail = error.diagnostics && error.diagnostics.length ? error.diagnostics.map(function (d) { return d.message; }).join('；') : error.message; status((error.code ? error.code + ' · ' : '') + detail, true); if (bridge && bridge.getState().unconfirmed) awaitLateResult(); }
@@ -15,11 +35,13 @@
     byId('instantiate').textContent = editing ? '添加副本到当前合成' : '添加到当前合成';
     byId('read-instance').disabled = locked || !bridge || !context || !context.activeComp;
     byId('search').disabled = locked;
+    byId('folder-nav').disabled = locked;
+    byId('svg-mode').disabled = locked;
     byId('update-instance').hidden = !editing;
     byId('update-instance').disabled = !editing || !canCreate();
     byId('instance-info').hidden = !editing; byId('update-help').hidden = !editing;
     byId('instance-info').textContent = editing ? '正在编辑：' + editing.instance.layerName + ' · 图层 ' + editing.instance.layerId : '';
-    ['add-folder', 'enter-path', 'add-library', 'refresh-library', 'remove-library', 'register-path', 'library', 'refresh-host'].forEach(function (id) { byId(id).disabled = busy || !!(bridge && bridge.getState().busy); });
+    ['add-folder', 'enter-path', 'add-library', 'refresh-library', 'remove-library', 'register-path', 'library', 'refresh-host', 'setup-browse', 'setup-path', 'setup-pack'].forEach(function (id) { byId(id).disabled = busy || !!(bridge && bridge.getState().busy); });
     Array.prototype.forEach.call(byId('parameters').querySelectorAll('input,select'), function (el) { el.disabled = locked || !!(editing && (el.dataset.parameter === 'motion' || el.dataset.parameter === 'duration')); });
   }
   async function task(body) {
@@ -91,6 +113,8 @@
     if (editor && !keepEditor) editor.reset();
     selected = asset;
     byId('detail').hidden = !asset; byId('detail-empty').hidden = !!asset;
+    byId('svg-options').hidden = !asset || asset.kind !== 'local.svg';
+    byId('svg-mode').value = 'shape';
     if (asset) {
       byId('asset-name').textContent = asset.name;
       document.querySelector('.kind').textContent = asset.kind === 'ae.nativeShape' ? '原生形状' : isLocal(asset) ? asset.extension.slice(1).toUpperCase() : '尚未适配';
@@ -100,7 +124,7 @@
       else { values = {}; byId('parameters').replaceChildren(); }
       document.querySelector('.preview-stage').hidden = !asset.valid || asset.status === 'blocked';
       document.querySelector('.preview-note').hidden = !asset.valid || asset.status === 'blocked';
-      document.querySelector('.preview-note').textContent = isLocal(asset) ? '文件预览 · SVG 复杂效果以 AE 导入结果为准' : '面板近似预览 · 颜色与效果以 AE 为准';
+      document.querySelector('.preview-note').textContent = isLocal(asset) ? '素材预览' : '图形预览 · 实际外观以 AE 为准';
     }
     Array.prototype.forEach.call(byId('grid').children, function (card) { card.classList.toggle('selected', !!asset && card.dataset.id === asset.id); });
     updateButtons();
@@ -108,10 +132,12 @@
   async function renderAssets() {
     var revision = ++searchRevision, packId = byId('library').value;
     var found = packId ? await service.listAssets(packId, byId('search').value) : [];
+    var directory = byId('folder-nav').value;
+    if (directory) found = found.filter(function (asset) { return asset.relativePath && asset.relativePath.indexOf(directory) === 0; });
     if (revision !== searchRevision) return;
     assets = found; byId('grid').replaceChildren(); byId('asset-count').textContent = found.length + ' 项';
     byId('empty').hidden = !!found.length;
-    byId('empty').textContent = packId ? (byId('search').value ? '没有找到匹配素材。' : '目录暂无可用素材。放入 SVG、PNG、JPG 后点击刷新，或查看目录读取提示。') : '点击“添加文件夹”读取本地 SVG、PNG、JPG；参数图形库使用“添加图形包”。';
+    byId('empty').textContent = packId ? (byId('search').value || directory ? '没有找到匹配素材。' : '文件夹中暂无素材。放入 SVG、PNG、JPG 后刷新。') : '请先设置素材文件夹。';
     // First-round pagination bounds DOM work; virtual scrolling is a later measured stage.
     var rendered = 0;
     function appendBatch() {
@@ -140,15 +166,29 @@
     else selectAsset(found[0] || null);
   }
   async function renderLibraries(preferred) {
-    var revision = ++libraryRevision, current = preferred || byId('library').value;
+    var revision = ++libraryRevision, current = preferred || byId('library').value || preference('source');
     var found = await service.listLibraries(); if (revision !== libraryRevision) return;
     libraries = found; var select = byId('library'); select.replaceChildren();
     if (!found.length) { var empty = document.createElement('option'); empty.value = ''; empty.textContent = '尚未添加图形库'; select.appendChild(empty); }
-    found.forEach(function (library) { var option = document.createElement('option'); option.value = library.id; option.textContent = (library.sourceType === 'folder' ? '文件夹 · ' : '图形包 · ') + library.name + (library.status === 'unavailable' ? ' · 不可用' : ''); option.title = library.directory; select.appendChild(option); });
+    found.forEach(function (library) { var option = document.createElement('option'); option.value = library.id; option.textContent = (library.sourceType === 'folder' ? '文件夹 · ' : library.sourceType === 'files' ? '' : '图形包 · ') + library.name + (library.status === 'unavailable' ? ' · 不可用' : ''); option.title = library.directory; select.appendChild(option); });
     if (found.some(function (library) { return library.id === current; })) select.value = current;
-    await renderAssets();
+    else { var firstFolder = found.find(function (library) { return library.sourceType === 'folder' || library.sourceType === 'files'; }); if (firstFolder) select.value = firstFolder.id; }
     var activeLibrary = found.find(function (library) { return library.id === select.value; });
-    byId('library-location').textContent = activeLibrary ? activeLibrary.directory : '支持子文件夹；放入新素材后点击刷新'; byId('library-location').title = byId('library-location').textContent;
+    byId('setup').hidden = !!activeLibrary; document.body.classList.toggle('needs-setup', !activeLibrary);
+    if (activeLibrary) preference('source', activeLibrary.id);
+    var previousDirectory = byId('folder-nav').dataset.source === select.value ? byId('folder-nav').value : '';
+    byId('folder-nav').replaceChildren();
+    var all = document.createElement('option'); all.value = ''; all.textContent = '全部文件夹'; byId('folder-nav').appendChild(all);
+    if (activeLibrary && activeLibrary.sourceType === 'folder') {
+      var folderAssets = await service.listAssets(select.value, ''), directories = {};
+      if (revision !== libraryRevision) return;
+      folderAssets.forEach(function (asset) { var parts = (asset.relativePath || '').split('/'); parts.pop(); var prefix = ''; parts.forEach(function (part) { prefix += part + '/'; directories[prefix] = true; }); });
+      Object.keys(directories).sort().forEach(function (directory) { var option = document.createElement('option'); option.value = directory; option.textContent = directory.slice(0,-1); byId('folder-nav').appendChild(option); });
+    }
+    byId('folder-nav').hidden = byId('folder-nav').options.length < 2; byId('folder-nav').dataset.source = select.value;
+    if (Array.from(byId('folder-nav').options).some(function (option) { return option.value === previousDirectory; })) byId('folder-nav').value = previousDirectory;
+    await renderAssets();
+    byId('library-location').textContent = activeLibrary ? activeLibrary.directory : '可拖入文件夹或 SVG / PNG / JPG；支持子文件夹'; byId('library-location').title = byId('library-location').textContent;
     if (activeLibrary && activeLibrary.status !== 'available') status((activeLibrary.diagnostics || []).map(function (d) { return d.message; }).join('；') || '目录无法完整读取，请重新定位或选择子文件夹。', true);
   }
   async function readHost() {
@@ -185,6 +225,7 @@
     lateTimer = setTimeout(check, 1000);
   }
   byId('search').addEventListener('input', function () { renderAssets().catch(report); });
+  byId('folder-nav').addEventListener('change', function () { selectAsset(null); renderAssets().catch(report); });
   byId('read-instance').addEventListener('click', function () {
     task(async function () {
       await readHost();
@@ -208,11 +249,12 @@
   byId('library').addEventListener('change', function () { selectAsset(null); renderLibraries().catch(report); });
   byId('refresh-host').addEventListener('click', function () { task(async function () { await readHost(); status('已刷新 AE 上下文。'); }); });
   function chooseDirectory(mode) {
+    closeManagement();
     pathMode = mode;
     try {
       if (window.cep && window.cep.fs && window.cep.fs.showOpenDialogEx) {
         var result = window.cep.fs.showOpenDialogEx(false, true, mode === 'folder' ? '选择 SVG / PNG / JPG 素材文件夹' : '选择含 pack.json 的图形库文件夹', '', []);
-        if (result.err === 0 && result.data && result.data.length) { task(async function () { var registration = await service[mode === 'folder' ? 'registerFolder' : 'registerLibrary'](result.data[0]); await renderLibraries(registration.library.id); status('已载入目录。放入新素材后点击刷新。'); }); return; }
+        if (result.err === 0 && result.data && result.data.length) { task(async function () { var registration = await service[mode === 'folder' ? 'registerFolder' : 'registerLibrary'](result.data[0]); byId('search').value = ''; await renderLibraries(registration.library.id); status('已载入目录。放入新素材后点击刷新。'); }); return; }
         if (result.err === 0) return;
       }
     } catch (_) { /* Older CEP builds can use a typed directory path. */ }
@@ -220,33 +262,39 @@
     byId('path-entry').hidden = false; byId('library-path').focus();
   }
   byId('add-folder').addEventListener('click', function () { chooseDirectory('folder'); });
-  byId('enter-path').addEventListener('click', function () { pathMode = 'folder'; byId('path-label').textContent = '素材文件夹（SVG / PNG / JPG，含子文件夹）'; byId('path-entry').hidden = false; byId('library-path').focus(); });
+  byId('enter-path').addEventListener('click', function () { closeManagement(); pathMode = 'folder'; byId('path-label').textContent = '素材文件夹（SVG / PNG / JPG，含子文件夹）'; byId('path-entry').hidden = false; byId('library-path').focus(); });
+  byId('setup-browse').addEventListener('click', function () { byId('add-folder').click(); });
+  byId('setup-path').addEventListener('click', function () { byId('enter-path').click(); });
+  byId('setup-pack').addEventListener('click', function () { byId('add-library').click(); });
   byId('add-library').addEventListener('click', function () { chooseDirectory('pack'); });
   byId('cancel-path').addEventListener('click', function () { byId('path-entry').hidden = true; });
-  byId('register-path').addEventListener('click', function () { task(async function () { var result = await service[pathMode === 'folder' ? 'registerFolder' : 'registerLibrary'](byId('library-path').value.trim()); await renderLibraries(result.library.id); byId('path-entry').hidden = true; status('目录已载入，源文件保持独立。'); }); });
+  byId('register-path').addEventListener('click', function () { task(async function () { var result = await service[pathMode === 'folder' ? 'registerFolder' : 'registerLibrary'](byId('library-path').value.trim()); byId('search').value = ''; await renderLibraries(result.library.id); byId('path-entry').hidden = true; status('目录已载入。'); }); });
   byId('library-path').addEventListener('keydown', function (event) { if (event.key === 'Enter') { event.preventDefault(); byId('register-path').click(); } });
   byId('refresh-library').addEventListener('click', function () { task(async function () { if (!byId('library').value) return; var refreshed; try { refreshed = await service.refreshLibrary(byId('library').value); } finally { await renderLibraries(); } if (refreshed.status === 'available') status('已刷新目录中的素材。'); }); });
-  byId('remove-library').addEventListener('click', function () { task(async function () { if (!byId('library').value) return; await service.removeLibrary(byId('library').value); selectAsset(null); await renderLibraries(); status('已移除登记，源图形库文件仍保留。'); }); });
+  byId('remove-library').addEventListener('click', function () { closeManagement(); task(async function () { if (!byId('library').value) return; await service.removeLibrary(byId('library').value); selectAsset(null); byId('search').value = ''; await renderLibraries(); status('已移除登记，源文件仍保留。'); }); });
   byId('instantiate').addEventListener('click', function () {
     if (!canCreate()) return;
-    var asset = selected, parametersSnapshot = clone(values);
+    var asset = selected, parametersSnapshot = clone(values), svgMode = byId('svg-mode').value;
     task(async function () {
       status('正在检查文件与目标合成…');
       await readHost();
       var host = Object.assign({}, hostInfo, context);
       var prepared = await service.prepareAsset(asset.packId, asset.id, asset.fingerprint, host, parametersSnapshot);
-      if (asset.kind === 'local.svg') { status('正在准备 SVG 兼容图片…'); prepared.local = await service.attachSVGRaster(prepared.local, await AEBrowseRaster.fromSVG(prepared.svgURL)); }
+      if (asset.kind === 'local.svg') {
+        if (svgMode === 'shape') { status('正在转换 SVG 形状…'); prepared.local.vector = AEBrowseSVG.compileURL(prepared.svgURL); }
+        else { status('正在准备透明图片…'); prepared.local = await service.attachSVGRaster(prepared.local, await AEBrowseRaster.fromSVG(prepared.svgURL)); prepared.local.importMode = 'image'; }
+      }
       var operationId = 'create-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
       status('正在添加图形…');
       var response = await bridge.request(isLocal(asset) ? 'importLocalAsset' : 'instantiateAsset', { compId: context.comp.id }, isLocal(asset) ? { local:prepared.local, insertTime:context.comp.time } : { loaded: prepared.loaded, parameters: parametersSnapshot, insertTime: context.comp.time }, { operationId: operationId });
       diagnostics((prepared.diagnostics || []).concat(response.diagnostics || []));
       if (!response.ok) { status(response.diagnostics.map(function (d) { return d.message; }).join('；'), true); return; }
-      byId('result').textContent = '已添加 · 图层 ' + response.data.layerId + (response.data.rasterized ? ' · SVG 已通过高清透明图片兼容导入' : isLocal(asset) ? ' · 文件已导入' : ' · 参数已回读');
+      byId('result').textContent = '已添加 · 图层 ' + response.data.layerId + (response.data.vectorized ? ' · 可编辑形状图层' : response.data.rasterized ? ' · 透明图片' : isLocal(asset) ? ' · 文件已导入' : ' · 参数已回读');
       status('已完成导入。');
     });
   });
   document.addEventListener('visibilitychange', function () { if (document.hidden && lateTimer) { clearTimeout(lateTimer); lateTimer = null; } else if (!document.hidden && bridge && bridge.getState().unconfirmed) awaitLateResult(); });
-  window.addEventListener('beforeunload', function () { if (lateTimer) clearTimeout(lateTimer); if (bridge) bridge.dispose(); });
+  window.addEventListener('beforeunload', function () { fileDrop.dispose(); if (lateTimer) clearTimeout(lateTimer); if (bridge) bridge.dispose(); });
   async function start() {
     if (demo) {
       var manifest = window.AEBrowseDemo;
@@ -260,13 +308,15 @@
       byId('context').textContent = '未连接 AE'; ['add-folder', 'enter-path', 'add-library', 'refresh-library', 'remove-library', 'refresh-host'].forEach(function (id) { byId(id).disabled = true; }); return;
     }
     cs = new CSInterface(); var req = window.cep_node.require, process = window.cep_node.process, path = req('path');
+    function applyHostTheme() { try { var skin = cs.getHostEnvironment().appSkinInfo, bg = skin.panelBackgroundColor.color, luminance = (bg.red + bg.green + bg.blue) / 3; if (luminance < 128) { document.documentElement.style.setProperty('--ae-panel', 'rgb(' + [bg.red,bg.green,bg.blue].join(',') + ')'); } } catch (_) { /* Keep the AE dark theme when host skin data is unavailable. */ } }
+    applyHostTheme(); if (cs.addEventListener && CSInterface.THEME_COLOR_CHANGED_EVENT) cs.addEventListener(CSInterface.THEME_COLOR_CHANGED_EVENT, applyHostTheme);
     var root = cs.getSystemPath(SystemPath.EXTENSION), dataDir = path.join(process.env.APPDATA || cs.getSystemPath(SystemPath.USER_DATA), 'AE Browse');
     service = req(path.join(root, 'cep/node/content-service.cjs')).createContentService({ dataDir: dataDir });
     bridge = AEBrowseBridge.createBridge({ csInterface: cs, timeoutMs: 20000 });
     editor = AEBrowseEditor.createEditor({ bridge: bridge, service: service });
     byId('runtime').textContent = 'Node ' + process.versions.node + ' · Chromium ' + (process.versions.chrome || '待确认');
     await renderLibraries();
-    try { await readHost(); status('已连接 AE，选择图形库开始。'); }
+    try { await readHost(); status('已连接 AE。'); }
     catch (error) { report(error); byId('context').textContent = '宿主连接失败；可继续浏览图形库'; }
     updateButtons();
   }

@@ -1,0 +1,34 @@
+'use strict';
+// Node-only geometry checks; literal expectations catch incorrect coordinates/tangents.
+const assert = require('node:assert/strict'), fs = require('node:fs'), path = require('node:path');
+const file = path.resolve(__dirname, '../cep/ui/svg-shapes.js');
+assert.ok(fs.existsSync(file), 'SVG shape geometry converter is not implemented');
+const svg = require(file);
+// CEP mixed context exposes both module and window: neither API may disappear.
+const vm=require('node:vm'),mixed=vm.createContext({module:{exports:{}},window:{}});
+vm.runInContext(fs.readFileSync(file,'utf8'),mixed);
+assert.equal(typeof mixed.window.AEBrowseSVG,'object','CEP browser global must exist alongside Node exports');
+assert.equal(mixed.module.exports,mixed.window.AEBrowseSVG);
+const paths = svg.parsePath('M10 20h30v40h-30z');
+assert.deepEqual(paths[0].vertices, [[10,20],[40,20],[40,60],[10,60]]);
+assert.equal(paths[0].closed, true);
+const cubic = svg.parsePath('M0 0 C10 0 20 30 30 30 s20 -30 30 -30')[0];
+assert.deepEqual(cubic.outTangents, [[10,0],[10,0],[0,0]]);
+assert.deepEqual(cubic.inTangents, [[0,0],[-10,0],[-10,0]]);
+const quadratic = svg.parsePath('M0 0 Q15 30 30 0 T60 0')[0];
+assert.deepEqual(quadratic.outTangents[0], [10,20]);
+assert.deepEqual(quadratic.inTangents[1], [-10,20]);
+assert.deepEqual(quadratic.outTangents[1], [10,-20]);
+const compound = svg.parsePath('M0 0H10V10Z M2 2v5h5z');
+assert.equal(compound.length, 2);
+const arc = svg.parsePath('M10 0 A10 10 0 0 1 0 10')[0];
+assert.ok(Math.abs(arc.vertices[1][0]) < 1e-8);
+assert.ok(Math.abs(arc.vertices[1][1]-10) < 1e-8);
+assert.ok(Math.abs(arc.outTangents[0][1]-5.5228474983)<1e-8);
+assert.deepEqual(svg.parsePath('M0 0L10 0L0 0Z')[0].vertices, [[0,0],[10,0]]);
+assert.throws(()=>svg.parsePath('M0 0L5'), /路径/);
+assert.throws(()=>svg.parsePath('M0 0 R1 2'), /路径/);
+assert.throws(()=>svg.parsePath('M0 0A5 5 0 2 0 10 10'), /路径/);
+assert.deepEqual(svg.transformPoint(svg.parseTransform('translate(10 20) scale(2)'), [3,4]), [16,28]);
+assert.throws(()=>svg.parseTransform('unknown(2)'), /变换/);
+console.log('SVG geometry and mixed context: 14 checks passed (Node only; no AE)');
